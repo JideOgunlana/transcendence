@@ -1,0 +1,22 @@
+h1 {
+	font-family: sans-serif;
+	font-size: 90px;
+	text-align: center;
+}
+
+body {
+    background-color: #c2e1d9;
+}
+
+/* $white: #ffffff;
+
+$theme-colors: (
+    "light":      #c2e1d9,
+    "dark":       #061725,
+    "primary":    #2c3a71,
+    "secondary":  #de4d51,
+    "info":       #f0795f,
+    "success":    #28a363,
+    "warning":    #e1cb28,
+    "danger":     #ef2315,
+); */
