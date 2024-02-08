@@ -63,4 +63,21 @@ A minimum of 7 major modules is required (14 points).
 (2) Live chat.  
 
 ### AI-Algo
-(2)
+(2) AI opponent.  
+(1) User and Game Stats Dashboards.  
+
+### Cybersecurity
+(2) Implement WAF/ModSecurity with Hardened Configuration and HashiCorp Vault for Secrets Management.  
+(1) GDPR Compliance Options with User Anonymization, Local Data Management, and Account Deletion.  
+(2) Implement Two-Factor Authentication (2FA) and JWT.  
+
+### Devops
+(2) Infrastructure Setup for Log Management.  
+(1) Monitoring system.  
+(2) Designing the Backend as Microservices.  
+
+### Graphics
+(2) Use of advanced 3D techniques.
+
+### Accessibility
+(1) Support on all devices.  
