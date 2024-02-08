@@ -93,3 +93,4 @@ A minimum of 7 major modules is required (14 points).
 `django-admin startapp core`  
 
 :green_circle:  
+:white_check_mark:
