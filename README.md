@@ -31,12 +31,36 @@ Go to `http://localhost:9443` for Portainer.
 `django-admin startapp core`  
 
 ## Modules
-- Web
-- User Management
-- Gameplay and user experience
-- AI-Algo
-- Cybersecurity
-- Devops
-- Graphics
-- Accessibility
-- Server-side pong
+A minimum of 7 major modules is required (14 points).  
+
+- Web (6)
+- User Management (4)
+- Gameplay and user experience (9)
+- AI-Algo (3)
+- Cybersecurity (5)
+- Devops (5)
+- Graphics (2)
+- Accessibility (5)
+- Server-side pong (4)
+
+43 possible points.  
+
+### Web
+(2) Use a Framework as backend.  
+(1) Use a front-end famework or toolkit.  
+(1) Use a database for the backend.
+(2) Store the score of a tournament in the Blockchain.
+
+### User Management
+(2) Standard user management, authentication, users across tournaments.  
+(2) Implementing a remote authentication.
+
+### Gameplay and user experience
+(2) Remote players.  
+(2) Multiplayers (more than 2 in the same game).  
+(2) Add another game.
+(1) Game customization options.  
+(2) Live chat.  
+
+### AI-Algo
+(2)
