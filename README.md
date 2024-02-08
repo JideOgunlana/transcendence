@@ -30,6 +30,13 @@ Go to `http://localhost:9443` for Portainer.
 `cd app`  
 `django-admin startapp core`  
 
-## Module categories
+## Modules
 - Web
 - User Management
+- Gameplay and user experience
+- AI-Algo
+- Cybersecurity
+- Devops
+- Graphics
+- Accessibility
+- Server-side pong
