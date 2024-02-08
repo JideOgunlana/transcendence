@@ -30,6 +30,14 @@ Go to `http://localhost:9443` for Portainer.
 :white_circle: Game customization. (1p)  
 :white_circle: Live chat. (2p)  
 :white_circle: User and game stats dashboard. (1p)  
+:white_circle: Infastructure setup for Log Management (2p).  
+:white_circle: Monitoring system. (1p)  
+:orange_circle: Designing the Backend as Microservices (2p)  
+:white_circle: Use of advanced 3D techniques. (2p)  
+:white_circle: Support on all devices. (1p)  
+:white_circle: Expanding Browser Compatibility. (1p)  
+:white_circle: Multiple language supports. (1p)  
+:white_circle: Accessibility for Visually Impaired Users. (1p)  
 
 
 ## Modules
