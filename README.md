@@ -81,3 +81,11 @@ A minimum of 7 major modules is required (14 points).
 
 ### Accessibility
 (1) Support on all devices.  
+(1) Expanding Browser Compatibility.  
+(1) Multiple language supports.  
+(1) Add accessiblity for Visually Impaired Users.  
+(1) Server-Side Rendering (SSR) Integration.  
+
+### Server-Side Pong
+(2) Replacing Basic Pong with Server-Side Pong and Implementing an API.  
+(2) Enabling Pong Gameplay via CLI against Web Users with API integration.  
