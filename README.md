@@ -3,6 +3,8 @@
 ## Getting started
 Use `.env-example` to create a valid `.env` file. Start the setup with `make` in the base directory.  
 
+Go to `https://localhost:8000` in your favorite browser.  
+
 ## Services
 - Django (Backend)
 - React (Frontend)
