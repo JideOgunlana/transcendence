@@ -22,6 +22,11 @@ Go to `http://localhost:9443` for Portainer.
 :orange_circle: Under construction  
 :white_circle: Planned  
 
+:green_circle: Use a Framework as backend. (Web 2p)  
+:white_circle: Use a front-end framework. (Web 1p)  
+:green_circle: Use a database for the backend. (Web 1p)  
+
+
 ## Modules
 A minimum of 7 major modules is required (14 points).  
 
@@ -39,7 +44,7 @@ A minimum of 7 major modules is required (14 points).
 
 ### Web
 (2) Use a Framework as backend.  
-(1) Use a front-end famework or toolkit.  
+(1) Use a front-end framework or toolkit.  
 (1) Use a database for the backend.
 (2) Store the score of a tournament in the Blockchain.
 
