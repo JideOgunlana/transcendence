@@ -1,7 +1,11 @@
 # Overview
 
-## Tools
-- Django
+## Getting started
+Use `.env-example` to create a valid `.env` file. Start the setup with `make` in the base directory.  
+
+## Services
+- Django (Backend)
+- React (Frontend)
 - Postgres (Main database)
 - PgAdmin (Database management)
 - Nginx (Cache)
@@ -21,3 +25,5 @@
 `django-admin startproject app`  
 `cd app`  
 `django-admin startapp core`  
+
+## Modules
