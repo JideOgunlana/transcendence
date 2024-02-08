@@ -1,3 +1,14 @@
+# Overview
+
+## Tools
+- Django
+- Postgres (Main database)
+- PgAdmin (Database management)
+- Nginx (Cache)
+- Grafana/Prometheus (monitoring)
+- Portainer (Container management)
+- Elastic stack (Logging)
+
 ## Setup
 `python -m venv .venv`  
 `source .venv/bin/activate`  
