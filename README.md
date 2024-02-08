@@ -17,18 +17,7 @@ Go to `http://localhost:9443` for Portainer.
 - Portainer (Container management)
 - Elastic stack (Logging)
 
-## Setup
-`python -m venv .venv`  
-`source .venv/bin/activate`  
-
-## Check if you're using the virtual environment.  
-`which python`  
-`pip install --upgrade pip && pip install -r requirements.txt`  
-
-## Create the Django project and app
-`django-admin startproject app`  
-`cd app`  
-`django-admin startapp core`  
+## Progress
 
 ## Modules
 A minimum of 7 major modules is required (14 points).  
@@ -89,3 +78,18 @@ A minimum of 7 major modules is required (14 points).
 ### Server-Side Pong
 (2) Replacing Basic Pong with Server-Side Pong and Implementing an API.  
 (2) Enabling Pong Gameplay via CLI against Web Users with API integration.  
+
+## Setup
+`python -m venv .venv`  
+`source .venv/bin/activate`  
+
+### Check if you're using the virtual environment.  
+`which python`  
+`pip install --upgrade pip && pip install -r requirements.txt`  
+
+### Create the Django project and app
+`django-admin startproject app`  
+`cd app`  
+`django-admin startapp core`  
+
+:green_circle:  
