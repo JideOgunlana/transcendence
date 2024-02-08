@@ -18,9 +18,9 @@ Go to `http://localhost:9443` for Portainer.
 - Elastic stack (Logging)
 
 ## Progress
-:green_circle:
-:orange_circle:
-:white_circle:
+:green_circle: Ready  
+:orange_circle: Under construction  
+:white_circle: Planned  
 
 ## Modules
 A minimum of 7 major modules is required (14 points).  
