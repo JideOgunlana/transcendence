@@ -24,7 +24,12 @@ Go to `http://localhost:9443` for Portainer.
 
 :green_circle: Use a Framework as backend. (2p)  
 :white_circle: Use a front-end framework. (1p)  
-:green_circle: Use a database for the backend. (Web 1p)  
+:green_circle: Use a database for the backend. (1p)  
+:white_circle: User management and authentication. (2p)  
+:white_circle: Add another game. (2p)  
+:white_circle: Game customization. (1p)  
+:white_circle: Live chat. (2p)  
+:white_circle: User and game stats dashboard. (1p)  
 
 
 ## Modules
