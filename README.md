@@ -22,23 +22,23 @@ Go to `http://localhost:9443` for Portainer.
 :orange_circle: Under construction  
 :white_circle: Planned  
 
-:green_circle: Use a Framework as backend. (Web 2p)  
-:white_circle: Use a front-end framework. (Web 1p)  
+:green_circle: Use a Framework as backend. (2p)  
+:white_circle: Use a front-end framework. (1p)  
 :green_circle: Use a database for the backend. (Web 1p)  
 
 
 ## Modules
 A minimum of 7 major modules is required (14 points).  
 
-- Web (6)
-- User Management (4)
-- Gameplay and user experience (9)
-- AI-Algo (3)
-- Cybersecurity (5)
-- Devops (5)
-- Graphics (2)
-- Accessibility (5)
-- Server-side pong (4)
+- Web (6p)
+- User Management (4p)
+- Gameplay and user experience (9p)
+- AI-Algo (3p)
+- Cybersecurity (5p)
+- Devops (5p)
+- Graphics (2p)
+- Accessibility (5p)
+- Server-side pong (4p)
 
 43 possible points.  
 
