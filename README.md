@@ -5,6 +5,7 @@ Use `.env-example` to create a valid `.env` file. Start the setup with `make` in
 
 Go to `http://localhost:8000` in your favorite browser.  
 Go to `http://localhost:5050` for PgAdmin.  
+Go to `http://localhost:9443` for Portainer.  
 
 ## Services
 - Django (Backend)
@@ -29,4 +30,6 @@ Go to `http://localhost:5050` for PgAdmin.
 `cd app`  
 `django-admin startapp core`  
 
-## Modules
+## Module categories
+- Web
+- User Management
