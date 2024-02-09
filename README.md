@@ -116,3 +116,5 @@ A minimum of 7 major modules is required (14 points).
 `cd app`  
 `django-admin startapp core`  
 
+### Admin login
+`python manage.py createsuperuser`  
