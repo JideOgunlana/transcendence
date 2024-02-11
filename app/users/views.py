@@ -5,10 +5,11 @@ from . import models
 
 
 def index(request):
-	return HttpResponse("Hello")
+	if not request.user.is_authenticated:
+		return HttpResponseRedirect(reverse("login"))
 
 def login_view(request):
-	return HttpResponse("Hello")
+	return render(request, "users/login.html")
 
 def logout_view(request):
 	return HttpResponse("Hello")
