@@ -40,8 +40,8 @@ Go to `http://localhost:9443` for Portainer.
 :white_circle: Accessibility for Visually Impaired Users. (1p)  
 
 :green_circle: 3p  
-:orange_circle: 2p  
-:white_circle: 18p  
+:orange_circle: 4p  
+:white_circle: 16p  
 
 ## Modules
 A minimum of 7 major modules is required (14 points).  
