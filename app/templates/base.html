@@ -13,7 +13,9 @@
 		<link rel="shortcut icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}" >
 		<link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}" >
 		<link rel="stylesheet" href="{% static 'css/styles.css' %}">
-		{% block scripts %}{% endblock scripts %}
+		<script>
+			{% block script %}{% endblock %}
+		</script>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -47,21 +49,21 @@
 
 						{% if request.user.is_authenticated %}
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">									{{ request.user.first_name }}
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><button type="button" class="btn btn-primary">{{ request.user.first_name }}</button>
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="#">Action</a>
 									<a class="dropdown-item" href="#">Another action</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="/users/logout">Logout</a>
+									<a class="dropdown-item" href="/users/logout"><button type="button" class="btn btn-secondary">Logout</button></a>
 								</div>
 							</li>
 						{% else %}
 							<li class="nav-item">
-								<a href="/users" class="nav-link">Login</a>
+								<a href="/users" class="nav-link"><button type="button" class="btn btn-primary">Login</button></a>
 							</li>
 							<li class="nav-item">
-								<a href="/users" class="nav-link">Sign up</a>
+								<a href="/users" class="nav-link"><button type="button" class="btn btn-secondary">Sign up</button></a>
 							</li>
 						{% endif %}
 

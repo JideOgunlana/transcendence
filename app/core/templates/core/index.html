@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
+{% block script %}
+	let counter = 0;
+	function count() {
+		counter++;
+		alert(counter);
+	}
+{% endblock %}
+
+
+
 {% block body %}
 	<h1>Hello</h1>
 	<p>
@@ -14,4 +24,9 @@
 	{% empty %}
 		<li>No stats yet.</li>
 	{% endfor %}
+
+	<div>
+		<button type="button" class="btn btn-info" onclick="count()">Count</button>
+	</div>
+
 {% endblock %}
