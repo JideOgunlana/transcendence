@@ -4,7 +4,7 @@
 	let counter = 0;
 	function count() {
 		counter++;
-		alert(counter);
+		document.querySelector('h3').innerHTML = counter;
 	}
 {% endblock %}
 
@@ -26,6 +26,7 @@
 	{% endfor %}
 
 	<div>
+		<h3>0</h3>
 		<button type="button" class="btn btn-info" onclick="count()">Count</button>
 	</div>
 
