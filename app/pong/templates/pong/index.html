@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="{% static 'js/globals.js' %}"></script>
+<script src="{% static 'js/Vector2.js' %}"></script>
+<script src="{% static 'js/Ball.js' %}"></script>
+<script src="{% static 'js/Paddle.js' %}"></script>
+<script src="{% static 'js/Player.js' %}"></script>
+<script src="{% static 'js/setup.js' %}"></script>
+<script src="{% static 'js/inputHandler.js' %}"></script>
+<script src="{% static 'js/game.js' %}"></script>
+{% endblock %}
+
+
+
+{% block body %}
+	<h1>Pong</h1>
+	<div class="container">
+		<canvas id="canvas"  ></canvas>
+	</div>
+{% endblock %}

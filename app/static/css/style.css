@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 96vh;
+    width: 100%;
+    border: 2px solid red;
+}
+
+canvas {
+    height: 90vh;
+    border: 2px solid black;
+}

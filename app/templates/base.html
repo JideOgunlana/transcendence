@@ -16,6 +16,7 @@
 		<script>
 			{% block script %}{% endblock %}
 		</script>
+		{% block head %}{% endblock %}
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -73,7 +74,7 @@
 		</nav>
 		<div class="container border-4 p-3">
 			{% block body %}
-			{% endblock body %}
+			{% endblock %}
 		</div>
 	</body>
 </html>
