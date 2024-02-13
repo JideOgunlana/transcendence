@@ -17,6 +17,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 ALLOWED_HOSTS = ['*']
+
+CORS_ALLOWED_ORIGINS = [
+	'http://localhost:3000',
+	'http://127.0.0.1:3000'
+]
+
+CORS_ALOWED_CREDENTIALS = True
+
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
@@ -28,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
     'core',
     'users',
     'fitness',
@@ -38,6 +48,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
