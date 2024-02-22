@@ -8,7 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 	<title>Snake</title>
-	<link rel="stylesheet" href="{% static 'css/style-snake.css' %}">
+	<link rel="stylesheet" href='{% static 'css/style-snake.css' %}?{% now "U" %}'>
 	<script src="{% static 'js/script-snake.js' %}" defer></script>
 </head>
 <body>
