@@ -1,17 +1,16 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
+import GameManager from './GameManager';
 
 export default class Ball {
     
-    constructor(scene, world, radius, widthSeg, heightSeg, color, pos, speed, gameField, direction, paddleLeft, paddleRight) {
-        this.scene = scene;
-        this.world = world;
+    constructor(radius, widthSeg, heightSeg, color, pos, speed, direction, paddleLeft, paddleRight) {
         this.radius = radius;
         this.widthSeg = widthSeg;
         this.heightSeg = heightSeg;
         this.color = color;
         this.speed = speed;
-        this.gameField = gameField;
+        //GameManager.gameField = GameManager.gameField;
         this.direction = direction.multiplyScalar(speed);
         this.material = new THREE.MeshStandardMaterial({color: this.color, wireframe: false, metalness: 1, roughness: 0, envMapIntensity: 1 }); //color 0xffffff
         this.physicMaterial = new CANNON.Material();
@@ -25,43 +24,40 @@ export default class Ball {
                                         });
         this.paddleLeft = paddleLeft;
         this.paddleRight = paddleRight;
-        //this.hitLeftPaddle = false
-        //this.hitRightPaddle = false
         this.hitMask = 0b00;
-        //this.toggleHit = (hitValue) => { hitValue != hitValue}
         this.initBall(pos)
     }
 
     initBall(pos) {
         this.mesh.position.set(pos.x, pos.y, pos.z); //x=-2, y=5, z=0
         this.mesh.castShadow = true;
-        this.scene.add(this.mesh);
+        GameManager.scene.add(this.mesh);
         //this.world.addBody(this.physicBody);
     }
 
     CollisionXLeft()
     {
-        if (this.mesh.position.x + this.radius >= this.gameField.x / 2)
+        if (this.mesh.position.x + this.radius >= GameManager.gameField.x / 2)
             return true
         return false
     }
 
     CollisionXRight()
     {
-        if (this.mesh.position.x - this.radius <= -this.gameField.x / 2)
+        if (this.mesh.position.x - this.radius <= -GameManager.gameField.x / 2)
             return true
         return false
     }
 
     CollisionX()
     {
-        if (this.mesh.position.x + this.radius >= this.gameField.x / 2 || this.mesh.position.x - this.radius <= -this.gameField.x / 2)
+        if (this.mesh.position.x + this.radius >= GameManager.gameField.x / 2 || this.mesh.position.x - this.radius <= -GameManager.gameField.x / 2)
             return true
     }
 
     CollisionZ()
     {
-        if (this.mesh.position.z + this.radius >= this.gameField.z / 2 || this.mesh.position.z - this.radius <= -this.gameField.z / 2) {
+        if (this.mesh.position.z + this.radius >= GameManager.gameField.z / 2 || this.mesh.position.z - this.radius <= -GameManager.gameField.z / 2) {
             return true;
         }
     }
@@ -117,16 +113,10 @@ export default class Ball {
     translate()
     {
         this.mesh.position.add(this.direction);
-        //this.mesh.position.x += this.direction.x;
-        //this.mesh.position.z += this.direction.z;
 
     }
     async update() {
-        //console.log(this.mesh.position)
         this.Collision()
         this.translate()
-        /* this.mesh.position.x += this.speed;
-        if (this.Collision())
-            this.speed *= -1 */
     }
 }

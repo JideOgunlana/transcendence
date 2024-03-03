@@ -6,9 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div id="root"></div>
+    <div id="overlay">
+      <div id="scoreBoard">
+        <p class="score score-left">0</p>
+        <p class="score score-right">0</p>
+      </div>
+      <div id="main-container">
+        <img id="btn-start" src="start.png">
+        <div id="winning-background">
+          <p id='winning-text'>Player X won the game!</p>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,13 +1,12 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
+import GameManager from './GameManager';
 
 export default class Ground {
     
-    constructor(scene, world, width, height, color) {
-        this.scene = scene;
-        this.world = world;
-        this.width = width;
-        this.height = height;
+    constructor(color) {
+        this.width = GameManager.gameField.x;
+        this.height = GameManager.gameField.z;
         this.color = color;
         this.material = new THREE.MeshStandardMaterial({color: this.color, side: THREE.DoubleSide, wireframe: false, metalness: 1, roughness: 0.4});
         this.physicMaterial = new CANNON.Material();
@@ -31,8 +30,8 @@ export default class Ground {
         this.mesh.receiveShadow = true;
 
         this.physicBody.quaternion.setFromEuler(-0.5 * Math.PI, 0, 0);
-        this.scene.add(gridHelper);
-        this.scene.add(this.mesh);
+        GameManager.scene.add(gridHelper);
+        GameManager.scene.add(this.mesh);
        // this.world.addBody(this.physicBody);
     }
 }

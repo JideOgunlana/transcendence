@@ -1,9 +1,8 @@
 import * as THREE from 'three';
-
+import GameManager from './GameManager';
 export default class Paddle {
     
-    constructor(scene, x, y, z, width, height, depth, color, name) {
-        this.scene = scene;
+    constructor(x, y, z, width, height, depth, color, name) {
         this.width = width;
         this.height = height;
         this.depth = depth;
@@ -27,7 +26,7 @@ export default class Paddle {
         /* this.paddle.rotation.y = -0.5 * Math.PI;
         this.paddle.rotation.z = -0.5 * Math.PI; */
 
-        this.scene.add(this.mesh);
+        GameManager.scene.add(this.mesh);
     }
 
     moveUp() {

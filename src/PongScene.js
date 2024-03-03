@@ -10,42 +10,39 @@ import Light from './Light.js';
 import { LightTypes } from './Enums.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js'
 
+import GameManager from './GameManager.js';
+
 
 export default class PongScene {
-    constructor(canvasId, scene, gameField, world, ground, ball, paddleLeft, paddleRight, playerLeft, playerRight, scoreBoard) {
+    constructor(canvasId, ground, ball, paddleLeft, paddleRight, playerLeft, playerRight) {
         this.fov = 45;
+        this.maxScores = 1;
         this.canvasId = canvasId;
 
-        this.gameField = gameField;
-
-        this.scene = scene;
         this.stats = undefined;
         this.camera = undefined;
         this.controls = undefined;
         this.renderer = undefined;
         this.clock = undefined;
-        this.scoreBoard = scoreBoard;
-        /* this.labelRenderer = undefined;
-        this.htmlElemObject = undefined; */
 
         this.ground = ground;
         this.ball = ball;
-        this.world = world;
         this.timeStep = 1/60;
+
         //lights
         this.paddleLeft = paddleLeft;
         this.paddleRight = paddleRight;
         this.playerLeft = playerLeft;
         this.playerRight = playerRight;
-        this.light1 = new Light(this.scene, LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(10, 20, 0), 1, 1)
-        this.light2 = new Light(this.scene, LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(-10, 20, 0), 1, 1)
+        this.light1 = new Light(LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(10, 20, 0), 1, 1)
+        this.light2 = new Light(LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(-10, 20, 0), 1, 1)
     }
 
 
-    initContacts() {
+   /*  initContacts() {
         const planeSphereContactMat = new CANNON.ContactMaterial(this.ground.physicMaterial, this.ball.physicMaterial, {restitution: 0.5});
         this.world.addContactMaterial(planeSphereContactMat);
-    }
+    } */
 
     initControls()
     {
@@ -56,7 +53,7 @@ export default class PongScene {
     {
         const axesHelper = new THREE.AxesHelper(50);
         axesHelper.setColors(0xff0000,0x0000ff,0x5dff00);
-        this.scene.add(axesHelper);
+        GameManager.scene.add(axesHelper);
     }
 
     initialize() {
@@ -73,25 +70,6 @@ export default class PongScene {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
 
-        /* this.labelRenderer = new CSS2DRenderer();
-        console.log(this.labelRenderer);
-        this.labelRenderer.setSize(window.innerWidth, window.innerHeight);
-        this.labelRenderer.domElement.style.position = 'absolute';
-        this.labelRenderer.domElement.style.top = '0px';
-        this.labelRenderer.domElement.style.pointerEvents = 'none';
-        this.labelRenderer.domElement.style.border = "5px solid red";
-        this.labelRenderer.domElement.innerHTML = "hello?";
-        document.body.appendChild(this.labelRenderer.domElement);
-
-        const p = document.createElement('p');
-        p.textContent = "0";
-        p.style.fontSize = "32px";
-        this.htmlElemObject = new CSS2DObject(p);
-        this.scene.add(this.htmlElemObject);
-        this.htmlElemObject.position.set(0, 2, 0);
-        this.htmlElemObject.castShadow = true; */
-
-
         
         this.initControls();
         this.initHelpers();
@@ -100,46 +78,30 @@ export default class PongScene {
     }
 
     animate() {
-        window.requestAnimationFrame(this.animate.bind(this));
+        let animationId = window.requestAnimationFrame(this.animate.bind(this));
         this.controls.update();
         this.playerLeft.HitWall(this.ball)
         this.playerRight.HitWall(this.ball)
-        if (this.playerLeft.Won(3))
-            console.log("Player Left Won")
-        else if (this.playerRight.Won(3))
-            console.log("Player Right Won")
+        if (this.playerLeft.Won(this.maxScores) || this.playerRight.Won(this.maxScores)) {
+            GameManager.StopGame(animationId)
+        }
         
         this.render();
 
     }
 
     render() {
-        /* this.world.step(this.timeStep);
-        
-        
-        this.ground.mesh.position.copy(this.ground.physicBody.position);
-        this.ground.mesh.quaternion.copy(this.ground.physicBody.quaternion);
-        
-        this.ball.mesh.position.copy(this.ball.physicBody.position);
-        this.ball.mesh.quaternion.copy(this.ball.physicBody.quaternion); */
 
-
-        //this.paddle.position.copy(this.paddleBody.position);
-        //this.paddle.quaternion.copy(this.paddleBody.quaternion);
         this.ball.update();
         this.paddleLeft.update();
         this.paddleRight.update();
-        this.scoreBoard.labelRenderer.render(this.scene, this.camera);
-        //this.labelRenderer.render(this.scene, this.camera);
-        this.renderer.render(this.scene, this.camera);
+        this.renderer.render(GameManager.scene, this.camera);
     }
 
     onWindowResize() {
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.scoreBoard.labelRenderer.setSize(window.innerWidth, window.innerHeight);
-        //this.labelRenderer.setSize(window.innerWidth, window.innerHeight);
     }
 }
 

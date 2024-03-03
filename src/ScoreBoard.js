@@ -1,4 +1,4 @@
-import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js'
+/* import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js'
 
 export default class ScoreBoard {
     
@@ -71,4 +71,4 @@ export default class ScoreBoard {
 
     LabelRenderer() { return this.LabelRenderer; }
 
-}
+} */

@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 import { LightTypes } from './Enums';
 
+import GameManager from './GameManager';
+
 export default class Light {
     
-    constructor(scene, type, distance, color, shadow = true, position = new THREE.Vector3(0,0,0), intensity=1, power=1) {
-        this.scene = scene;
+    constructor(type, distance, color, shadow = true, position = new THREE.Vector3(0,0,0), intensity=1, power=1) {
         this.type = type;
         this.ambientLight = undefined;
         this.directionalLight = undefined;
@@ -23,7 +24,7 @@ export default class Light {
     {
         this.ambientLight = new THREE.AmbientLight(this.color);
         this.ambientLight.castShadow = this.shadow;
-        this.scene.add(this.ambientLight);
+        GameManager.scene.add(this.ambientLight);
     }
     initSpotLight()
     {
@@ -31,7 +32,7 @@ export default class Light {
         this.spotLight.castShadow = this.shadow;
         this.spotLight.shadow.mapSize = new THREE.Vector2(2048, 2048);
         this.spotLight.position.set(this.position.x, this.position.y, this.position.z); //10,20,0
-        this.scene.add(this.spotLight)
+        GameManager.scene.add(this.spotLight)
     }
     initPointLight()
     {
@@ -43,7 +44,7 @@ export default class Light {
         this.pointLight.shadow.camera.left = -this.distance
         this.pointLight.shadow.camera.right = this.distance */
         this.pointLight.position.set(this.position.x, this.position.y, this.position.z); //10,20,0
-        this.scene.add(this.pointLight)
+        GameManager.scene.add(this.pointLight)
     }
     initDirectionalLight()
     {
@@ -55,7 +56,7 @@ export default class Light {
         this.directionalLight.shadow.camera.left = -this.distance
         this.directionalLight.shadow.camera.right = this.distance
         this.directionalLight.position.set(this.position.x, this.position.y, this.position.z); //10,20,0
-        this.scene.add(this.directionalLight)
+        GameManager.scene.add(this.directionalLight)
     }
     initLight() {
         if (this.type === LightTypes.Ambient)
