@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { LightTypes } from './Enums';
 
 import GameManager from './GameManager';
+import Constants from './Constants';
 
 export default class Light {
     
@@ -24,7 +25,7 @@ export default class Light {
     {
         this.ambientLight = new THREE.AmbientLight(this.color);
         this.ambientLight.castShadow = this.shadow;
-        GameManager.scene.add(this.ambientLight);
+        Constants.scene.add(this.ambientLight);
     }
     initSpotLight()
     {
@@ -32,7 +33,7 @@ export default class Light {
         this.spotLight.castShadow = this.shadow;
         this.spotLight.shadow.mapSize = new THREE.Vector2(2048, 2048);
         this.spotLight.position.set(this.position.x, this.position.y, this.position.z); //10,20,0
-        GameManager.scene.add(this.spotLight)
+        Constants.scene.add(this.spotLight)
     }
     initPointLight()
     {
@@ -44,7 +45,7 @@ export default class Light {
         this.pointLight.shadow.camera.left = -this.distance
         this.pointLight.shadow.camera.right = this.distance */
         this.pointLight.position.set(this.position.x, this.position.y, this.position.z); //10,20,0
-        GameManager.scene.add(this.pointLight)
+        Constants.scene.add(this.pointLight)
     }
     initDirectionalLight()
     {
@@ -56,7 +57,7 @@ export default class Light {
         this.directionalLight.shadow.camera.left = -this.distance
         this.directionalLight.shadow.camera.right = this.distance
         this.directionalLight.position.set(this.position.x, this.position.y, this.position.z); //10,20,0
-        GameManager.scene.add(this.directionalLight)
+        Constants.scene.add(this.directionalLight)
     }
     initLight() {
         if (this.type === LightTypes.Ambient)

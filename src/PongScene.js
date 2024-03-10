@@ -2,21 +2,13 @@ import * as THREE from 'three';
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import Stats from 'three/examples/jsm/libs/stats.module';
-//import { GUI } from 'dat.gui'
-import * as CANNON from 'cannon-es'
-
-import Paddle from './Paddle.js';
-import Light from './Light.js';
-import { LightTypes } from './Enums.js';
-import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js'
-
 import GameManager from './GameManager.js';
-
+import Constants from './Constants.js';
+import { inGameObjects } from './InGameObjects.js';
 
 export default class PongScene {
-    constructor(canvasId, ground, ball, paddleLeft, paddleRight, playerLeft, playerRight) {
+    constructor(canvasId, ball, paddleLeft, paddleRight, playerLeft, playerRight) {
         this.fov = 45;
-        this.maxScores = 1;
         this.canvasId = canvasId;
 
         this.stats = undefined;
@@ -24,25 +16,12 @@ export default class PongScene {
         this.controls = undefined;
         this.renderer = undefined;
         this.clock = undefined;
-
-        this.ground = ground;
-        this.ball = ball;
         this.timeStep = 1/60;
 
-        //lights
-        this.paddleLeft = paddleLeft;
-        this.paddleRight = paddleRight;
         this.playerLeft = playerLeft;
         this.playerRight = playerRight;
-        this.light1 = new Light(LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(10, 20, 0), 1, 1)
-        this.light2 = new Light(LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(-10, 20, 0), 1, 1)
+        
     }
-
-
-   /*  initContacts() {
-        const planeSphereContactMat = new CANNON.ContactMaterial(this.ground.physicMaterial, this.ball.physicMaterial, {restitution: 0.5});
-        this.world.addContactMaterial(planeSphereContactMat);
-    } */
 
     initControls()
     {
@@ -53,7 +32,7 @@ export default class PongScene {
     {
         const axesHelper = new THREE.AxesHelper(50);
         axesHelper.setColors(0xff0000,0x0000ff,0x5dff00);
-        GameManager.scene.add(axesHelper);
+        Constants.scene.add(axesHelper);
     }
 
     initialize() {
@@ -80,22 +59,20 @@ export default class PongScene {
     animate() {
         let animationId = window.requestAnimationFrame(this.animate.bind(this));
         this.controls.update();
-        this.playerLeft.HitWall(this.ball)
-        this.playerRight.HitWall(this.ball)
-        if (this.playerLeft.Won(this.maxScores) || this.playerRight.Won(this.maxScores)) {
+        this.playerLeft.HitWall(inGameObjects.ball)
+        this.playerRight.HitWall(inGameObjects.ball)
+        if (this.playerLeft.Won(Constants.winningScore) || this.playerRight.Won(Constants.winningScore)) {
             GameManager.StopGame(animationId)
         }
-        
         this.render();
-
     }
 
     render() {
 
-        this.ball.update();
-        this.paddleLeft.update();
-        this.paddleRight.update();
-        this.renderer.render(GameManager.scene, this.camera);
+        inGameObjects.ball.update();
+        this.playerLeft.paddle.update();
+        this.playerRight.paddle.update();
+        this.renderer.render(Constants.scene, this.camera);
     }
 
     onWindowResize() {

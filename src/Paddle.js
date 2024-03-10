@@ -1,8 +1,9 @@
 import * as THREE from 'three';
-import GameManager from './GameManager';
+import Constants from './Constants';
+
 export default class Paddle {
     
-    constructor(x, y, z, width, height, depth, color, name) {
+    constructor(x, y, z, width, height, depth, color, name, obj) {
         this.width = width;
         this.height = height;
         this.depth = depth;
@@ -15,6 +16,7 @@ export default class Paddle {
         this.material = new THREE.MeshStandardMaterial({color: this.color, metalness: 1, roughness: 0.5});
         this.geometry = new THREE.BoxGeometry(this.width, this.height,this.depth);
         this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.obj = obj;
         this.initPaddle(x, y, z)
         this.speed = 0;
     }
@@ -26,11 +28,13 @@ export default class Paddle {
         /* this.paddle.rotation.y = -0.5 * Math.PI;
         this.paddle.rotation.z = -0.5 * Math.PI; */
 
-        GameManager.scene.add(this.mesh);
+        Constants.scene.add(this.mesh);
+        console.log("paddle " +  this.name + "\tobj: " + this.obj);
     }
 
     moveUp() {
         this.speed = 0.3
+        console.log("move up")
         //this.z += this.speed;
         
     

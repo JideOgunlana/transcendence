@@ -1,18 +1,29 @@
-import GameManager from "./GameManager"
+import { inGameObjects } from "./InGameObjects"
 
-function keyDown(event, paddleRight, paddleLeft)
+export function handleKeyDown(event)
 {
     let key = event.key
       if (key == "ArrowUp" ) {
-        paddleRight.moveUp()
+        console.log("lol move up")
+        inGameObjects.paddleRight.moveUp()
       } else if (key == "ArrowDown" ) {
-        paddleRight.moveDown()
+        inGameObjects.paddleRight.moveDown()
       } 
       if (key == "w" ) {
-        paddleLeft.moveUp()
+        inGameObjects.paddleLeft.moveUp()
       } else if (key == "s" ) {
-        paddleLeft.moveDown()
+        inGameObjects.paddleLeft.moveDown()
       }
 }
 
-//export const handleKeyDown = (event) => {keyDown(GameManager.paddleLeft, GameManager.paddleRight)}
+//export const handleKeyDown = (event) => {keyDown()}
+
+export function handleKeyUp(event)
+{
+    let key = event.key
+    if (key == "ArrowUp" || key == "ArrowDown") {
+      inGameObjects.paddleRight.resetSpeed()
+    } else if (key == "w" || key == "s") {
+      inGameObjects.paddleLeft.resetSpeed()
+    }
+}

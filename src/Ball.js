@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 import GameManager from './GameManager';
+import Constants from './Constants';
 
 export default class Ball {
     
@@ -10,7 +11,7 @@ export default class Ball {
         this.heightSeg = heightSeg;
         this.color = color;
         this.speed = speed;
-        //GameManager.gameField = GameManager.gameField;
+        //Constants.gameField = Constants.gameField;
         this.direction = direction.multiplyScalar(speed);
         this.material = new THREE.MeshStandardMaterial({color: this.color, wireframe: false, metalness: 1, roughness: 0, envMapIntensity: 1 }); //color 0xffffff
         this.physicMaterial = new CANNON.Material();
@@ -31,33 +32,34 @@ export default class Ball {
     initBall(pos) {
         this.mesh.position.set(pos.x, pos.y, pos.z); //x=-2, y=5, z=0
         this.mesh.castShadow = true;
-        GameManager.scene.add(this.mesh);
+        Constants.scene.add(this.mesh);
+        console.log("in here");
         //this.world.addBody(this.physicBody);
     }
 
     CollisionXLeft()
     {
-        if (this.mesh.position.x + this.radius >= GameManager.gameField.x / 2)
+        if (this.mesh.position.x + this.radius >= Constants.gameField.x / 2)
             return true
         return false
     }
 
     CollisionXRight()
     {
-        if (this.mesh.position.x - this.radius <= -GameManager.gameField.x / 2)
+        if (this.mesh.position.x - this.radius <= -Constants.gameField.x / 2)
             return true
         return false
     }
 
     CollisionX()
     {
-        if (this.mesh.position.x + this.radius >= GameManager.gameField.x / 2 || this.mesh.position.x - this.radius <= -GameManager.gameField.x / 2)
+        if (this.mesh.position.x + this.radius >= Constants.gameField.x / 2 || this.mesh.position.x - this.radius <= -Constants.gameField.x / 2)
             return true
     }
 
     CollisionZ()
     {
-        if (this.mesh.position.z + this.radius >= GameManager.gameField.z / 2 || this.mesh.position.z - this.radius <= -GameManager.gameField.z / 2) {
+        if (this.mesh.position.z + this.radius >= Constants.gameField.z / 2 || this.mesh.position.z - this.radius <= -Constants.gameField.z / 2) {
             return true;
         }
     }
