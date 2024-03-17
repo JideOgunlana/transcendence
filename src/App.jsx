@@ -8,6 +8,7 @@ import GameManager from './GameManager.js';
 import {handleKeyDown, handleKeyUp} from './EventHandelers.js';
 import PongScene from './PongScene.js';
 import { inGameObjects } from './InGameObjects.js';
+import Constants from './Constants.js';
 
 function App() {
   useEffect(() => {
@@ -16,6 +17,13 @@ function App() {
     const game = new PongScene('canvas', inGameObjects.ball, inGameObjects.paddleLeft, inGameObjects.paddleRight, playerLeft, playerRight);
     game.initialize();
     
+    Constants.buttonStart.onclick = () => {
+      playerLeft.ResetScore();
+      playerRight.ResetScore();
+      inGameObjects.ball.SetDirection(Constants.ballStartDir);
+      inGameObjects.ball.SetPosition(Constants.ballStartPosition);
+      GameManager.StartGame(game.animate.bind(game));
+    }
     window.addEventListener('stopGame', (e) => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
@@ -27,6 +35,7 @@ function App() {
       window.addEventListener('keyup',handleKeyUp,false);
       console.log("game starts")
     }, false)
+
     GameManager.StartGame(game.animate.bind(game));
   }, []);
 

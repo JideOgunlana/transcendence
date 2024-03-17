@@ -23,7 +23,7 @@ class InGameObjects {
                 new Wall(Constants.scene, -10.5, 0.5, 0, 1, 1, 20, 0x8674aa),
                 new Wall(Constants.scene, 0, 0.5, -10.5, 22, 1, 1, 0x8674aa),
             ]
-            this.ball = new Ball(0.2, 50, 50, 0xffffff, new THREE.Vector3(-2, 0.2, 0), 0.1, new THREE.Vector3(1, 0, 2).normalize(), this.paddleLeft, this.paddleRight);
+            this.ball = new Ball(0.2, 50, 50, 0xffffff, Constants.ballStartPosition, 0.1, Constants.ballStartDir, this.paddleLeft, this.paddleRight);
             this.light1 = new Light(LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(10, 20, 0), 1, 1)
             this.light2 = new Light(LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(-10, 20, 0), 1, 1)
         } else {

@@ -39,4 +39,10 @@ export default class Player {
         }
         return false
     }
+    ResetScore()
+    {
+        this.score = 0;
+        this.scoresHtml.innerHTML = this.score;
+        this.winHtml.style.display = "none";
+    }
 }

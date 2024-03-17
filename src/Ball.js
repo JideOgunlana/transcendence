@@ -12,7 +12,7 @@ export default class Ball {
         this.color = color;
         this.speed = speed;
         //Constants.gameField = Constants.gameField;
-        this.direction = direction.multiplyScalar(speed);
+        this.direction = new THREE.Vector3(direction.x * speed, direction.y * speed, direction.z * speed);//Constants.ballStartDirection.multiplyScalar(speed);
         this.material = new THREE.MeshStandardMaterial({color: this.color, wireframe: false, metalness: 1, roughness: 0, envMapIntensity: 1 }); //color 0xffffff
         this.physicMaterial = new CANNON.Material();
         this.geometry = new THREE.SphereGeometry(this.radius, this.widthSeg, this.heightSeg);
@@ -35,6 +35,17 @@ export default class Ball {
         Constants.scene.add(this.mesh);
         console.log("in here");
         //this.world.addBody(this.physicBody);
+    }
+
+    SetPosition(pos)
+    {
+        this.mesh.position.set(pos.x, pos.y, pos.z);
+        console.log("set position")
+    }
+
+    SetDirection(dir)
+    {
+        this.direction = new THREE.Vector3(dir.x * this.speed, dir.y*this.speed, dir.z * this.speed);
     }
 
     CollisionXLeft()
