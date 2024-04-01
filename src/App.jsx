@@ -24,6 +24,13 @@ function App() {
       inGameObjects.ball.SetPosition(Constants.ballStartPosition);
       GameManager.StartGame(game.animate.bind(game));
     }
+    window.addEventListener('hitLeftWall', (e) => {
+      console.log("hitLeftWall")
+      playerRight.HitWall()
+    }, false)
+    window.addEventListener('hitRightWall', (e) => {
+      playerLeft.HitWall()
+    }, false)
     window.addEventListener('stopGame', (e) => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);

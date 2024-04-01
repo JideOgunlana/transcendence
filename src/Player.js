@@ -19,15 +19,24 @@ export default class Player {
         return null;
     }
 
-    HitWall(ball)
+    HitWall()
     {
-        if (this.paddle.name == "left" && ball.CollisionXRight() || this.paddle.name == "right" && ball.CollisionXLeft())
+        this.score += 1
+        this.scoresHtml.innerHTML = this.score
+        /* if (this.paddle.name == "left" && ball.CollisionXRight() || this.paddle.name == "right" && ball.CollisionXLeft())
         {
             this.score += 1;
             this.scoresHtml.innerHTML = this.score;
             return true
         }
-        return false
+        return false */
+        /* if (this.paddle.name == "left" && leftRight == "right" || this.paddle.name == "right" && leftRight == "left")
+        {
+            this.score += 1
+            this.scoresHtml.innerHTML = this.score
+            return true
+        }
+        return false */
     }
     Won(maxScores)
     {

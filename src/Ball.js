@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 import GameManager from './GameManager';
 import Constants from './Constants';
+import Events from './Events';
 
 export default class Ball {
     
@@ -117,8 +118,14 @@ export default class Ball {
             this.hitMask |= 2
             this.ToggleHitMask(2)
         }
-        else if (this.CollisionXLeft() || this.CollisionXRight())
+        else if (this.CollisionXLeft()) {
+            dispatchEvent(Events["hitLeftWall"])
             this.direction.x *= -1;
+        }
+        else if (this.CollisionXRight()) {
+            dispatchEvent(Events["hitRightWall"])
+            this.direction.x *= -1;
+        }
         else if (this.CollisionZ())
             this.direction.z *= -1;
     }

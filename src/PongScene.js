@@ -59,8 +59,8 @@ export default class PongScene {
     animate() {
         let animationId = window.requestAnimationFrame(this.animate.bind(this));
         this.controls.update();
-        this.playerLeft.HitWall(inGameObjects.ball)
-        this.playerRight.HitWall(inGameObjects.ball)
+        //this.playerLeft.HitWall(inGameObjects.ball)
+        //this.playerRight.HitWall(inGameObjects.ball)
         if (this.playerLeft.Won(Constants.winningScore) || this.playerRight.Won(Constants.winningScore)) {
             GameManager.StopGame(animationId)
         }
