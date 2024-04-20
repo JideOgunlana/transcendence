@@ -6,7 +6,8 @@ const Events = {
     "hitRightWall" :  new Event("hitRightWall"),
     "playerWon" :  new Event("playerWon"),
     "updateScore": new Event("updateScore"),
-    "reset" : new Event("reset")
+    "reset" : new Event("reset"),
+    "playersSet": new Event("playersSet")
 }
 
 export default Events;

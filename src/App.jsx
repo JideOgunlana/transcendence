@@ -14,11 +14,11 @@ import Events from './Events.js';
 
 function App() {
   useEffect(() => {
-    const players = []
+    //const players = []
     const uimanager = new UIManager()
     let playerLeft = new Player(inGameObjects.paddleLeft, "user1")
     let playerRight = new Player(inGameObjects.paddleRight, "user2")
-    let playerNumber = undefined
+    //let playerNumber = undefined
     const game = new PongScene('canvas', inGameObjects.ball, inGameObjects.paddleLeft, inGameObjects.paddleRight, playerLeft, playerRight);
     game.initialize();
     
@@ -50,33 +50,12 @@ function App() {
       console.log("game starts")
     }, false)
 
-    Constants.submitBtn.onclick = () => {
-      console.log("submit")
-      if (playerNumber === undefined)
-      {
+    window.addEventListener('playersSet', (e) => {
+      GameManager.StartGame(game.animate.bind(game));
+    })
 
-        playerNumber = Constants.numberPlayers.getElementsByTagName("input")[0].value;
-        Constants.numberPlayers.style.display = "none"
-        for (let i = 0; i < playerNumber; i++)
-        {
-          const newDiv = document.createElement('div');
-          newDiv.innerHTML = `Player ${i}: <input type='text' placeholder='Name'><br><br>`
-          Constants.playerNames.appendChild(newDiv)
-        }
-        Constants.playerNames.style.display = "block"
-      } else {
-        const playerNames = [...Constants.playerNames.getElementsByTagName("div")];
-        playerNames.forEach(name => {
-          const playerName = name.getElementsByTagName("input")[0].value;
-          players.push(new Player(undefined, playerName))
-        });
-        //playerLeft = players[0]
-        //playerRight = players[1]
-        Constants.inputOverlay.style.display = "none";
-        Constants.overlay.style.display = "block";
-        GameManager.StartGame(game.animate.bind(game));
-      }
-    }
+
+    
   }, []);
 
 

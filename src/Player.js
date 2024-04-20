@@ -13,22 +13,10 @@ export default class Player {
 
         this.handleReset = this.handleReset.bind(this)
         this.startListening()
-        /* window.addEventListener("stopGame", (e) => {
-            this.stopListening()
-        }, false)
-        window.addEventListener("startGame", (e) => {
-            console.log("in here howhwoqhqwow")
-            this.startListening()
-        }, false) */
-
     }
     startListening() {
         window.addEventListener("reset", this.handleReset, false)
         
-    }
-    stopListening()
-    {
-        window.removeEventListener("reset", this.handleReset)
     }
     handleReset()
     {
@@ -56,21 +44,6 @@ export default class Player {
             newScore : this.score
         }
         dispatchEvent(e)
-        //this.scoresHtml.innerHTML = this.score
-        /* if (this.paddle.name == "left" && ball.CollisionXRight() || this.paddle.name == "right" && ball.CollisionXLeft())
-        {
-            this.score += 1;
-            this.scoresHtml.innerHTML = this.score;
-            return true
-        }
-        return false */
-        /* if (this.paddle.name == "left" && leftRight == "right" || this.paddle.name == "right" && leftRight == "left")
-        {
-            this.score += 1
-            this.scoresHtml.innerHTML = this.score
-            return true
-        }
-        return false */
     }
     Won(maxScores)
     {
@@ -80,8 +53,6 @@ export default class Player {
                 playerName : this.name
             }
             dispatchEvent(e)
-            /* this.winHtml.innerHTML = `<p id='winning-text'>Player ${this.name} won the game!</p>`;
-            this.winHtml.style.display = "block"; */
             return true
         }
         return false
