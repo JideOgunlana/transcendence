@@ -9,21 +9,28 @@ import {handleKeyDown, handleKeyUp} from './EventHandelers.js';
 import PongScene from './PongScene.js';
 import { inGameObjects } from './InGameObjects.js';
 import Constants from './Constants.js';
+import UIManager from './UIManager.js';
+import Events from './Events.js';
 
 function App() {
   useEffect(() => {
-    const playerLeft = new Player(inGameObjects.paddleLeft, "user1")
-    const playerRight = new Player(inGameObjects.paddleRight, "user2")
+    const players = []
+    const uimanager = new UIManager()
+    let playerLeft = new Player(inGameObjects.paddleLeft, "user1")
+    let playerRight = new Player(inGameObjects.paddleRight, "user2")
+    let playerNumber = undefined
     const game = new PongScene('canvas', inGameObjects.ball, inGameObjects.paddleLeft, inGameObjects.paddleRight, playerLeft, playerRight);
     game.initialize();
     
     Constants.buttonStart.onclick = () => {
-      playerLeft.ResetScore();
-      playerRight.ResetScore();
+      //playerLeft.ResetScore();
+      //playerRight.ResetScore();
+      dispatchEvent(Events["reset"])
       inGameObjects.ball.SetDirection(Constants.ballStartDir);
       inGameObjects.ball.SetPosition(Constants.ballStartPosition);
       GameManager.StartGame(game.animate.bind(game));
     }
+    
     window.addEventListener('hitLeftWall', (e) => {
       console.log("hitLeftWall")
       playerRight.HitWall()
@@ -43,7 +50,33 @@ function App() {
       console.log("game starts")
     }, false)
 
-    GameManager.StartGame(game.animate.bind(game));
+    Constants.submitBtn.onclick = () => {
+      console.log("submit")
+      if (playerNumber === undefined)
+      {
+
+        playerNumber = Constants.numberPlayers.getElementsByTagName("input")[0].value;
+        Constants.numberPlayers.style.display = "none"
+        for (let i = 0; i < playerNumber; i++)
+        {
+          const newDiv = document.createElement('div');
+          newDiv.innerHTML = `Player ${i}: <input type='text' placeholder='Name'><br><br>`
+          Constants.playerNames.appendChild(newDiv)
+        }
+        Constants.playerNames.style.display = "block"
+      } else {
+        const playerNames = [...Constants.playerNames.getElementsByTagName("div")];
+        playerNames.forEach(name => {
+          const playerName = name.getElementsByTagName("input")[0].value;
+          players.push(new Player(undefined, playerName))
+        });
+        //playerLeft = players[0]
+        //playerRight = players[1]
+        Constants.inputOverlay.style.display = "none";
+        Constants.overlay.style.display = "block";
+        GameManager.StartGame(game.animate.bind(game));
+      }
+    }
   }, []);
 
 

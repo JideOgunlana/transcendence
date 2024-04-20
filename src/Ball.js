@@ -41,12 +41,12 @@ export default class Ball {
     SetPosition(pos)
     {
         this.mesh.position.set(pos.x, pos.y, pos.z);
-        console.log("set position")
+        console.log("whowhowwohwohwohw")
     }
 
     SetDirection(dir)
     {
-        this.direction = new THREE.Vector3(dir.x * this.speed, dir.y*this.speed, dir.z * this.speed);
+        this.direction = new THREE.Vector3(dir.x * this.speed, dir.y * this.speed, dir.z * this.speed);
     }
 
     CollisionXLeft()
