@@ -6,8 +6,8 @@ export const LightTypes = Object.freeze({
 })
 
 export const GameModes = Object.freeze({
-	SinglePlayer: Symbol(0),
-	DoublePlayer: Symbol(1),
-	MultiPlayer: Symbol(2),
-	Tournament: Symbol(3)
+	SinglePlayer: "SinglePlayer",
+	DoublePlayer: "DoublePlayer",
+	MultiPlayer: "MultiPlayer",
+	Tournament: "Tournament"
 })

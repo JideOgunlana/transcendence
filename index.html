@@ -12,7 +12,16 @@
     <div id="root"></div>
     <div id="user-input-overlay">
       <div id="form-wrapper">
-        <form id="tournament-form">
+        <form id="input-form">
+          <div id="input-modi">
+            <span>Modi: </span>
+            <select name="modi" id="modi">
+              <option value="SinglePlayer" class="modi-option">Single Player</option>
+              <option value="DoublePlayer" class="modi-option">Double Player</option>
+              <option value="MultiPlayer" class="modi-option">Multi Player</option>
+              <option value="Tournament" class="modi-option">Tournament</option>
+            </select>
+          </div>
           <div id="input-number-players">Number of Players: <input type="text" name="fplayerNumber"><br><br></div>
           <div id="input-player-names"></div>
           <button id="submit" type="button" value="Submit">Submit</button>

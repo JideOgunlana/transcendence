@@ -18,6 +18,10 @@ export default class Player {
         window.addEventListener("reset", this.handleReset, false)
         
     }
+    SetPaddle(paddle)
+    {
+        this.paddle = paddle
+    }
     handleReset()
     {
         this.score = 0;

@@ -7,7 +7,7 @@ const Events = {
     "playerWon" :  new Event("playerWon"),
     "updateScore": new Event("updateScore"),
     "reset" : new Event("reset"),
-    "playersSet": new Event("playersSet")
+    "setPlayers": new Event("setPlayers")
 }
 
 export default Events;

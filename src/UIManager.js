@@ -1,18 +1,20 @@
 import { GameModes } from "./Enums"
-import Globals from "./Globals"
 import Events from "./Events"
-import Player from "./Player"
+import UIInputParser from "./UIInputParser"
+import Globals from "./Globals"
 
 export default class UIManager {
     constructor() {
         this.mode = GameModes.DoublePlayer
         this.winHtml = window.document.getElementById("winning-background")
         this.winText = window.document.getElementById("winning-text")
-        this.playerNames = window.document.getElementsByClassName("player-name")
+        this.currentPlayersNames = window.document.getElementsByClassName("player-name")
         this.scores = window.document.getElementsByClassName("score")
         this.submitBtn = window.document.getElementById("submit");
-        this.numberPlayers = window.document.getElementById("input-number-players")
-        this.playerNames = window.document.getElementById("input-player-names")
+
+        this.inputModi = window.document.getElementById("input-modi")
+        this.inputNumberPlayers = window.document.getElementById("input-number-players")
+        this.inputPlayerNames = window.document.getElementById("input-player-names")
         this.overlay = window.document.getElementById("overlay");
         this.inputOverlay = window.document.getElementById("user-input-overlay");
 
@@ -20,6 +22,8 @@ export default class UIManager {
         this.handleScoreUpdate = this.handleScoreUpdate.bind(this)
         this.handleReset = this.handleReset.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+
+        this.inputParser = new UIInputParser()
 
         this.setUp()
         
@@ -36,33 +40,52 @@ export default class UIManager {
         this.submitBtn.onclick = this.handleSubmit
 
     }
+
     handleSubmit(e)
     {
-        console.log("submit")
-        if (Globals.numberOfPlayers === undefined)
-        {
-            Globals.numberOfPlayers = this.numberPlayers.getElementsByTagName("input")[0].value;
-            this.numberPlayers.style.display = "none"
-            for (let i = 0; i < Globals.numberOfPlayers; i++)
-            {
-                const newDiv = document.createElement('div');
-                newDiv.innerHTML = `Player ${i}: <input type='text' placeholder='Name'><br><br>`
-                this.playerNames.appendChild(newDiv)
+        if (Globals.currentGameMode == undefined) {
+            this.inputParser.ParseModi()
+            this.inputModi.style.display = "none";
+            switch (Globals.currentGameMode) {
+                case GameModes.SinglePlayer:
+                    this.inputNumberPlayers.style.display = "none"
+                    this.inputPlayerNames.style.display = "block"
+                    Globals.numberOfPlayers = 1
+                    this.inputParser.CreateNameInputField(1)
+                    break
+                case GameModes.DoublePlayer:
+                    this.inputNumberPlayers.style.display = "none"
+                    this.inputPlayerNames.style.display = "block"
+                    Globals.numberOfPlayers = 2
+                    this.inputParser.CreateNameInputField(2)
+                    break
+                case GameModes.MultiPlayer:
+                    this.inputNumberPlayers.style.display = "none"
+                    this.inputPlayerNames.style.display = "block"
+                    Globals.numberOfPlayers = 4
+                    this.inputParser.CreateNameInputField(4)
+                    break
+                case GameModes.Tournament:
+                    this.inputNumberPlayers.style.display = "block"
+                    break
+                default:
+                    console.log("default")
+                    break
             }
-            this.playerNames.style.display = "block"
-        } else {
-            const playerNames = [...this.playerNames.getElementsByTagName("div")];
-            playerNames.forEach(name => {
-                const playerName = name.getElementsByTagName("input")[0].value;
-                Globals.players.push(new Player(undefined, playerName))
-            });
-            //playerLeft = players[0]
-            //playerRight = players[1]
+        } else if (this.inputParser.parsePlayers() == true) {
+            this.currentPlayersNames[0].textContent = Globals.currentPlayerLeft.name
+            this.currentPlayersNames[1].textContent = Globals.currentPlayerRight.name
             this.inputOverlay.style.display = "none";
             this.overlay.style.display = "block";
-            dispatchEvent(Events["playersSet"])
-            
+            dispatchEvent(Events["setPlayers"])
         }
+        /* else if (this.inputParser.parsePlayers() == true) {
+            this.currentPlayersNames[0].textContent = Globals.currentPlayerLeft.name
+            this.currentPlayersNames[1].textContent = Globals.currentPlayerRight.name
+            this.inputOverlay.style.display = "none";
+            this.overlay.style.display = "block";
+            dispatchEvent(Events["setPlayers"])
+        } */
     }
     handleWin(e)
     {
@@ -87,6 +110,7 @@ export default class UIManager {
         this.scores[1].innerHTML = 0
         this.winHtml.style.display = "none";
     }
+
     startListening() {
         window.addEventListener("playerWon", this.handleWin, false)
         window.addEventListener("updateScore", this.handleScoreUpdate, false)
