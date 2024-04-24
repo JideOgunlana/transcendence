@@ -54,10 +54,11 @@ export default class Player {
     Won(maxScores)
     {
         if (this.score == maxScores) {
-            Globals.winningPlayers.push(this)
+            //Globals.winningPlayers.push(this)
             let e = Events["playerWon"]
             e.detail = {
-                playerName : this.name
+                player : this
+                //playerName : this.name
             }
             dispatchEvent(e)
             return true

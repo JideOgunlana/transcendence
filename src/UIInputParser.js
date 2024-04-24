@@ -59,10 +59,11 @@ export default class UIInputParser {
                 const playerName = name.getElementsByTagName("input")[0].value;
                 let player = new Player(undefined, playerName)
                 Globals.players.push(player)
-                if (Globals.currentGameMode === GameModes.Tournament)
-                    Globals.winningPlayers.push(player)
+                /* if (Globals.currentGameMode === GameModes.Tournament)
+                    Globals.winningPlayers.push(player) */
             });
             if (Globals.currentGameMode === GameModes.Tournament) {
+                this.tournamentLogic.InitWinningPlayers(Globals.players)
                 this.tournamentLogic.CreateTeams()
                 this.tournamentLogic.SetCurrentPlayers()
             }

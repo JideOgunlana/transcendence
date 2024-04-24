@@ -11,38 +11,45 @@ export default class TournamentLogic {
         this.currentTeamIndex = 0
         this.currentRound = 1
         this.lastRoundPending = null
+        this.currentTeams = [[], [], [], [], [], [], []]
+        this.winningPlayers = null
     }
-    
-    DisplayWin(winHtml, playerName)
+    InitWinningPlayers(players)
+    {
+        this.winningPlayers = players
+    }
+    DisplayWin(winHtml, player)
     {
         if (this.numberOfTeams == 1 && this.pendingPlayer == false) {
-            winHtml.innerHTML = `<p id='winning-text'>Player ${playerName} won the tournament!</p>`;
+            winHtml.innerHTML = `<p id='winning-text'>Player ${player.name} won the tournament!</p>`;
             winHtml.style.display = "block";
+        } else {
+            this.winningPlayers.push(player)
         }
     }
     CreateTeams()
     {
         this.numberOfTeams = this.DeterminNumberOfTeams()
-        let numberOfWinningPlayers = this.pendingPlayer ? Globals.winningPlayers.length - 1 : Globals.winningPlayers.length
+        let numberOfWinningPlayers = this.pendingPlayer ? this.winningPlayers.length - 1 : this.winningPlayers.length
         if (this.lastRoundPending != null) {
-            Globals.currentTeams[0].push(this.lastRoundPending)
+            this.currentTeams[0].push(this.lastRoundPending)
             this.lastRoundPending = null
         }
         for (let i = 0; i < numberOfWinningPlayers; ++i) {
             let num = Math.floor(Math.random() * this.numberOfTeams)
-            while (Globals.currentTeams[num].length == 2)
+            while (this.currentTeams[num].length == 2)
                 num = Math.floor(Math.random() * this.numberOfTeams)
-            Globals.currentTeams[num].push(Globals.winningPlayers[i])
+            this.currentTeams[num].push(this.winningPlayers[i])
         }
         if (this.pendingPlayer) {
-            //Globals.currentTeams[this.numberOfTeams].push(Globals.winningPlayers[numberOfWinningPlayers])
-            this.lastRoundPending = Globals.winningPlayers[numberOfWinningPlayers]
+            //this.currentTeams[this.numberOfTeams].push(this.winningPlayers[numberOfWinningPlayers])
+            this.lastRoundPending = this.winningPlayers[numberOfWinningPlayers]
         }
-        Globals.currentTeams.forEach(team => {
+        this.currentTeams.forEach(team => {
             console.log(team)
             console.log("\n\n")
         });
-        Globals.winningPlayers = []
+        this.winningPlayers = []
     }
     DeterminNumberOfTeams()
     {
@@ -57,8 +64,8 @@ export default class TournamentLogic {
 
     SetCurrentPlayers()
     {
-        Globals.currentPlayerLeft = Globals.currentTeams[this.currentTeamIndex][0]
-        Globals.currentPlayerRight = Globals.currentTeams[this.currentTeamIndex][1]
+        Globals.currentPlayerLeft = this.currentTeams[this.currentTeamIndex][0]
+        Globals.currentPlayerRight = this.currentTeams[this.currentTeamIndex][1]
         Globals.currentPlayerLeft.SetPaddle(inGameObjects.paddleLeft)
         Globals.currentPlayerRight.SetPaddle(inGameObjects.paddleRight)
     }
@@ -78,15 +85,15 @@ export default class TournamentLogic {
     {
         if (this.numberOfTeams > 1) {
             this.currentTeamIndex = 0
-            Globals.currentTeams = [[], [], [], [], [], [], []]
+            this.currentTeams = [[], [], [], [], [], [], []]
             this.currentRound++
             this.pendingPlayer = false
             this.CreateTeams()
             console.log("greater 1")
         } else {
             if (this.pendingPlayer) {
-                //let pendingPlayer = Globals.currentTeams[1][0]
-                Globals.currentTeams = [[Globals.winningPlayers[0], this.lastRoundPending], [], [], [], [], [], []]
+                //let pendingPlayer = this.currentTeams[1][0]
+                this.currentTeams = [[this.winningPlayers[0], this.lastRoundPending], [], [], [], [], [], []]
                 this.pendingPlayer = false
                 this.lastRoundPending = null
             }

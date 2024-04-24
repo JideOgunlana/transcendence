@@ -89,9 +89,9 @@ export default class UIManager {
     handleWin(e)
     {
         if (Globals.currentGameMode == GameModes.Tournament) {
-            this.tournamentLogic.DisplayWin(this.winHtml, e.detail.playerName)
+            this.tournamentLogic.DisplayWin(this.winHtml, e.detail.player)
         } else {
-            this.winHtml.innerHTML = `<p id='winning-text'>Player ${e.detail.playerName} won the game!</p>`;
+            this.winHtml.innerHTML = `<p id='winning-text'>Player ${e.detail.player.name} won the game!</p>`;
             this.winHtml.style.display = "block";
         }
     }
