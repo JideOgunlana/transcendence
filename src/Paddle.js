@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import Constants from './Constants';
+import { Constants } from './Constants';
 
 export default class Paddle {
     

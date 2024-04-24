@@ -8,7 +8,7 @@ import GameManager from './GameManager.js';
 import {handleKeyDown, handleKeyUp} from './EventHandelers.js';
 import PongScene from './PongScene.js';
 import { inGameObjects } from './InGameObjects.js';
-import Constants from './Constants.js';
+import { Constants } from './Constants.js';
 import UIManager from './UIManager.js';
 import Events from './Events.js';
 import Globals from './Globals.js';

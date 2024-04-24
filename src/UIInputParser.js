@@ -1,7 +1,7 @@
 //import { Constants } from "three/examples/jsm/libs/motion-controllers.module.js";
 import Globals from "./Globals"
 import Player from "./Player"
-import Constants from "./Constants";
+import { Constants } from "./Constants";
 import { GameModes } from "./Enums";
 import TournamentLogic from "./TournamentLogic";
 

@@ -1,6 +1,6 @@
 import Globals from "./Globals"
 import Player from "./Player"
-import Constants from "./Constants";
+import { Constants } from "./Constants";
 import { GameModes } from "./Enums";
 import { inGameObjects } from "./InGameObjects";
 

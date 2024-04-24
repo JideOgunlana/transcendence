@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
-import Constants from './Constants';
+import { Constants } from './Constants';
 
 export default class Ground {
     

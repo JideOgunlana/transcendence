@@ -2,7 +2,8 @@ import * as THREE from 'three';
 import { LightTypes } from './Enums';
 
 import GameManager from './GameManager';
-import Constants from './Constants';
+//import Constants from './Constants';
+import { Constants } from './Constants';
 
 export default class Light {
     

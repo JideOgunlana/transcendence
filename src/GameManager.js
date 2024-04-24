@@ -1,4 +1,4 @@
-import Constants from "./Constants";
+import { Constants } from "./Constants";
 import Events from "./Events";
 
 export default class GameManager {

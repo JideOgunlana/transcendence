@@ -2,7 +2,7 @@ import * as THREE from 'three'
 
 import Wall from './Wall';
 import Paddle from './Paddle';
-import Constants from './Constants';
+import { Constants } from './Constants';
 import Ball from './Ball';
 import Light from './Light';
 import { LightTypes } from './Enums';

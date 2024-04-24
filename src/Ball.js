@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 import GameManager from './GameManager';
-import Constants from './Constants';
+import { Constants } from './Constants';
 import Events from './Events';
 
 export default class Ball {

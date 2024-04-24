@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import GameManager from './GameManager.js';
-import Constants from './Constants.js';
+import { Constants } from './Constants.js';
 import { inGameObjects } from './InGameObjects.js';
 import Globals from './Globals.js';
 import { GameModes } from './Enums.js';
