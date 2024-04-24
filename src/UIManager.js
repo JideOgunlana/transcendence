@@ -4,7 +4,7 @@ import UIInputParser from "./UIInputParser"
 import Globals from "./Globals"
 
 export default class UIManager {
-    constructor() {
+    constructor(tournamentLogic) {
         this.mode = GameModes.DoublePlayer
         this.winHtml = window.document.getElementById("winning-background")
         this.winText = window.document.getElementById("winning-text")
@@ -22,8 +22,8 @@ export default class UIManager {
         this.handleScoreUpdate = this.handleScoreUpdate.bind(this)
         this.handleReset = this.handleReset.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-
-        this.inputParser = new UIInputParser()
+        this.tournamentLogic = tournamentLogic
+        this.inputParser = new UIInputParser(tournamentLogic)
 
         this.setUp()
         
@@ -34,7 +34,6 @@ export default class UIManager {
             this.stopListening()
         }, false)
         window.addEventListener("startGame", (e) => {
-            console.log("in here howhwoqhqwow")
             this.startListening()
         }, false)
         this.submitBtn.onclick = this.handleSubmit
@@ -89,9 +88,12 @@ export default class UIManager {
     }
     handleWin(e)
     {
-        console.log("player Won ", e.detail.playerName)
-        this.winHtml.innerHTML = `<p id='winning-text'>Player ${e.detail.playerName} won the game!</p>`;
-        this.winHtml.style.display = "block";
+        if (Globals.currentGameMode == GameModes.Tournament) {
+            this.tournamentLogic.DisplayWin(this.winHtml, e.detail.playerName)
+        } else {
+            this.winHtml.innerHTML = `<p id='winning-text'>Player ${e.detail.playerName} won the game!</p>`;
+            this.winHtml.style.display = "block";
+        }
     }
 
     handleScoreUpdate(e)
@@ -108,6 +110,8 @@ export default class UIManager {
     handleReset (e) {
         this.scores[0].innerHTML = 0
         this.scores[1].innerHTML = 0
+        this.currentPlayersNames[0].textContent = Globals.currentPlayerLeft.name
+        this.currentPlayersNames[1].textContent = Globals.currentPlayerRight.name
         this.winHtml.style.display = "none";
     }
 

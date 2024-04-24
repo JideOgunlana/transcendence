@@ -3,9 +3,10 @@ export default class Globals {
     static players = []
     static currentPlayerRight = undefined
     static currentPlayerLeft = undefined
-    static currentRound = 1
+    //static currentRound = 1
     static currentTeams = [[], [], [], [], [], [], []]
     static winningPlayers = []
+    static currentPlayers = []
     static currentGameMode = undefined
 
     

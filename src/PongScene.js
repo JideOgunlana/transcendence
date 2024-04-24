@@ -5,9 +5,11 @@ import Stats from 'three/examples/jsm/libs/stats.module';
 import GameManager from './GameManager.js';
 import Constants from './Constants.js';
 import { inGameObjects } from './InGameObjects.js';
+import Globals from './Globals.js';
+import { GameModes } from './Enums.js';
 
 export default class PongScene {
-    constructor(canvasId, ball, paddleLeft, paddleRight, playerLeft, playerRight) {
+    constructor(canvasId, playerLeft, playerRight, tournamentLogic) {
         this.fov = 45;
         this.canvasId = canvasId;
 
@@ -18,8 +20,9 @@ export default class PongScene {
         this.clock = undefined;
         this.timeStep = 1/60;
 
-        this.playerLeft = playerLeft;
-        this.playerRight = playerRight;
+        //this.playerLeft = playerLeft;
+        //this.playerRight = playerRight;
+        this.tournamentLogic = tournamentLogic
         
     }
 
@@ -61,7 +64,7 @@ export default class PongScene {
         this.controls.update();
         //this.playerLeft.HitWall(inGameObjects.ball)
         //this.playerRight.HitWall(inGameObjects.ball)
-        if (this.playerLeft.Won(Constants.winningScore) || this.playerRight.Won(Constants.winningScore)) {
+        if (Globals.currentPlayerLeft.Won(Constants.winningScore) || Globals.currentPlayerRight.Won(Constants.winningScore)) {
             GameManager.StopGame(animationId)
         }
         this.render();
@@ -70,8 +73,8 @@ export default class PongScene {
     render() {
 
         inGameObjects.ball.update();
-        this.playerLeft.paddle.update();
-        this.playerRight.paddle.update();
+        Globals.currentPlayerLeft.paddle.update();
+        Globals.currentPlayerRight.paddle.update();
         this.renderer.render(Constants.scene, this.camera);
     }
 

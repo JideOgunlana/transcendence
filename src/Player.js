@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import Events from './Events';
+import Globals from './Globals';
 
 export default class Player {
     
@@ -25,6 +26,7 @@ export default class Player {
     handleReset()
     {
         this.score = 0;
+        console.log("reset score to 0")
         /* this.scoresHtml.innerHTML = this.score;
         this.winHtml.style.display = "none"; */
     }
@@ -52,6 +54,7 @@ export default class Player {
     Won(maxScores)
     {
         if (this.score == maxScores) {
+            Globals.winningPlayers.push(this)
             let e = Events["playerWon"]
             e.detail = {
                 playerName : this.name

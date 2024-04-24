@@ -12,11 +12,15 @@ import Constants from './Constants.js';
 import UIManager from './UIManager.js';
 import Events from './Events.js';
 import Globals from './Globals.js';
+import TournamentLogic from './TournamentLogic.js';
+import { GameModes } from './Enums.js';
+
 
 function App() {
   useEffect(() => {
     //const players = []
-    const uimanager = new UIManager()
+    const tournamentLogic = new TournamentLogic()
+    const uimanager = new UIManager(tournamentLogic)
     //let playerLeft = new Player(inGameObjects.paddleLeft, "user1")
     //let playerRight = new Player(inGameObjects.paddleRight, "user2")
     //let playerNumber = undefined
@@ -24,12 +28,15 @@ function App() {
     window.addEventListener('setPlayers', (e) => {
       Globals.currentPlayerLeft.SetPaddle(inGameObjects.paddleLeft)
       Globals.currentPlayerRight.SetPaddle(inGameObjects.paddleRight)
-      const game = new PongScene('canvas', inGameObjects.ball, inGameObjects.paddleLeft, inGameObjects.paddleRight, Globals.currentPlayerLeft, Globals.currentPlayerRight);
+      const game = new PongScene('canvas', Globals.currentPlayerLeft, Globals.currentPlayerRight, tournamentLogic);
       game.initialize();
       GameManager.StartGame(game.animate.bind(game));
       Constants.buttonStart.onclick = () => {
         //playerLeft.ResetScore();
         //playerRight.ResetScore();
+        if (Globals.currentGameMode === GameModes.Tournament) {
+            tournamentLogic.NextTeam()
+        }
         dispatchEvent(Events["reset"])
         inGameObjects.ball.SetDirection(Constants.ballStartDir);
         inGameObjects.ball.SetPosition(Constants.ballStartPosition);
