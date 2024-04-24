@@ -27,7 +27,7 @@ export default class Ground {
         this.mesh.receiveShadow = true;
 
         this.physicBody.quaternion.setFromEuler(-0.5 * Math.PI, 0, 0);
-        Constants.scene.add(gridHelper);
+        /* Constants.scene.add(gridHelper); */
         Constants.scene.add(this.mesh);
     }
 }

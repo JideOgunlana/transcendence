@@ -27,7 +27,7 @@ body {
   justify-content: space-between;
   align-items: center;
   border-radius: 20px;
-  border: 5px blue solid;
+  /* border: 5px blue solid; */
   margin: 0 auto;
   padding: 4% 2%;
 }
@@ -63,7 +63,7 @@ body {
   flex-direction: column;
   height: 50vh;
   margin-top: 8%;
-  border: 5px solid green;
+  /* border: 5px solid green; */
 }
 
 #winning-background {

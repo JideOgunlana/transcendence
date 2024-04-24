@@ -54,7 +54,7 @@ export default class PongScene {
 
         
         this.initControls();
-        this.initHelpers();
+        //this.initHelpers();
         
         window.addEventListener('resize', () => this.onWindowResize(), false);
     }
