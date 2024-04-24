@@ -5,14 +5,19 @@ import { GameModes } from "./Enums";
 import { inGameObjects } from "./InGameObjects";
 
 export default class TournamentLogic {
+    instantiated = false;
     constructor() {
-        this.pendingPlayer = false
-        this.numberOfTeams = undefined
-        this.currentTeamIndex = 0
-        this.currentRound = 1
-        this.lastRoundPending = null
-        this.currentTeams = [[], [], [], [], [], [], []]
-        this.winningPlayers = null
+        if (this.instantiated == false) {
+            this.pendingPlayer = false
+            this.numberOfTeams = undefined
+            this.currentTeamIndex = 0
+            this.currentRound = 1
+            this.lastRoundPending = null
+            this.currentTeams = [[], [], [], [], [], [], []]
+            this.winningPlayers = null
+        } else {
+            throw Error('only one instance can exist');
+        }
     }
     InitWinningPlayers(players)
     {

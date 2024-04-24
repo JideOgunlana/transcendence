@@ -4,28 +4,34 @@ import UIInputParser from "./UIInputParser"
 import Globals from "./Globals"
 
 export default class UIManager {
+    instantiated = false;
     constructor(tournamentLogic) {
-        this.mode = GameModes.DoublePlayer
-        this.winHtml = window.document.getElementById("winning-background")
-        this.winText = window.document.getElementById("winning-text")
-        this.currentPlayersNames = window.document.getElementsByClassName("player-name")
-        this.scores = window.document.getElementsByClassName("score")
-        this.submitBtn = window.document.getElementById("submit");
+        if (this.instantiated == false) {
+            this.instantiated = true
+            this.mode = GameModes.DoublePlayer
+            this.winHtml = window.document.getElementById("winning-background")
+            this.winText = window.document.getElementById("winning-text")
+            this.currentPlayersNames = window.document.getElementsByClassName("player-name")
+            this.scores = window.document.getElementsByClassName("score")
+            this.submitBtn = window.document.getElementById("submit");
 
-        this.inputModi = window.document.getElementById("input-modi")
-        this.inputNumberPlayers = window.document.getElementById("input-number-players")
-        this.inputPlayerNames = window.document.getElementById("input-player-names")
-        this.overlay = window.document.getElementById("overlay");
-        this.inputOverlay = window.document.getElementById("user-input-overlay");
+            this.inputModi = window.document.getElementById("input-modi")
+            this.inputNumberPlayers = window.document.getElementById("input-number-players")
+            this.inputPlayerNames = window.document.getElementById("input-player-names")
+            this.overlay = window.document.getElementById("overlay");
+            this.inputOverlay = window.document.getElementById("user-input-overlay");
 
-        this.handleWin = this.handleWin.bind(this)
-        this.handleScoreUpdate = this.handleScoreUpdate.bind(this)
-        this.handleReset = this.handleReset.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.tournamentLogic = tournamentLogic
-        this.inputParser = new UIInputParser(tournamentLogic)
+            this.handleWin = this.handleWin.bind(this)
+            this.handleScoreUpdate = this.handleScoreUpdate.bind(this)
+            this.handleReset = this.handleReset.bind(this)
+            this.handleSubmit = this.handleSubmit.bind(this)
+            this.tournamentLogic = tournamentLogic
+            this.inputParser = new UIInputParser(tournamentLogic)
 
-        this.setUp()
+            this.setUp()
+        } else {
+            throw Error('only one instance can exist');
+        }
         
     }
     setUp()
@@ -50,41 +56,38 @@ export default class UIManager {
                     this.inputNumberPlayers.style.display = "none"
                     this.inputPlayerNames.style.display = "block"
                     Globals.numberOfPlayers = 1
+                    this.inputParser.SetMinMaxNumPlayers(1, 1)
                     this.inputParser.CreateNameInputField(1)
                     break
                 case GameModes.DoublePlayer:
                     this.inputNumberPlayers.style.display = "none"
                     this.inputPlayerNames.style.display = "block"
                     Globals.numberOfPlayers = 2
+                    this.inputParser.SetMinMaxNumPlayers(2, 2)
                     this.inputParser.CreateNameInputField(2)
                     break
                 case GameModes.MultiPlayer:
                     this.inputNumberPlayers.style.display = "none"
                     this.inputPlayerNames.style.display = "block"
                     Globals.numberOfPlayers = 4
+                    this.inputParser.SetMinMaxNumPlayers(4, 4)
                     this.inputParser.CreateNameInputField(4)
                     break
                 case GameModes.Tournament:
+                    this.inputParser.SetMinMaxNumPlayers(3, 12)
                     this.inputNumberPlayers.style.display = "block"
                     break
                 default:
                     console.log("default")
                     break
             }
-        } else if (this.inputParser.parsePlayers() == true) {
+        } else if (this.inputParser.ParsePlayers() == true) {
             this.currentPlayersNames[0].textContent = Globals.currentPlayerLeft.name
             this.currentPlayersNames[1].textContent = Globals.currentPlayerRight.name
             this.inputOverlay.style.display = "none";
             this.overlay.style.display = "block";
             dispatchEvent(Events["setPlayers"])
         }
-        /* else if (this.inputParser.parsePlayers() == true) {
-            this.currentPlayersNames[0].textContent = Globals.currentPlayerLeft.name
-            this.currentPlayersNames[1].textContent = Globals.currentPlayerRight.name
-            this.inputOverlay.style.display = "none";
-            this.overlay.style.display = "block";
-            dispatchEvent(Events["setPlayers"])
-        } */
     }
     handleWin(e)
     {
@@ -124,13 +127,5 @@ export default class UIManager {
     {
         window.removeEventListener("playerWon", this.handleWin)
         window.removeEventListener("updateScore", this.handleScoreUpdate)
-        //window.removeEventListener("reset", this.handleReset)
     }
-
-    /* userInput()
-    {
-        Constants.submitBtn.onclick = () => {
-            
-          }
-    } */
 }

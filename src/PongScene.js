@@ -9,7 +9,7 @@ import Globals from './Globals.js';
 import { GameModes } from './Enums.js';
 
 export default class PongScene {
-    constructor(canvasId, playerLeft, playerRight, tournamentLogic) {
+    constructor(canvasId, tournamentLogic) {
         this.fov = 45;
         this.canvasId = canvasId;
 
