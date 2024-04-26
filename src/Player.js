@@ -1,6 +1,4 @@
-import * as THREE from 'three';
 import Events from './Events';
-import Globals from './Globals';
 
 export default class Player {
     
@@ -8,8 +6,8 @@ export default class Player {
         this.paddle = paddle
         this.score = 0
         this.name = name
-        this.scoresHtml = this.GetHTMLElem()
-        this.winHtml = window.document.getElementById("winning-background")
+        /* this.scoresHtml = this.GetHTMLElem()
+        this.winHtml = window.document.getElementById("winning-background") */
 
 
         this.handleReset = this.handleReset.bind(this)
@@ -30,7 +28,7 @@ export default class Player {
         /* this.scoresHtml.innerHTML = this.score;
         this.winHtml.style.display = "none"; */
     }
-    GetHTMLElem()
+    /* GetHTMLElem()
     {
         if (this.paddle == undefined)
             return null
@@ -39,7 +37,7 @@ export default class Player {
         else if (this.paddle.name == "right")
             return window.document.getElementsByClassName("score-right")[0];
         return null;
-    }
+    } */
 
     HitWall()
     {

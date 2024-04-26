@@ -2,12 +2,10 @@ import { useEffect } from 'react'
 
 import './App.css'
 import * as CANNON from 'cannon-es'
-import Player from './Player.js';
 
 import GameManager from './GameManager.js';
-import {handleKeyDown, handleKeyUp} from './EventHandelers.js';
 import PongScene from './PongScene.js';
-import { inGameObjects } from './InGameObjects.js';
+import { IN_GAME_OBJECTS } from './InGameObjects.js';
 import { Constants } from './Constants.js';
 import UIManager from './UIManager.js';
 import Events from './Events.js';
@@ -21,13 +19,13 @@ function App() {
     //const players = []
     const tournamentLogic = new TournamentLogic()
     const uimanager = new UIManager(tournamentLogic)
-    //let playerLeft = new Player(inGameObjects.paddleLeft, "user1")
-    //let playerRight = new Player(inGameObjects.paddleRight, "user2")
+    //let playerLeft = new Player(IN_GAME_OBJECTS.paddleLeft, "user1")
+    //let playerRight = new Player(IN_GAME_OBJECTS.paddleRight, "user2")
     //let playerNumber = undefined
     
     window.addEventListener('setPlayers', (e) => {
-      Globals.currentPlayerLeft.SetPaddle(inGameObjects.paddleLeft)
-      Globals.currentPlayerRight.SetPaddle(inGameObjects.paddleRight)
+      Globals.currentPlayerLeft.SetPaddle(IN_GAME_OBJECTS.paddleLeft)
+      Globals.currentPlayerRight.SetPaddle(IN_GAME_OBJECTS.paddleRight)
       const game = new PongScene('canvas', Globals.currentPlayerLeft, Globals.currentPlayerRight, tournamentLogic);
       game.initialize();
       GameManager.StartGame(game.animate.bind(game));
@@ -38,8 +36,8 @@ function App() {
             tournamentLogic.NextTeam()
         }
         dispatchEvent(Events["reset"])
-        inGameObjects.ball.SetDirection(Constants.ballStartDir);
-        inGameObjects.ball.SetPosition(Constants.ballStartPosition);
+        IN_GAME_OBJECTS.ball.SetDirection(Constants.ballStartDir);
+        IN_GAME_OBJECTS.ball.SetPosition(Constants.ballStartPosition);
         GameManager.StartGame(game.animate.bind(game));
       }
     }, false)
@@ -51,17 +49,7 @@ function App() {
     window.addEventListener('hitRightWall', (e) => {
       Globals.currentPlayerLeft.HitWall()
     }, false)
-    window.addEventListener('stopGame', (e) => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-      console.log("stopp received");
-    }, false)
     
-    window.addEventListener('startGame', (e) => {
-      window.addEventListener('keydown', handleKeyDown ,false);
-      window.addEventListener('keyup',handleKeyUp,false);
-      console.log("game starts")
-    }, false)
 
 
     

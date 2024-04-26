@@ -7,7 +7,8 @@ const Events = {
     "playerWon" :  new Event("playerWon"),
     "updateScore": new Event("updateScore"),
     "reset" : new Event("reset"),
-    "setPlayers": new Event("setPlayers")
+    "setPlayers": new Event("setPlayers"),
+    "AIPrediction": new Event("AIPrediction"),
 }
 
 export default Events;

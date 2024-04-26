@@ -63,11 +63,11 @@ export default class Ball {
         return false
     }
 
-    CollisionX()
+    /* CollisionX()
     {
         if (this.mesh.position.x + this.radius >= Constants.gameField.x / 2 || this.mesh.position.x - this.radius <= -Constants.gameField.x / 2)
             return true
-    }
+    } */
 
     CollisionZ()
     {
@@ -91,11 +91,13 @@ export default class Ball {
 
     CollisionPaddleRight()
     {
-        if (!(this.hitMask & 2) && this.mesh.position.x - this.radius <= this.paddleRight.X() + this.paddleRight.width / 2) {
-            if (this.direction.z > 0 && this.mesh.position.z + this.radius >= this.paddleRight.Z() - this.paddleRight.depth / 2 && this.mesh.position.z + this.radius < this.paddleLeft.Z() + this.paddleLeft.depth / 2 )
+        //!(this.hitMask & 2) && 
+        if (this.mesh.position.x - this.radius <= this.paddleRight.X() + this.paddleRight.width / 2) {
+            if (this.direction.z > 0 && (this.mesh.position.z + this.radius) >= (this.paddleRight.Z() - this.paddleRight.depth / 2) && (this.mesh.position.z + this.radius) < (this.paddleRight.Z() + this.paddleRight.depth / 2) )
                 return true
-            if (this.direction.z < 0 && this.mesh.position.z - this.radius <= this.paddleRight.Z() + this.paddleRight.depth / 2 && this.mesh.position.z - this.radius > this.paddleLeft.Z() - this.paddleLeft.depth / 2)
+            if (this.direction.z < 0 && (this.mesh.position.z - this.radius) <= (this.paddleRight.Z() + this.paddleRight.depth / 2) && (this.mesh.position.z - this.radius) > (this.paddleRight.Z() - this.paddleRight.depth / 2))
                 return true
+            console.log("in here but not in the other functions")
         }
         return false
     }
@@ -135,6 +137,13 @@ export default class Ball {
         this.mesh.position.add(this.direction);
 
     }
+    IsMovingUp() { return this.direction.z > 0}
+    IsMovingDown() { return this.direction.z < 0 }
+    IsMovingLeft() { return this.direction.x > 0 }
+    IsMovingRight() { return this.direction.x < 0}
+    X() { return this.mesh.position.x; }
+    Y() { return this.mesh.position.y; }
+    Z() { return this.mesh.position.z; }
     async update() {
         this.Collision()
         this.translate()

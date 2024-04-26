@@ -4,9 +4,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import GameManager from './GameManager.js';
 import { Constants } from './Constants.js';
-import { inGameObjects } from './InGameObjects.js';
+import { IN_GAME_OBJECTS } from './InGameObjects.js';
 import Globals from './Globals.js';
 import { GameModes } from './Enums.js';
+
 
 export default class PongScene {
     constructor(canvasId, tournamentLogic) {
@@ -62,8 +63,8 @@ export default class PongScene {
     animate() {
         let animationId = window.requestAnimationFrame(this.animate.bind(this));
         this.controls.update();
-        //this.playerLeft.HitWall(inGameObjects.ball)
-        //this.playerRight.HitWall(inGameObjects.ball)
+        //this.playerLeft.HitWall(IN_GAME_OBJECTS.ball)
+        //this.playerRight.HitWall(IN_GAME_OBJECTS.ball)
         if (Globals.currentPlayerLeft.Won(Constants.winningScore) || Globals.currentPlayerRight.Won(Constants.winningScore)) {
             GameManager.StopGame(animationId)
         }
@@ -72,8 +73,11 @@ export default class PongScene {
 
     render() {
 
-        inGameObjects.ball.update();
+        IN_GAME_OBJECTS.ball.update();
         Globals.currentPlayerLeft.paddle.update();
+        if (Globals.currentGameMode == GameModes.SinglePlayer) {
+            Globals.currentPlayerRight.HandleMovement()
+        }
         Globals.currentPlayerRight.paddle.update();
         this.renderer.render(Constants.scene, this.camera);
     }

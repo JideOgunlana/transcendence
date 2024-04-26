@@ -28,13 +28,13 @@ export default class UIManager {
             this.tournamentLogic = tournamentLogic
             this.inputParser = new UIInputParser(tournamentLogic)
 
-            this.setUp()
+            this.setUpListeners()
         } else {
             throw Error('only one instance can exist');
         }
         
     }
-    setUp()
+    setUpListeners()
     {
         window.addEventListener("stopGame", (e) => {
             this.stopListening()
@@ -58,6 +58,7 @@ export default class UIManager {
                     Globals.numberOfPlayers = 1
                     this.inputParser.SetMinMaxNumPlayers(1, 1)
                     this.inputParser.CreateNameInputField(1)
+                    Globals.AIPlayerActive = true
                     break
                 case GameModes.DoublePlayer:
                     this.inputNumberPlayers.style.display = "none"

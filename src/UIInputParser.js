@@ -1,6 +1,8 @@
 import Globals from "./Globals"
 import Player from "./Player"
 import { GameModes } from "./Enums";
+import AIPlayer from "./AIPlayer";
+import { IN_GAME_OBJECTS } from "./InGameObjects";
 
 export default class UIInputParser {
     instantiated = false;
@@ -67,12 +69,17 @@ export default class UIInputParser {
                 this.tournamentLogic.CreateTeams()
                 this.tournamentLogic.SetCurrentPlayers()
             }
-            else if (Globals.currentGameMode === GameModes.SinglePlayer)
+            else if (Globals.currentGameMode === GameModes.SinglePlayer) {
                 Globals.currentPlayerLeft = Globals.players[0]
+                Globals.currentPlayerRight = new AIPlayer(IN_GAME_OBJECTS.paddleRight, "AI", IN_GAME_OBJECTS.ball)
+                Globals.currentPlayerLeft.SetPaddle(IN_GAME_OBJECTS.paddleLeft)
+            }
                 //Globals.currentPlayerRight = AIPlayer => AIPlayer doesnt exist yet
             else {
                 Globals.currentPlayerLeft = Globals.players[0]
                 Globals.currentPlayerRight = Globals.players[1]
+                Globals.currentPlayerLeft.SetPaddle(IN_GAME_OBJECTS.paddleLeft)
+                Globals.currentPlayerRight.SetPaddle(IN_GAME_OBJECTS.paddleRight)
             }
             return true
         }

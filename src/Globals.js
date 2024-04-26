@@ -8,6 +8,7 @@ export default class Globals {
     //static winningPlayers = []
     static currentPlayers = []
     static currentGameMode = undefined
+    static AIPlayerActive = false
 
     
     

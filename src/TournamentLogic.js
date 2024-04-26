@@ -2,7 +2,7 @@ import Globals from "./Globals"
 import Player from "./Player"
 import { Constants } from "./Constants";
 import { GameModes } from "./Enums";
-import { inGameObjects } from "./InGameObjects";
+import { IN_GAME_OBJECTS } from "./InGameObjects";
 
 export default class TournamentLogic {
     instantiated = false;
@@ -71,8 +71,8 @@ export default class TournamentLogic {
     {
         Globals.currentPlayerLeft = this.currentTeams[this.currentTeamIndex][0]
         Globals.currentPlayerRight = this.currentTeams[this.currentTeamIndex][1]
-        Globals.currentPlayerLeft.SetPaddle(inGameObjects.paddleLeft)
-        Globals.currentPlayerRight.SetPaddle(inGameObjects.paddleRight)
+        Globals.currentPlayerLeft.SetPaddle(IN_GAME_OBJECTS.paddleLeft)
+        Globals.currentPlayerRight.SetPaddle(IN_GAME_OBJECTS.paddleRight)
     }
     NextTeam()
     {
