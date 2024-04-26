@@ -92,7 +92,7 @@ export default class Ball {
     CollisionPaddleRight()
     {
         //!(this.hitMask & 2) && 
-        if (this.mesh.position.x - this.radius <= this.paddleRight.X() + this.paddleRight.width / 2) {
+        if (!(this.hitMask & 2) && this.mesh.position.x - this.radius <= this.paddleRight.X() + this.paddleRight.width / 2) {
             if (this.direction.z > 0 && (this.mesh.position.z + this.radius) >= (this.paddleRight.Z() - this.paddleRight.depth / 2) && (this.mesh.position.z + this.radius) < (this.paddleRight.Z() + this.paddleRight.depth / 2) )
                 return true
             if (this.direction.z < 0 && (this.mesh.position.z - this.radius) <= (this.paddleRight.Z() + this.paddleRight.depth / 2) && (this.mesh.position.z - this.radius) > (this.paddleRight.Z() - this.paddleRight.depth / 2))

@@ -15,7 +15,7 @@ class InGameObjects {
             this.instantiated = true
             
             this.paddleLeft = new Paddle(9.5, 0.5, 0, 1, 1, 4, 0xe4d6ff, "left", "gamemanager");
-            this.paddleRight = new Paddle(-9.5, 0.5, 4, 1, 1, 4, 0xe4d6ff, "right", "gamemanager");
+            this.paddleRight = new Paddle(-9.5, 0.5, 0, 1, 1, 4, 0xe4d6ff, "right", "gamemanager");
             this.ground = new Ground(0xf1ebff);
             this.walls =  [
                 new Wall(Constants.scene, 10.5, 0.5, 0, 1, 1, 20, 0x8674aa),
