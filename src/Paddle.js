@@ -108,29 +108,26 @@ export default class Paddle {
     moveDown() {
         this.direction.z = -1
     }
-
+    SetSpeed(speed)
+    {
+        console.log("set speed to: ", speed)
+        this.speed = speed
+    }
     resetSpeed() {
         this.direction.z = 0
     }
-    setAIMovingDirection2()
+    /* setAIMovingDirection2()
     {
         console.log(this.AIPredictionPoint.z)
         let movingZDir = this.AIPredictionPoint.z - this.mesh.position.z
         console.log("moving Dir: ", movingZDir)
         console.log("pos: ", this.mesh.position.z)
-        /* if (this.direction.z == 0) {
-
-        } else if (this.direction.z > 0) {
-
-        } else {
-
-        } */
         if (movingZDir == 0 || (movingZDir > 0 && this.mesh.position.z >= this.AIPredictionPoint) || (movingZDir < 0 && this.mesh.position.z <= this.AIPredictionPoint)) {
             this.direction.z = 0
         } else  {
             this.direction.z = movingZDir > 0 ? 1 : -1
         }
-    }
+    } */
     setAIMovingDirection()
     {
         let upperBound = this.AIPredictionPoint.z + 0.5
@@ -153,12 +150,8 @@ export default class Paddle {
     }
     update()
     {
-        if (this.name == "right")
-            console.log("start: ", this.direction.z)
         if (Globals.AIPlayerActive && this.name == "right" && this.AIPredictionPoint != undefined)
             this.setAIMovingDirection()
-        if (this.name == "right")
-            console.log("middle: ", this.direction.z)
         if ((this.mesh.position.z >= 10 - this.depth / 2 && this.direction.z > 0) || (this.mesh.position.z <= -10 + this.depth / 2 && this.direction.z < 0))
             this.direction.z = 0
         this.mesh.position.z += this.direction.z * this.speed;

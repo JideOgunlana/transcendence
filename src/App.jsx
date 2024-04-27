@@ -24,11 +24,15 @@ function App() {
     //let playerNumber = undefined
     
     window.addEventListener('setPlayers', (e) => {
-      Globals.currentPlayerLeft.SetPaddle(IN_GAME_OBJECTS.paddleLeft)
-      Globals.currentPlayerRight.SetPaddle(IN_GAME_OBJECTS.paddleRight)
+      //Globals.currentPlayerLeft.SetPaddle(IN_GAME_OBJECTS.paddleLeft)
+      //Globals.currentPlayerRight.SetPaddle(IN_GAME_OBJECTS.paddleRight)
       const game = new PongScene('canvas', Globals.currentPlayerLeft, Globals.currentPlayerRight, tournamentLogic);
       game.initialize();
       GameManager.StartGame(game.animate.bind(game));
+      if (Globals.currentGameMode === GameModes.SinglePlayer) {
+        console.log("game mode is single")
+        Globals.currentPlayerRight.paddle.SetSpeed(0.1)
+      }
       Constants.buttonStart.onclick = () => {
         //playerLeft.ResetScore();
         //playerRight.ResetScore();
