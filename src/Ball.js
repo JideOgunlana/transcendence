@@ -27,6 +27,8 @@ export default class Ball {
         this.paddleLeft = paddleLeft;
         this.paddleRight = paddleRight;
         this.hitMask = 0b00;
+        this.handleReset = this.handleReset.bind(this)
+        window.addEventListener("reset", this.handleReset, false)
         this.initBall(pos)
     }
 
@@ -34,14 +36,15 @@ export default class Ball {
         this.mesh.position.set(pos.x, pos.y, pos.z); //x=-2, y=5, z=0
         this.mesh.castShadow = true;
         Constants.scene.add(this.mesh);
-        console.log("in here");
         //this.world.addBody(this.physicBody);
     }
-
+    handleReset() {
+        this.SetDirection(Constants.ballStartDir);
+        this.SetPosition(Constants.ballStartPosition);
+    }
     SetPosition(pos)
     {
         this.mesh.position.set(pos.x, pos.y, pos.z);
-        console.log("whowhowwohwohwohw")
     }
 
     SetDirection(dir)
@@ -97,7 +100,6 @@ export default class Ball {
                 return true
             if (this.direction.z < 0 && (this.mesh.position.z - this.radius) <= (this.paddleRight.Z() + this.paddleRight.depth / 2) && (this.mesh.position.z - this.radius) > (this.paddleRight.Z() - this.paddleRight.depth / 2))
                 return true
-            console.log("in here but not in the other functions")
         }
         return false
     }

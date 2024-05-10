@@ -21,10 +21,13 @@ export default class UIManager {
             this.overlay = window.document.getElementById("overlay");
             this.inputOverlay = window.document.getElementById("user-input-overlay");
 
+            //this.matchMaker = window.document.getElementById("matchmaker");
+
             this.handleWin = this.handleWin.bind(this)
             this.handleScoreUpdate = this.handleScoreUpdate.bind(this)
             this.handleReset = this.handleReset.bind(this)
             this.handleSubmit = this.handleSubmit.bind(this)
+           // this.handleDisplayTeams = this.handleDisplayTeams.bind(this)
             this.tournamentLogic = tournamentLogic
             this.inputParser = new UIInputParser(tournamentLogic)
 
@@ -118,15 +121,36 @@ export default class UIManager {
         this.currentPlayersNames[1].textContent = Globals.currentPlayerRight.name
         this.winHtml.style.display = "none";
     }
+    /* handleDisplayTeams(e) {
+        let teams = e.detail.teams
+        let pending = e.detail.pending
+        let round = e.detail.round
+        console.log("handleDisplayTeams")
+        const newDiv = document.createElement('div');
+        newDiv.innerHTML = `Round: ${round}<br><br>`
+        this.matchMaker.appendChild(newDiv)
+        for (let i = 0; i < e.detail.numberOfTeams; ++i) {
+            const newDiv = document.createElement('div');
+            newDiv.innerHTML = `${teams[i][0].name} X ${teams[i][1].name}<br><br>`
+            this.matchMaker.appendChild(newDiv)
+        }
+        if (pending != null) {
+            const newDiv2 = document.createElement('div');
+            newDiv.innerHTML = `Pending till next round- ${pending.name}<br><br>`
+            this.matchMaker.appendChild(newDiv2)
+        }
+    } */
 
     startListening() {
         window.addEventListener("playerWon", this.handleWin, false)
         window.addEventListener("updateScore", this.handleScoreUpdate, false)
         window.addEventListener("reset", this.handleReset, false)
+       // window.addEventListener("TournamentTeams", this.handleDisplayTeams, false)
     }
     stopListening()
     {
         window.removeEventListener("playerWon", this.handleWin)
         window.removeEventListener("updateScore", this.handleScoreUpdate)
+       // window.removeEventListener("TournamentTeams", this.handleDisplayTeams)
     }
 }

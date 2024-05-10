@@ -24,20 +24,7 @@ export default class Player {
     handleReset()
     {
         this.score = 0;
-        console.log("reset score to 0")
-        /* this.scoresHtml.innerHTML = this.score;
-        this.winHtml.style.display = "none"; */
     }
-    /* GetHTMLElem()
-    {
-        if (this.paddle == undefined)
-            return null
-        else if (this.paddle.name == "left")
-            return window.document.getElementsByClassName("score-left")[0];
-        else if (this.paddle.name == "right")
-            return window.document.getElementsByClassName("score-right")[0];
-        return null;
-    } */
 
     HitWall()
     {
@@ -52,11 +39,9 @@ export default class Player {
     Won(maxScores)
     {
         if (this.score == maxScores) {
-            //Globals.winningPlayers.push(this)
             let e = Events["playerWon"]
             e.detail = {
                 player : this
-                //playerName : this.name
             }
             dispatchEvent(e)
             return true

@@ -22,8 +22,8 @@ export function handleKeyUp(event)
 {
     let key = event.key
     if ((key == "ArrowUp" || key == "ArrowDown") && AIPlayerActive == false) {
-      IN_GAME_OBJECTS.paddleRight.resetSpeed()
+      IN_GAME_OBJECTS.paddleRight.resetDirection()
     } else if (key == "w" || key == "s") {
-      IN_GAME_OBJECTS.paddleLeft.resetSpeed()
+      IN_GAME_OBJECTS.paddleLeft.resetDirection()
     }
 } */

@@ -9,6 +9,7 @@ const Events = {
     "reset" : new Event("reset"),
     "setPlayers": new Event("setPlayers"),
     "AIPrediction": new Event("AIPrediction"),
+    "TournamentTeams" : new Event("TournamentTeams")
 }
 
 export default Events;

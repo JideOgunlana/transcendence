@@ -16,12 +16,9 @@ import { GameModes } from './Enums.js';
 
 function App() {
   useEffect(() => {
-    //const players = []
     const tournamentLogic = new TournamentLogic()
     const uimanager = new UIManager(tournamentLogic)
-    //let playerLeft = new Player(IN_GAME_OBJECTS.paddleLeft, "user1")
-    //let playerRight = new Player(IN_GAME_OBJECTS.paddleRight, "user2")
-    //let playerNumber = undefined
+
     
     window.addEventListener('setPlayers', (e) => {
       //Globals.currentPlayerLeft.SetPaddle(IN_GAME_OBJECTS.paddleLeft)
@@ -30,7 +27,6 @@ function App() {
       game.initialize();
       GameManager.StartGame(game.animate.bind(game));
       if (Globals.currentGameMode === GameModes.SinglePlayer) {
-        console.log("game mode is single")
         Globals.currentPlayerRight.paddle.SetSpeed(0.1)
       }
       Constants.buttonStart.onclick = () => {
@@ -40,8 +36,8 @@ function App() {
             tournamentLogic.NextTeam()
         }
         dispatchEvent(Events["reset"])
-        IN_GAME_OBJECTS.ball.SetDirection(Constants.ballStartDir);
-        IN_GAME_OBJECTS.ball.SetPosition(Constants.ballStartPosition);
+        //IN_GAME_OBJECTS.ball.SetDirection(Constants.ballStartDir);
+        //IN_GAME_OBJECTS.ball.SetPosition(Constants.ballStartPosition);
         GameManager.StartGame(game.animate.bind(game));
       }
     }, false)

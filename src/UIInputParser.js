@@ -74,7 +74,6 @@ export default class UIInputParser {
                 Globals.currentPlayerRight = new AIPlayer(IN_GAME_OBJECTS.paddleRight, "AI", IN_GAME_OBJECTS.ball)
                 Globals.currentPlayerLeft.SetPaddle(IN_GAME_OBJECTS.paddleLeft)
             }
-                //Globals.currentPlayerRight = AIPlayer => AIPlayer doesnt exist yet
             else {
                 Globals.currentPlayerLeft = Globals.players[0]
                 Globals.currentPlayerRight = Globals.players[1]

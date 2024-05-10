@@ -61,9 +61,9 @@ export default class Paddle {
     handleKeyUp(e) {
         let key = e.key
         if ((key == "ArrowUp" || key == "ArrowDown") && Globals.AIPlayerActive == false && this.name == "right") {
-            this.resetSpeed()
+            this.resetDirection()
         } else if ((key == "w" || key == "s") && this.name == "left") {
-            this.resetSpeed()
+            this.resetDirection()
         }
     }
 
@@ -75,7 +75,6 @@ export default class Paddle {
         this.paddle.rotation.z = -0.5 * Math.PI; */
 
         Constants.scene.add(this.mesh);
-        console.log("paddle " +  this.name + "\tobj: " + this.obj);
     }
     moveAlongVector(zDirection, speed)
     {
@@ -86,9 +85,6 @@ export default class Paddle {
 
     moveTowardsPoint(e)
     {
-        console.log("name is not AI")
-        console.log(this.name)
-        console.log("ai player active: ", Globals.AIPlayerActive)
         if (this.name == "right" && Globals.AIPlayerActive == true) {
             console.log("in here the fuck why doesnt it work")
             //let zValue = e.detail.zValue
@@ -110,24 +106,11 @@ export default class Paddle {
     }
     SetSpeed(speed)
     {
-        console.log("set speed to: ", speed)
         this.speed = speed
     }
-    resetSpeed() {
+    resetDirection() {
         this.direction.z = 0
     }
-    /* setAIMovingDirection2()
-    {
-        console.log(this.AIPredictionPoint.z)
-        let movingZDir = this.AIPredictionPoint.z - this.mesh.position.z
-        console.log("moving Dir: ", movingZDir)
-        console.log("pos: ", this.mesh.position.z)
-        if (movingZDir == 0 || (movingZDir > 0 && this.mesh.position.z >= this.AIPredictionPoint) || (movingZDir < 0 && this.mesh.position.z <= this.AIPredictionPoint)) {
-            this.direction.z = 0
-        } else  {
-            this.direction.z = movingZDir > 0 ? 1 : -1
-        }
-    } */
     setAIMovingDirection()
     {
         let upperBound = this.AIPredictionPoint.z + 0.5
@@ -139,14 +122,6 @@ export default class Paddle {
             this.direction.z = 1
         else if (movingZDir < 0)
             this.direction.z = -1
-
-        /* let movingZDir = this.AIPredictionPoint.z - this.mesh.position.z
-        
-        if (movingZDir == 0 || (movingZDir > 0 && this.mesh.position.z >= this.AIPredictionPoint) || (movingZDir < 0 && this.mesh.position.z <= this.AIPredictionPoint)) {
-            this.direction.z = 0
-        } else  {
-            this.direction.z = movingZDir > 0 ? 1 : -1
-        } */
     }
     update()
     {

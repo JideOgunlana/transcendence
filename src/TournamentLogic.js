@@ -3,6 +3,8 @@ import Player from "./Player"
 import { Constants } from "./Constants";
 import { GameModes } from "./Enums";
 import { IN_GAME_OBJECTS } from "./InGameObjects";
+import Events from "./Events";
+import UITournament from "./UITournament";
 
 export default class TournamentLogic {
     instantiated = false;
@@ -15,6 +17,7 @@ export default class TournamentLogic {
             this.lastRoundPending = null
             this.currentTeams = [[], [], [], [], [], [], []]
             this.winningPlayers = null
+            this.uiTournament = new UITournament()
         } else {
             throw Error('only one instance can exist');
         }
@@ -50,6 +53,16 @@ export default class TournamentLogic {
             //this.currentTeams[this.numberOfTeams].push(this.winningPlayers[numberOfWinningPlayers])
             this.lastRoundPending = this.winningPlayers[numberOfWinningPlayers]
         }
+        /* let e = Events["TournamentTeams"]
+        e.detail = {
+            teams : this.currentTeams,
+            pending : this.lastRoundPending,
+            round : this.currentRound,
+            numberOfTeams :  this.numberOfTeams
+        }
+        dispatchEvent(e)
+        console.log("event should be dispatched: ", e) */
+        this.uiTournament.DisplayTeams(this.currentTeams, this.lastRoundPending, this.currentRound, this.numberOfTeams)
         this.currentTeams.forEach(team => {
             console.log(team)
             console.log("\n\n")
@@ -94,7 +107,6 @@ export default class TournamentLogic {
             this.currentRound++
             this.pendingPlayer = false
             this.CreateTeams()
-            console.log("greater 1")
         } else {
             if (this.pendingPlayer) {
                 //let pendingPlayer = this.currentTeams[1][0]
