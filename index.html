@@ -5,50 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
   </head>
   <body>
     <div id="root"></div>
-    <div id="user-input-overlay">
-      <div id="form-wrapper">
-        <form id="input-form">
-          <div id="input-modi">
-            <span>Modi: </span>
-            <select name="modi" id="modi">
-              <option value="SinglePlayer" class="modi-option">Single Player</option>
-              <option value="DoublePlayer" class="modi-option">Double Player</option>
-              <option value="MultiPlayer" class="modi-option">Multi Player</option>
-              <option value="Tournament" class="modi-option">Tournament</option>
-            </select>
-          </div>
-          <div id="input-number-players">Number of Players: <input type="text" name="fplayerNumber"><br><br></div>
-          <div id="input-player-names"></div>
-          <button id="submit" type="button" value="Submit">Submit</button>
-        </form>        
-      </div>
-    </div>
-    <div id="overlay">
-      <div id="scoreBoard">
-        <div id="player-left">
-          <p class="player-name"></p>
-          <p class="score score-left"></p>
-        </div>
-        <div id="player-right">
-          <p class="player-name"></p>
-          <p class="score score-right"></p>
-        </div>
-        <!--<p class="score score-left">0</p>
-        <p class="score score-right">0</p>-->
-      </div>
-      <div id="main-container">
-        <img id="btn-start" src="start.png">
-        <div id="tournament-wrapper"><div id="matchmaker"></div></div>
-        <div id="winning-background">
-          <p id='winning-text'></p>
-        </div>
-      </div>
-    </div>
+   
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

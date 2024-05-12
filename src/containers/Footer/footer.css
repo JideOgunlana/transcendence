@@ -1,0 +1,32 @@
+footer {
+    display: flex;
+    justify-content: center;
+    /* border-top: 1px solid var(--custom-grey-border); */
+
+    .left-footer {
+        width: 20%;
+    }
+    
+    .left-footer, .right-footer {
+        align-content: center;
+    }
+    
+    .left-footer > div {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .left-footer div span {
+        margin-left: 30px;
+    }
+    
+    div select {
+        background-color: #18181B;
+        width: 144px;
+        height: 32px;
+        border-radius: 32px;
+        color: var(--custom-white)
+    }
+}
+

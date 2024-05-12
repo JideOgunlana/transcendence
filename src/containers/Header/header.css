@@ -1,0 +1,38 @@
+nav {
+    display: flex;
+    height: 53px;
+    align-items: center;
+    border-bottom: 1px solid var(--custom-grey-border);
+
+    .left-nav-bar, .right-nav-bar {
+        display: flex;
+    }
+    
+    .transcend-logo {
+        display: flex;
+        align-items: end;
+    }
+    
+    .right-nav-bar--icons {
+        margin-right: 16px;
+    }
+    
+    .right-nav-bar--signup-btn {
+        background-color: var(--custom--light-purple);
+        height: 32px;
+        width: 114px;
+        border-radius: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 32px;
+    }
+}
+
+
+
+@media screen and (min-width: 1460px) {
+    nav {
+        justify-content: space-between;
+    }
+}

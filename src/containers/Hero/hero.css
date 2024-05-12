@@ -1,0 +1,118 @@
+.heroSection {
+    grid-row: span 6;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 100%;
+    row-gap:  60px;
+
+
+    .heroSection-header {
+        display: none;
+    }
+
+    .heroSection-about {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 60px;
+        margin-top: 60px;
+    }
+
+    .heroSection-about > div {
+        width: 300px;
+
+    }
+
+    .heroSection-gameSelect {
+        display: flex;
+        flex-direction: column;
+        gap: 60px 0;
+        align-items: center;
+    }
+
+    .heroSection-gameSelect--tabs {
+        display: flex;
+        justify-content: center;
+    }
+
+    .heroSection-gameSelect--tabs--pong, .heroSection-gameSelect--tabs--memory {
+        display: flex;
+        flex-direction: column;
+
+        h4 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        & {
+            width: 200px
+        }
+    }
+
+    .tabActive {
+        border-bottom: 1px solid var(--custom--light-purple);
+        color: var(--custom--light-purple);
+    }
+
+    .tabInactive {
+        border-bottom: 1px solid var(--custom-grey-border);
+    }
+
+
+    .heroSection-signup {
+        display: flex;
+        justify-content: center;
+    }
+
+    .heroSection-signup--btn {
+        background-color: var(--custom--light-purple);
+        height: 36px;
+        width: 204px;
+        border-radius: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-right: 32px;
+    }
+
+}
+
+
+@media screen and (min-width: 1460px) {
+    .heroSection {
+        grid-template-rows: 800px;
+
+        .heroSection-header {
+            background-image: url('../../assets/svg/heroBg.svg');
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    
+        .heroSection-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .heroSection-header h1 {
+            position: absolute;
+        }
+    
+        .heroSection-header h1:first-child {
+            transform: translate(-100px, -50px);
+        }
+
+        .heroSection-header h1:last-child {
+            transform: translateX(200px);
+        }
+
+        .heroSection-signup--beforeFooter {
+            text-align: center;
+        }
+
+    }
+}
+
+
+
