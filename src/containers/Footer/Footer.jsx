@@ -12,13 +12,13 @@ const Footer = props => {
                         <img src={transcendLogo} />
                     </div>
                     <div className='text-13'>
-                        <img src={githubIcon} />
+                        <a href='#'> <img src={githubIcon} /> </a>
                         <span >
-                            The Team
+                            The 😎 Team
                         </span>
                     </div>
                     <div className='text-13'>
-                        <select>
+                        <select className='clickable'>
                             <option>English (US)</option>
                             <option>German (DE)</option>
                             <option>Spanish (ES)</option> 

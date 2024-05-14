@@ -23,56 +23,13 @@
 
     }
 
-    .heroSection-gameSelect {
-        display: flex;
-        flex-direction: column;
-        gap: 60px 0;
-        align-items: center;
-    }
-
-    .heroSection-gameSelect--tabs {
-        display: flex;
-        justify-content: center;
-    }
-
-    .heroSection-gameSelect--tabs--pong, .heroSection-gameSelect--tabs--memory {
-        display: flex;
-        flex-direction: column;
-
-        h4 {
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        & {
-            width: 200px
-        }
-    }
-
-    .tabActive {
-        border-bottom: 1px solid var(--custom--light-purple);
-        color: var(--custom--light-purple);
-    }
-
-    .tabInactive {
-        border-bottom: 1px solid var(--custom-grey-border);
-    }
-
-
     .heroSection-signup {
         display: flex;
         justify-content: center;
     }
 
     .heroSection-signup--btn {
-        background-color: var(--custom--light-purple);
-        height: 36px;
-        width: 204px;
-        border-radius: 32px;
-        display: flex;
-        align-items: center;
         justify-content: space-around;
-        margin-right: 32px;
     }
 
 }

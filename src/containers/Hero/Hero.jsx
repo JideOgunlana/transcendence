@@ -1,10 +1,12 @@
+
+import GameSelect from '../../components/GameSelect/GameSelect';
+
 import './hero.css';
 import circle from '../../assets/svg/circle.svg';
-import pong2D from '../../assets/svg/pong2D.svg';
 import rightArrow from '../../assets/svg/rightArrow.svg';
 import before from '../../assets/svg/footerBefore.svg';
 
-const Hero = props => {
+const Hero = ({handleSignup}) => {
     return (
         <div className='heroSection'>
             <div className="heroSection-header">
@@ -21,7 +23,7 @@ const Hero = props => {
                         <img src={circle} />
                     </div>
                     <h2>Play Solo</h2>
-                    <p class="text-13">
+                    <p className="text-13">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, recusandae?
                     </p>
                 </div>
@@ -30,7 +32,7 @@ const Hero = props => {
                         <img src={circle} />
                     </div>
                     <h2>Play against</h2>
-                    <p class="text-13">
+                    <p className="text-13">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, recusandae?
                     </p>
                 </div>
@@ -39,35 +41,20 @@ const Hero = props => {
                         <img src={circle} />
                     </div>
                     <h2>Play for fun</h2>
-                    <p class="text-13">
+                    <p className="text-13">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, recusandae?
                     </p>
                 </div>
             </div>
-            <div className='heroSection-gameSelect'>
-                <div className='heroSection-gameSelect--tabs'>
-                    <div className="heroSection-gameSelect--tabs--pong tabActive">
-                        <h4>
-                            Pong
-                        </h4>
-                        <div className=''></div>
-                    </div>
-                    <div className="heroSection-gameSelect--tabs--memory tabInactive">
-                        <h4>
-                            Memory
-                        </h4>
-                        <div className=''></div>
-                    </div>
-                </div>
-                <div className='heroSection-gameSelect--gameImg'>
-                    <img src={pong2D} />
-                </div>
-            </div>
+            <GameSelect />
             <div className='heroSection-signup'>
-                <div className='heroSection-signup--btn text-13'>
-                    <span>SignUp/Sing In</span>
+                <button 
+                    className='heroSection-signup--btn btn-primary clickable text-13'
+                    onClick={handleSignup}
+                    >
+                    <span>SignUp</span>
                     <img src={rightArrow} />
-                </div>
+                </button>
             </div>
             <div className='heroSection-signup--beforeFooter'>
                 <img src={before} />

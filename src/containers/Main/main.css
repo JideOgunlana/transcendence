@@ -1,0 +1,24 @@
+main {
+    .tabActive {
+        border-bottom: 1px solid var(--custom--light-purple);
+        color: var(--custom--light-purple);
+    }
+
+    .tabInactive {
+        border-bottom: 1px solid var(--custom-grey-border);
+    }
+      
+}
+
+.transition-main {
+    opacity: 0;
+    animation: transition-main 1s ease forwards;  
+}
+@keyframes transition-main {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,13 @@
+
+
+.player {
+    width: 251px;
+    height: 112px;
+    border: 1px solid var(--custom--light-purple);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    gap: 10px;
+}

@@ -1,0 +1,16 @@
+
+.playerList {
+    /* border: 1px solid red; */
+    width: 70%;
+
+    h3 {
+        text-align: center;
+    }
+   .playerList--players {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px 40px;
+   }
+
+
+}
