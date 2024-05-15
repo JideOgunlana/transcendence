@@ -30,9 +30,7 @@
     }
 
     .dashboard--gameMenu, 
-    .dashboard--gamePlayers,
-    .dashboard--fullHistory,
-    .dashboard--userHistory  {
+    .dashboard--gamePlayers  {
         width: 100%;
     }
 

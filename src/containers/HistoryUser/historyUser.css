@@ -2,8 +2,12 @@
 
     display: flex;
     flex-direction: column;
-    width: 100%;
-
+    width: 80%;
+    height: 80vh;
+    align-items: center;
+    align-content: center;
+    align-items: center;
+    
     .statsCard {
         max-width: 500px;
         height: 360px;
@@ -12,10 +16,16 @@
         padding: 20px;
     }
 
-    .historyUser--stats {
+    .historyUser--stats{
         width: 100%;
         /* border: 3px solid red; */
         display: flex;
+    }
+
+    .historyUser--player {
+        flex: 1;
+        display: flex;
+        justify-content: center;
     }
 
     .historyUser--stats-grid {
@@ -25,6 +35,6 @@
         gap: 90px 30px;
         justify-content: center;
         align-items: center;
-        flex: 2;
+        flex: 3;
     }
 }

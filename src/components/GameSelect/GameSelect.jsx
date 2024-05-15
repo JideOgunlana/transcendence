@@ -5,15 +5,20 @@ import memory from '../../assets/svg/memory.svg';
 import React, {useState} from 'react';
 
 
-const GameSelect = () => {
+const GameSelect = ({handlePongOptionsChange, handleMemoryOptionsChange}) => {
 
     const [activeTab, setActiveTab] = useState("pong");
-
+    
     const selectGameTab = (e) => {
-        (e.target.innerText.toLowerCase().includes("pong")) ? 
-                        setActiveTab("pong") 
-                        : 
-                        setActiveTab("memory");
+        const tabName = e.target.innerText.toLowerCase();
+        setActiveTab(tabName);
+        if (tabName === "pong") {
+            handlePongOptionsChange({ selected: true });
+            handleMemoryOptionsChange({ selected: false });
+        } else  {
+            handlePongOptionsChange({ selected: false });
+            handleMemoryOptionsChange({ selected: true });
+        }
     }
 
     return (
@@ -21,14 +26,12 @@ const GameSelect = () => {
             <div className='gameSelect'>
                 <div 
                     className='gameSelect--tabs clickable'
-                    onClick={selectGameTab} 
-                >
+                    onClick={selectGameTab} >
                     <div
                         className=
                         {
                             `gameSelect--tabs--pong ${activeTab === 'pong' ? 'tabActive': 'tabInactive'}`
-                        }
-                    >
+                        }>
                         <h4>
                             Pong
                         </h4>
@@ -38,8 +41,7 @@ const GameSelect = () => {
                         className=
                         {
                             `gameSelect--tabs--pong ${activeTab === 'memory' ? 'tabActive': 'tabInactive'}`
-                        }
-                    >
+                        }>
                         <h4>
                             Memory
                         </h4>
@@ -48,7 +50,7 @@ const GameSelect = () => {
                 </div>
                 <div className='gameSelect--gameImg'>
                     {
-                        activeTab === 'pong' ? <img src={pong2D} /> : <img src={memory} />
+                        activeTab === 'pong' ? <img src={pong2D}  /> : <img src={memory} />
                     }
                 </div>
             </div>

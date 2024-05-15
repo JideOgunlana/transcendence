@@ -3,11 +3,17 @@
 .player {
     width: 251px;
     height: 112px;
-    border: 1px solid var(--custom--light-purple);
+    border: 1px solid var(--custom-light-purple);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     gap: 10px;
+    color: var(--custom-greyGreen);
+
+    &.selected {
+        background-color: var(--custom-light-purple);
+        color: var(--custom-grey);
+    }
 }

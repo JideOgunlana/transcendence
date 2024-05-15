@@ -2,52 +2,83 @@
 
 import { useState } from 'react';
 import {GameSelect, HistoryBar, NextBtn } from '../../components';
-import {PongGameMenu, PongGamePlayerList, HistoryAll, HistoryUser} from '../../containers';
+import {PongGameMenu, PongGamePlayerList} from '../../containers';
 import './dashboard.css';
 
 
 const Dashboard = () => {
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState({
+        stepNumber: 0,
+            pong: {
+                selected: true,
+                theme: '3D',
+                mode: 'singlePlayer',
+                selectedPlayers: []
+            },
+            memory: {
+                selected: false,
+                theme: 'icons',
+                mode: 'singlePlayer',
+                gridSize: '4x4',
+                selectedPlayers: []
+            }
+    });
 
-    const handleNextBtnClick = (nextStep) => {
-        setStep(nextStep);
+    const handleNextBtnClick = () => {
+        setStep({ ...step, stepNumber: step.stepNumber + 1 });
     };
 
-
+    const handlePongOptionsChange = (options) => {
+        setStep(prevState => ({
+            ...prevState,
+            pong: { ...prevState.pong, ...options }
+        }));
+    };
+    
+    const handleMemoryOptionsChange = (options) => {
+        setStep(prevState => ({
+            ...prevState,
+            memory: { ...prevState.memory, ...options }
+        }));
+    };
+    
 
     return (
         <div className='dashboard'>
             {
-                step === 0 && (
+                step.stepNumber === 0 && (
                     <div className='dashboard--mainPage'>
                         <div className='dashboard--mainPage--selectGame'>
-                            <GameSelect />
-                            <NextBtn handleNextBtnClick={ () => handleNextBtnClick(1)}/>
+                            <GameSelect 
+                                handlePongOptionsChange={handlePongOptionsChange} 
+                                handleMemoryOptionsChange={handleMemoryOptionsChange} 
+                            />
+                            <NextBtn handleNextBtnClick={handleNextBtnClick} />
                         </div>
                         <div className='sideBar'>
-                            <HistoryBar />
+                            <HistoryBar step={step} />
                         </div>
                     </div>
                 )
             }
             {
-                step === 1 && (
+                step.stepNumber === 1 && step.pong.selected && (
                     <div className='dashboard--gameMenu'>
-                    <PongGameMenu handleNextBtnClick={ () => handleNextBtnClick(2)}/>
+                        <PongGameMenu 
+                            handleNextBtnClick={handleNextBtnClick}
+                            handlePongOptionsChange={handlePongOptionsChange} 
+                            step={step}/>
                     </div>
                 )
             }
             {
-                step === 2 &&
-             <div className='dashboard--gamePlayers'>
-                <PongGamePlayerList />
-            </div> }
-            {/* <div className='dashboard--fullHistory'>
-                <HistoryAll />
-            </div> */}
-            {/* <div className='dashboard--userHistory'>
-                <HistoryUser />
-            </div> */}
+                step.stepNumber === 2 && step.pong.selected && (
+                <div className='dashboard--gamePlayers'>
+                    <PongGamePlayerList step={step} setStep={setStep} />
+                </div>
+                )
+            }
+
         </div>
     );
 }

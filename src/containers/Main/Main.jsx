@@ -1,9 +1,6 @@
 
 import './main.css';
-import Hero from '../Hero/Hero'
-import Signup  from '../Singup/Signup';
-import Userprofile from '../Userprofile/Userprofile';
-import Dashboard from '../Dashboard/Dashboard';
+import {Hero, Signup, Userprofile, Dashboard, HistoryAll, HistoryUser} from '../../containers'
 
 const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, handleSignup, handleGoToDashboard }) => {
 
@@ -19,6 +16,12 @@ const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, han
                 )
             }
             {showDashboard && <Dashboard /> }
+            {/* <div className='fullHistory mTop32'>
+                <HistoryAll />
+            </div> */}
+            {/* <div className='userHistory mTop32'>
+                <HistoryUser />
+            </div> */}
         </main>
     );
 }

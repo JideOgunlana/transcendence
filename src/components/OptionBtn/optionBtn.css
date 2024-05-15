@@ -3,7 +3,7 @@
     background-color: var(--custom-greyGreen);
 } 
 .optionBtn-inactive {
-    background-color: var(--custom-grey-card);
+    background-color: var(--custom-grey);
     color: var(--custom-greyGreen)
 }
 

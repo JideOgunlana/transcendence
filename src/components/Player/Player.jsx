@@ -1,19 +1,18 @@
 import './player.css';
 
-const Player = () => {
+const Player = ({ username, selected, onClick }) => {
     return (
-        <div className='player'>
+        <div 
+            className={`player ${selected ? 'selected' : ''}`}
+            onClick={onClick} >
             <div className='player--img'>
-                <img src={''} alt='data.profile-image' />
+                <img src={'profile-image-url'} alt={username} />
             </div>
             <div className='player--username'>
-                {
-                    'data.username'
-                }
+                <strong>{username}</strong>
             </div>
-            
         </div>
     );
-}
+};
 
 export default Player;

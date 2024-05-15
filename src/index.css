@@ -77,13 +77,13 @@ button:focus-visible {
   --custom-black: #070708;
   --custom-logo-link-white: #F4F4F5;
   --custom-white: #FFFFFF;
-  --custom--light-purple: #715DF2;
+  --custom-light-purple: #715DF2;
   --custom-grey-purple: #7B759D;
   --custom-paddle-left: #F59E0B;
   --custom-paddle-right: #3E3ECA;
   --custom-grey-border: #5A5A5A;
-  --custom-grey-card: #242424;
   --custom-darkGrey-card: #171717;
+  --custom-grey: #242424;
   --custom-red-error: #f22C3D;
   --custom-greyGreen: #7191A5;
 }
@@ -119,8 +119,8 @@ body {
   cursor: pointer;
 }
 
-.btn-primary {
-  background-color: var(--custom--light-purple);
+.btn-primary, 
+.btn-disabled {
   color: var(--custom-white);
   border-radius: 6px;
   display: flex;
@@ -131,12 +131,22 @@ body {
   width: 204px;
 }
 
+.btn-primary {
+  background-color: var(--custom-light-purple);
+  cursor: pointer;
+}
+
+.btn-disabled {
+  background-color: var(--custom-grey-purple);
+  cursor: not-allowed;
+}
+
 .link {
-  color: var(--custom--light-purple);
+  color: var(--custom-light-purple);
 }
 
 .linkDashboardActive {
-    color: var(--custom--light-purple);
+    color: var(--custom-light-purple);
 }
 
 

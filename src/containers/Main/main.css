@@ -1,11 +1,17 @@
 main {
     .tabActive {
-        border-bottom: 1px solid var(--custom--light-purple);
-        color: var(--custom--light-purple);
+        border-bottom: 1px solid var(--custom-light-purple);
+        color: var(--custom-light-purple);
     }
 
     .tabInactive {
         border-bottom: 1px solid var(--custom-grey-border);
+    }
+
+    .userHistory,
+    .fullHistory {
+        display: flex;
+        justify-content: center;
     }
       
 }

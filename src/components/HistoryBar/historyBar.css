@@ -17,7 +17,7 @@
         /* border: 1px solid green; */
         margin-bottom: 10px;
         border-radius: 6px;
-        background-color: var(--custom-grey-card);
+        background-color: var(--custom-grey);
         padding: 15px;
 
         h5 {

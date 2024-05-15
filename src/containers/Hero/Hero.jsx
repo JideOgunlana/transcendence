@@ -7,6 +7,10 @@ import rightArrow from '../../assets/svg/rightArrow.svg';
 import before from '../../assets/svg/footerBefore.svg';
 
 const Hero = ({handleSignup}) => {
+
+    const handlePongOptionsChange = () => {}
+    const handleMemoryOptionsChange = () => {}
+
     return (
         <div className='heroSection'>
             <div className="heroSection-header">
@@ -46,7 +50,10 @@ const Hero = ({handleSignup}) => {
                     </p>
                 </div>
             </div>
-            <GameSelect />
+            <GameSelect 
+                handlePongOptionsChange={handlePongOptionsChange}
+                handleMemoryOptionsChange={handleMemoryOptionsChange}
+            />
             <div className='heroSection-signup'>
                 <button 
                     className='heroSection-signup--btn btn-primary clickable text-13'

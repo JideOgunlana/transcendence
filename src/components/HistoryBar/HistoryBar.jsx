@@ -60,7 +60,7 @@ const Head2Head = () => {
 
 
 
-const HistoryBar = () => {
+const HistoryBar = ({step}) => {
     return (
         <div className='historyBar'>
             <div className='historyBar--title'>
@@ -82,19 +82,27 @@ const HistoryBar = () => {
                     <MostPlays /> {/*   **To-Do logic showing Players with most plays or -- No data -- */}
                 </div>
             </div>
+            
             <div className='head2Head'>
                 <h5>
                     <img src={head2HeadIcon} /> {'Head-2-Head'}
                 </h5>
                 <div className="head2Head--players">
-                    <Head2Head /> 
-                    {/*   
+                    {
+                        step.stepNumber !== 0 || 
+                        step.pong.mode !== 'singlePlayer' ||
+                        step.pong.mode !== 'multiPlayer' ||
+                        step.memory.mode !== 'tournament'
+                        ?
+                        `i18n No Data Available`
+                        : 
+                        <Head2Head /> 
                     
-                        ** To-Do logic showing head-2-head or -- No data -- 
-                        ** Check for head 2 head only when there are 2 players
-                        ** For more than 2 players H-2-H is Unavailable
+                        // ** To-Do logic showing head-2-head or -- No data -- 
+                        // ** Check for head 2 head only when there are 2 players
+                        // ** For more than 2 players H-2-H is Unavailable
                     
-                    */}
+                    }
                 </div>
             </div>
             <div className='fullHistory'>

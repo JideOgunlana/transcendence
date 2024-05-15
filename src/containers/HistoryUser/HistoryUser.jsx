@@ -2,18 +2,10 @@
 import './historyUser.css';
 import {Player} from '../../components'
 
-const WinLoss = () => {
+const RecentGames = () => {
     return (
         <div className='statsCard'>
-            Win Loss Ratio Graph Pong
-        </div>
-    );
-}
-
-const TotalGames = () => {
-    return (
-        <div className='statsCard'>
-            Win Loss Ratio Graph Memory
+            Last 5 games pong / Memory
         </div>
     );
 }
@@ -37,11 +29,13 @@ const HistoryUser = () => {
     return (
         <div className='historyUser'>
             <h4>{'i18n.User History'}</h4>
-            <div className='historyUser--stats' >
-                <Player />
+            <div className='historyUser--stats mTop32' >
+                <div className='historyUser--player'>
+                    <Player />
+                </div>
                 <div className='historyUser--stats-grid'>
-                    <WinLoss />
-                    <TotalGames />
+                    <RecentGames />
+                    <RecentGames />
                     <Ranking />
                     <BestGame />
 
