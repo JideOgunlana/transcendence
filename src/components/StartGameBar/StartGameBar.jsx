@@ -49,11 +49,10 @@ const StartGameBar = ({ step }) => {
                 <h5 className='mTop16 gameRequirementsInfo'>{'* data.requirements'}</h5>
                 <h5>{`${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${'i18n SELECTED'}`}</h5>
             </div>
-
-            <div className='startPong'>
-                <button className={isStartDisabled ? `btn-disabled`: `btn-primary`} onClick={handleStartClick} disabled={isStartDisabled}>
-                    {'i18n.Start'}
-                </button>
+            <div className='startGameBar--btn'>
+				<button className={isStartDisabled ? `btn-disabled`: `btn-primary`} onClick={handleStartClick} disabled={isStartDisabled}>
+					{'i18n.Start'}
+				</button>
             </div>
         </div>
     );

@@ -1,8 +1,7 @@
 
 import './header.css'
 import transcendLogo from '../../assets/svg/transcend.svg';
-import soundIcon from '../../assets/svg/sound.svg';
-import languageIcon from '../../assets/svg/language.svg';
+import settingsIcon from '../../assets/svg/settings.svg';
 
 const Header = ({handleSignup, handleLogoClick, handleGoToDashboard, resetDashboardStep}) => {
     return (
@@ -22,10 +21,7 @@ const Header = ({handleSignup, handleLogoClick, handleGoToDashboard, resetDashbo
                 </div>
                 <div className='right-nav-bar'>
                     <div className='right-nav-bar--icons clickable'>
-                        <img src={languageIcon} />
-                    </div>
-                    <div className='right-nav-bar--icons clickable'>
-                       <img src={soundIcon} />
+                        <img src={settingsIcon} />
                     </div>
                     <button 
                         className='btn-primary right-nav-bar--signup-btn text-13 clickable'

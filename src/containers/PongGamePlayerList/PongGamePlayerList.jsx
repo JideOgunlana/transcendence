@@ -7,7 +7,9 @@ const PongGamePlayerList = ({ step, setStep }) => {
     return (
         <div className='pongGamePlayerList'>
             <PlayerList step={step} setStep={setStep} />
-            <StartGameBar step={step}pr />
+            <div className='sideBar--startGame'>
+                <StartGameBar step={step} />
+            </div>
         </div>
     );
 };

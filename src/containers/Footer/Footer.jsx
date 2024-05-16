@@ -17,13 +17,6 @@ const Footer = props => {
                             The 😎 Team
                         </span>
                     </div>
-                    <div className='text-13'>
-                        <select className='clickable'>
-                            <option>English (US)</option>
-                            <option>German (DE)</option>
-                            <option>Spanish (ES)</option> 
-                        </select>
-                    </div>
                 </div>
                 <div className='right-footer text-13'>
                     <div>

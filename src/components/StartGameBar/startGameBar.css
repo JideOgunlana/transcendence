@@ -11,7 +11,8 @@
     .gameRequirementsInfo {
         color: var(--custom-red-error)
     }
-    .startPong {
+
+    .startGameBar--btn  {
         /* border: 1px solid purple; */
         display: flex;
         justify-content: center;
