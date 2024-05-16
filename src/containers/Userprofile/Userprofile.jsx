@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './userprofile.css';
 import userIcon from '../../assets/svg/user.svg';
 
@@ -23,7 +24,9 @@ const Userprofile = ({handleGoToDashboard}) => {
                 className='link text-13 mTop16 clickable'
                 onClick={handleGoToDashboard}
             >
+                <Link to='/dashboard'>
                 <span>Go to Dashboard</span>
+                </Link>
             </div>
         </div>
     );

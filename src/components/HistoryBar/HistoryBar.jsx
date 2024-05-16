@@ -106,7 +106,7 @@ const HistoryBar = ({step}) => {
                 </div>
             </div>
             <div className='fullHistory'>
-                <button className='btn-primary'>{'i18n. Full History'}</button>
+                <button className='game-btn-enabled'>{'i18n. Full History'}</button>
             </div>
         </div>
     );

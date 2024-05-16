@@ -4,7 +4,7 @@ const NextBtn = ({handleNextBtnClick}) => {
     return (
         <div>
             <button 
-                className='btn-primary clickable'
+                className='game-btn-enabled clickable'
                 onClick={handleNextBtnClick}    
             >
                 Next

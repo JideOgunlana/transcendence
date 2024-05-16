@@ -1,5 +1,7 @@
 
 import GameSelect from '../../components/GameSelect/GameSelect';
+import { Link } from 'react-router-dom';
+
 
 import './hero.css';
 import circle from '../../assets/svg/circle.svg';
@@ -12,7 +14,7 @@ const Hero = ({handleSignup}) => {
     const handleMemoryOptionsChange = () => {}
 
     return (
-        <div className='heroSection'>
+        <div className='heroSection d-grid gap-5'>
             <div className="heroSection-header">
                 <h1>
                     Experience the fun 
@@ -21,7 +23,7 @@ const Hero = ({handleSignup}) => {
                     of gaming
                 </h1>
             </div>
-            <div className="heroSection-about">
+            <div className="heroSection-about d-flex flex-wrap gap-5 mt-5 justify-content-center">
                 <div>
                     <div>
                         <img src={circle} />
@@ -54,17 +56,19 @@ const Hero = ({handleSignup}) => {
                 handlePongOptionsChange={handlePongOptionsChange}
                 handleMemoryOptionsChange={handleMemoryOptionsChange}
             />
-            <div className='heroSection-signup'>
-                <button 
-                    className='heroSection-signup--btn btn-primary clickable text-13'
-                    onClick={handleSignup}
-                    >
-                    <span>SignUp</span>
-                    <img src={rightArrow} />
-                </button>
+            <div className='heroSection-signup d-flex justify-content-center'>
+                <Link to='signup' >
+                    <button 
+                        className='heroSection-signup--btn game-btn-enabled clickable text-13 justify-content-around'
+                        onClick={handleSignup}
+                        >
+                        <span>SignUp</span>
+                        <img src={rightArrow} />
+                    </button>
+                </Link>
             </div>
             <div className='heroSection-signup--beforeFooter'>
-                <img src={before} />
+                <img src={before} className='img-fluid' />
             </div>
         </div>
     )

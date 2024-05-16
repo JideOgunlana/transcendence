@@ -50,7 +50,7 @@ const StartGameBar = ({ step }) => {
                 <h5>{`${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${'i18n SELECTED'}`}</h5>
             </div>
             <div className='startGameBar--btn'>
-				<button className={isStartDisabled ? `btn-disabled`: `btn-primary`} onClick={handleStartClick} disabled={isStartDisabled}>
+				<button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
 					{'i18n.Start'}
 				</button>
             </div>

@@ -39,7 +39,7 @@
         justify-content: center;
         align-items: center;
 
-        .btn-primary {
+        .game-btn-enabled {
             width: 288px;
         }
     }

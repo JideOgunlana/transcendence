@@ -119,8 +119,8 @@ body {
   cursor: pointer;
 }
 
-.btn-primary, 
-.btn-disabled {
+.game-btn-enabled, 
+.game-btn-disabled {
   color: var(--custom-white);
   border-radius: 6px;
   display: flex;
@@ -131,12 +131,12 @@ body {
   width: 204px;
 }
 
-.btn-primary {
+.game-btn-enabled {
   background-color: var(--custom-light-purple);
   cursor: pointer;
 }
 
-.btn-disabled {
+.game-btn-disabled {
   background-color: var(--custom-grey-purple);
   cursor: not-allowed;
 }

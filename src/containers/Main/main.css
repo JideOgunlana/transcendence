@@ -16,11 +16,11 @@ main {
       
 }
 
-.transition-main {
+.main-container-transition {
     opacity: 0;
-    animation: transition-main 1s ease forwards;  
+    animation: main-container-transition 1s ease forwards;  
 }
-@keyframes transition-main {
+@keyframes main-container-transition {
     from {
         opacity: 0;
     }

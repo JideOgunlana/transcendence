@@ -50,7 +50,9 @@ const GameSelect = ({handlePongOptionsChange, handleMemoryOptionsChange}) => {
                 </div>
                 <div className='gameSelect--gameImg'>
                     {
-                        activeTab === 'pong' ? <img src={pong2D}  /> : <img src={memory} />
+                        activeTab === 'pong' ? 
+                        <img src={pong2D} className='img-fluid' /> 
+                        : <img src={memory} className='img-fluid' />
                     }
                 </div>
             </div>

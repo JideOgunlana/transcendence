@@ -1,6 +1,6 @@
 .signupSection {
     height: 80vh;
-    align-content: center;
+    /* align-content: center; */
     /* border: 3px solid red; */
 
     .signupSection--form {

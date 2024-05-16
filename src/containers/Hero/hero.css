@@ -1,35 +1,12 @@
 .heroSection {
-    grid-row: span 6;
-    display: grid;
-    justify-content: center;
     grid-template-columns: 100%;
-    row-gap:  60px;
-
 
     .heroSection-header {
         display: none;
     }
 
-    .heroSection-about {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 60px;
-        margin-top: 60px;
-    }
-
     .heroSection-about > div {
         width: 300px;
-
-    }
-
-    .heroSection-signup {
-        display: flex;
-        justify-content: center;
-    }
-
-    .heroSection-signup--btn {
-        justify-content: space-around;
     }
 
 }
