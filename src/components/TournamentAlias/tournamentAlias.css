@@ -1,0 +1,23 @@
+.tournamentAlias {
+
+    .modal-content {
+        border: 1px solid var(--custom-white)
+    }
+
+    .modal-content {
+        background-color: var(--custom-grey);
+    }
+
+    .modal-header {
+        border-bottom: 1px solid var(--custom-grey-border);
+    }
+
+    .modal-footer {
+        border-top: 1px solid var(--custom-grey-border);
+    }
+
+    .alias-note {
+        color: var(--custom-red-error);
+    }
+
+}

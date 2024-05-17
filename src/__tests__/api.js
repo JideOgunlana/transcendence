@@ -8,7 +8,7 @@ export const createPost = async (postData) => {
 export const getUsers = async () => {
     return [
         {
-            username: 'user1',
+            username: '121345678912345678912',
             email: 'uabc@email.com'
         },
         {
@@ -20,7 +20,7 @@ export const getUsers = async () => {
             email: 'uabc@email.com'
         },
         {
-            username: 'user4',
+            username: '121345678912345678912',
             email: 'xyz@email.com'
         },
         {

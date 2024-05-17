@@ -5,4 +5,5 @@ export {default as PlayerList} from './PlayerList/PlayerList';
 export {default as Player} from './Player/Player';
 export {default as StartGameBar} from './StartGameBar/StartGameBar';
 export {default as OptionBtn} from './OptionBtn/OptionBtn';
+export {default as TournamentAlias} from './TournamentAlias/TournamentAlias';
 

@@ -68,36 +68,63 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
     return (
         <div className='signupSection align-content-center'>
             <div className='signupSection--form mx-auto d-flex flex-column align-items-center'>
-                <h3 className='mb-5'>Create User</h3>
-                <div>
+                <h3 className='mb-1'>Create User</h3>
+                <div className='custom-input'>
+
+                    <div className={`signupSection--form--error cust-text-13 ${usernameInputState.isDuplicate || !usernameInputState.value ? 'showInputErrMsg' : ''}`}>
+                        {usernameInputState.isDuplicate ? 
+                        <div className='signupErrDuplicateUser d-flex align-items-end mt-3'>
+                            <span>username is already taken</span>
+                        </div>
+                        :
+                        <div className='signupErrList mt-3'>
+                            <span>
+                                * username must be between 2 to 20 characters 
+                            </span>
+                            <br />
+                            <span>
+                                * username must not have trailing or leading space
+                            </span>
+                            <br />
+                            <span>
+                                * username should contain only letters / numbers
+                            </span>
+                            <br />
+                            <span>
+                                * username should start with a letter
+                            </span>
+                        </div>
+                        }
+                    </div>
+                    <br />
                     <label>Username</label>
-                    <br />
-                    <span className={`signupSection--form--error cust-text-13 ${usernameInputState.isDuplicate || !usernameInputState.value ? 'showInputErrMsg' : ''}`}>
-                        {usernameInputState.isDuplicate ? 'username is already taken' : 'username must be between 2 to 20 characters'}
-                    </span>
-                    <br />
                     <input
                         type='text'
                         name='username'
                         value={signUpFormData.username}
                         onChange={handleChange}
-                        className={!usernameInputState.value ? 'invalid' : ''}
+                        className={`form-control ${!usernameInputState.value ? 'inalid' : ''}`}
+                        minLength={2}
+                        maxLength={20}
                     />
                     <br />
                 </div>
-                <div>
-                    <label>Email</label>
-                    <br />
+                <div className='custom-input'>
+
                     <span className={`signupSection--form--error cust-text-13 ${!emailInputState ? 'showInputErrMsg' : ''}`}>
                         Email is not valid
                     </span>
+                    <br />
+                    <label>Email</label>
                     <br />
                     <input
                         type='email'
                         name='email'
                         value={signUpFormData.email}
                         onChange={handleChange}
-                        className={!emailInputState ? 'invalid' : ''}
+                        className={`form-control ${!emailInputState ? 'invalid' : ''}`}
+                        minLength={2}
+                        maxLength={50}
                     />
                 </div>
                 <div>

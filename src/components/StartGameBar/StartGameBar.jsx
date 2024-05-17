@@ -1,22 +1,49 @@
 import { useState, useEffect } from 'react';
 import './startGameBar.css';
+import { TournamentAlias } from '../../components';
+import { aliasNameValid } from '../../utils/helper';
+
 
 const StartGameBar = ({ step }) => {
     const [isStartDisabled, setIsStartDisabled] = useState(true);
+    const [showAliasModal, setShowAliasModal] = useState(false);
+    const [aliases, setAliases] = useState([]);
+    const [showError, setShowError] = useState(false);
+    const ALIAS_MAX = 15;
+    const ALIAS_MIN = 2;
 
     const handleStartClick = () => {
-        // Send the step data to the server
-        console.log('Starting game with parameters:', step);
+        if (step.pong.mode === 'tournament' && aliases.length < 4) {
+            setShowAliasModal(true);
+        } else {
+            // Send the step data and aliases to the server
+            console.log('Starting game with parameters:', step, 'Aliases:', aliases);
+        }
     };
 
+    const handleAliasSubmit = (aliases) => {
+        // Check if all aliases are filled and meet the criteria
+        const aliasIsValid = aliasNameValid(aliases);
+    
+        if (aliasIsValid) {
+            setAliases(aliases);
+            setShowAliasModal(false);
+            // Proceed with starting the game after aliases are set
+            console.log('Starting game with parameters:', step, 'Aliases:', aliases);
+        } else {
+            // Display an error message or handle invalid aliases
+            setShowAliasModal(true);
+            setShowError(true);
+            console.log('Invalid aliases. Please ensure each alias meets the criteria.');
+        }
+    };
+    
+
     const areSelectionRequirementsMet = () => {
-        // Check if the selection requirements are met based on the current step data
         if (step.pong.selected) {
-            // For Pong game mode
             const maxPlayersPong = getMaxPlayers(step.pong.mode);
             return step.pong.selectedPlayers && step.pong.selectedPlayers.length === maxPlayersPong;
         } else if (step.memory.selected) {
-            // For Memory game mode
             const maxPlayersMemory = getMaxPlayers(step.memory.mode);
             return step.memory.selectedPlayers && step.memory.selectedPlayers.length === maxPlayersMemory;
         }
@@ -24,12 +51,10 @@ const StartGameBar = ({ step }) => {
     };
 
     useEffect(() => {
-        // Update the disabled/enabled state of the Start button based on the selection requirements
         setIsStartDisabled(!areSelectionRequirementsMet());
     }, [step]);
 
     const getMaxPlayers = (mode) => {
-        // Define the maximum number of players based on the game mode
         switch (mode) {
             case 'singlePlayer':
                 return 1;
@@ -50,10 +75,18 @@ const StartGameBar = ({ step }) => {
                 <h5>{`${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${'i18n SELECTED'}`}</h5>
             </div>
             <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
-				<button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
-					{'i18n.Start'}
-				</button>
+                <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
+                    {'i18n.Start'}
+                </button>
             </div>
+            <TournamentAlias
+                show={showAliasModal}
+                handleModalClose={() => setShowAliasModal(false)}
+                handleAliasSubmit={handleAliasSubmit}
+                selectedPlayers={step.pong.selectedPlayers}
+                showError={showError}
+            />
+
         </div>
     );
 };
