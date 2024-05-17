@@ -2,7 +2,6 @@
     /* border: 2px solid red; */
     height: 320px;
     width: 320px;
-    padding: 20px;
     border-radius: 10px;
     background-color: var(--custom-darkGrey-card);
     display: grid;
@@ -11,13 +10,4 @@
     .gameRequirementsInfo {
         color: var(--custom-red-error)
     }
-
-    .startGameBar--btn  {
-        /* border: 1px solid purple; */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-    }
-
 }

@@ -1,49 +1,17 @@
 .dashboard {
-    display: flex;
-    /* gap: 40px; */
+    min-height: 65vh;
     width: 80%;
-    height: 80vh;
-    margin: 90px auto;
-    /* border: 4px solid green; */
+    margin: 100px auto;
 
-    .dashboard--mainPage {
-        width: 100%;
-        display: flex;
-    }
     .dashboard--mainPage--selectGame {
-        width: 75%;
-        /* border: 1px solid white; */
-
-        .gameSelect--gameImg img {
-            max-width: 600px;
-            width:100%;
-        }
-
         div button{
-            margin: 40px auto 0;
+            margin: 60px auto 0;
         }
-    }
-
-    .sideBar {
-        /* border: 1px solid red; */
-        width: 20%;
-    }
-
-    .dashboard--gameMenu, 
-    .dashboard--gamePlayers  {
-        width: 100%;
     }
 
     .dashboard--gameMenu {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
         .game-btn-enabled {
             width: 288px;
         }
     }
-    
-
-
 }

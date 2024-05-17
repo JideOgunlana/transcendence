@@ -67,12 +67,12 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
 
     return (
         <div className='signupSection align-content-center'>
-            <div className='signupSection--form'>
-                <h3>Create an account</h3>
+            <div className='signupSection--form mx-auto d-flex flex-column align-items-center'>
+                <h3 className='mb-5'>Create User</h3>
                 <div>
                     <label>Username</label>
                     <br />
-                    <span className={`signupSection--form--error text-13 ${usernameInputState.isDuplicate || !usernameInputState.value ? 'showInputErrMsg' : ''}`}>
+                    <span className={`signupSection--form--error cust-text-13 ${usernameInputState.isDuplicate || !usernameInputState.value ? 'showInputErrMsg' : ''}`}>
                         {usernameInputState.isDuplicate ? 'username is already taken' : 'username must be between 2 to 20 characters'}
                     </span>
                     <br />
@@ -88,7 +88,7 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                 <div>
                     <label>Email</label>
                     <br />
-                    <span className={`signupSection--form--error text-13 ${!emailInputState ? 'showInputErrMsg' : ''}`}>
+                    <span className={`signupSection--form--error cust-text-13 ${!emailInputState ? 'showInputErrMsg' : ''}`}>
                         Email is not valid
                     </span>
                     <br />
@@ -108,12 +108,12 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                         Sign Up
                     </button>
                 </div>
-                <div className='text-13 signupsection--form-selectUser' onClick={handleGoToDashboard}>
-                    Already have an account? 
+                <div className='cust-text-13 signupsection--form-selectUser mt-4 mb-4' onClick={handleGoToDashboard}>
+                    Already have a user? 
                     <Link to='/dashboard'> <span className='link clickable'>Go to Dashboard</span></Link>
                 </div>
             </div>
-            <div className='signupSection--form--line'></div>
+            <div className='signupSection--form--line mx-auto'></div>
         </div>
     );
 }

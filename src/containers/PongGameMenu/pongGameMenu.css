@@ -1,36 +1,14 @@
 .pongGameMenu {
     width: 100%;
-    /* border: 1px solid red; */
 
     .pongGameMenu--card {
-        /* border: 1px solid olive; */
         background-color: var(--custom-darkGrey-card);
         border-radius: 10px;
         width: 600px;
         height: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        /* justify-content: center; */
-        align-items: center;
     }
 
     .gameTheme, .gameMode {
         width: 60%;
-    }
-
-    .gameTheme-options {
-        display: flex;
-        /* border: 14px solid yellow; */
-        justify-content: space-around;
-    }
-
-    .gameMode--options {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        align-items: center;
     }
 }

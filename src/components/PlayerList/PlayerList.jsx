@@ -13,7 +13,7 @@ const PlayerList = ({ step, setStep }) => {
             ...prevStep,
             [prevStep.pong.selected ? 'pong' : 'memory']: {
                 ...prevStep[prevStep.pong.selected ? 'pong' : 'memory'],
-                selectedPlayers: selectedPlayers // Use selectedPlayers here instead of selectedPlayers
+                selectedPlayers: selectedPlayers
             }
         }));
     }, [selectedPlayers, setStep]);
@@ -62,12 +62,12 @@ const PlayerList = ({ step, setStep }) => {
     return (
         <div className='playerList'>
             <div className='playerList--heading'>
-                <h3>{'i18n.Player List'}</h3>
+                <h3 className='text-center '>{'i18n.Player List'}</h3>
             </div>
             <div className='playerList--info'>
                 <h4>{'i18n.*Click on a user to select or unselect'}</h4>
             </div>
-            <div className='playerList--players clickable'>
+            <div className='playerList--players d-flex flex-wrap clickable'>
                 {users.map((user, index) => (
                     <Player
                         key={index}

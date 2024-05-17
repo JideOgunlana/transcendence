@@ -5,7 +5,7 @@ import './pongGamePlayerList.css';
 const PongGamePlayerList = ({ step, setStep }) => {
 
     return (
-        <div className='pongGamePlayerList'>
+        <div className='pongGamePlayerList d-flex'>
             <PlayerList step={step} setStep={setStep} />
             <div className='sideBar--startGame'>
                 <StartGameBar step={step} />

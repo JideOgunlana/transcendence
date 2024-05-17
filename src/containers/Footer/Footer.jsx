@@ -5,22 +5,18 @@ import githubIcon from '../../assets/svg/github.svg';
 
 const Footer = props => {
     return (
-        <footer>
-            <div className="left-footer">
-                <div className='mb-2 d-flex align-items-center'>
-                    <img src={transcendLogo} />
-                </div>
-                <div className='text-13 mb-5 d-flex align-items-center'>
-                    <a href='#'> <img src={githubIcon} /> </a>
-                    <span className='ms-4'>
-                        The 😎 Team
-                    </span>
-                </div>
+        <footer className="d-flex flex-column justify-content-center align-items-center gap-1 p-4">
+            <div className='mb-2 d-flex align-items-center'>
+                <img src={transcendLogo} />
             </div>
-            <div className='right-footer text-13'>
-                <div>
-                    &copy; 2024 Team T*D*B*S
-                </div>
+            <div className='cust-text-13 d-flex align-items-center'>
+                <div><a href='#'> <img src={githubIcon} /> </a></div>
+                <span className='ms-4'>
+                    The 😎 Team
+                </span>
+            </div>
+            <div className='cust-text-13'>
+                &copy; 2024 Team T*D*B*S
             </div>
         </footer>
     )

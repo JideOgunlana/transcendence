@@ -1,4 +1,5 @@
 main {
+    padding: 20px;
     .tabActive {
         border-bottom: 1px solid var(--custom-light-purple);
         color: var(--custom-light-purple);
@@ -10,8 +11,8 @@ main {
 
     .userHistory,
     .fullHistory {
-        display: flex;
-        justify-content: center;
+        /* display: flex; */
+        /* justify-content: center; */
     }
       
 }

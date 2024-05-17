@@ -43,13 +43,13 @@ const StartGameBar = ({ step }) => {
     };
 
     return (
-        <div className='startGameBar'>
+        <div className='startGameBar p-3'>
             <div className='startGameBar--title'>
                 <h4 className=''>{'i18n.pong - data.type'}</h4>
                 <h5 className='mTop16 gameRequirementsInfo'>{'* data.requirements'}</h5>
                 <h5>{`${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${'i18n SELECTED'}`}</h5>
             </div>
-            <div className='startGameBar--btn'>
+            <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
 				<button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
 					{'i18n.Start'}
 				</button>

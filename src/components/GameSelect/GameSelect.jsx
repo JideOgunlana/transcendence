@@ -23,29 +23,27 @@ const GameSelect = ({handlePongOptionsChange, handleMemoryOptionsChange}) => {
 
     return (
         <>
-            <div className='gameSelect'>
+            <div className='gameSelect d-flex flex-column align-items-center gap-5'>
                 <div 
-                    className='gameSelect--tabs clickable'
+                    className='gameSelect--tabs clickable d-flex col-4 justify-content-center'
                     onClick={selectGameTab} >
                     <div
                         className=
                         {
-                            `gameSelect--tabs--pong ${activeTab === 'pong' ? 'tabActive': 'tabInactive'}`
+                            `col-12 col-md-4 gameSelect--tabs--pong ${activeTab === 'pong' ? 'tabActive': 'tabInactive'}`
                         }>
-                        <h4>
+                        <h4 className='mb-3 text-center'>
                             Pong
                         </h4>
-                        <div className=''></div>
                     </div>
                     <div
                         className=
                         {
-                            `gameSelect--tabs--pong ${activeTab === 'memory' ? 'tabActive': 'tabInactive'}`
+                            `col-12 col-md-4 gameSelect--tabs--pong ${activeTab === 'memory' ? 'tabActive': 'tabInactive'}`
                         }>
-                        <h4>
+                        <h4 className='text-center'>
                             Memory
                         </h4>
-                        <div className=''></div>
                     </div>
                 </div>
                 <div className='gameSelect--gameImg'>

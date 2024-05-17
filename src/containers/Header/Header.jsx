@@ -16,7 +16,7 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep }) => {
                 >
                     <Link to='/' > <img src={transcendLogo} className='clickable'/> </Link>
                 </div>
-                <div className='text-13 linkDashboardActive col-md-2'>
+                <div className='cust-text-13 linkDashboardActive col-md-2'>
                     <Link to="/dashboard" onClick={resetDashboardStep} className='clickable'>Dashboard</Link>
                 </div>
             </div>
@@ -25,7 +25,7 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep }) => {
                     <img src={settingsIcon} />
                 </div>
                 <div className='right-nav-bar--button mt-2 mt-md-0'>
-                    <Link to="/signup" className='game-btn-enabled right-nav-bar--signup-btn text-13 clickable me-4' onClick={handleSignup}>SignUp</Link>
+                    <Link to="/signup" className='game-btn-enabled right-nav-bar--signup-btn cust-text-13 clickable me-4' onClick={handleSignup}>SignUp</Link>
                 </div>
             </div>
         </nav>

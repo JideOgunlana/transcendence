@@ -44,10 +44,10 @@ const Dashboard = () => {
     
 
     return (
-        <div className='dashboard'>
+        <div className='dashboard d-flex'>
             {
                 step.stepNumber === 0 && (
-                    <div className='dashboard--mainPage'>
+                    <div className='dashboard--mainPage flex-fill'>
                         <div className='dashboard--mainPage--selectGame'>
                             <GameSelect 
                                 handlePongOptionsChange={handlePongOptionsChange} 
@@ -55,15 +55,15 @@ const Dashboard = () => {
                             />
                             <NextBtn handleNextBtnClick={handleNextBtnClick} />
                         </div>
-                        <div className='sideBar'>
+                        {/* <div className='sideBar'>
                             <HistoryBar step={step} />
-                        </div>
+                        </div> */}
                     </div>
                 )
             }
             {
                 step.stepNumber === 1 && step.pong.selected && (
-                    <div className='dashboard--gameMenu'>
+                    <div className='dashboard--gameMenu flex-fill d-flex align-items-center'>
                         <PongGameMenu 
                             handleNextBtnClick={handleNextBtnClick}
                             handlePongOptionsChange={handlePongOptionsChange} 

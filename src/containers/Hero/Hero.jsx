@@ -29,7 +29,7 @@ const Hero = ({handleSignup}) => {
                         <img src={circle} />
                     </div>
                     <h2>Play Solo</h2>
-                    <p className="text-13">
+                    <p className="cust-text-13">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, recusandae?
                     </p>
                 </div>
@@ -38,7 +38,7 @@ const Hero = ({handleSignup}) => {
                         <img src={circle} />
                     </div>
                     <h2>Play against</h2>
-                    <p className="text-13">
+                    <p className="cust-text-13">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, recusandae?
                     </p>
                 </div>
@@ -47,7 +47,7 @@ const Hero = ({handleSignup}) => {
                         <img src={circle} />
                     </div>
                     <h2>Play for fun</h2>
-                    <p className="text-13">
+                    <p className="cust-text-13">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, recusandae?
                     </p>
                 </div>
@@ -59,7 +59,7 @@ const Hero = ({handleSignup}) => {
             <div className='heroSection-signup d-flex justify-content-center'>
                 <Link to='signup' >
                     <button 
-                        className='heroSection-signup--btn game-btn-enabled clickable text-13 justify-content-around'
+                        className='heroSection-signup--btn game-btn-enabled clickable cust-text-13 justify-content-around'
                         onClick={handleSignup}
                         >
                         <span>SignUp</span>

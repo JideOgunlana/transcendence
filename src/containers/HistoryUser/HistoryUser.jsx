@@ -27,7 +27,7 @@ const BestGame = () => {
 
 const HistoryUser = () => {
     return (
-        <div className='historyUser'>
+        <div className='historyUser d-flex flex-column align-content-center align-items-center'>
             <h4>{'i18n.User History'}</h4>
             <div className='historyUser--stats mTop32' >
                 <div className='historyUser--player'>

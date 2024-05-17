@@ -1,6 +1,6 @@
 .pongGamePlayerList {
     width: 100%;
-    display: flex;
+    /* display: flex; */
 
     .sideBar--startGame {
         margin-top: 100px;

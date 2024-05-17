@@ -62,11 +62,11 @@ const Head2Head = () => {
 
 const HistoryBar = ({step}) => {
     return (
-        <div className='historyBar'>
+        <div className='historyBar p-3 d-grid gap-3'>
             <div className='historyBar--title'>
-                <h4>{'History'}</h4>
+                <h4 className='mb-0'>{'History'}</h4>
             </div>
-            <div className='topPlayers'>
+            <div className='topPlayers p-3'>
                 <h5>
                     <img src={topPlayersIcon} /> {'Top Players'}
                 </h5>
@@ -74,7 +74,7 @@ const HistoryBar = ({step}) => {
                     <TopPlayers /> {/*   **To-Do logic showing top players or -- No data -- */}
                 </div>
             </div>
-            <div className='mostPlays'>
+            <div className='mostPlays p-3'>
                 <h5>
                     <img src={mostPlaysIcon} /> {'Most Plays'}
                 </h5>
@@ -83,7 +83,7 @@ const HistoryBar = ({step}) => {
                 </div>
             </div>
             
-            <div className='head2Head'>
+            <div className='head2Head p-3'>
                 <h5>
                     <img src={head2HeadIcon} /> {'Head-2-Head'}
                 </h5>
@@ -105,7 +105,7 @@ const HistoryBar = ({step}) => {
                     }
                 </div>
             </div>
-            <div className='fullHistory'>
+            <div className='fullHistory align-items-center'>
                 <button className='game-btn-enabled'>{'i18n. Full History'}</button>
             </div>
         </div>

@@ -1,14 +1,4 @@
 footer {
-    display: flex;
-    justify-content: center;
-    /* border-top: 1px solid var(--custom-grey-border); */
 
-    .left-footer {
-        width: 20%;
-    }
-    
-    .left-footer, .right-footer {
-        align-content: center;
-    }
 }
 
