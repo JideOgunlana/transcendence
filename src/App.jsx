@@ -15,6 +15,8 @@ function App() {
   const [showSignup, setShowSignup] = useState(false);
   const [userSignedUp, setUserSignedUp] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
+  const [lang, setLang] = useState('en');
+  const [sound, setSound] = useState('OFF');
 
   const handleSignup = () => {
     setShowSignup(true);
@@ -68,6 +70,10 @@ function App() {
           handleUserSignedUp={handleUserSignedUp}
           handleSignup={handleSignup}
           handleGoToDashboard={handleGoToDashboard}
+          lang={lang}
+          setLang={setLang}
+          sound={sound}
+          setSound={setSound}
         />
         <Footer />
       </div>

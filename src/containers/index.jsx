@@ -9,3 +9,4 @@ export {default as PongGameMenu} from './PongGameMenu/PongGameMenu';
 export {default as PongGamePlayerList} from './PongGamePlayerList/PongGamePlayerList';
 export {default as HistoryAll} from './HistoryAll/HistoryAll';
 export {default as HistoryUser} from './HistoryUser/HistoryUser';
+export {default as Settings} from './Settings/Settings';
