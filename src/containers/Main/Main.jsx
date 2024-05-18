@@ -1,7 +1,7 @@
 
 import './main.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import {Hero, Signup, Userprofile, Dashboard, Settings, HistoryAll, HistoryUser} from '../../containers'
+import {Hero, Signup, Userprofile, Dashboard, Settings, HistoryAll, HistoryUser, PongGame} from '../../containers'
 
 const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, handleSignup, handleGoToDashboard, lang, setLang, sound, setSound }) => {
 
@@ -40,16 +40,23 @@ const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, han
                         element={<Dashboard />}>
                     </Route>)
                 }
-                {/* <div className='fullHistory d-flex justify-content-cener mTop32'>
+                {/* <div className='fullHistory d-flex justify-content-cener mt-3'>
                     <HistoryAll />
                 </div> */}
-                {/* <div className='userHistory d-flex justify-content-cener mTop32'>
+                {/* <div className='userHistory d-flex justify-content-cener mt-3'>
                     <HistoryUser />
                 </div> */}
                 {
                     (
                         <Route path='settings'
                             element={<Settings lang={lang} setLang={setLang} sound={sound} setSound={setSound} />}>
+                        </Route>
+                    )
+                }
+                {
+                    (
+                        <Route path='dashboard/pong'
+                            element={ <PongGame></PongGame> } >
                         </Route>
                     )
                 }

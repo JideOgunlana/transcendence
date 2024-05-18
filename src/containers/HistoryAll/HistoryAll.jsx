@@ -3,7 +3,7 @@ import './historyAll.css';
 
 const HistoryColumn = () => {
     return (
-        <div className='flex-fill d-flex align-items-center justify-content-center historyAll--column mBottom32 mTop32'>
+        <div className='flex-fill d-flex align-items-center justify-content-center historyAll--column mb-3 mt-3'>
             <div>
                 <img src='' alt='data.img' />
             </div>

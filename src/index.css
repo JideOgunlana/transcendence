@@ -84,7 +84,7 @@ button:focus-visible {
   --custom-grey-border: #5A5A5A;
   --custom-darkGrey-card: #171717;
   --custom-grey: #242424;
-  --custom-red-error: #f22C3D;
+  --custom-red-error: #F22C3D;
   --custom-greyGreen: #7191A5;
 }
 
@@ -149,52 +149,6 @@ body {
     color: var(--custom-light-purple);
 }
 
-
-/* + Helper margin class + */
-.m16 {
-  margin: 16px;
-}
-
-.mTop16 {
-  margin-top: 16px;
-}
-
-.mBottom16 {
-  margin-bottom: 16px;
-}
-
-.mTopBottom16 {
-  margin: 16px 0;
-}
-
-.m32 {
-  margin: 32px;
-}
-
-.mTop32 {
-  margin-top: 32px;
-}
-
-.mBottom32 {
-  margin-bottom: 32px;
-}
-
-.mTopBottom32 {
-  margin: 32px 0;
-}
-
-.mNoMargin {
-  margin: 0;
-}
-.mNoMarginTop {
-  margin-top: 0;
-}
-.mNoMarginBottom {
-  margin-bottom: 0;
-}
-.mNoMarginLeft {
-  margin-left: 0;
-}
-.mNoMarginRight {
-  margin-right: 0;
+a {
+  text-decoration: none;
 }

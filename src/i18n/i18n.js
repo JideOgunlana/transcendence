@@ -9,9 +9,6 @@ const resources = {
       "Language": "Language",
       "ON": "ON",
       "OFF": "OFF",
-      "English": "English",
-      "German": "German",
-      "Spanish": "Spanish"
     }
   },
   de: {
@@ -20,9 +17,6 @@ const resources = {
       "Language": "Sprache",
       "ON": "Ein",
       "OFF": "Aus",
-      "English": "Englisch",
-      "German": "Deutsch",
-      "Spanish": "Spanisch"
     }
   },
   es: {
@@ -31,9 +25,6 @@ const resources = {
       "Language": "Idioma",
       "ON": "Encendido",
       "OFF": "Apagado",
-      "English": "Inglés",
-      "German": "Alemán",
-      "Spanish": "Español"
     }
   }
 };

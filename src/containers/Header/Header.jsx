@@ -33,3 +33,5 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep }) => {
 }
 
 export default Header;
+
+

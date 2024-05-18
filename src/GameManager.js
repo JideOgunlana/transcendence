@@ -11,14 +11,14 @@ export default class GameManager {
 
     static StopGame(animationId)
     {
-        Constants.buttonStart.style.display = "block";
+        // Constants.buttonStart.style.display = "block";
         dispatchEvent(Events["stopGame"]);
         cancelAnimationFrame(animationId);
     }
 
     static StartGame(gameLoop)
     {
-        Constants.buttonStart.style.display = "none";
+        // Constants.buttonStart.style.display = "none";
         //this.buttonStart.removeAttribute("onclick")
         dispatchEvent(Events["startGame"]);
         gameLoop();

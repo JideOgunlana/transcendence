@@ -24,7 +24,7 @@ const Userprofile = ({handleGoToDashboard}) => {
                 </div>
             </div>
             <div 
-                className='link cust-text-13 mTop16 clickable'
+                className='link cust-text-13 mt-3 clickable'
                 onClick={handleGoToDashboard}
             >
                 <Link to='/dashboard'>

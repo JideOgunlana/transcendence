@@ -2,15 +2,14 @@ import { useState, useEffect } from 'react';
 import './startGameBar.css';
 import { TournamentAlias } from '../../components';
 import { aliasNameValid } from '../../utils/helper';
-
+import { Link } from 'react-router-dom';
 
 const StartGameBar = ({ step }) => {
     const [isStartDisabled, setIsStartDisabled] = useState(true);
     const [showAliasModal, setShowAliasModal] = useState(false);
     const [aliases, setAliases] = useState([]);
     const [showError, setShowError] = useState(false);
-    const ALIAS_MAX = 15;
-    const ALIAS_MIN = 2;
+
 
     const handleStartClick = () => {
         if (step.pong.mode === 'tournament' && aliases.length < 4) {
@@ -71,13 +70,15 @@ const StartGameBar = ({ step }) => {
         <div className='startGameBar p-3'>
             <div className='startGameBar--title'>
                 <h4 className=''>{'i18n.pong - data.type'}</h4>
-                <h5 className='mTop16 gameRequirementsInfo'>{'* data.requirements'}</h5>
+                <h5 className='m-3 gameRequirementsInfo'>{'* data.requirements'}</h5>
                 <h5>{`${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${'i18n SELECTED'}`}</h5>
             </div>
             <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
+                <Link to='pong'>
                 <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
                     {'i18n.Start'}
                 </button>
+                </Link>
             </div>
             <TournamentAlias
                 show={showAliasModal}

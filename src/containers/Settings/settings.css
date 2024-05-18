@@ -2,28 +2,8 @@
     height: 80vh;
 
     .settings-card {
-        height: 300px;
         width: 300px;
-        /* border: 1px solid red; */
-        padding: 20px;
+        padding: 20px 30px;
+        background-color: var(--custom-darkGrey-card);
     }
-
-    .clickable {
-        cursor: pointer;
-    }
-
-    .optionSettingsBtn-active {
-        background-color: #4CAF50; /* Active button background */
-        color: white;
-    }
-
-    .optionSettingsBtn-inactive {
-        background-color: #f1f1f1; /* Inactive button background */
-        color: black;
-    }
-
-    .custom-input {
-        margin-bottom: 1rem;
-    }
-
 }
