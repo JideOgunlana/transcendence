@@ -11,20 +11,20 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep }) => {
         <nav className='d-flex align-items-center col-12 flex-wrap p-4 p-md-2'>
             <div className='left-nav-bar col-12 col-md-6 d-flex justify-content-center justify-content-md-start'>
                 <div
-                    className='d-flex align-items-end col-md-4'
+                    className='d-flex align-items-end col-md-4 btn'
                     onClick={handleLogoClick}
                 >
                     <Link to='/' > <img src={transcendLogo} className='clickable'/> </Link>
                 </div>
-                <div className='cust-text-13 linkDashboardActive col-md-2'>
+                <div className='cust-text-13 linkDashboardActive col-md-2 btn'>
                     <Link to="/dashboard" onClick={resetDashboardStep} className='clickable'>Dashboard</Link>
                 </div>
             </div>
             <div className='right-nav-bar col-12 col-md-6 d-flex flex-wrap justify-content-center justify-content-md-end'>
-                <div className='right-nav-bar--icons clickable mt-2 mt-md-0'>
+                <div className='right-nav-bar--icons clickable mt-2 mt-md-0 btn'>
                     <Link to='/settings' ><img src={settingsIcon} /> </Link>
                 </div>
-                <div className='right-nav-bar--button mt-2 mt-md-0'>
+                <div className='right-nav-bar--button mt-2 mt-md-0 btn'>
                     <Link to="/signup" className='game-btn-enabled right-nav-bar--signup-btn cust-text-13 clickable me-4' onClick={handleSignup}>SignUp</Link>
                 </div>
             </div>

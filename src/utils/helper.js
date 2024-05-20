@@ -1,9 +1,10 @@
 import { getUsers } from "../__tests__/api";
 
 const USERNAME_MIN_LENGTH = 2;
-const USERNAME_MAX_LENGTH = 15;
+const USERNAME_MAX_LENGTH = 20;
 const ALIAS_MIN = 2;
 const ALIAS_MAX = 15;
+const AIUserName = 'AI';
 
 
 export const signupFormValid = (username) => {
@@ -26,9 +27,11 @@ export const signupFormValid = (username) => {
 
 export const checkNameExists = async (username) => {
     const users = await getUsers(); // stubbed line for testing without Django backend
-    return users.some(user => user.username.toLowerCase() === username.toLowerCase());
+    const normalizedUsername = username.toUpperCase();
+    return users.some(user => user.username.toUpperCase() === normalizedUsername || normalizedUsername === AIUserName);
 }
 
+    
 export const emailValid = (email) => {
     // Regular expression for basic email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

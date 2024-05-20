@@ -23,35 +23,6 @@ const Hero = ({handleSignup}) => {
                     of gaming
                 </h1>
             </div>
-            <div className="heroSection-about d-flex flex-wrap gap-5 mt-5 justify-content-center">
-                <div>
-                    <div>
-                        <img src={circle} />
-                    </div>
-                    <h2>Play Solo</h2>
-                    <p className="cust-text-13">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, recusandae?
-                    </p>
-                </div>
-                <div>
-                    <div>
-                        <img src={circle} />
-                    </div>
-                    <h2>Play against</h2>
-                    <p className="cust-text-13">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, recusandae?
-                    </p>
-                </div>
-                <div>
-                    <div>
-                        <img src={circle} />
-                    </div>
-                    <h2>Play for fun</h2>
-                    <p className="cust-text-13">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, recusandae?
-                    </p>
-                </div>
-            </div>
             <GameSelect 
                 handlePongOptionsChange={handlePongOptionsChange}
                 handleMemoryOptionsChange={handleMemoryOptionsChange}

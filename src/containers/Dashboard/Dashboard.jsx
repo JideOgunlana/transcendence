@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import {GameSelect, HistoryBar, NextBtn } from '../../components';
-import {PongGameMenu, PongGamePlayerList} from '../../containers';
+import {PongGameMenu, PongGamePlayerList, MemoryGame} from '../../containers';
 import './dashboard.css';
 
 
@@ -70,6 +70,11 @@ const Dashboard = () => {
                             step={step}/>
                     </div>
                 )
+                ||
+                step.stepNumber === 1 && step.memory.selected && (<>
+                    Memory Selected
+                    <MemoryGame />
+                </>)
             }
             {
                 step.stepNumber === 2 && step.pong.selected && (

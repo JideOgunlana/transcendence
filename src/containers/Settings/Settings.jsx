@@ -13,7 +13,7 @@ import soundOffIcon from '../../assets/svg/soundOff.svg';
 const SettingsBtn = ({ btnClass, isActive, option, val, handleSettingsClick }) => {
     return (
         <div 
-            className={` clickable ${btnClass} ${isActive ? 'optionBtn-active' : 'optionBtn-inactive'}`}
+            className={` clickable ${btnClass} ${isActive ? 'optionBtn-active' : 'optionBtn-inactive inactiveText'}`}
             onClick={() => handleSettingsClick(option)}
             id={option}>
                 {val}
@@ -85,7 +85,7 @@ const Settings = ({lang, setLang, sound, setSound}) => {
                                 isActive={lang === 'de'}
                                 handleSettingsClick={handleSettingsClick}
                                 option='de'
-                                val={t('German')}
+                                val={t('Deutsch')}
                             />
                             <img src={deIcon} />
                         </div>
@@ -95,7 +95,7 @@ const Settings = ({lang, setLang, sound, setSound}) => {
                                 isActive={lang === 'es'}
                                 handleSettingsClick={handleSettingsClick}
                                 option='es'
-                                val={t('Spanish')}
+                                val={t('Español')}
                             />
                             <img src={espIcon} />
                         </div>
