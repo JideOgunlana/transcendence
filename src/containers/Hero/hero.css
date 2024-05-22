@@ -2,7 +2,8 @@
     grid-template-columns: 100%;
 
     .heroSection-header {
-        display: none;
+        background: none;
+        text-align: center;
     }
 
 }

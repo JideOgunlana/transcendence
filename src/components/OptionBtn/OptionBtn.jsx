@@ -1,12 +1,12 @@
 
 import './optionBtn.css';
 
-const OptionBtn = ({btnClass, handlePongOptionsChange, step, option, val}) => {
+const OptionBtn = ({btnClass, handlePongOptionsChange, handleMemoryOptionsChange, step, option, val}) => {
 
-    const isActive = step.pong.selected
-        ? step.pong.theme === option || step.pong.mode === option
-        : step.memory.selected && step.memory.theme === option
-
+    const isActive = (
+        (step.pong.selected && (step.pong.theme === option || step.pong.mode === option)) ||
+        (step.memory.selected && (step.memory.theme === option || step.memory.mode === option || step.memory.gridSize === option))
+    );
 
     const handleClick = () => {
         if (step.pong.selected) {

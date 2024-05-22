@@ -12,7 +12,7 @@ const StartGameBar = ({ step }) => {
 
 
     const handleStartClick = () => {
-        if (step.pong.mode === 'tournament' && aliases.length < 4) {
+        if (step.pong.mode === 'tournament' || step.memory.mode === 'tournament' && aliases.length < 4) {
             setShowAliasModal(true);
         } else {
             // Send the step data and aliases to the server
@@ -68,25 +68,62 @@ const StartGameBar = ({ step }) => {
 
     return (
         <div className='startGameBar p-3'>
-            <div className='startGameBar--title'>
-                <h4 className=''>{'i18n.pong - data.type'}</h4>
-                <h5 className='m-3 gameRequirementsInfo'>{'* data.requirements'}</h5>
-                <h5>{`${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${'i18n SELECTED'}`}</h5>
-            </div>
-            <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
-                <Link to='pong'>
-                <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
-                    {'i18n.Start'}
-                </button>
-                </Link>
-            </div>
-            <TournamentAlias
-                show={showAliasModal}
-                handleModalClose={() => setShowAliasModal(false)}
-                handleAliasSubmit={handleAliasSubmit}
-                selectedPlayers={step.pong.selectedPlayers}
-                showError={showError}
-            />
+            {
+                step.pong.selected && 
+                <>
+                    <div className='startGameBar--title'>
+                        <h4 className=''>{'i18n.pong - data.type'}</h4>
+                        <h5 className='m-3 gameRequirementsInfo'>{'* data.requirements'}</h5>
+                        <h5>
+                            {
+                                `${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${'i18n SELECTED'}`
+                            }
+                        </h5>
+                    </div>
+                    <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
+                        <Link to='pong'>
+                            <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
+                                {'i18n.Start'}
+                            </button>
+                        </Link>
+                    </div>
+                    <TournamentAlias
+                        show={showAliasModal}
+                        handleModalClose={() => setShowAliasModal(false)}
+                        handleAliasSubmit={handleAliasSubmit}
+                        selectedPlayers={step.pong.selectedPlayers}
+                        showError={showError}
+                    />
+                </>
+            }
+            {
+                step.memory.selected &&
+                <>
+                    <div className='startGameBar--title'>
+                        <h4 className=''>{'i18n.Memory - data.type'}</h4>
+                        <h5 className='m-3 gameRequirementsInfo'>{'* data.requirements'}</h5>
+                        <h5>
+                            {
+                                `${step.memory.selectedPlayers ? step.memory.selectedPlayers.length : 0} / ${getMaxPlayers(step.memory.mode)} ${'i18n SELECTED'}`
+                            }
+                        </h5>
+                    </div>
+                    <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
+                        <Link to='memory'>
+                            <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
+                                {'i18n.Start'}
+                            </button>
+                        </Link>
+                    </div>
+                    <TournamentAlias
+                        show={showAliasModal}
+                        handleModalClose={() => setShowAliasModal(false)}
+                        handleAliasSubmit={handleAliasSubmit}
+                        selectedPlayers={step.memory.selectedPlayers}
+                        showError={showError}
+                    />
+                </>
+            }
 
         </div>
     );

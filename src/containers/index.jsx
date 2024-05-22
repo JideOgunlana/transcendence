@@ -12,3 +12,5 @@ export { default as HistoryUser } from './HistoryUser/HistoryUser';
 export { default as Settings } from './Settings/Settings';
 export { default as PongGame } from './Games/PongGame/PongGame';
 export { default as MemoryGame } from './Games/MemoryGame/MemoryGame';
+export { default as MemoryGameMenu } from './MemoryGameMenu/MemoryGameMenu';
+export { default as MemoryGamePlayerList } from './MemoryGamePlayerList/MemoryGamePlayerList';

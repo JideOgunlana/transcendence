@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import {GameSelect, HistoryBar, NextBtn } from '../../components';
-import {PongGameMenu, PongGamePlayerList, MemoryGame} from '../../containers';
+import {PongGameMenu, MemoryGameMenu, PongGamePlayerList, MemoryGamePlayerList, MemoryGame} from '../../containers';
 import './dashboard.css';
 
 
@@ -49,6 +49,7 @@ const Dashboard = () => {
                 step.stepNumber === 0 && (
                     <div className='dashboard--mainPage flex-fill'>
                         <div className='dashboard--mainPage--selectGame'>
+                            <h2 className='mb-5 text-center'>i18n Select a Game</h2>
                             <GameSelect 
                                 handlePongOptionsChange={handlePongOptionsChange} 
                                 handleMemoryOptionsChange={handleMemoryOptionsChange} 
@@ -72,8 +73,13 @@ const Dashboard = () => {
                 )
                 ||
                 step.stepNumber === 1 && step.memory.selected && (<>
-                    Memory Selected
-                    <MemoryGame />
+                    <div className='dashboard--gameMenu flex-fill d-flex align-items-center'>
+                        <MemoryGameMenu
+                            handleNextBtnClick={handleNextBtnClick}
+                            handleMemoryOptionsChange={handleMemoryOptionsChange} 
+                            step={step}
+                        />
+                    </div>
                 </>)
             }
             {
@@ -81,6 +87,12 @@ const Dashboard = () => {
                 <div className='dashboard--gamePlayers'>
                     <PongGamePlayerList step={step} setStep={setStep} />
                 </div>
+                )
+                ||
+                step.stepNumber === 2 && step.memory.selected && (
+                    <div className='dashboard--gamePlayers'>
+                        <MemoryGamePlayerList step={step} setStep={setStep} />
+                    </div>
                 )
             }
 

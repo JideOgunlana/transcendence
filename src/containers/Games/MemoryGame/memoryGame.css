@@ -17,6 +17,10 @@
   .memory-grid.sixBySix {
     grid-template-columns: repeat(6, 1fr);
   }
+
+  .memory-grid.twoByThree {
+    grid-template-columns: repeat(3, 1fr);
+  }
   
   .memory-tile {
     width: 80px;
@@ -27,6 +31,7 @@
     background-color: #f0f0f0;
     border: 2px solid #ccc;
     cursor: pointer;
+    font-size: 40px;
   }
   
   .memory-tile.flipped, .memory-tile.matched {
@@ -41,4 +46,3 @@
     margin-top: 20px;
     font-size: 1.5rem;
   }
-  

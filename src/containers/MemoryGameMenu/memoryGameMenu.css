@@ -1,0 +1,14 @@
+.memoryGameMenu {
+    width: 100%;
+
+    .memoryGameMenu--card {
+        background-color: var(--custom-darkGrey-card);
+        border-radius: 10px;
+        width: 600px;
+        height: 600px;
+    }
+
+    .gameTheme, .gameMode, .gameGridSize {
+        width: 60%;
+    }
+}

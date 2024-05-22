@@ -27,7 +27,7 @@ const PlayerList = ({ step, setStep }) => {
             setSelectedPlayers(selectedPlayers.filter((selectedUser) => selectedUser !== user));
         } else {
             // User is not selected, check the game mode and enforce selection rules
-            const maxPlayers = getMaxPlayers(step.pong.mode);
+            const maxPlayers = step.pong.selected ? getMaxPlayers(step.pong.mode) : getMaxPlayers(step.memory.mode);
             if (selectedPlayers.length < maxPlayers) {
                 setSelectedPlayers([...selectedPlayers, user]);
             }

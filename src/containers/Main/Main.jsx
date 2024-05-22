@@ -1,7 +1,7 @@
 
 import './main.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import {Hero, Signup, Userprofile, Dashboard, Settings, HistoryAll, HistoryUser, PongGame} from '../../containers'
+import {Hero, Signup, Userprofile, Dashboard, Settings, HistoryAll, HistoryUser, PongGame, MemoryGame} from '../../containers'
 
 const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, handleSignup, handleGoToDashboard, lang, setLang, sound, setSound }) => {
 
@@ -57,6 +57,13 @@ const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, han
                     (
                         <Route path='dashboard/pong'
                             element={ <PongGame></PongGame> } >
+                        </Route>
+                    )
+                }
+                {
+                    (
+                        <Route path='dashboard/memory'
+                            element={ <MemoryGame></MemoryGame> } >
                         </Route>
                     )
                 }
