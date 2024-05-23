@@ -1,15 +1,7 @@
-import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRouter
-import { useEffect, useState } from 'react';
-import GameManager from './GameManager.js';
-import PongScene from './PongScene.js';
-import { IN_GAME_OBJECTS } from './InGameObjects.js';
-import { Constants } from './Constants.js';
-import UIManager from './UIManager.js';
-import Events from './Events.js';
-import Globals from './Globals.js';
-import TournamentLogic from './TournamentLogic.js';
-import { GameModes } from './Enums.js';
-import {Header, Main, Footer} from './containers/';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { useState } from 'react';
+
+import { Header, Main, Footer } from './containers/';
 
 function App() {
   const [showSignup, setShowSignup] = useState(false);
@@ -54,7 +46,7 @@ function App() {
   };
 
   return (
-    <Router> {/* Wrap your App with BrowserRouter */}
+    <Router>
       <div className='app-container'>
         <Header 
           handleSignup={handleSignup}

@@ -6,14 +6,14 @@ import { MemoryMulti, MemorySingle, MemoryTournament } from './';
 const MemoryGame = ({ step }) => {
     const initialSelectedPlayers = [
         { username: 'user2', email: 'xyz@email.com', alias: 'user2-Al' },
-        // { username: 'user3', email: 'uabc@email.com', alias: 'user3-Al' },
+        { username: 'user3', email: 'uabc@email.com', alias: 'user3-Al' },
         // { username: 'user4', email: 'uabc@email.com', alias: 'user4-Al' },
         // { username: 'user1', email: 'uabc@email.com', alias: 'user1-Al' }
     ];
 
     // Hard coded memory mode for testing
-    const mode = 'singlePlayer';
-    // const mode = 'multiPlayer';
+    // const mode = 'singlePlayer';
+    const mode = 'multiPlayer';
     // const mode = 'tournament';
 
 

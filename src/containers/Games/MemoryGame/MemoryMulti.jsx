@@ -64,9 +64,18 @@ const MemoryMulti = ({gridSize, theme, selectedPlayers}) => {
         if (winners.length === 1) {
             setWinner(winners[0].username);
         } else {
+            alert('tie Breaker')
             setWinner('tie');
+            replayGame();
         }
         setShowModal(true);
+    };
+
+    const replayGame = () => {
+        setTiles(generateTiles(theme, ''));
+        setFlippedTiles([]);
+        setMatchedTiles([]);
+        setCurrentPlayer(0);
     };
 
     const getCurrentPlayerName = () => {
@@ -106,9 +115,13 @@ const MemoryMulti = ({gridSize, theme, selectedPlayers}) => {
                 (
                     <div className='modal-content'>
                         {
-                            winner === 'tie' ? <h2>It's a tie!</h2> : <h2>Winner: {winner}</h2>
-                        } 
-                        <button onClick={() => window.location.reload()}>Play Again</button>
+                            winner !== 'tie' && (
+                                <>
+                                <h2>Winner: {winner}</h2>
+                                <button onClick={() => window.location.reload()}>Play Again</button>
+                                </>
+                            )
+                        }
                     </div>
                 )
             }

@@ -1,0 +1,1 @@
+export { default as userIcon } from './svg/user.svg'

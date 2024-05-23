@@ -24,7 +24,8 @@ const MemoryGameMenu = ({handleNextBtnClick, handleMemoryOptionsChange, step}) =
                         <h4>{'i18n.gameMode'}</h4>
                     </div>
                     <div className='gameMode--options d-flex flex-column gap-4 align-items-center'>
-                        <OptionBtn btnClass='optionBtnLarge' handleMemoryOptionsChange={handleMemoryOptionsChange} step={step} option={'singlePlayer'} val={'i18n.Single'} />
+                        <OptionBtn btnClass='optionBtnLarge' handleMemoryOptionsChange={handleMemoryOptionsChange} step={step} option={'singlePlayer'} val={'i18n.SinglePlayer'} />
+                        <OptionBtn btnClass='optionBtnLarge' handleMemoryOptionsChange={handleMemoryOptionsChange} step={step} option={'multiPlayer'} val={'i18n.multiPlayer'} />
                         <OptionBtn btnClass='optionBtnLarge' handleMemoryOptionsChange={handleMemoryOptionsChange} step={step} option={'tournament'} val={'i18n.tournament'}/>
                     </div>
                 </div>

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './playerList.css';
 import { Player } from '../../components';
 import { getUsers } from '../../__tests__/api';
+import { userIcon } from '../../assets/';
+
 
 const PlayerList = ({ step, setStep }) => {
     const [users, setUsers] = useState([]);
@@ -71,6 +73,7 @@ const PlayerList = ({ step, setStep }) => {
                 {users.map((user, index) => (
                     <Player
                         key={index}
+                        userImg={userIcon}
                         username={user.username}
                         selected={selectedPlayers.includes(user)}
                         onClick={() => handleUserSelect(user)}

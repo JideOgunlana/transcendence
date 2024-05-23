@@ -1,48 +1,58 @@
-
+import React from 'react';
 import './historyUser.css';
-import {Player} from '../../components'
+import { Player } from '../../components';
 
-const RecentGames = () => {
+const PieChart = ({ games }) => {
     return (
         <div className='statsCard'>
-            Last 5 games pong / Memory
+            Pong / Memory Pie Chart (Ratio of Total Pong games to Memory games)
         </div>
     );
-}
+};
 
-const Ranking = () => {
+const PongWinLoss = ({ winloss }) => {
     return (
         <div className='statsCard'>
-            Ranking
+            Pong Game Wins and Losses: {winloss}
         </div>
     );
-}
-const BestGame = () => {
+};
+
+const MemoryWinLoss = ({ winloss }) => {
     return (
         <div className='statsCard'>
-            Best Game
+           Memory Wins and Losses: {winloss}
         </div>
     );
-}
+};
 
-const HistoryUser = () => {
+
+
+const HistoryUser = ({ userData, onBack }) => {
+    const { username, userImg } = userData;
     return (
-        <div className='historyUser d-flex flex-column align-content-center align-items-center'>
-            <h4>{'i18n.User History'}</h4>
-            <div className='historyUser--stats mt-3' >
-                <div className='historyUser--player'>
-                    <Player />
-                </div>
-                <div className='historyUser--stats-grid'>
-                    <RecentGames />
-                    <RecentGames />
-                    <Ranking />
-                    <BestGame />
-
+        <div className='historyUser d-flex gap-5 mt-5 flex-column'>
+            <h4 className='text-center'>{username} History</h4>
+            <div className='col-2'>
+                <button onClick={onBack} className='btn btn-primary mb-3'>Back</button>
+            </div>
+            <div className='row col-12'>
+                <div className='historyUser--stats mt-3 col-12 row justify-content-center'>
+                    <div className='historyUser--player mb-5 col-12 col-md-4'>
+                        <Player 
+                            userImg={ userImg }
+                            username={ username }
+                        />
+                    </div>
+                    <div className='historyUser--stats-grid row gap-4 col-12 col-md-8'>
+                        <PongWinLoss winloss={userData.pong['wins'] - userData.pong['losses']} />
+                        <MemoryWinLoss winloss={userData.pong['wins'] - userData.pong['losses']} />
+                        <PieChart games={''} />
+                    </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default HistoryUser;

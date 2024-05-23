@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './userprofile.css';
-import userIcon from '../../assets/svg/user.svg';
+import { userIcon } from '../../assets/';
+
 
 
 const Userprofile = ({handleGoToDashboard}) => {

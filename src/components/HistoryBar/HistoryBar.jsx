@@ -2,7 +2,7 @@ import './historyBar.css';
 import topPlayersIcon from '../../assets/svg/historyTopPlayers.svg';
 import mostPlaysIcon from '../../assets/svg/historyMostPlays.svg';
 import head2HeadIcon from '../../assets/svg/historyHead2Head.svg';
-import userIcon from '../../assets/svg/user.svg';
+import { userIcon } from '../../assets/';
 
 const TopPlayers = () => {
     return (

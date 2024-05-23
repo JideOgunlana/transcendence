@@ -146,7 +146,9 @@ body {
 }
 
 .linkDashboardActive {
-    color: var(--custom-light-purple);
+  a {
+    color: var(--custom-white);
+  }
 }
 
 a {

@@ -1,12 +1,7 @@
 .historyUser {
 
-    /* display: flex; */
-    /* flex-direction: column; */
     width: 80%;
     height: 80vh;
-    /* align-items: center; */
-    /* align-content: center; */
-    /* align-items: center; */
     
     .statsCard {
         max-width: 500px;
@@ -14,27 +9,5 @@
         border-radius: 10px;
         background-color: var(--custom-darkGrey-card);
         padding: 20px;
-    }
-
-    .historyUser--stats{
-        width: 100%;
-        /* border: 3px solid red; */
-        display: flex;
-    }
-
-    .historyUser--player {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-    }
-
-    .historyUser--stats-grid {
-        display: grid;
-        /* border: 10px solid yellow; */
-        grid-template-columns: 40% 40%;
-        gap: 90px 30px;
-        justify-content: center;
-        align-items: center;
-        flex: 3;
     }
 }

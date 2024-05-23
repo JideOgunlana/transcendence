@@ -18,7 +18,7 @@ const OptionBtn = ({btnClass, handlePongOptionsChange, handleMemoryOptionsChange
         } else {
             if (['icons', 'numbers'].includes(option)) {
                 handleMemoryOptionsChange({ theme: option });
-            } else if (['singlePlayer', 'multiplayer', 'tournament'].includes(option)) {
+            } else if (['singlePlayer', 'multiPlayer', 'tournament'].includes(option)) {
                 handleMemoryOptionsChange({ mode: option });
             } else {
                 handleMemoryOptionsChange({ gridSize: option });
