@@ -57,6 +57,7 @@ const HistoryAll = () => {
                     <div className='historyAll-pong mt-5'>
                         <h3 className='text-center mb-5'>Pong i18n.History</h3>
                         {
+                            stubbedUserData.length !== 0 ?
                             stubbedUserData.slice(0, 2).map(user => (
                                 <HistoryColumn 
                                     key={user.id} 
@@ -64,17 +65,26 @@ const HistoryAll = () => {
                                     userData={user} 
                                     onSelectUser={handleSelectUser} />
                             ))
+                            :
+                            <div className='text-center'>
+                                -- i18n No Pong game History --
+                            </div>
                         }
                     </div>
                     <div className='historyAll-memory mt-5'>
                         <h3 className='text-center mb-5'>Memory i18n.History</h3>
                         {
+                            stubbedUserData.length !== 0 ?
                             stubbedUserData.map(user => (
                                 <HistoryColumn key={user.id} 
                                     userCol={'memory'} 
                                     userData={user} 
                                     onSelectUser={handleSelectUser} />
                             ))
+                            :
+                            <div className='text-center'>
+                                -- No Memory game History --
+                            </div>
                         }
                     </div>
                 </div>
