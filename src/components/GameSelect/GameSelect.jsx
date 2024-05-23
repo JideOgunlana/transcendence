@@ -1,6 +1,6 @@
 import './gameSelect.css';
-import pong2D from '../../assets/svg/pong2D.svg';
-import memory from '../../assets/svg/memory.svg';
+import { pong2DIcon, memoryIcon } from '../../assets/';
+
 
 import React, {useState} from 'react';
 
@@ -49,8 +49,8 @@ const GameSelect = ({handlePongOptionsChange, handleMemoryOptionsChange}) => {
                 <div className='gameSelect--gameImg'>
                     {
                         activeTab === 'pong' ? 
-                        <img src={pong2D} className='img-fluid' /> 
-                        : <img src={memory} className='img-fluid' />
+                        <img src={pong2DIcon} className='img-fluid' /> 
+                        : <img src={memoryIcon} className='img-fluid' />
                     }
                 </div>
             </div>

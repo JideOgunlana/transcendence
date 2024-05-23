@@ -63,11 +63,11 @@ const PlayerList = ({ step, setStep }) => {
 
     return (
         <div className='playerList'>
-            <div className='playerList--heading'>
+            <div className='playerList--heading mb-5'>
                 <h3 className='text-center '>{'i18n.Player List'}</h3>
             </div>
-            <div className='playerList--info'>
-                <h4>{'i18n.*Click on a user to select or unselect'}</h4>
+            <div className='playerList--info mb-5'>
+                <h5> <em>{'i18n.*Click on a user to select or unselect'} </em> </h5>
             </div>
             <div className='playerList--players d-flex flex-wrap clickable'>
                 {users.map((user, index) => (

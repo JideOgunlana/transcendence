@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 import './hero.css';
-import circle from '../../assets/svg/circle.svg';
-import rightArrow from '../../assets/svg/rightArrow.svg';
-import before from '../../assets/svg/footerBefore.svg';
+import { footerBefore, rightArrow } from '../../assets';
 
 const Hero = ({handleSignup}) => {
 
@@ -39,7 +37,7 @@ const Hero = ({handleSignup}) => {
                 </Link>
             </div>
             <div className='heroSection-signup--beforeFooter'>
-                <img src={before} className='img-fluid' />
+                <img src={footerBefore} className='img-fluid' />
             </div>
         </div>
     )

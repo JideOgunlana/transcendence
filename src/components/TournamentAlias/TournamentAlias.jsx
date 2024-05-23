@@ -1,7 +1,7 @@
 // TournamentAlias.js
 import { useState, useEffect } from 'react';
 import './tournamentAlias.css';
-import closeIcon from '../../assets/svg/close.svg'
+import { closeIcon } from '../../assets/';
 
 const TournamentAlias = ({ show, handleModalClose, handleAliasSubmit, selectedPlayers, showError }) => {
     const [aliases, setAliases] = useState(selectedPlayers.map(player => ({ ...player, alias: '' })));

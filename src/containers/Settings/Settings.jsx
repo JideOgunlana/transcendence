@@ -1,13 +1,7 @@
 // Settings.js
 import './settings.css';
-import soundIcon from '../../assets/svg/sound.svg';
-import languageIcon from '../../assets/svg/language.svg';
 import { useTranslation } from 'react-i18next';
-import engIcon from '../../assets/svg/eng.svg';
-import deIcon from '../../assets/svg/de.svg';
-import espIcon from '../../assets/svg/esp.svg';
-import soundOnIcon from '../../assets/svg/soundOn.svg';
-import soundOffIcon from '../../assets/svg/soundOff.svg';
+import { soundIcon, languageIcon, engIcon, deIcon, espIcon } from '../../assets';
 
 const SettingsBtn = ({ btnClass, isActive, option, val, handleSettingsClick }) => {
     return (

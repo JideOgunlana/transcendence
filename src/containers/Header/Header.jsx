@@ -1,7 +1,6 @@
 
 import './header.css'
-import transcendLogo from '../../assets/svg/transcend.svg';
-import settingsIcon from '../../assets/svg/settings.svg';
+import { transcendLogo, settingsIcon } from '../../assets';
 
 
 import { Link } from 'react-router-dom';
