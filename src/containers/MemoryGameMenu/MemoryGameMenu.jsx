@@ -9,6 +9,7 @@ import { useState } from 'react';
 const MemoryGameMenu = ({handleNextBtnClick, handleMemoryOptionsChange, step}) => {
     return (
         <div className='memoryGameMenu'>
+            <h3 className='text-center mb-5'>Memory Menu</h3>
             <div className='memoryGameMenu--card mx-auto justify-content-center align-items-center d-flex flex-column gap-5 p-4'>
                 <div className='gameTheme'>
                     <div className='gameTheme-header'>

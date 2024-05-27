@@ -187,7 +187,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
             {showModal && (
                 <div className='modal-content'>
                     <h2>Winner: {winner}</h2>
-                    <button onClick={() => window.location.reload()}>Play Again</button>
+                    <button onClick={() => window.location.href = '/dashboard'}>Play Again</button>
                 </div>
             )}
         </div>

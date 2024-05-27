@@ -2,10 +2,6 @@ nav {
     min-height: 53px;
     border-bottom: 1px solid var(--custom-grey-border);
 
-    .right-nav-bar--icons {
-        margin-right: 16px;
-    }
-    
     .right-nav-bar--signup-btn {
         height: 32px;
         width: 114px;

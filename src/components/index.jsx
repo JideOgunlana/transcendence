@@ -1,5 +1,6 @@
 export { default as GameSelect } from './GameSelect/GameSelect';
 export { default as NextBtn } from './NextBtn/NextBtn';
+export { default as BackBtn } from './BackBtn/BackBtn';
 export { default as HistoryBar } from './HistoryBar/HistoryBar';
 export { default as PlayerList } from './PlayerList/PlayerList';
 export { default as Player } from './Player/Player';

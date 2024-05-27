@@ -3,6 +3,7 @@ import './playerList.css';
 import { Player } from '../../components';
 import { getUsers } from '../../__tests__/api';
 import { userIcon } from '../../assets/';
+import axios from 'axios';
 
 
 const PlayerList = ({ step, setStep }) => {
@@ -49,17 +50,36 @@ const PlayerList = ({ step, setStep }) => {
         }
     };
 
+
+    // Stubbed line via __tests__ api
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const fetchedUsers = await getUsers();
+    //             setUsers(fetchedUsers);
+    //         } catch (error) {
+    //             console.error('Error fetching users:', error);
+    //         }
+    //     };
+    //     fetchData();
+    // }, []);
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const fetchedUsers = await getUsers();
+                const response = await axios.get('http://127.0.0.1:8000');
+                const fetchedUsers = response.data;
                 setUsers(fetchedUsers);
             } catch (error) {
                 console.error('Error fetching users:', error);
+                return ;
             }
         };
         fetchData();
     }, []);
+
 
     return (
         <div className='playerList'>
@@ -70,15 +90,24 @@ const PlayerList = ({ step, setStep }) => {
                 <h5> <em>{'i18n.*Click on a user to select or unselect'} </em> </h5>
             </div>
             <div className='playerList--players d-flex flex-wrap clickable'>
-                {users.map((user, index) => (
-                    <Player
-                        key={index}
-                        userImg={userIcon}
-                        username={user.username}
-                        selected={selectedPlayers.includes(user)}
-                        onClick={() => handleUserSelect(user)}
-                    />
-                ))}
+                {
+                    (() => {
+                        try {
+                            return users.map((user, index) => (
+                                <Player
+                                    key={index}
+                                    userImg={userIcon}
+                                    username={user.username}
+                                    selected={selectedPlayers.includes(user)}
+                                    onClick={() => handleUserSelect(user)}
+                                />
+                            ));
+                        } catch (error) {
+                            console.error('Error mapping users:', error);
+                            return null;
+                        }
+                    })()
+                }
             </div>
         </div>
     );

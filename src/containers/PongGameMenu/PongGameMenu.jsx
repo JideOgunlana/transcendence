@@ -11,6 +11,7 @@ const PongGameMenu = ({handleNextBtnClick, handlePongOptionsChange, step}) => {
 
     return (
         <div className='pongGameMenu'>
+            <h3 className='text-center mb-5'>Pong Menu</h3>
             <div className='pongGameMenu--card mx-auto justify-content-center align-items-center d-flex flex-column gap-5 p-4'>
                 <div className='gameTheme'>
                     <div className='gameTheme-header'>

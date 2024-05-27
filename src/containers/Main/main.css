@@ -1,5 +1,6 @@
 main {
     padding: 20px;
+    min-height: 80vh;
     .tabActive {
         border-bottom: 1px solid var(--custom-light-purple);
         color: var(--custom-light-purple);

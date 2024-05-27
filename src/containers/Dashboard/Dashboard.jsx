@@ -1,48 +1,11 @@
-
+// Dashboard.jsx
 
 import { useState } from 'react';
-import {GameSelect, HistoryBar, NextBtn } from '../../components';
-import {PongGameMenu, MemoryGameMenu, PongGamePlayerList, MemoryGamePlayerList, MemoryGame} from '../../containers';
+import { BackBtn, GameSelect, HistoryBar, NextBtn } from '../../components';
+import { PongGameMenu, MemoryGameMenu, PongGamePlayerList, MemoryGamePlayerList, MemoryGame } from '../../containers';
 import './dashboard.css';
 
-
-const Dashboard = () => {
-    const [step, setStep] = useState({
-        stepNumber: 0,
-            pong: {
-                selected: true,
-                theme: '3D',
-                mode: 'singlePlayer',
-                selectedPlayers: []
-            },
-            memory: {
-                selected: false,
-                theme: 'icons',
-                mode: 'singlePlayer',
-                gridSize: '4x4',
-                selectedPlayers: []
-            }
-    });
-
-    const handleNextBtnClick = () => {
-        setStep({ ...step, stepNumber: step.stepNumber + 1 });
-    };
-
-    const handlePongOptionsChange = (options) => {
-        setStep(prevState => ({
-            ...prevState,
-            pong: { ...prevState.pong, ...options }
-        }));
-    };
-    
-    const handleMemoryOptionsChange = (options) => {
-        setStep(prevState => ({
-            ...prevState,
-            memory: { ...prevState.memory, ...options }
-        }));
-    };
-    
-
+const Dashboard = ({ step, setStep, handleNextBtnClick, handleBackBtnClick, handlePongOptionsChange, handleMemoryOptionsChange }) => {
     return (
         <div className='dashboard d-flex'>
             {
@@ -56,46 +19,53 @@ const Dashboard = () => {
                             />
                             <NextBtn handleNextBtnClick={handleNextBtnClick} />
                         </div>
-                        {/* <div className='sideBar'>
-                            <HistoryBar step={step} />
-                        </div> */}
                     </div>
                 )
             }
             {
                 step.stepNumber === 1 && step.pong.selected && (
-                    <div className='dashboard--gameMenu flex-fill d-flex align-items-center'>
-                        <PongGameMenu 
-                            handleNextBtnClick={handleNextBtnClick}
-                            handlePongOptionsChange={handlePongOptionsChange} 
-                            step={step}/>
-                    </div>
+                    <>
+                        <BackBtn handleBackBtnClick={handleBackBtnClick}/>
+                        <div className='dashboard--gameMenu flex-fill d-flex align-items-center'>
+                            <PongGameMenu 
+                                handleNextBtnClick={handleNextBtnClick}
+                                handlePongOptionsChange={handlePongOptionsChange} 
+                                step={step}
+                            />
+                        </div>
+                    </>
+                ) ||
+                step.stepNumber === 1 && step.memory.selected && (
+                    <>
+                        <BackBtn handleBackBtnClick={handleBackBtnClick}/>
+                        <div className='dashboard--gameMenu flex-fill d-flex align-items-center'>
+                            <MemoryGameMenu
+                                handleNextBtnClick={handleNextBtnClick}
+                                handleMemoryOptionsChange={handleMemoryOptionsChange} 
+                                step={step}
+                            />
+                        </div>
+                    </>
                 )
-                ||
-                step.stepNumber === 1 && step.memory.selected && (<>
-                    <div className='dashboard--gameMenu flex-fill d-flex align-items-center'>
-                        <MemoryGameMenu
-                            handleNextBtnClick={handleNextBtnClick}
-                            handleMemoryOptionsChange={handleMemoryOptionsChange} 
-                            step={step}
-                        />
-                    </div>
-                </>)
             }
             {
                 step.stepNumber === 2 && step.pong.selected && (
-                <div className='dashboard--gamePlayers'>
-                    <PongGamePlayerList step={step} setStep={setStep} />
-                </div>
-                )
-                ||
+                    <>
+                        <BackBtn handleBackBtnClick={handleBackBtnClick}/>
+                        <div className='dashboard--gamePlayers'>
+                            <PongGamePlayerList step={step} setStep={setStep} />
+                        </div>
+                    </>
+                ) ||
                 step.stepNumber === 2 && step.memory.selected && (
-                    <div className='dashboard--gamePlayers'>
-                        <MemoryGamePlayerList step={step} setStep={setStep} />
-                    </div>
+                    <>
+                        <BackBtn handleBackBtnClick={handleBackBtnClick}/>
+                        <div className='dashboard--gamePlayers'>
+                            <MemoryGamePlayerList step={step} setStep={setStep} />
+                        </div>
+                    </>
                 )
             }
-
         </div>
     );
 }

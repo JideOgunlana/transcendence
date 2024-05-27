@@ -16,3 +16,4 @@ export { default as topPlayersIcon } from './svg/historyTopPlayers.svg';
 export { default as mostPlaysIcon } from './svg/historyMostPlays.svg';
 export { default as head2HeadIcon } from './svg/historyHead2Head.svg';
 export { default as  transcendLogo } from './svg/transcend.svg';
+export { default as  navBarToggle } from './svg/navBarToggle.svg';

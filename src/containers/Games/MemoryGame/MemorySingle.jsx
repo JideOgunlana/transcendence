@@ -100,8 +100,8 @@ const MemorySingle = ({gridSize, theme, selectedPlayers}) => {
             {
                 showModal && 
                 (
-                    <div className='modal'>
-                        <button onClick={() => window.location.reload()}>Play Again</button>
+                    <div className='modal-content'>
+                        <button onClick={() => window.location.href = '/dashboard'}>Play Again</button>
                     </div>
                 )
             }

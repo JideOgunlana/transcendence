@@ -8,7 +8,7 @@ const MemoryGamePlayerList = ({ step, setStep }) => {
         <div className='memoryGamePlayerList d-flex'>
             <PlayerList step={step} setStep={setStep} />
             <div className='sideBar--startGame'>
-                <StartGameBar step={step} />
+                <StartGameBar step={step} setStep={setStep} />
             </div>
         </div>
     );

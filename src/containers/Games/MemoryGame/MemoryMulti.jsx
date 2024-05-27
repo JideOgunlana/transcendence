@@ -118,7 +118,7 @@ const MemoryMulti = ({gridSize, theme, selectedPlayers}) => {
                             winner !== 'tie' && (
                                 <>
                                 <h2>Winner: {winner}</h2>
-                                <button onClick={() => window.location.reload()}>Play Again</button>
+                                <button onClick={() => window.location.href = '/dashboard'}>Play Again</button>
                                 </>
                             )
                         }

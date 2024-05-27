@@ -16,30 +16,42 @@
   
   .memory-grid.sixBySix {
     grid-template-columns: repeat(6, 1fr);
+
   }
 
   .memory-grid.twoByThree {
     grid-template-columns: repeat(3, 1fr);
+
+  }
+
+  .memory-grid.fourByFour,
+  .memory-grid.sixBySix,
+  .memory-grid.twoByThree {
+    padding: 70px;
+    background-color: var(--custom-darkGrey-card);
+    border-radius: 10px;
+    user-select: none;
   }
   
   .memory-tile {
-    width: 80px;
-    height: 80px;
+    width: 111px;
+    height: 111px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f0f0f0;
-    border: 2px solid #ccc;
+    background-color: var(--custom-grey);
+    border-radius: 100px;
     cursor: pointer;
     font-size: 40px;
+    color: var(--custom-grey)
   }
   
   .memory-tile.flipped, .memory-tile.matched {
-    background-color: #fff;
+    background-color: var(--custom-white);
   }
   
   .memory-tile.matched {
-    background-color: #a0e0a0;
+    background-color: var(--custom-green-win);
   }
   
   .timer, .current-player {

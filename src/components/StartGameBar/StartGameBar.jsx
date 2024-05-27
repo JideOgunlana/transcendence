@@ -2,21 +2,30 @@ import { useState, useEffect } from 'react';
 import './startGameBar.css';
 import { TournamentAlias } from '../../components';
 import { aliasNameValid } from '../../utils/helper';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const StartGameBar = ({ step }) => {
+const StartGameBar = ({ step, setStep }) => {
     const [isStartDisabled, setIsStartDisabled] = useState(true);
     const [showAliasModal, setShowAliasModal] = useState(false);
     const [aliases, setAliases] = useState([]);
     const [showError, setShowError] = useState(false);
-
+    const navigate = useNavigate(); // Use useNavigate for programmatic navigation
 
     const handleStartClick = () => {
-        if (step.pong.mode === 'tournament' || step.memory.mode === 'tournament' && aliases.length < 4) {
-            setShowAliasModal(true);
+        if ((step.pong.selected && step.pong.mode === 'tournament') || 
+            (step.memory.selected && step.memory.mode === 'tournament')) {
+            if (aliases.length < 4) {
+                setShowAliasModal(true);
+            } else {
+                console.log('Start button Clicked - Starting game with parameters:', step, 'Aliases:', aliases);
+            }
         } else {
-            // Send the step data and aliases to the server
-            console.log('Starting game with parameters:', step, 'Aliases:', aliases);
+            // Navigate to the appropriate game route
+            if (step.pong.selected) {
+                navigate('pong');
+            } else if (step.memory.selected) {
+                navigate('memory');
+            }
         }
     };
 
@@ -27,8 +36,15 @@ const StartGameBar = ({ step }) => {
         if (aliasIsValid) {
             setAliases(aliases);
             setShowAliasModal(false);
+            setStep({ ...step, aliases: aliases });
             // Proceed with starting the game after aliases are set
-            console.log('Starting game with parameters:', step, 'Aliases:', aliases);
+            console.log('Aliases are valid - Starting game with parameters:', step, 'Aliases:', step.aliases);
+            // Navigate to the appropriate game route if aliases are valid
+            if (step.pong.selected) {
+                navigate('pong');
+            } else if (step.memory.selected) {
+                navigate('memory');
+            }
         } else {
             // Display an error message or handle invalid aliases
             setShowAliasModal(true);
@@ -36,7 +52,6 @@ const StartGameBar = ({ step }) => {
             console.log('Invalid aliases. Please ensure each alias meets the criteria.');
         }
     };
-    
 
     const areSelectionRequirementsMet = () => {
         if (step.pong.selected) {
@@ -81,11 +96,9 @@ const StartGameBar = ({ step }) => {
                         </h5>
                     </div>
                     <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
-                        <Link to='pong'>
-                            <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
-                                {'i18n.Start'}
-                            </button>
-                        </Link>
+                        <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
+                            {'i18n.Start'}
+                        </button>
                     </div>
                     <TournamentAlias
                         show={showAliasModal}
@@ -109,11 +122,9 @@ const StartGameBar = ({ step }) => {
                         </h5>
                     </div>
                     <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
-                        <Link to='memory'>
-                            <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
-                                {'i18n.Start'}
-                            </button>
-                        </Link>
+                        <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
+                            {'i18n.Start'}
+                        </button>
                     </div>
                     <TournamentAlias
                         show={showAliasModal}
@@ -124,7 +135,6 @@ const StartGameBar = ({ step }) => {
                     />
                 </>
             }
-
         </div>
     );
 };

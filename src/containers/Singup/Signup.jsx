@@ -129,6 +129,7 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                 </div>
                 <div>
                     <button
+                        type='submit'
                         className='game-btn-enabled signupSection--form-btn clickable'
                         onClick={handleSubmit}
                     >

@@ -14,3 +14,5 @@ export { default as PongGame } from './Games/PongGame/PongGame';
 export { default as MemoryGame } from './Games/MemoryGame/MemoryGame';
 export { default as MemoryGameMenu } from './MemoryGameMenu/MemoryGameMenu';
 export { default as MemoryGamePlayerList } from './MemoryGamePlayerList/MemoryGamePlayerList';
+export { default as Unauthorized } from './Unauthorized/Unauthorized';
+export { default as ErrorPage } from './ErrorPage/ErrorPage';

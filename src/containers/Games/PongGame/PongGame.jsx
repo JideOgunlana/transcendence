@@ -6,7 +6,19 @@ import TournamentLogic from '../../../TournamentLogic.js';
 import { GameModes } from '../../../Enums.js';
 import Globals from '../../../Globals.js';
 
-function PongGame() {
+function PongGame({step}) {
+
+      const initialSelectedPlayers = step.aliases.length > 0 ? step.aliases : step.pong.selectedPlayers.map(player => {
+        return {
+            username: player.username,
+            email: player.email,
+            alias: ''
+        };
+    });
+
+    console.log(initialSelectedPlayers);
+
+
     useEffect(() => {
         const tournamentLogic = new TournamentLogic()
         const uimanager = new UIManager(tournamentLogic)
