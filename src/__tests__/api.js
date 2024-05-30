@@ -44,14 +44,14 @@ export const getFakeUserData = async () => {
             userImg: userIcon,
             username: 'User1',
             pong: {
-                'wins': 10,
-                'losses': 5,
-                'gamesPlayed': 15,
+                'win': 10,
+                'loss': 5,
+                'total': 15,
             },
             memory: {
-                'wins': 2,
-                'losses': 4,
-                'gamesPlayed': 6,
+                'win': 2,
+                'loss': 4,
+                'total': 6,
             }
         },
         {
@@ -59,14 +59,14 @@ export const getFakeUserData = async () => {
             userImg: userIcon,
             username: 'User2',
             pong: {
-                'wins': 8,
-                'losses': 2,
-                'gamesPlayed': 10,
+                'win': 8,
+                'loss': 2,
+                'total': 10,
             },
             memory: {
-                'wins': 3,
-                'losses': 2,
-                'gamesPlayed': 5,
+                'win': 3,
+                'loss': 2,
+                'total': 5,
             }
         },
         {
@@ -74,14 +74,14 @@ export const getFakeUserData = async () => {
             userImg: userIcon,
             username: 'User3',
             pong: {
-                'wins': 8,
-                'losses': 1,
-                'gamesPlayed': 9,
+                'win': 8,
+                'loss': 1,
+                'total': 9,
             },
             memory: {
-                'wins': 2,
-                'losses': 7,
-                'gamesPlayed': 9,
+                'win': 2,
+                'loss': 7,
+                'total': 9,
             }
         },
         {
@@ -89,15 +89,77 @@ export const getFakeUserData = async () => {
             userImg: userIcon,
             username: 'User4',
             pong: {
-                'wins': 3,
-                'losses': 3,
-                'gamesPlayed': 6,
+                'win': 3,
+                'loss': 3,
+                'total': 6,
             },
             memory: {
-                'wins': 8,
-                'losses': 7,
-                'gamesPlayed': 15,
+                'win': 8,
+                'loss': 7,
+                'total': 15,
             }
         },
     ]);
 }
+
+
+[
+    {
+        "id": 0,
+        "username": "testuser",
+        "email": "test@example.com",
+        "pong": {
+            "singlePlayer": {
+                "total": 1,
+                "win": 1,
+                "loss": 0
+            },
+            "multiPlayer": {
+                "total": 1,
+                "win": 1,
+                "loss": 0
+            }
+        },
+        "memory": {
+            "singlePlayer": {
+                "total": 0,
+                "win": 0,
+                "loss": 0
+            },
+            "multiPlayer": {
+                "total": 0,
+                "win": 0,
+                "loss": 0
+            }
+        },
+    },
+    {
+        "id": 1,
+        "username": "ben",
+        "email": "ben@example.com",
+        "pong": {
+            "singlePlayer": {
+                "total": 1,
+                "win": 1,
+                "loss": 0
+            },
+            "multiPlayer": {
+                "total": 1,
+                "win": 1,
+                "loss": 0
+            }
+        },
+        "memory": {
+            "singlePlayer": {
+                "total": 0,
+                "win": 0,
+                "loss": 0
+            },
+            "multiPlayer": {
+                "total": 0,
+                "win": 0,
+                "loss": 0
+            }
+        },
+    },
+]

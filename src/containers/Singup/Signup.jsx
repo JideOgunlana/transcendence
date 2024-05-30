@@ -4,6 +4,7 @@ import './signup.css';
 import axios from 'axios';
 import { createPost } from '../../__tests__/api';
 import { signupFormValid, checkNameExists, emailValid } from '../../utils/helper';
+import defaults from '../../utils/defaults';
 
 const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
     const [signUpFormData, setSignUpFormData] = useState({
@@ -104,8 +105,8 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                         value={signUpFormData.username}
                         onChange={handleChange}
                         className={`form-control ${!usernameInputState.value ? 'inalid' : ''}`}
-                        minLength={2}
-                        maxLength={20}
+                        minLength={defaults.USERNAME_MIN_LENGTH}
+                        maxLength={defaults.USERNAME_MAX_LENGTH}
                     />
                     <br />
                 </div>
@@ -123,8 +124,8 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                         value={signUpFormData.email}
                         onChange={handleChange}
                         className={`form-control ${!emailInputState ? 'invalid' : ''}`}
-                        minLength={2}
-                        maxLength={50}
+                        minLength={defaults.EMAIL_MIN_LENGTH}
+                        maxLength={defaults.EMAIL_MAX_LENGTH}
                     />
                 </div>
                 <div>

@@ -6,14 +6,17 @@ import { Unauthorized } from '../../../containers'
 
 const MemoryGame = ({ step }) => {
 
-    const initialSelectedPlayers = step.aliases.length > 0 ? step.aliases : step.memory.selectedPlayers.map(player => {
-        return {
-            username: player.username,
-            email: player.email,
-            alias: '' // Default alias to username if aliases is empty
-        };
-    });
-    
+    const initialSelectedPlayers = (step.aliases.length > 0 && step.memory.mode === 'tournament') ? 
+        step.aliases 
+        : 
+        step.memory.selectedPlayers.map(player => {
+            return {
+                username: player.username,
+                email: player.email,
+                alias: '' // Default alias to username if aliases is empty
+            };
+        });
+
     console.log(initialSelectedPlayers);
 
     const mode = step.memory.mode;

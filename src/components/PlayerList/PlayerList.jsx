@@ -69,9 +69,10 @@ const PlayerList = ({ step, setStep }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000');
+                const response = await axios.get('http://127.0.0.1:8000/api/users/');
                 const fetchedUsers = response.data;
                 setUsers(fetchedUsers);
+                console.log(fetchedUsers);
             } catch (error) {
                 console.error('Error fetching users:', error);
                 return ;

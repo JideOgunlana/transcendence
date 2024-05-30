@@ -51,7 +51,10 @@ export default class PongScene {
         });
         this.renderer.shadowMap.enabled = true;
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(this.renderer.domElement);
+
+        // No need to append the renderer to the document.body as it's already linked to the canvas
+        // We want only the root div used by React to be in the body
+        // document.body.appendChild(this.renderer.domElement);
 
         
         this.initControls();

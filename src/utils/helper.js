@@ -1,17 +1,12 @@
 import { getUsers } from "../__tests__/api";
-
-const USERNAME_MIN_LENGTH = 2;
-const USERNAME_MAX_LENGTH = 20;
-const ALIAS_MIN = 2;
-const ALIAS_MAX = 15;
-const AIUserName = 'AI';
+import  defaults  from './defaults'
 
 
 export const signupFormValid = (username) => {
 
     const trimmedUsername = username.trim();
 
-    if (trimmedUsername.length < USERNAME_MIN_LENGTH || trimmedUsername.length > USERNAME_MAX_LENGTH) {
+    if (trimmedUsername.length < defaults.USERNAME_MIN_LENGTH || trimmedUsername.length > defaults.USERNAME_MAX_LENGTH) {
         console.error("Username must be between 2 and 20");
         return false;
     }
@@ -28,7 +23,7 @@ export const signupFormValid = (username) => {
 export const checkNameExists = async (username) => {
     const users = await getUsers(); // stubbed line for testing without Django backend
     const normalizedUsername = username.toUpperCase();
-    return users.some(user => user.username.toUpperCase() === normalizedUsername || normalizedUsername === AIUserName);
+    return users.some(user => user.username.toUpperCase() === normalizedUsername || normalizedUsername === defaults.AI_USERNAME);
 }
 
     
@@ -43,7 +38,7 @@ export const aliasNameValid = (aliases) => {
     const aliasIsValid = aliases.every(alias => {
         const trimmedAlias = alias.alias.trim();
         // Check if alias is not empty
-        if (trimmedAlias.length < ALIAS_MIN || trimmedAlias.length > ALIAS_MAX) {
+        if (trimmedAlias.length < defaults.ALIAS_MIN_LENGTH || trimmedAlias.length > defaults.ALIAS_MAX_LENGTH) {
             return false; // Alias length should be between 2 and 15 characters
         }
         // Check if alias contains only alphanumeric characters

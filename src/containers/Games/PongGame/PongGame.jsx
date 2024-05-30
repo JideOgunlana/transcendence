@@ -5,14 +5,18 @@ import UIManager from '../../../UIManager.js';
 import TournamentLogic from '../../../TournamentLogic.js';
 import { GameModes } from '../../../Enums.js';
 import Globals from '../../../Globals.js';
+// import { Constants } from '../../../Constants.js';
 
 function PongGame({step}) {
 
-      const initialSelectedPlayers = step.aliases.length > 0 ? step.aliases : step.pong.selectedPlayers.map(player => {
+    const initialSelectedPlayers = (step.aliases.length > 0 && step.pong.mode === 'tournament') ? 
+    step.aliases 
+    : 
+    step.pong.selectedPlayers.map(player => {
         return {
             username: player.username,
             email: player.email,
-            alias: ''
+            alias: '' // Default alias to username if aliases is empty
         };
     });
 
@@ -33,17 +37,17 @@ function PongGame({step}) {
           if (Globals.currentGameMode === GameModes.SinglePlayer) {
             Globals.currentPlayerRight.paddle.SetSpeed(0.1)
           }
-          Constants.buttonStart.onclick = () => {
-            //playerLeft.ResetScore();
-            //playerRight.ResetScore();
-            if (Globals.currentGameMode === GameModes.Tournament) {
-                tournamentLogic.NextTeam()
-            }
-            dispatchEvent(Events["reset"])
-            //IN_GAME_OBJECTS.ball.SetDirection(Constants.ballStartDir);
-            //IN_GAME_OBJECTS.ball.SetPosition(Constants.ballStartPosition);
-            GameManager.StartGame(game.animate.bind(game));
-          }
+          // Constants.buttonStart.onclick = () => {
+          //   //playerLeft.ResetScore();
+          //   //playerRight.ResetScore();
+          //   if (Globals.currentGameMode === GameModes.Tournament) {
+          //       tournamentLogic.NextTeam()
+          //   }
+          //   dispatchEvent(Events["reset"])
+          //   //IN_GAME_OBJECTS.ball.SetDirection(Constants.ballStartDir);
+          //   //IN_GAME_OBJECTS.ball.SetPosition(Constants.ballStartPosition);
+          //   GameManager.StartGame(game.animate.bind(game));
+          // }
         }, false)
           
         window.addEventListener('hitLeftWall', (e) => {
@@ -60,7 +64,8 @@ function PongGame({step}) {
       }, []);
 
   return (
-    <div>
+    <div className='d-flex'>
+      <div className='pongGame'>
       <div id="user-input-overlay">
         <div id="form-wrapper">
           <form id="input-form">
@@ -91,12 +96,13 @@ function PongGame({step}) {
           </div>
         </div>
         <div id="main-container">
-          <img id="btn-start" src="../../../start.png" />
+          {/* <img id="btn-start" src="../../../start.png" /> */}
           <div id="tournament-wrapper"><div id="matchmaker"></div></div>
           <div id="winning-background">
             <p id='winning-text'></p>
           </div>
         </div>
+      </div>
       </div>
       {/* Add canvas element with ID 'canvas' */}
       <canvas id="canvas"></canvas>

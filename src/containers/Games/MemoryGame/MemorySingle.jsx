@@ -1,16 +1,14 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { generateTiles } from '../../../utils/memoryHelper';
+import defaults from '../../../utils/defaults';
 
-
-const MemorySingle = ({gridSize, theme, selectedPlayers}) => {
-
-
+const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
     const [tiles, setTiles] = useState([]);
     const [flippedTiles, setFlippedTiles] = useState([]);
     const [matchedTiles, setMatchedTiles] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [timer, setTimer] = useState(0);
+    const [countdown, setCountdown] = useState(defaults.MEMORY_SINGLE_TIME);
+    const [gameOver, setGameOver] = useState(false);
     const timerRef = useRef(null);
     const [totalFlips, setTotalFlips] = useState(0);
     const [totalMoves, setTotalMoves] = useState(0);
@@ -22,20 +20,28 @@ const MemorySingle = ({gridSize, theme, selectedPlayers}) => {
 
     useEffect(() => {
         timerRef.current = setInterval(() => {
-            setTimer(prev => prev + 1);
+            setCountdown(prev => prev - 1);
         }, 1000);
 
         return () => clearInterval(timerRef.current);
     }, []);
 
-    const handleTileClick = (index) => {
-        if (flippedTiles.length < 2 && !flippedTiles.includes(index) && !matchedTiles.includes(index)) {
-            setFlippedTiles(prev => [...prev, index]);
+    useEffect(() => {
+        if (countdown <= 0) {
+            clearInterval(timerRef.current);
+            setGameOver(true);
+            alert(`Time's up! You didn't find all pairs.`);
+            setShowModal(true);
         }
-        setTotalFlips(totalFlips + 1);
-        console.log("FlippedTiles count: " + totalFlips);
-    };
+    }, [countdown]);
 
+    const handleTileClick = (index) => {
+        if (gameOver || flippedTiles.length >= 2 || flippedTiles.includes(index) || matchedTiles.includes(index)) {
+            return;
+        }
+        setFlippedTiles(prev => [...prev, index]);
+        setTotalFlips(totalFlips + 1);
+    };
 
     useEffect(() => {
         if (flippedTiles.length === 2) {
@@ -53,18 +59,13 @@ const MemorySingle = ({gridSize, theme, selectedPlayers}) => {
     }, [flippedTiles, tiles, selectedPlayers.length]);
 
     useEffect(() => {
-        console.log(flippedTiles.length);
         if (matchedTiles.length === tiles.length && tiles.length > 0) {
-
-                clearInterval(timerRef.current);
-                // Determine the number of moves
-                alert(`Congratulations! You found all pairs in ${timer} seconds with ${totalMoves} moves.`);
-                setShowModal(true);
-                return ;
+            clearInterval(timerRef.current);
+            alert(`Congratulations! You found all pairs with ${totalMoves} moves before time ran out.`);
+            setShowModal(true);
+            return;
         }
     }, [matchedTiles, tiles.length]);
-
-
 
     return (
         <div className='memory-game'>
@@ -79,35 +80,25 @@ const MemorySingle = ({gridSize, theme, selectedPlayers}) => {
                     </div>
                 ))}
             </div>
-            {
-                <div className='timer'>Time: {timer}s</div>
-            }
-
+            <div className='timer'>Time Remaining: {countdown}s</div>
             <div className='moves'>
                 {selectedPlayers.map((player, index) => (
                     <div key={index} className='player-moves'>
-                        {
-                            <div>
-                                Player: {player.username}
-                                <br />
-                                moves: {totalMoves}
-                            </div>
-
-                        }
+                        <div>
+                            Player: {player.username}
+                            <br />
+                            Moves: {totalMoves}
+                        </div>
                     </div>
                 ))}
             </div>
-            {
-                showModal && 
-                (
-                    <div className='modal-content'>
-                        <button onClick={() => window.location.href = '/dashboard'}>Play Again</button>
-                    </div>
-                )
-            }
+            {showModal && (
+                <div className='modal-content'>
+                    <button onClick={() => window.location.href = '/dashboard'}>Play Again</button>
+                </div>
+            )}
         </div>
     );
 }
 
-
-export default MemorySingle
+export default MemorySingle;

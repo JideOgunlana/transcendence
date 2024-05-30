@@ -21,6 +21,7 @@ const StartGameBar = ({ step, setStep }) => {
             }
         } else {
             // Navigate to the appropriate game route
+            setAliases([]);
             if (step.pong.selected) {
                 navigate('pong');
             } else if (step.memory.selected) {

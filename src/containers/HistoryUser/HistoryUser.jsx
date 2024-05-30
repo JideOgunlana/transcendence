@@ -1,6 +1,7 @@
 import React from 'react';
 import './historyUser.css';
 import { Player } from '../../components';
+import { userIcon } from '../../assets';
 
 const PieChart = ({ games }) => {
     return (
@@ -10,18 +11,54 @@ const PieChart = ({ games }) => {
     );
 };
 
-const PongWinLoss = ({ winloss }) => {
+const PongWinLoss = ({ winSingleGame, lossSingleGame, winMultiGame, lossMultiGame, totalSingleGame, totalMultiGame }) => {
     return (
         <div className='statsCard'>
-            Pong Game Wins and Losses: {winloss}
+            Pong Game Wins and Losses:
+            <div>
+                Total single games played: { totalSingleGame }
+            </div>
+            <div>
+                Single Player Wins: { winSingleGame }
+            </div>
+            <div>
+                Single Player Losses: { lossSingleGame }
+            </div>
+            <div>
+                Total Multi games played: { totalMultiGame }
+            </div>
+            <div>
+                Multi Player Wins: { winMultiGame }
+            </div>
+            <div>
+                Multi Player Losses: { lossMultiGame }
+            </div>
         </div>
     );
 };
 
-const MemoryWinLoss = ({ winloss }) => {
+const MemoryWinLoss = ({ winSingleGame, lossSingleGame, winMultiGame, lossMultiGame, totalSingleGame, totalMultiGame }) => {
     return (
         <div className='statsCard'>
-           Memory Wins and Losses: {winloss}
+            Memory Game Wins and Losses:
+            <div>
+                Total single games played: { totalSingleGame }
+            </div>
+            <div>
+                Single Player Wins: { winSingleGame }
+            </div>
+            <div>
+                Single Player Losses: { lossSingleGame }
+            </div>
+            <div>
+                Total Multi games played: { totalMultiGame }
+            </div>
+            <div>
+                Multi Player Wins: { winMultiGame }
+            </div>
+            <div>
+                Multi Player Losses: { lossMultiGame }
+            </div>
         </div>
     );
 };
@@ -29,7 +66,7 @@ const MemoryWinLoss = ({ winloss }) => {
 
 
 const HistoryUser = ({ userData, onBack }) => {
-    const { username, userImg } = userData;
+    const { username } = userData;
     return (
         <div className='historyUser d-flex gap-5 mt-5 flex-column'>
             <h4 className='text-center'>{username} History</h4>
@@ -40,14 +77,30 @@ const HistoryUser = ({ userData, onBack }) => {
                 <div className='historyUser--stats mt-3 col-12 row justify-content-center'>
                     <div className='historyUser--player mb-5 col-12 col-md-4'>
                         <Player 
-                            userImg={ userImg }
+                            userImg={ userIcon }
                             username={ username }
                         />
                     </div>
                     <div className='historyUser--stats-grid row gap-4 col-12 col-md-8'>
-                        <PongWinLoss winloss={userData.pong['wins'] - userData.pong['losses']} />
-                        <MemoryWinLoss winloss={userData.pong['wins'] - userData.pong['losses']} />
-                        <PieChart games={''} />
+                        <PongWinLoss 
+                            winSingleGame={userData.pong.singlePlayer['win']}
+                            lossSingleGame={userData.pong.singlePlayer['loss']}
+                            totalSingleGame={userData.pong.singlePlayer['total']}
+                            winMultiGame={userData.pong.multiPlayer['win']}
+                            lossMultiGame={userData.pong.multiPlayer['loss']}
+                            totalMultiGame={userData.pong.multiPlayer['total']}
+                        />
+                        <MemoryWinLoss
+                            winSingleGame={userData.memory.singlePlayer['win']}
+                            lossSingleGame={userData.memory.singlePlayer['loss']}
+                            totalSingleGame={userData.memory.singlePlayer['total']}
+                            winMultiGame={userData.memory.multiPlayer['win']}
+                            lossMultiGame={userData.memory.multiPlayer['loss']}
+                            totalMultiGame={userData.memory.multiPlayer['total']}
+                        />
+                        <PieChart
+                            games={''}
+                        />
                     </div>
                 </div>
             </div>
