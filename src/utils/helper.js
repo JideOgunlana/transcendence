@@ -1,5 +1,6 @@
-import { getUsers } from "../__tests__/api";
+// import { getUsers } from "../__tests__/api";
 import  defaults  from './defaults'
+import axios from 'axios'
 
 
 export const signupFormValid = (username) => {
@@ -21,9 +22,17 @@ export const signupFormValid = (username) => {
 }
 
 export const checkNameExists = async (username) => {
-    const users = await getUsers(); // stubbed line for testing without Django backend
-    const normalizedUsername = username.toUpperCase();
-    return users.some(user => user.username.toUpperCase() === normalizedUsername || normalizedUsername === defaults.AI_USERNAME);
+    try {
+        // const users = await getUsers(); // stubbed line for testing without Django backend
+        const response = await axios.get('http://localhost:8000/api/users/');
+        const users = response.data;  // Get the data property from the response
+
+        const normalizedUsername = username.toUpperCase();
+        return users.some(user => user.username.toUpperCase() === normalizedUsername || normalizedUsername === defaults.AI_USERNAME);
+    } catch (error) {
+        console.error('Error checking username:', error);
+        return false;  // Default to false if there's an error
+    }
 }
 
     
@@ -31,7 +40,7 @@ export const emailValid = (email) => {
     // Regular expression for basic email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
-};
+}
 
 export const aliasNameValid = (aliases) => {
     // Check if all aliases are filled and meet the criteria

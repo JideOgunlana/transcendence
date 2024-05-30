@@ -1,11 +1,22 @@
-import { Link } from 'react-router-dom';
-import './userprofile.css';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { userIcon } from '../../assets/';
+import { Unauthorized } from '../../containers'
+import './userprofile.css';
 
+const Userprofile = ({ handleGoToDashboard }) => {
+    const location = useLocation();
+    const userData = location.state && location.state.userData;
 
+    if (!userData) {
+        // Render the Unauthorized component if userData is not defined
+        return (
+            <div className="unauthorized-container">
+                <Unauthorized />
+            </div>
+        );
+    }
 
-const Userprofile = ({handleGoToDashboard}) => {
-    
     return (
         <div className='userProfileSection align-content-center'>
             <div className='text-center mb-3 text-success'>
@@ -17,11 +28,11 @@ const Userprofile = ({handleGoToDashboard}) => {
                 </div>
                 <div>
                     <span>Username: </span>
-                    <span>{'data'}</span>
+                    <span>{userData.username}</span>
                 </div>
                 <div>
                     <span>Email: </span>
-                    <span>{'data'}</span>
+                    <span>{userData.email}</span>
                 </div>
             </div>
             <div 

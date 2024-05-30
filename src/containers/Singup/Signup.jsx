@@ -1,15 +1,36 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './signup.css';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { createPost } from '../../__tests__/api';
 import { signupFormValid, checkNameExists, emailValid } from '../../utils/helper';
 import defaults from '../../utils/defaults';
+import './signup.css';
 
 const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
+
+    const navigate = useNavigate();
     const [signUpFormData, setSignUpFormData] = useState({
         username: '',
-        email: ''
+        email: '',
+        pong_single_player: {
+            total: 0,
+            win: 0,
+            loss: 0
+        },
+        pong_multi_player: {
+            total: 0,
+            win: 0,
+            loss: 0
+        },
+        memory_single_player: {
+            total: 0,
+            win: 0,
+            loss: 0
+        },
+        memory_multi_player: {
+            total: 0,
+            win: 0,
+            loss: 0
+        }
     });
     const [usernameInputState, setUsernameInputState] = useState({
         value: true,
@@ -17,15 +38,13 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
     });
     const [emailInputState, setEmailInputState] = useState(true);
 
-
     const handleChange = e => {
-        setSignUpFormData({ ...signUpFormData, [e.target.name]: e.target.value })
-    }
+        setSignUpFormData({ ...signUpFormData, [e.target.name]: e.target.value });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // resets the input state
         setUsernameInputState({ value: true, isDuplicate: false });
         setEmailInputState(true);
 
@@ -38,40 +57,52 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
             setEmailInputState(false);
             return;
         }
+
         try {
             const nameExists = await checkNameExists(signUpFormData.username);
             if (nameExists) {
+                console.error("Name Exists")
                 setUsernameInputState({ value: false, isDuplicate: true });
                 return;
             }
+
             setUsernameInputState({ value: true, isDuplicate: false });
             setEmailInputState(true);
-            // const response = await axios.post('');
-            const response = await createPost(signUpFormData); // stubbed line for testing without Django backend
-            console.log('Response:  ', response);
 
-            // Display User Profile after successful login
+            const response = await axios.post(
+                'http://localhost:8000/api/users/',
+                signUpFormData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+
+            console.log('Response:', response);
+
             handleUserSignedUp();
-            // Navigate to userprofile only if requirements are met
-            handleGoToUserProfile();
+            navigate('/userprofile', { state: { userData: signUpFormData } }); // Navigate to user profile with signup data
+            // handleGoToUserProfile();
         } catch (error) {
-            console.error('Error: ', error);
+            console.error('Error:', error);
+            if (error.response) {
+                console.error('Response data:', error.response.data);
+            }
         }
-    }
+    };
 
-    // Function to navigate to userprofile if requirements are met
     const handleGoToUserProfile = () => {
         if (signupFormValid(signUpFormData.username) && emailValid(signUpFormData.email)) {
-            window.location.href = '/userprofile'; // Navigate to userprofile page
+            window.location.href = '/userprofile';
         }
-    }
+    };
 
     return (
         <div className='signupSection align-content-center'>
             <div className='signupSection--form mx-auto d-flex flex-column align-items-center'>
                 <h3 className='mb-1'>Create User</h3>
                 <div className='custom-input'>
-
                     <div className={`signupSection--form--error cust-text-13 ${usernameInputState.isDuplicate || !usernameInputState.value ? 'showInputErrMsg' : ''}`}>
                         {usernameInputState.isDuplicate ? 
                         <div className='signupErrDuplicateUser d-flex align-items-end mt-3'>
@@ -104,14 +135,13 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                         name='username'
                         value={signUpFormData.username}
                         onChange={handleChange}
-                        className={`form-control ${!usernameInputState.value ? 'inalid' : ''}`}
+                        className={`form-control ${!usernameInputState.value ? 'invalid' : ''}`}
                         minLength={defaults.USERNAME_MIN_LENGTH}
                         maxLength={defaults.USERNAME_MAX_LENGTH}
                     />
                     <br />
                 </div>
                 <div className='custom-input'>
-
                     <span className={`signupSection--form--error cust-text-13 ${!emailInputState ? 'showInputErrMsg' : ''}`}>
                         Email is not valid
                     </span>
@@ -145,6 +175,6 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
             <div className='signupSection--form--line mx-auto'></div>
         </div>
     );
-}
+};
 
 export default Signup;
