@@ -24,7 +24,7 @@ export const signupFormValid = (username) => {
 export const checkNameExists = async (username) => {
     try {
         // const users = await getUsers(); // stubbed line for testing without Django backend
-        const response = await axios.get('http://localhost:8000/api/users/');
+        const response = await axios.get('http://localhost:8000/pong/users/');
         const users = response.data;  // Get the data property from the response
 
         const normalizedUsername = username.toUpperCase();

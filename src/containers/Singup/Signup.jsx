@@ -70,7 +70,7 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
             setEmailInputState(true);
 
             const response = await axios.post(
-                'http://localhost:8000/api/users/',
+                'http://localhost:8000/pong/users/',
                 signUpFormData,
                 {
                     headers: {

@@ -59,7 +59,7 @@ const HistoryAll = () => {
         const fetchData = async () => {
             try {
                 // const data =  await getFakeUserData();
-                const response = await axios.get('http://127.0.0.1:8000/api/users/');
+                const response = await axios.get('http://127.0.0.1:8000/pong/users/');
                 setUserData(response.data);
                 console.log(response.data);
             } catch (err) {

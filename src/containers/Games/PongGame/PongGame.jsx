@@ -14,6 +14,7 @@ function PongGame({step}) {
     : 
     step.pong.selectedPlayers.map(player => {
         return {
+            id: player.id,
             username: player.username,
             email: player.email,
             alias: '' // Default alias to username if aliases is empty
