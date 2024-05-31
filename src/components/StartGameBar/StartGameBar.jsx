@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import './startGameBar.css';
 import { TournamentAlias } from '../../components';
 import { aliasNameValid } from '../../utils/helper';
 import { useNavigate } from 'react-router-dom';
+import './startGameBar.css';
 
 const StartGameBar = ({ step, setStep }) => {
     const [isStartDisabled, setIsStartDisabled] = useState(true);
@@ -83,13 +83,17 @@ const StartGameBar = ({ step, setStep }) => {
     };
 
     return (
-        <div className='startGameBar p-3'>
+        <div className='startGameBar p-3 mx-auto'>
             {
                 step.pong.selected && 
                 <>
                     <div className='startGameBar--title'>
-                        <h4 className=''>{'i18n.pong - data.type'}</h4>
-                        <h5 className='m-3 gameRequirementsInfo'>{'* data.requirements'}</h5>
+                        <h4 className=''>
+                            { 
+                                `Pong - ${step.pong.mode}`
+                            }
+                        </h4>
+                        <h5 className='m-3 gameRequirementsInfo'>{'* i18n.requirements'}</h5>
                         <h5>
                             {
                                 `${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${'i18n SELECTED'}`
@@ -114,8 +118,12 @@ const StartGameBar = ({ step, setStep }) => {
                 step.memory.selected &&
                 <>
                     <div className='startGameBar--title'>
-                        <h4 className=''>{'i18n.Memory - data.type'}</h4>
-                        <h5 className='m-3 gameRequirementsInfo'>{'* data.requirements'}</h5>
+                        <h4 className=''>
+                            {
+                                `Memory - ${step.memory.mode}`
+                            }
+                        </h4>
+                        <h5 className='m-3 gameRequirementsInfo'>{'* i18n.requirements'}</h5>
                         <h5>
                             {
                                 `${step.memory.selectedPlayers ? step.memory.selectedPlayers.length : 0} / ${getMaxPlayers(step.memory.mode)} ${'i18n SELECTED'}`

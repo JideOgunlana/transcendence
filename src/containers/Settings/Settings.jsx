@@ -1,7 +1,7 @@
 // Settings.js
-import './settings.css';
 import { useTranslation } from 'react-i18next';
 import { soundIcon, languageIcon, engIcon, deIcon, espIcon } from '../../assets';
+import './settings.css';
 
 const SettingsBtn = ({ btnClass, isActive, option, val, handleSettingsClick }) => {
     return (

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './historyAll.css';
 import { HistoryUser } from '../../containers';
 import { userIcon } from '../../assets';
 import axios from 'axios';
+import './historyAll.css';
 
-import { getFakeUserData } from '../../__tests__/api';
+// import { getFakeUserData } from '../../__tests__/api';
 
 const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
     const handleClick = () => {

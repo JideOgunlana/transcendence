@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import './playerList.css';
 import { Player } from '../../components';
 import { getUsers } from '../../__tests__/api';
-import { userIcon } from '../../assets/';
 import axios from 'axios';
+import './playerList.css';
+import { userIcon } from '../../assets/';
 
 
 const PlayerList = ({ step, setStep }) => {
@@ -94,15 +94,26 @@ const PlayerList = ({ step, setStep }) => {
                 {
                     (() => {
                         try {
-                            return users.map((user, index) => (
-                                <Player
-                                    key={index}
-                                    userImg={userIcon}
-                                    username={user.username}
-                                    selected={selectedPlayers.includes(user)}
-                                    onClick={() => handleUserSelect(user)}
-                                />
-                            ));
+                            if (users.length >= 1) {
+                                return users.map((user, index) => (
+                                    <Player
+                                        key={index}
+                                        userImg={userIcon}
+                                        username={user.username}
+                                        selected={selectedPlayers.includes(user)}
+                                        onClick={() => handleUserSelect(user)}
+                                    />
+                                ));
+                            }
+                            else {
+                                return (
+                                    <div>
+                                        <p>
+                                            There are no users, Click on Signup to create a user 
+                                        </p>
+                                    </div>
+                                )
+                            }
                         } catch (error) {
                             console.error('Error mapping users:', error);
                             return null;

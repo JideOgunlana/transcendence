@@ -6,4 +6,16 @@ nav {
         height: 32px;
         width: 114px;
     }
+
+    .customNavLink {
+        a {
+          color: var(--custom-white);
+        }
+      }
+      
+      .customNavLink.active{
+        a {
+          color: var(--custom-light-purple);
+        }
+      }
 }

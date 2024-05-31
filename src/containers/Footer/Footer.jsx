@@ -1,6 +1,6 @@
 
-import './footer.css';
 import { transcendLogo, githubIcon } from '../../assets';
+import './footer.css';
 
 const Footer = props => {
     return (

@@ -1,10 +1,9 @@
 
 import GameSelect from '../../components/GameSelect/GameSelect';
 import { Link } from 'react-router-dom';
-
-
-import './hero.css';
 import { footerBefore, rightArrow } from '../../assets';
+import './hero.css';
+
 
 const Hero = ({handleSignup}) => {
 

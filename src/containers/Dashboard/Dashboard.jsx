@@ -1,7 +1,5 @@
-// Dashboard.jsx
 
-import { useState } from 'react';
-import { BackBtn, GameSelect, HistoryBar, NextBtn } from '../../components';
+import { BackBtn, GameSelect, NextBtn } from '../../components';
 import { PongGameMenu, MemoryGameMenu, PongGamePlayerList, MemoryGamePlayerList, MemoryGame } from '../../containers';
 import './dashboard.css';
 
@@ -52,7 +50,7 @@ const Dashboard = ({ step, setStep, handleNextBtnClick, handleBackBtnClick, hand
                 step.stepNumber === 2 && step.pong.selected && (
                     <>
                         <BackBtn handleBackBtnClick={handleBackBtnClick}/>
-                        <div className='dashboard--gamePlayers'>
+                        <div className='dashboard--gamePlayers flex-fill'>
                             <PongGamePlayerList step={step} setStep={setStep} />
                         </div>
                     </>
@@ -60,7 +58,7 @@ const Dashboard = ({ step, setStep, handleNextBtnClick, handleBackBtnClick, hand
                 step.stepNumber === 2 && step.memory.selected && (
                     <>
                         <BackBtn handleBackBtnClick={handleBackBtnClick}/>
-                        <div className='dashboard--gamePlayers'>
+                        <div className='dashboard--gamePlayers flex-fill'>
                             <MemoryGamePlayerList step={step} setStep={setStep} />
                         </div>
                     </>

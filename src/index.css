@@ -142,14 +142,8 @@ body {
   cursor: not-allowed;
 }
 
-.link {
+.customLink {
   color: var(--custom-light-purple);
-}
-
-.linkDashboardActive {
-  a {
-    color: var(--custom-white);
-  }
 }
 
 a {

@@ -60,7 +60,7 @@ const MemoryWinLoss = ({ winSingleGame, lossSingleGame, winMultiGame, lossMultiG
                 Multi Player Losses: { lossMultiGame }
             </div>
         </div>
-    );
+    );  
 };
 
 
@@ -69,7 +69,7 @@ const HistoryUser = ({ userData, onBack }) => {
     const { username } = userData;
     return (
         <div className='historyUser d-flex gap-5 mt-5 flex-column'>
-            <h4 className='text-center'>{username} History</h4>
+            <h4 className='text-center'> Your History</h4>
             <div className='col-2'>
                 <button onClick={onBack} className='btn btn-primary mb-3'>Back</button>
             </div>

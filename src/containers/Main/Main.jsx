@@ -1,9 +1,9 @@
 // Main.jsx
 
-import './main.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { Hero, Signup, Userprofile, Dashboard, Settings, HistoryAll, PongGame, MemoryGame, ErrorPage } from '../../containers';
 import { useState } from 'react';
+import './main.css';
 
 const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, handleSignup, handleGoToDashboard, lang, setLang, sound, setSound }) => {
     const [step, setStep] = useState({

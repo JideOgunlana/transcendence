@@ -1,7 +1,7 @@
-import './memoryGame.css';
 import React from 'react';
 import { MemoryMulti, MemorySingle, MemoryTournament } from './';
 import { Unauthorized } from '../../../containers'
+import './memoryGame.css';
 
 
 const MemoryGame = ({ step }) => {

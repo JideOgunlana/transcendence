@@ -1,9 +1,6 @@
-import './memoryGameMenu.css';
 
 import { NextBtn, OptionBtn } from '../../components';
-import { useState } from 'react';
-
-
+import './memoryGameMenu.css';
 
 
 const MemoryGameMenu = ({handleNextBtnClick, handleMemoryOptionsChange, step}) => {

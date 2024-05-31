@@ -1,9 +1,6 @@
-import './pongGameMenu.css';
 
 import { NextBtn, OptionBtn } from '../../components';
-import { useState } from 'react';
-
-
+import './pongGameMenu.css';
 
 
 const PongGameMenu = ({handleNextBtnClick, handlePongOptionsChange, step}) => {

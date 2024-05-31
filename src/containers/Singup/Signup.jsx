@@ -169,7 +169,7 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                 </div>
                 <div className='cust-text-13 signupsection--form-selectUser mt-4 mb-4' onClick={handleGoToDashboard}>
                     Already have a user? 
-                    <Link to='/dashboard'> <span className='link clickable'>Go to Dashboard</span></Link>
+                    <Link to='/dashboard'> <span className='customLink clickable'>Go to Dashboard</span></Link>
                 </div>
             </div>
             <div className='signupSection--form--line mx-auto'></div>

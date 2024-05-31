@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { userIcon } from '../../assets/';
 import { Unauthorized } from '../../containers'
+import { userIcon } from '../../assets/';
 import './userprofile.css';
 
 const Userprofile = ({ handleGoToDashboard }) => {
@@ -36,7 +36,7 @@ const Userprofile = ({ handleGoToDashboard }) => {
                 </div>
             </div>
             <div 
-                className='link cust-text-13 mt-3 clickable'
+                className='customLink cust-text-13 mt-3 clickable'
                 onClick={handleGoToDashboard}
             >
                 <Link to='/dashboard'>
