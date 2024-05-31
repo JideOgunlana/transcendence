@@ -1,5 +1,15 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from rest_framework import generics
+from .models import GameUser
+from .serializers import GameUserSerializer, GameUserCreateUpdateSerializer
 
-def index(request):
-    return render(request, "pong/index.html")
+class GameUserListCreateView(generics.ListCreateAPIView):
+    queryset = GameUser.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return GameUserCreateUpdateSerializer
+        return GameUserSerializer
+
+class GameUserRetrieveUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = GameUser.objects.all()
+    serializer_class = GameUserCreateUpdateSerializer

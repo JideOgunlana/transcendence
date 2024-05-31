@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
+from .views import GameUserListCreateView, GameUserRetrieveUpdateView
 
 urlpatterns = [
-	path("", views.index, name="index"),
+    path('users/', GameUserListCreateView.as_view(), name='user-list-create'),
+    path('users/<int:pk>/', GameUserRetrieveUpdateView.as_view(), name='user-detail-update'),
 ]
