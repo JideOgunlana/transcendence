@@ -19,7 +19,7 @@ const MemoryGame = ({ step }) => {
 
     return (
 
-        <div>
+        <div className='memoryGame d-grid align-content-center'>
             {
                 initialSelectedPlayers.length >= 1 ? 
                 <>

@@ -4,7 +4,7 @@ import './unauthorized.css';
 const Unauthorized = () => {
 	return (
 		<div>
-			You are not authorized to view this page
+			<p className='text-center'>You are not authorized to view this page</p>
 		</div>
 	)
 }

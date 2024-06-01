@@ -87,6 +87,7 @@ button:focus-visible {
   --custom-red-error: #F22C3D;
   --custom-greyGreen: #7191A5;
   --custom-green-win: #0BB32A;
+  --g: rgba(158,169,186,1);
 }
 
 
@@ -148,4 +149,10 @@ body {
 
 a {
   text-decoration: none;
+}
+
+
+.backBtn button {
+  background-color: var(--custom-grey);
+  border: none;
 }

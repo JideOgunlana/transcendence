@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { generateTiles } from '../../../utils/memoryHelper';
 import axios from 'axios';
+import { closeIcon } from '../../../assets/';
 
-const MemoryMulti = ({gridSize, theme, selectedPlayers}) => {
+
+const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
     const [tiles, setTiles] = useState([]);
     const [flippedTiles, setFlippedTiles] = useState([]);
     const [matchedTiles, setMatchedTiles] = useState([]);
@@ -45,7 +47,7 @@ const MemoryMulti = ({gridSize, theme, selectedPlayers}) => {
             } else {
                 setTimeout(() => {
                     setFlippedTiles([]);
-                        setCurrentPlayer(prev => (prev + 1) % selectedPlayers.length);
+                    setCurrentPlayer(prev => (prev + 1) % selectedPlayers.length);
                 }, 1000);
             }
         }
@@ -62,7 +64,6 @@ const MemoryMulti = ({gridSize, theme, selectedPlayers}) => {
     useEffect(() => {
         console.log(flippedTiles.length);
         if (matchedTiles.length === tiles.length && tiles.length > 0) {
-
             determineWinner();
         }
     }, [matchedTiles, tiles.length]);
@@ -70,13 +71,15 @@ const MemoryMulti = ({gridSize, theme, selectedPlayers}) => {
     const determineWinner = () => {
         const maxPoints = Math.max(...points);
         const winners = selectedPlayers.filter((_, index) => points[index] === maxPoints);
-        console.log('Here -in determine winner-',winners)
+        console.log('Here -in determine winner-', winners)
         if (winners.length === 1) {
             setWinner(winners[0].username);
             updateMultiPlayerResults(winners[0].username);
             setShowModal(true);
         } else {
-            alert('tie Breaker')
+            // alert('tie Breaker')
+            setWinner('tie');
+            setShowModal(true);
             replayGame();
         }
     };
@@ -148,7 +151,7 @@ const MemoryMulti = ({gridSize, theme, selectedPlayers}) => {
     };
 
     return (
-        <div className='memory-game'>
+        <div className='memoryGame--multi'>
             <div className={`memory-grid ${gridSize === '4x4' ? 'fourByFour' : 'sixBySix'}`}>
                 {tiles.map((tile, index) => (
                     <div
@@ -162,32 +165,51 @@ const MemoryMulti = ({gridSize, theme, selectedPlayers}) => {
             </div>
 
             <div className='current-player'>
-                Current Player: { getCurrentPlayerName() }
+                Current Player: {getCurrentPlayerName()}
             </div>
             <div className='points'>
                 {selectedPlayers.map((player, index) => (
                     <div key={index} className='player-points'>
                         {
                             <div>
-                                { player.username } : { points[index] } points
+                                {player.username} : {points[index]} points
                             </div>
                         }
                     </div>
                 ))}
             </div>
             {
-                showModal && 
+                showModal &&
                 (
-                    <div className='modal-content'>
-                        {
-                            <div>
-                                <h2>Winner: {winner}</h2>
-                                <button className='game-btn-enabled' onClick={() => window.location.href = '/dashboard'}>Play Again</button>
+                    <div className="modal fade show d-block" tabIndex="-1" role="dialog">
+                        <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header justify-content-between">
+                                    <h5 className="modal-title">
+                                        { winner === 'tie' ? "Tie Breaker" : "Game Over" }
+                                    </h5>
+                                    <div type="button" className="close" onClick={() => setShowModal(false)}>
+                                        <span aria-hidden="true" ><img src={closeIcon} alt='close' width={20} /></span>
+                                    </div>
+                                </div>
+                                <div className="modal-body">
+                                    <p className='text-center mb-0'>
+                                        {winner === 'tie' ? "Match is a Tie, game will restart" : `Congratulations ${winner}!`}
+                                    </p>
+                                </div>
+                                {
+                                    winner !== 'tie' && (
+                                        <div className="modal-footer justify-content-center">
+                                            <button type="button" className="game-btn-enabled" onClick={() => window.location.href = '/dashboard'}>Play Again</button>
+                                        </div>
+                                    )
+                                }
                             </div>
-                        }
+                        </div>
                     </div>
                 )
             }
+
         </div>
     );
 }

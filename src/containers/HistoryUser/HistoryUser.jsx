@@ -1,11 +1,11 @@
 import React from 'react';
 import './historyUser.css';
 import { Player } from '../../components';
-import { userIcon } from '../../assets';
+import { backBtnIcon, userIcon } from '../../assets';
 
 const PieChart = ({ games }) => {
     return (
-        <div className='statsCard'>
+        <div className='statsCard mx-'>
             Pong / Memory Pie Chart (Ratio of Total Pong games to Memory games)
         </div>
     );
@@ -13,7 +13,7 @@ const PieChart = ({ games }) => {
 
 const PongWinLoss = ({ winSingleGame, lossSingleGame, winMultiGame, lossMultiGame, totalSingleGame, totalMultiGame }) => {
     return (
-        <div className='statsCard'>
+        <div className='statsCard mx-'>
             Pong Game Wins and Losses:
             <div>
                 Total single games played: { totalSingleGame }
@@ -39,7 +39,7 @@ const PongWinLoss = ({ winSingleGame, lossSingleGame, winMultiGame, lossMultiGam
 
 const MemoryWinLoss = ({ winSingleGame, lossSingleGame, winMultiGame, lossMultiGame, totalSingleGame, totalMultiGame }) => {
     return (
-        <div className='statsCard'>
+        <div className='statsCard mx-'>
             Memory Game Wins and Losses:
             <div>
                 Total single games played: { totalSingleGame }
@@ -70,8 +70,10 @@ const HistoryUser = ({ userData, onBack }) => {
     return (
         <div className='historyUser d-flex gap-5 mt-5 flex-column'>
             <h4 className='text-center'> Your History</h4>
-            <div className='col-2'>
-                <button onClick={onBack} className='btn btn-primary mb-3'>Back</button>
+            <div className='col-2 backBtn'>
+                <button onClick={onBack} className='btn btn-primary mb-3'>
+                    <img src={ backBtnIcon } alt="back" />
+                </button>
             </div>
             <div className='row col-12'>
                 <div className='historyUser--stats mt-3 col-12 row justify-content-center'>
@@ -81,7 +83,7 @@ const HistoryUser = ({ userData, onBack }) => {
                             username={ username }
                         />
                     </div>
-                    <div className='historyUser--stats-grid row gap-4 col-12 col-md-8'>
+                    <div className='historyUser--stats-grid row gap-4 col-12 col-md-8 justify-content-center'>
                         <PongWinLoss 
                             winSingleGame={userData.pong.singlePlayer['win']}
                             lossSingleGame={userData.pong.singlePlayer['loss']}

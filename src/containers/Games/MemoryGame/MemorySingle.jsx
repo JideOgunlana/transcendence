@@ -2,12 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import { generateTiles } from '../../../utils/memoryHelper';
 import defaults from '../../../utils/defaults';
 import axios from 'axios';
+import { closeIcon } from '../../../assets/';
 
 const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
     const [tiles, setTiles] = useState([]);
     const [flippedTiles, setFlippedTiles] = useState([]);
     const [matchedTiles, setMatchedTiles] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
     const [countdown, setCountdown] = useState(defaults.MEMORY_SINGLE_TIME);
     const [gameOver, setGameOver] = useState(false);
     const timerRef = useRef(null);
@@ -47,7 +49,7 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     loss: prevResult.memory_single_player.loss + 1,
                 },
             }));
-            alert(`Time's up! You didn't find all pairs.`);
+            setModalMessage(`Time's up! You didn't find all pairs.`);
             setShowModal(true);
         }
     }, [countdown]);
@@ -63,7 +65,7 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     win: prevResult.memory_single_player.win + 1,
                 },
             }));
-            alert(`Congratulations! You found all pairs with ${totalMoves} moves before time ran out.`);
+            setModalMessage(`Congratulations! You found all pairs with ${totalMoves} moves before time ran out.`);
             setShowModal(true);
         }
     }, [matchedTiles, tiles.length]);
@@ -120,7 +122,7 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
     };
 
     return (
-        <div className='memory-game'>
+        <div className='memoryGame--single'>
             <div className={`memory-grid ${gridSize === '4x4' ? 'fourByFour' : 'sixBySix'}`}>
                 {tiles.map((tile, index) => (
                     <div
@@ -144,10 +146,25 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     </div>
                 ))}
             </div>
+
+            {/* Bootstrap Modal */}
             {showModal && (
-                <div className='modal-content'>
-                    <div>
-                        <button className='game-btn-enabled' onClick={() => window.location.href = '/dashboard'}>Play Again</button>
+                <div className="modal fade show d-block" tabIndex="-1" role="dialog">
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header justify-content-between">
+                                <h5 className="modal-title">Game Over</h5>
+                                <div type="button" className="close" onClick={() => setShowModal(false)}>
+                                    <span aria-hidden="true" ><img src={ closeIcon } width={20} /></span>
+                                </div>
+                            </div>
+                            <div className="modal-body">
+                                <p className='text-center mb-0'>{ modalMessage }</p>
+                            </div>
+                            <div className="modal-footer justify-content-center">
+                                <button type="button" className="game-btn-enabled" onClick={() => window.location.href = '/dashboard'}>Play Again</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

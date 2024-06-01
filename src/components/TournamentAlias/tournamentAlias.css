@@ -1,11 +1,7 @@
 .tournamentAlias {
-
-    .modal-content {
-        border: 1px solid var(--custom-white)
-    }
-
     .modal-content {
         background-color: var(--custom-grey);
+        border: 1px solid var(--custom-white)
     }
 
     .modal-header {
