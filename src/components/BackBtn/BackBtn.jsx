@@ -4,7 +4,7 @@ const BackBtn = ({handleBackBtnClick}) => {
     return (
         <div className="backBtn">
             <button 
-                className='btn btn-primary clickable'
+                className='btn btn-secondary clickable'
                 onClick={handleBackBtnClick}>
                 <img src={ backBtnIcon } alt="back" />
             </button>

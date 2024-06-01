@@ -1,6 +1,7 @@
 
 import GameSelect from '../../components/GameSelect/GameSelect';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { footerBefore, rightArrow } from '../../assets';
 import './hero.css';
 
@@ -9,15 +10,16 @@ const Hero = ({handleSignup}) => {
 
     const handlePongOptionsChange = () => {}
     const handleMemoryOptionsChange = () => {}
+    const { t } = useTranslation();
 
     return (
         <div className='heroSection d-grid gap-5'>
             <div className="heroSection-header">
                 <h1>
-                    Experience the fun 
+                    { t('experience the fun of gaming') }
                 </h1>
                 <h1>
-                    of gaming
+                    { t('of gaming') }
                 </h1>
             </div>
             <GameSelect 
@@ -30,7 +32,9 @@ const Hero = ({handleSignup}) => {
                         className='heroSection-signup--btn game-btn-enabled clickable cust-text-13 justify-content-around'
                         onClick={handleSignup}
                         >
-                        <span>SignUp</span>
+                        <span>
+                            { t('signup') }
+                        </span>
                         <img src={rightArrow} />
                     </button>
                 </Link>

@@ -3,10 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { signupFormValid, checkNameExists, emailValid } from '../../utils/helper';
 import defaults from '../../utils/defaults';
+import { useTranslation } from 'react-i18next';
+
 import './signup.css';
 
 const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
 
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [signUpFormData, setSignUpFormData] = useState({
         username: '',
@@ -101,35 +104,38 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
     return (
         <div className='signupSection align-content-center'>
             <div className='signupSection--form mx-auto d-flex flex-column align-items-center'>
-                <h3 className='mb-1'>Create User</h3>
+                <h3 className='mb-1'> {t('create user')} </h3>
                 <div className='custom-input'>
                     <div className={`signupSection--form--error cust-text-13 ${usernameInputState.isDuplicate || !usernameInputState.value ? 'showInputErrMsg' : ''}`}>
                         {usernameInputState.isDuplicate ? 
                         <div className='signupErrDuplicateUser d-flex align-items-end mt-3'>
-                            <span>username is already taken</span>
+                            <span>
+                                { t('username is already taken') }
+                            </span>
                         </div>
                         :
                         <div className='signupErrList mt-3'>
-                            <span>
-                                * username must be between 2 to 20 characters 
-                            </span>
-                            <br />
-                            <span>
-                                * username must not have trailing or leading space
-                            </span>
-                            <br />
-                            <span>
-                                * username should contain only letters / numbers
-                            </span>
-                            <br />
-                            <span>
-                                * username should start with a letter
-                            </span>
+                            <ul>
+                                <li className='mb-2 mx-auto'>
+                                    { t('username must be between 2 to 20 characters') }
+                                </li>
+                                <li className='mb-2 mx-auto'>
+                                    { t('username must not have trailing or leading space') }
+                                </li>
+                                <li className='mb-2 mx-auto'>
+                                    { t('username should contain only letters / numbers') }
+                                </li>
+                                <li className='mb-2 mx-auto'>
+                                    { t('username should start with a letter') }
+                                </li>
+                            </ul>
                         </div>
                         }
                     </div>
                     <br />
-                    <label>Username</label>
+                    <label>
+                        {  t('username') }
+                    </label>
                     <input
                         type='text'
                         name='username'
@@ -143,10 +149,10 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                 </div>
                 <div className='custom-input'>
                     <span className={`signupSection--form--error cust-text-13 ${!emailInputState ? 'showInputErrMsg' : ''}`}>
-                        Email is not valid
+                        { t('email is not valid') }
                     </span>
                     <br />
-                    <label>Email</label>
+                    <label> { t('email') } </label>
                     <br />
                     <input
                         type='email'
@@ -164,12 +170,12 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                         className='game-btn-enabled signupSection--form-btn clickable'
                         onClick={handleSubmit}
                     >
-                        Sign Up
+                        {  t('signup') }
                     </button>
                 </div>
                 <div className='cust-text-13 signupsection--form-selectUser mt-4 mb-4' onClick={handleGoToDashboard}>
-                    Already have a user? 
-                    <Link to='/dashboard'> <span className='customLink clickable'>Go to Dashboard</span></Link>
+                    { t('already have a user') }?
+                    <Link to='/dashboard'> <span className='customLink clickable'>{ t('go to Dashboard') }</span></Link>
                 </div>
             </div>
             <div className='signupSection--form--line mx-auto'></div>

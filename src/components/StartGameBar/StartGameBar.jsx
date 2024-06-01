@@ -88,7 +88,7 @@ const StartGameBar = ({ step, setStep }) => {
                 step.pong.selected && 
                 <>
                     <div className='startGameBar--title'>
-                        <h4 className=''>
+                        <h4 className='text-center'>
                             { 
                                 `Pong - ${step.pong.mode}`
                             }
@@ -118,7 +118,7 @@ const StartGameBar = ({ step, setStep }) => {
                 step.memory.selected &&
                 <>
                     <div className='startGameBar--title'>
-                        <h4 className=''>
+                        <h4 className='text-center'>
                             {
                                 `Memory - ${step.memory.mode}`
                             }

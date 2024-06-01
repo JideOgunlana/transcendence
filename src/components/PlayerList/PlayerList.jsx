@@ -75,7 +75,7 @@ const PlayerList = ({ step, setStep }) => {
                 console.log(fetchedUsers);
             } catch (error) {
                 console.error('Error fetching users:', error);
-                return ;
+                return;
             }
         };
         fetchData();
@@ -95,7 +95,9 @@ const PlayerList = ({ step, setStep }) => {
                     (() => {
                         try {
                             if (users.length >= 1) {
-                                return users.map((user, index) => (
+                                const sortedUsers = [...users].sort((a, b) => a.username.localeCompare(b.username));
+
+                                return sortedUsers.map((user, index) => (
                                     <Player
                                         key={index}
                                         userImg={userIcon}
@@ -104,15 +106,14 @@ const PlayerList = ({ step, setStep }) => {
                                         onClick={() => handleUserSelect(user)}
                                     />
                                 ));
-                            }
-                            else {
+                            } else {
                                 return (
                                     <div>
                                         <p>
-                                            There are no users, Click on Signup to create a user 
+                                            There are no users, Click on Signup to create a user
                                         </p>
                                     </div>
-                                )
+                                );
                             }
                         } catch (error) {
                             console.error('Error mapping users:', error);

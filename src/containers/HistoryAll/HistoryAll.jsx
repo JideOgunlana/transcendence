@@ -91,8 +91,10 @@ const HistoryAll = () => {
                                     {error}
                                 </div>
                             ) : (
-                                userData && userData.length !== 0? 
-                                userData.map(user => (
+                                userData && userData.length !== 0 ? 
+                                [ ...userData ]
+                                .sort( (a, b) => a.username.localeCompare(b.username) )
+                                .map(user => (
                                     <HistoryColumn 
                                         key={user.id} 
                                         userCol={'pong'} 
@@ -114,7 +116,9 @@ const HistoryAll = () => {
                                 </div>
                             ) : (
                                 userData && userData.length !== 0 ? 
-                                userData.map(user => (
+                                [ ...userData ]
+                                .sort( (a, b) => a.username.localeCompare(b.username) )
+                                .map(user => (
                                     <HistoryColumn key={user.id} 
                                         userCol={'memory'} 
                                         userData={user} 

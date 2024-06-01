@@ -1,7 +1,7 @@
 .startGameBar {
     /* border: 2px solid red; */
     height: 320px;
-    width: 320px;
+    width: 360px;
     border-radius: 10px;
     background-color: var(--custom-darkGrey-card);
     display: grid;

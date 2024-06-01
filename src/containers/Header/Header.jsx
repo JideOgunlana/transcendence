@@ -1,12 +1,13 @@
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { transcendLogo, settingsIcon, navBarToggle } from '../../assets';
 import './header.css';
 
 
 import { Link } from 'react-router-dom';
 
-const Header = ({ handleSignup, handleLogoClick, resetDashboardStep }) => {
+const Header = ({ handleSignup, handleLogoClick, resetDashboardStep}) => {
 
     const [linkActive, setLinkActive] = useState([ false, false ]);
     const handleActive = (tab) => {
@@ -16,6 +17,7 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep }) => {
             :
             setLinkActive([false, false]);
     }
+    const { t } = useTranslation();
     return (
         <>
             <nav className="navbar navbar-expand-lg">
@@ -33,7 +35,9 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep }) => {
                                     <Link to="/dashboard" 
                                         onClick={resetDashboardStep} 
                                         className='clickable'>
-                                            Dashboard
+                                            {
+                                                t('dashboard')
+                                            }
                                     </Link>
                                 </div>
                             </li>
@@ -44,7 +48,9 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep }) => {
                                     <Link to="/history" 
                                         onClick={resetDashboardStep} 
                                         className='clickable'>
-                                            History
+                                            {
+                                                t('history')
+                                            }
                                     </Link>
                                 </div>
                             </li>
@@ -57,7 +63,7 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep }) => {
                             <Link to="/signup" 
                                 className='game-btn-enabled right-nav-bar--signup-btn clickable me-4' 
                                 onClick={ () => { handleSignup, handleActive('') } }>
-                                    SignUp
+                                   { t('signup') }
                             </Link>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ export { default as  closeIcon } from './svg/close.svg';
 export { default as  deIcon } from './svg/de.svg';
 export { default as  engIcon } from './svg/eng.svg';
 export { default as  espIcon } from './svg/esp.svg';
+export { default as ngIcon } from './svg/ng.svg';
 export { default as footerBefore} from  './svg/footerBefore.svg';
 export { default as  githubIcon } from './svg/github.svg';
 export { default as  languageIcon } from './svg/language.svg';

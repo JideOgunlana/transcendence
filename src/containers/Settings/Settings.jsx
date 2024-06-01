@@ -1,6 +1,6 @@
 // Settings.js
 import { useTranslation } from 'react-i18next';
-import { soundIcon, languageIcon, engIcon, deIcon, espIcon } from '../../assets';
+import { soundIcon, languageIcon, engIcon, deIcon, espIcon, ngIcon } from '../../assets';
 import './settings.css';
 
 const SettingsBtn = ({ btnClass, isActive, option, val, handleSettingsClick }) => {
@@ -19,7 +19,7 @@ const Settings = ({lang, setLang, sound, setSound}) => {
 
 
     const handleSettingsClick = (option) => {
-        if (['en', 'de', 'es'].includes(option)) {
+        if (['en', 'de', 'es', 'ng'].includes(option)) {
             setLang(option);
             i18n.changeLanguage(option);
         } 
@@ -92,6 +92,16 @@ const Settings = ({lang, setLang, sound, setSound}) => {
                                 val={t('Español')}
                             />
                             <img src={espIcon} />
+                        </div>
+                        <div className='d-flex gap-4 align-items-center mb-2'>
+                            <SettingsBtn
+                                btnClass='optionBtnLarge'
+                                isActive={lang === 'ng'}
+                                handleSettingsClick={handleSettingsClick}
+                                option='ng'
+                                val={t('Yoruba')}
+                            />
+                            <img src={ngIcon} />
                         </div>
                     </div>
                 </div>

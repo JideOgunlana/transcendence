@@ -12,6 +12,7 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
     const [modalMessage, setModalMessage] = useState('');
     const [countdown, setCountdown] = useState(defaults.MEMORY_SINGLE_TIME);
     const [gameOver, setGameOver] = useState(false);
+    const [showStartModal, setShowStartModal] = useState(true);
     const timerRef = useRef(null);
     const [totalFlips, setTotalFlips] = useState(0);
     const [totalMoves, setTotalMoves] = useState(0);
@@ -30,12 +31,16 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
     }, [theme, gridSize]);
 
     useEffect(() => {
-        timerRef.current = setInterval(() => {
-            setCountdown(prev => prev - 1);
-        }, 1000);
+        if (showStartModal) {
+            clearInterval(timerRef.current);
+        } else {
+            timerRef.current = setInterval(() => {
+                setCountdown(prev => prev - 1);
+            }, 1000);
+        }
 
         return () => clearInterval(timerRef.current);
-    }, []);
+    }, [showStartModal]);
 
     useEffect(() => {
         if (countdown <= 0) {
@@ -121,6 +126,10 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
         }
     };
 
+    const startGame = () => {
+        setShowStartModal(false);
+    };
+
     return (
         <div className='memoryGame--single'>
             <div className={`memory-grid ${gridSize === '4x4' ? 'fourByFour' : 'sixBySix'}`}>
@@ -147,7 +156,29 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                 ))}
             </div>
 
-            {/* Bootstrap Modal */}
+            {/* Initial Start Modal */}
+            {showStartModal && (
+                <div className="modal fade show d-block" tabIndex="-1" role="dialog">
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header justify-content-between">
+                                <h5 className="modal-title">Start Game</h5>
+                                <div type="button" className="close" onClick={() => setShowStartModal(false)}>
+                                    <span aria-hidden="true" ><img src={ closeIcon } width={20} /></span>
+                                </div>
+                            </div>
+                            <div className="modal-body">
+                                <p className='text-center mb-0'>You have {defaults.MEMORY_SINGLE_TIME} seconds to find all pairs. Are you ready?</p>
+                            </div>
+                            <div className="modal-footer justify-content-center">
+                                <button type="button" className="game-btn-enabled" onClick={startGame}>Start Game</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* End Game Modal */}
             {showModal && (
                 <div className="modal fade show d-block" tabIndex="-1" role="dialog">
                     <div className="modal-dialog modal-dialog-centered" role="document">

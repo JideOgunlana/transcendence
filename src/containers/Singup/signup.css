@@ -48,7 +48,12 @@
 
     .signupErrDuplicateUser,
     .signupErrList {
-        height: 100px;
+        height: 150px;
+        
+        ul {
+            width: 440px;
+            padding: 0;
+        }
     }
 }
 

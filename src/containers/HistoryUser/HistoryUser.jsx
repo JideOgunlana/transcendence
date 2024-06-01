@@ -71,7 +71,7 @@ const HistoryUser = ({ userData, onBack }) => {
         <div className='historyUser d-flex gap-5 mt-5 flex-column'>
             <h4 className='text-center'> Your History</h4>
             <div className='col-2 backBtn'>
-                <button onClick={onBack} className='btn btn-primary mb-3'>
+                <button onClick={onBack} className='btn btn-secondary mb-3'>
                     <img src={ backBtnIcon } alt="back" />
                 </button>
             </div>

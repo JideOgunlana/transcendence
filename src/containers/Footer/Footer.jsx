@@ -1,8 +1,12 @@
 
+import { useTranslation } from 'react-i18next';
 import { transcendLogo, githubIcon } from '../../assets';
 import './footer.css';
 
-const Footer = props => {
+const Footer = () => {
+
+    const { t } = useTranslation();
+
     return (
         <footer className="d-flex flex-column justify-content-center align-items-center gap-1 p-4">
             <div className='mb-2 d-flex align-items-center'>
@@ -11,7 +15,7 @@ const Footer = props => {
             <div className='cust-text-13 d-flex align-items-center'>
                 <div><a href='#'> <img src={githubIcon} /> </a></div>
                 <span className='ms-4'>
-                    The 😎 Team
+                    😎 { t('team') }
                 </span>
             </div>
             <div className='cust-text-13'>
