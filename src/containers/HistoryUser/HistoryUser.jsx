@@ -1,7 +1,8 @@
 import React from 'react';
-import './historyUser.css';
 import { Player } from '../../components';
+import { useTranslation } from 'react-i18next'; 
 import { backBtnIcon, userIcon } from '../../assets';
+import './historyUser.css';
 
 const PieChart = ({ games }) => {
     return (
@@ -66,13 +67,16 @@ const MemoryWinLoss = ({ winSingleGame, lossSingleGame, winMultiGame, lossMultiG
 
 
 const HistoryUser = ({ userData, onBack }) => {
+
+    const { t } = useTranslation();
     const { username } = userData;
     return (
         <div className='historyUser d-flex gap-5 mt-5 flex-column'>
-            <h4 className='text-center'> Your History</h4>
+            <h4 className='text-center'>{ t('your game history') }</h4>
             <div className='col-2 backBtn'>
-                <button onClick={onBack} className='btn btn-secondary mb-3'>
+                <button onClick={onBack} className='btn btn-secondary mb-3 d-flex align-items-center'>
                     <img src={ backBtnIcon } alt="back" />
+                    <span> { t('back') } </span>
                 </button>
             </div>
             <div className='row col-12'>

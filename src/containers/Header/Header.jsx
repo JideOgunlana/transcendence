@@ -29,11 +29,9 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep}) => {
                     <div className="collapse navbar-collapse" id="navbarText">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item text-center">
-                                <div className={ `customNavLink nav-link ${ linkActive[0] ? 'active' : '' } ` }
-                                    onClick={ () => { handleActive('dashboard') } }
-                                >
+                                <div className={ `customNavLink nav-link ${ linkActive[0] ? 'active' : '' } ` }>
                                     <Link to="/dashboard" 
-                                        onClick={resetDashboardStep} 
+                                        onClick={ () => { resetDashboardStep, handleActive('dashboard') }}
                                         className='clickable'>
                                             {
                                                 t('dashboard')
@@ -42,11 +40,9 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep}) => {
                                 </div>
                             </li>
                             <li className="nav-item text-center">
-                                <div className={ `customNavLink nav-link ${ linkActive[1] ? 'active' : '' } ` }
-                                    onClick= { () => { handleActive('history') } }
-                                >
+                                <div className={ `customNavLink nav-link ${ linkActive[1] ? 'active' : '' } ` }>
                                     <Link to="/history" 
-                                        onClick={resetDashboardStep} 
+                                        onClick={ () => { resetDashboardStep, handleActive('history') }}
                                         className='clickable'>
                                             {
                                                 t('history')

@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TournamentAlias } from '../../components';
 import { aliasNameValid } from '../../utils/helper';
 import { useNavigate } from 'react-router-dom';
 import './startGameBar.css';
 
 const StartGameBar = ({ step, setStep }) => {
+
+    const { t } = useTranslation();
     const [isStartDisabled, setIsStartDisabled] = useState(true);
     const [showAliasModal, setShowAliasModal] = useState(false);
     const [aliases, setAliases] = useState([]);
@@ -12,7 +15,7 @@ const StartGameBar = ({ step, setStep }) => {
     const navigate = useNavigate(); // Use useNavigate for programmatic navigation
 
     const handleStartClick = () => {
-        if ((step.pong.selected && step.pong.mode === 'tournament') || 
+        if ((step.pong.selected && step.pong.mode === 'tournament') ||
             (step.memory.selected && step.memory.mode === 'tournament')) {
             if (aliases.length < 4) {
                 setShowAliasModal(true);
@@ -33,7 +36,7 @@ const StartGameBar = ({ step, setStep }) => {
     const handleAliasSubmit = (aliases) => {
         // Check if all aliases are filled and meet the criteria
         const aliasIsValid = aliasNameValid(aliases);
-    
+
         if (aliasIsValid) {
             setAliases(aliases);
             setShowAliasModal(false);
@@ -85,24 +88,31 @@ const StartGameBar = ({ step, setStep }) => {
     return (
         <div className='startGameBar p-3 mx-auto'>
             {
-                step.pong.selected && 
+                step.pong.selected &&
                 <>
                     <div className='startGameBar--title'>
                         <h4 className='text-center'>
-                            { 
-                                `Pong - ${step.pong.mode}`
+                            {
+                                `Pong - 
+                                ${step.pong.mode === 'singlePlayer' ? t('single')
+                                    :
+                                    step.pong.mode === 'tournament' ? t('tournament')
+                                        :
+                                        '1v1'
+                                }
+                                `
                             }
                         </h4>
-                        <h5 className='m-3 gameRequirementsInfo'>{'* i18n.requirements'}</h5>
+                        <h5 className='m-3 gameRequirementsInfo'>* { t('requirements') }</h5>
                         <h5>
                             {
-                                `${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${'i18n SELECTED'}`
+                                `${step.pong.selectedPlayers ? step.pong.selectedPlayers.length : 0} / ${getMaxPlayers(step.pong.mode)} ${t('selected')}`
                             }
                         </h5>
                     </div>
                     <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
-                        <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
-                            {'i18n.Start'}
+                        <button className={isStartDisabled ? `game-btn-disabled` : `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
+                            { t('start') }
                         </button>
                     </div>
                     <TournamentAlias
@@ -120,19 +130,26 @@ const StartGameBar = ({ step, setStep }) => {
                     <div className='startGameBar--title'>
                         <h4 className='text-center'>
                             {
-                                `Memory - ${step.memory.mode}`
+                                `Memory - 
+                                ${step.memory.mode === 'singlePlayer' ? t('single')
+                                    :
+                                    step.memory.mode === 'tournament' ? t('tournament')
+                                        :
+                                        '1v1'
+                                }
+                                `
                             }
                         </h4>
-                        <h5 className='m-3 gameRequirementsInfo'>{'* i18n.requirements'}</h5>
+                        <h5 className='m-3 gameRequirementsInfo'>* { t('requirements') }</h5>
                         <h5>
                             {
-                                `${step.memory.selectedPlayers ? step.memory.selectedPlayers.length : 0} / ${getMaxPlayers(step.memory.mode)} ${'i18n SELECTED'}`
+                                `${step.memory.selectedPlayers ? step.memory.selectedPlayers.length : 0} / ${getMaxPlayers(step.memory.mode)} ${ t('selected') }`
                             }
                         </h5>
                     </div>
                     <div className='startGameBar--btn d-flex justify-content-center align-items-center'>
-                        <button className={isStartDisabled ? `game-btn-disabled`: `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
-                            {'i18n.Start'}
+                        <button className={isStartDisabled ? `game-btn-disabled` : `game-btn-enabled`} onClick={handleStartClick} disabled={isStartDisabled}>
+                            { t('start') }
                         </button>
                     </div>
                     <TournamentAlias

@@ -1,8 +1,10 @@
 
+import { useTranslation } from 'react-i18next';
 import './optionBtn.css';
 
 const OptionBtn = ({btnClass, handlePongOptionsChange, handleMemoryOptionsChange, step, option, val}) => {
 
+    const { t } = useTranslation();
     const isActive = (
         (step.pong.selected && (step.pong.theme === option || step.pong.mode === option)) ||
         (step.memory.selected && (step.memory.theme === option || step.memory.mode === option || step.memory.gridSize === option))
@@ -31,8 +33,10 @@ const OptionBtn = ({btnClass, handlePongOptionsChange, handleMemoryOptionsChange
             className={`clickable ${btnClass}  ${isActive ? 'optionBtn-active' : 'optionBtn-inactive'}`}
             onClick={handleClick}
             id={option}
-        >{val}</div>
-    );
+            >
+            { t(val) }
+        </div>
+);
 }
 
 export default OptionBtn;

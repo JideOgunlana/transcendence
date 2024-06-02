@@ -1,16 +1,21 @@
 
+
+import { useTranslation } from 'react-i18next';
 import { BackBtn, GameSelect, NextBtn } from '../../components';
 import { PongGameMenu, MemoryGameMenu, PongGamePlayerList, MemoryGamePlayerList, MemoryGame } from '../../containers';
 import './dashboard.css';
 
 const Dashboard = ({ step, setStep, handleNextBtnClick, handleBackBtnClick, handlePongOptionsChange, handleMemoryOptionsChange }) => {
+
+    const { t } = useTranslation();
+
     return (
         <div className='dashboard d-flex'>
             {
                 step.stepNumber === 0 && (
                     <div className='dashboard--mainPage flex-fill'>
                         <div className='dashboard--mainPage--selectGame'>
-                            <h2 className='mb-5 text-center'>i18n Select a Game</h2>
+                            <h2 className='mb-5 text-center'> {t('select a game')} </h2>
                             <GameSelect 
                                 handlePongOptionsChange={handlePongOptionsChange} 
                                 handleMemoryOptionsChange={handleMemoryOptionsChange} 

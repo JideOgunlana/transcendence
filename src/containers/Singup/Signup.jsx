@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { signupFormValid, checkNameExists, emailValid } from '../../utils/helper';
 import defaults from '../../utils/defaults';
-import { useTranslation } from 'react-i18next';
 
 import './signup.css';
 
@@ -97,7 +97,8 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
 
     const handleGoToUserProfile = () => {
         if (signupFormValid(signUpFormData.username) && emailValid(signUpFormData.email)) {
-            window.location.href = '/userprofile';
+            // window.location.href = '/userprofile';
+            navigate('/userprofile');
         }
     };
 

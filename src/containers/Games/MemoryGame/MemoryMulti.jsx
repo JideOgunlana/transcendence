@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { generateTiles } from '../../../utils/memoryHelper';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { generateTiles } from '../../../utils/memoryHelper';
 import { closeIcon } from '../../../assets/';
 
 
 const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
+
+    const navigate = useNavigate()
     const [tiles, setTiles] = useState([]);
     const [flippedTiles, setFlippedTiles] = useState([]);
     const [matchedTiles, setMatchedTiles] = useState([]);
@@ -200,7 +203,7 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
                                 {
                                     winner !== 'tie' && (
                                         <div className="modal-footer justify-content-center">
-                                            <button type="button" className="game-btn-enabled" onClick={() => window.location.href = '/dashboard'}>Play Again</button>
+                                            <button type="button" className="game-btn-enabled" onClick={() => navigate('/dashboard') }>Play Again</button>
                                         </div>
                                     )
                                 }

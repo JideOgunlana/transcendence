@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { generateTiles, generatePairs } from '../../../utils/memoryHelper';
 import { closeIcon } from '../../../assets/';
+import { useNavigate } from 'react-router-dom';
 
 const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
+
+    const navigate = useNavigate();
     const [tiles, setTiles] = useState([]);
     const [flippedTiles, setFlippedTiles] = useState([]);
     const [matchedTiles, setMatchedTiles] = useState([]);
@@ -206,7 +209,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
                                 {
                                     gameRound === 3 && winner !== 'tie' && (
                                     <div className="modal-footer justify-content-center">
-                                        <button type="button" className="game-btn-enabled" onClick={() => window.location.href = '/dashboard'}>Play Again</button>
+                                        <button type="button" className="game-btn-enabled" onClick={() => navigate('/dashboard') }>Play Again</button>
                                     </div>
                                     )
                                 }

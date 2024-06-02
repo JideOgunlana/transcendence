@@ -1,32 +1,57 @@
 
+import { useTranslation } from 'react-i18next'; 
 import { NextBtn, OptionBtn } from '../../components';
 import './pongGameMenu.css';
 
 
 const PongGameMenu = ({handleNextBtnClick, handlePongOptionsChange, step}) => {
 
+    const { t } = useTranslation();
 
     return (
         <div className='pongGameMenu'>
-            <h3 className='text-center mb-5'>Pong Menu</h3>
+            <h3 className='text-center mb-5'>Pong</h3>
+            <h3 className='text-center mb-5'>{ t('game menu') }</h3>
             <div className='pongGameMenu--card mx-auto justify-content-center align-items-center d-flex flex-column gap-5 p-4'>
                 <div className='gameTheme'>
                     <div className='gameTheme-header'>
-                        <h4 className=''>{'i18n.selectTheme'}</h4>
+                        <h4 className=''>{ t('select theme') }</h4>
                     </div>
                     <div className='gameTheme-options d-flex justify-content-around'>
-                        <OptionBtn btnClass='optionBtnMedium' handlePongOptionsChange={handlePongOptionsChange} step={step} option={'2D'} val={'2D'}/>
-                        <OptionBtn btnClass='optionBtnMedium' handlePongOptionsChange={handlePongOptionsChange} step={step} option={'3D'} val={'3D'}/>
+                        <OptionBtn 
+                            btnClass='optionBtnMedium' 
+                            handlePongOptionsChange={handlePongOptionsChange} 
+                            step={step} 
+                            option={'2D'} 
+                            val={'2D'}/>
+                        <OptionBtn 
+                            btnClass='optionBtnMedium' 
+                            handlePongOptionsChange={handlePongOptionsChange} 
+                            step={step} 
+                            option={'3D'} 
+                            val={'3D'}/>
                     </div>
                 </div>
                 <div className="gameMode">
                     <div>
-                        <h4>{'i18n.gameMode'}</h4>
+                        <h4>{ t('select mode') }</h4>
                     </div>
                     <div className='gameMode--options d-flex flex-column gap-4 align-items-center'>
-                        <OptionBtn btnClass='optionBtnLarge' handlePongOptionsChange={handlePongOptionsChange} step={step} option={'singlePlayer'} val={'i18n.Single'} />
-                        <OptionBtn btnClass='optionBtnLarge' handlePongOptionsChange={handlePongOptionsChange} step={step} option={'multiPlayer'} val={'i18n.multiplayer'}/>
-                        <OptionBtn btnClass='optionBtnLarge' handlePongOptionsChange={handlePongOptionsChange} step={step} option={'tournament'} val={'i18n.tournament'}/>
+                        <OptionBtn 
+                            btnClass='optionBtnLarge' 
+                            handlePongOptionsChange={handlePongOptionsChange} 
+                            step={step} option={'singlePlayer'}
+                            val={'single'} />
+                        <OptionBtn 
+                            btnClass='optionBtnLarge' 
+                            handlePongOptionsChange={handlePongOptionsChange} 
+                            step={step} option={'multiPlayer'}
+                            val={'1v1'}/>
+                        <OptionBtn 
+                            btnClass='optionBtnLarge' 
+                            handlePongOptionsChange={handlePongOptionsChange} 
+                            step={step} option={'tournament'}
+                            val={'tournament'}/>
                     </div>
                 </div>
                 <NextBtn handleNextBtnClick={handleNextBtnClick}/>

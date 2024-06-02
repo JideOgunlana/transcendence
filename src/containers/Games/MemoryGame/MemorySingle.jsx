@@ -3,8 +3,11 @@ import { generateTiles } from '../../../utils/memoryHelper';
 import defaults from '../../../utils/defaults';
 import axios from 'axios';
 import { closeIcon } from '../../../assets/';
+import { useNavigate } from 'react-router-dom';
 
 const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
+
+    const navigate = useNavigate();
     const [tiles, setTiles] = useState([]);
     const [flippedTiles, setFlippedTiles] = useState([]);
     const [matchedTiles, setMatchedTiles] = useState([]);
@@ -193,7 +196,7 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                                 <p className='text-center mb-0'>{ modalMessage }</p>
                             </div>
                             <div className="modal-footer justify-content-center">
-                                <button type="button" className="game-btn-enabled" onClick={() => window.location.href = '/dashboard'}>Play Again</button>
+                                <button type="button" className="game-btn-enabled" onClick={() => navigate('/dashboard') }>Play Again</button>
                             </div>
                         </div>
                     </div>

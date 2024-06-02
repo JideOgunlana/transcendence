@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Player } from '../../components';
 import { getUsers } from '../../__tests__/api';
 import axios from 'axios';
-import './playerList.css';
 import { userIcon } from '../../assets/';
+import './playerList.css';
 
 
 const PlayerList = ({ step, setStep }) => {
+
+    const { t } = useTranslation();
     const [users, setUsers] = useState([]);
     const [selectedPlayers, setSelectedPlayers] = useState([]);
 
@@ -85,10 +88,10 @@ const PlayerList = ({ step, setStep }) => {
     return (
         <div className='playerList'>
             <div className='playerList--heading mb-5'>
-                <h3 className='text-center '>{'i18n.Player List'}</h3>
+                <h3 className='text-center '>{ t('user list') }</h3>
             </div>
             <div className='playerList--info mb-5'>
-                <h5> <em>{'i18n.*Click on a user to select or unselect'} </em> </h5>
+                <h5> <em>* { t('click on a user to select or unselect') } </em> </h5>
             </div>
             <div className='playerList--players d-flex flex-wrap clickable'>
                 {
@@ -110,7 +113,7 @@ const PlayerList = ({ step, setStep }) => {
                                 return (
                                     <div>
                                         <p>
-                                            There are no users, Click on Signup to create a user
+                                            { t('there are no users, signup to create a user') }
                                         </p>
                                     </div>
                                 );

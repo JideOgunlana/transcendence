@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { HistoryUser } from '../../containers';
-import { userIcon } from '../../assets';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { userIcon } from '../../assets';
 import './historyAll.css';
 
 // import { getFakeUserData } from '../../__tests__/api';
 
 const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
+
     const handleClick = () => {
         onSelectUser(userData);
     };
@@ -51,6 +53,8 @@ const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
 };
 
 const HistoryAll = () => {
+
+    const { t } = useTranslation();
     const [selectedUser, setSelectedUser] = useState(null);
     const [userData, setUserData] = useState([]);
     const [error, setError] = useState(null);
@@ -82,9 +86,12 @@ const HistoryAll = () => {
     return (
         <>
             {!selectedUser ? (
-                <div className='historyAll d-flex justify-content-center mt-5'>
-                    <div className='historyAll-pong mt-5'>
-                        <h3 className='text-center mb-5'>Pong i18n.History</h3>
+                <div className='historyAll row justify-content-center mt-5'>
+                    <div className='col-12'>
+                        <h3 className='text-center'> { t('all user game history') } </h3>
+                    </div>
+                    <div className='historyAll-pong mt-5 col-12 col-md-8 col-lg-6'>
+                        <h3 className='text-center mb-5'>Pong</h3>
                         {
                             error ? (
                                 <div className='text-center'>
@@ -107,8 +114,8 @@ const HistoryAll = () => {
                             )
                         }
                     </div>
-                    <div className='historyAll-memory mt-5'>
-                        <h3 className='text-center mb-5'>Memory i18n.History</h3>
+                    <div className='historyAll-memory mt-5 col-12 col-md-8 col-lg-6'>
+                        <h3 className='text-center mb-5'>Memory</h3>
                         {
                             error ? (
                                 <div className='text-center'>
