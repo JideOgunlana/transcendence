@@ -2,11 +2,12 @@ import React from 'react';
 import { MemoryMulti, MemorySingle, MemoryTournament } from './';
 import { Unauthorized } from '../../../containers'
 import './memoryGame.css';
+import { useTranslation } from 'react-i18next';
 
 
 const MemoryGame = ({ step }) => {
 
-    // console.log(step.memory.selectedPlayers);
+    const { t } = useTranslation();
     const initialSelectedPlayers = (step.aliases.length > 0 && step.memory.mode === 'tournament') ? 
         step.aliases 
         : 
@@ -28,7 +29,7 @@ const MemoryGame = ({ step }) => {
                         <div>
                             <h3 className='text-center'> Memory </h3>
                             <div className='text-center'>
-                                <span> ~ Single Player ~ </span>
+                                <span> ~ { t('single') } ~ </span>
                             </div>
                             <MemorySingle
                                 gridSize={gridSize}
@@ -42,7 +43,7 @@ const MemoryGame = ({ step }) => {
                         <div>
                             <h3 className='text-center'> Memory </h3>
                             <div className='text-center'>
-                                <span> ~ Multi player ~ </span>
+                                <span> ~ 1v1 ~ </span>
                             </div>
                             <MemoryMulti 
                                 gridSize={gridSize}
@@ -56,7 +57,7 @@ const MemoryGame = ({ step }) => {
                         <div>
                             <h3 className='text-center'> Memory </h3>
                             <div className='text-center'>
-                                <span> ~ Tournament ~ </span>
+                                <span> ~ { t('tournament') } ~ </span>
                             </div>
                             <MemoryTournament 
                                 gridSize={gridSize}

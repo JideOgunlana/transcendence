@@ -17,15 +17,17 @@
         box-shadow: 8px 4px var(--custom-light-purple);
     }
 
-    .historyWin {
-        color: var(--custom-green-win)
-    }
+    
+}
 
-    .historyLoss {
-        color: var(--custom-red-error)
-    }
+.historyWin {
+    color: var(--custom-green-win)
+}
 
-    .historyTotal {
-        color: var(--custom-greyGreen)
-    }
+.historyLoss {
+    color: var(--custom-red-error)
+}
+
+.historyTotal {
+    color: var(--custom-greyGreen)
 }

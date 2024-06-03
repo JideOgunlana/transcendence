@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { generateTiles, generatePairs } from '../../../utils/memoryHelper';
 import { closeIcon } from '../../../assets/';
 import { useNavigate } from 'react-router-dom';
 
 const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
 
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [tiles, setTiles] = useState([]);
     const [flippedTiles, setFlippedTiles] = useState([]);
@@ -180,7 +182,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
             </div>
             {pairs.length > 0 && (
                 <>
-                    <div className='current-player'>Current Player: {getCurrentPlayerName()}</div>
+                    <div className='current-player'>{ t('current player') }: {getCurrentPlayerName()}</div>
                     <div className='points'>
                         {pairs[0].map((player, index) => (
                             <div key={index} className='player-points'>
@@ -197,7 +199,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
                             <div className="modal-content">
                                 <div className="modal-header justify-content-between">
                                     <h5 className="modal-title">
-                                        { winner === 'tie' ? "Tie Breaker" : gameRound === 3 ? "Game Over" : "Round Over" }
+                                        { winner === 'tie' ? `${ ('tie breaker') }` : gameRound === 3 ? `${ t('game over') }` : `${t('round over') }` }
                                     </h5>
                                     <div type="button" className="close" onClick={() => setShowModal(false)}>
                                         <span aria-hidden="true"><img src={ closeIcon } alt='close' width={20} /></span>

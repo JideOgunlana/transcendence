@@ -23,7 +23,7 @@ const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
                 { userData.username }
             </div>
             <div className='historyWin'>
-                <span> { t('wins') } &gt; </span>
+                <span> { t('wins') } </span>
                 <span className='btn btn-success'>
                 { 
                     userCol === 'pong' ? 
@@ -34,7 +34,7 @@ const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
                 </span>
             </div>
             <div className='historyLoss'>
-                <span> { t('losses') } &gt; </span>
+                <span> { t('losses') } </span>
                 <span className='btn btn-danger'>
                 { 
                     userCol === 'pong' ? 
@@ -45,7 +45,7 @@ const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
                 </span>
             </div>
             <div className='historyTotal'>
-                <span> { t('games played') } &gt; </span>
+                <span> { t('games played') } </span>
                 <span className='btn btn-secondary'>
                 { 
                     userCol === 'pong' ? 

@@ -1,37 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import { Player } from '../../components';
 import { useTranslation } from 'react-i18next';
-import { VictoryPie } from 'victory';
-import { backBtnIcon, brainIcon, pingPongIcon, pieChartIcon, userIcon } from '../../assets';
+import { Player } from '../../components';
+import { VictoryPie, VictoryTooltip } from 'victory';
+import { backBtnIcon, brainIcon, pingPongIcon, userIcon } from '../../assets';
 import './historyUser.css';
 
 const PieChart = ({ userData }) => {
+
+    const { t } = useTranslation();
     const graphicColor = ['#388087', '#6fb3b8', '#badfe7'];
     const totalPongGames = userData.pong.singlePlayer.total + userData.pong.multiPlayer.total;
     const totalMemoryGames = userData.memory.singlePlayer.total + userData.memory.multiPlayer.total;
     const totalGames = totalPongGames + totalMemoryGames;
     // Calculate percentages
-    const pongPercentage = totalGames > 0 ? parseInt((totalPongGames / totalGames) * 100) : 0;
-    const memoryPercentage = totalGames > 0 ? parseInt((totalMemoryGames / totalGames) * 100) : 0;
+    const pongPercentage = totalGames > 0 ? parseInt((totalPongGames / totalGames) * 100) : 40;
+    const memoryPercentage = totalGames > 0 ? parseInt((totalMemoryGames / totalGames) * 100) : 60;
 
-    const wantedGraphicData = [{ x: 'Pong', y: pongPercentage }, { x: 'Memory', y: memoryPercentage }];
-    const defaultGraphicData = [{ x: 'Pong', y: 0 }, { x: 'Memory', y: 0 }];
+    const wantedGraphicData = [
+        { x: 'Pong', y: pongPercentage, label: `${totalPongGames}/${totalPongGames} ${ t('games played') }` },
+        { x: 'Memory', y: memoryPercentage, label: `${totalMemoryGames}/${totalMemoryGames} ${ t('games played') }` }
+    ]; // Data that we want to display
+    const defaultGraphicData = [
+        { x: 'Pong', y: 0 },
+        { x: 'Memory', y: 100 }
+    ];
     const [graphicData, setGraphicData] = useState(defaultGraphicData);
-    
+
 
     useEffect(() => {
-      setGraphicData(wantedGraphicData);
+        setGraphicData(wantedGraphicData);
     }, []);
-    if (totalGames != 0 || totalGames == 0) {
+    if (totalGames) {
         return (
             <div className='statsCard'>
+                <div className='keyCell'>
+                    <div className='d-flex align-items-center justify-content-between'>Pong <div className='pongKeyCell'></div></div>
+                    <div className='d-flex align-items-center justify-content-between'>Memory <div className='memoryKeyCell'></div></div>
+                </div>
                 <VictoryPie
-                animate={{ easing: 'exp' }}
-                data={graphicData}
-                width={250}
-                height={250}
-                colorScale={graphicColor}
-                innerRadius={50}
+                    animate={{ easing: 'exp' }}
+                    data={graphicData}
+                    width={250}
+                    height={250}
+                    colorScale={graphicColor}
+                    innerRadius={50}
+                    labelComponent={
+                        <VictoryTooltip
+                            flyoutStyle={{ fill: 'black' }}
+                            style={{ fill: 'white', fontSize: 12, fontWeight: 'bold' }}
+                        />
+                    }
+                    style={{
+                        labels: {
+                            fill: "white",
+                            fontSize: 15,
+                            fontWeight: "bold"
+                        }
+                    }}
                 />
             </div>
         );
@@ -39,58 +64,82 @@ const PieChart = ({ userData }) => {
 };
 
 const PongWinLoss = ({ winSingleGame, lossSingleGame, winMultiGame, lossMultiGame, totalSingleGame, totalMultiGame }) => {
+
+    const { t } = useTranslation();
+
     return (
         <div className='statsCard'>
             <div>
-                <img src={pingPongIcon} alt='ping pong' />
+                <img src={pingPongIcon} alt='ping pong' /> Pong
             </div>
-            Pong Game Wins and Losses:
-            <div>
-                Total single games played: {totalSingleGame}
+            <div className='historySections mt-4 mx-auto'>
+                <div className='text-center mb-2'>
+                    { t('single') }
+                </div>
+                <div className='historyTotal'>
+                    { t('games played') }: {totalSingleGame}
+                </div>
+                <div className='historyWin'>
+                    {t('wins')}: {winSingleGame}
+                </div>
+                <div className='historyLoss'>
+                    { t('losses') }: {lossSingleGame}
+                </div>
             </div>
-            <div>
-                Single Player Wins: {winSingleGame}
-            </div>
-            <div>
-                Single Player Losses: {lossSingleGame}
-            </div>
-            <div>
-                Total Multi games played: {totalMultiGame}
-            </div>
-            <div>
-                Multi Player Wins: {winMultiGame}
-            </div>
-            <div>
-                Multi Player Losses: {lossMultiGame}
+            <div className='historySections mt-4 mx-auto'>
+                <div className='text-center mb-3'>
+                    1v1
+                </div>
+                <div className='historyTotal'>
+                    { t('games played') }: {totalMultiGame}
+                </div>
+                <div className='historyWin'>
+                    { t('wins') }: {winMultiGame}
+                </div>
+                <div className='historyLoss'>
+                    { t('losses') }: {lossMultiGame}
+                </div>
             </div>
         </div>
     );
 };
 
 const MemoryWinLoss = ({ winSingleGame, lossSingleGame, winMultiGame, lossMultiGame, totalSingleGame, totalMultiGame }) => {
+
+    const { t } = useTranslation();
+
     return (
         <div className='statsCard'>
             <div>
-                <img src={brainIcon} alt='ping pong' />
+                <img src={brainIcon} alt='ping pong' /> Memory
             </div>
-            Memory Game Wins and Losses:
-            <div>
-                Total single games played: {totalSingleGame}
+            <div className='historySections mt-4 mx-auto'>
+                <div className='text-center mb-2'>
+                    { t('single') }
+                </div>
+                <div className='historyTotal'>
+                    { t('games played') }: {totalSingleGame}
+                </div>
+                <div className='historyWin'>
+                    { t('wins') }: {winSingleGame}
+                </div>
+                <div className='historyLoss'>
+                    { t('losses') }: {lossSingleGame}
+                </div>
             </div>
-            <div>
-                Single Player Wins: {winSingleGame}
-            </div>
-            <div>
-                Single Player Losses: {lossSingleGame}
-            </div>
-            <div>
-                Total Multi games played: {totalMultiGame}
-            </div>
-            <div>
-                Multi Player Wins: {winMultiGame}
-            </div>
-            <div>
-                Multi Player Losses: {lossMultiGame}
+            <div className='historySections mt-4 mx-auto'>
+                <div className='text-center mb-3'>
+                    1v1
+                </div>
+                <div className='historyTotal'>
+                    { t('games played') }: {totalMultiGame}
+                </div>
+                <div className='historyWin'>
+                    { t('wins') }: {winMultiGame}
+                </div>
+                <div className='historyLoss'>
+                    { t('losses') }: {lossMultiGame}
+                </div>
             </div>
         </div>
     );
@@ -102,6 +151,7 @@ const HistoryUser = ({ userData, onBack }) => {
 
     const { t } = useTranslation();
     const { username } = userData;
+
     return (
         <div className='historyUser d-flex gap-5 mt-5 flex-column'>
             <h4 className='text-center'>{t('your game history')}</h4>

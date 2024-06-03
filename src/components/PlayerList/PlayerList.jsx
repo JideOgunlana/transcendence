@@ -75,7 +75,7 @@ const PlayerList = ({ step, setStep }) => {
                 const response = await axios.get('http://127.0.0.1:8000/pong/users/');
                 const fetchedUsers = response.data;
                 setUsers(fetchedUsers);
-                console.log(fetchedUsers);
+                // console.log(fetchedUsers);
             } catch (error) {
                 console.error('Error fetching users:', error);
                 return;

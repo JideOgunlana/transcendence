@@ -21,4 +21,5 @@ export { default as  navBarToggle } from './svg/navBarToggle.svg';
 export { default as  backBtnIcon } from './svg/btnBack.svg';
 export { default as brainIcon } from './svg/brain.svg';
 export { default as pingPongIcon } from './svg/pingPong.svg';
-export { default as pieChartIcon } from './svg/pieChart.svg';
+export { default as unauthorizedIcon } from './svg/unauthorized.svg';
+export { default as error404Icon } from './svg/error404.svg';

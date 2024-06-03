@@ -1,10 +1,11 @@
+import { unauthorizedIcon } from '../../assets';
 import './unauthorized.css';
 
-
 const Unauthorized = () => {
+
 	return (
-		<div>
-			<p className='text-center'>You are not authorized to view this page</p>
+		<div className='text-center'>
+			 <img src={unauthorizedIcon} alt='Unatuhorized' />
 		</div>
 	)
 }

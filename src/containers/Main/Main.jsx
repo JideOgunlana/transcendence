@@ -2,11 +2,14 @@
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { Hero, Signup, Userprofile, Dashboard, Settings, HistoryAll, PongGame, MemoryGame, ErrorPage } from '../../containers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import './main.css';
 
 const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, handleSignup, handleGoToDashboard, lang, setLang, sound, setSound }) => {
-    const [step, setStep] = useState({
+
+    const initialStepState = {
         stepNumber: 0,
         pong: {
             selected: true,
@@ -22,7 +25,18 @@ const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, han
             selectedPlayers: []
         },
         aliases: []
-    });
+    };
+    const [step, setStep] = useState(initialStepState);
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.pathname !== '/dashboard' 
+            && location.pathname !== '/dashboard/pong' 
+            && location.pathname !== '/dashboard/memory') {
+            setStep(initialStepState);
+        }
+    }, [location, setStep])
+
 
     const handleNextBtnClick = () => {
         setStep({ ...step, stepNumber: step.stepNumber + 1 });
@@ -68,14 +82,14 @@ const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, han
                 <Route path='/' element={<Hero handleSignup={handleSignup} />} />
                 <Route path='signup' element={<Signup handleUserSignedUp={handleUserSignedUp} handleGoToDashboard={handleGoToDashboard} />} />
                 <Route path='userprofile' element={<Userprofile handleGoToDashboard={handleGoToDashboard} />} />
-                <Route path='dashboard' 
+                <Route path='dashboard'
                     element={
-                        <Dashboard step={step} 
-                        setStep={setStep} 
-                        handleNextBtnClick={handleNextBtnClick} 
-                        handleBackBtnClick={handleBackBtnClick}
-                        handlePongOptionsChange={handlePongOptionsChange} 
-                        handleMemoryOptionsChange={handleMemoryOptionsChange} />
+                        <Dashboard step={step}
+                            setStep={setStep}
+                            handleNextBtnClick={handleNextBtnClick}
+                            handleBackBtnClick={handleBackBtnClick}
+                            handlePongOptionsChange={handlePongOptionsChange}
+                            handleMemoryOptionsChange={handleMemoryOptionsChange} />
                     }
                 />
                 <Route path='history' element={<HistoryAll />} />

@@ -59,7 +59,19 @@ const resources = {
       "wins": "Wins",
       "losses": "Losses",
       "games played": "Games played",
-
+      "current player": "Current Player",
+      "points": "points",
+      "you have": "You have",
+      "seconds to find all pairs. are you ready": "seconds to find all pairs. Are you ready",
+      "time remaining": "Time Remaining",
+      "player": "Player",
+      "moves": "Moves",
+      "game over": "Game Over",
+      "start game": "Start Game",
+      "play again": "Play Again",
+      "congratulations! you found all pairs before the time ran out": "Congratulations! You found all pairs before the time ran out",
+      "time's up! you didn't find all pairs": "Time's up! You didn't find all pairs",
+      "tie breaker": "Tie Breaker",
 
     }
   },
@@ -120,6 +132,19 @@ const resources = {
       "wins": "Gewinne",
       "losses": "Verluste",
       "games played": "Spiele gespielt",
+      "current player": "Aktueller Spieler",
+      "points": "punkte",
+      "you have": "Sie haben",
+      "seconds to find all pairs. are you ready": "Sekunden, um alle Paare zu finden. Sind Sie bereit",
+      "time remaining": "Verbleibende Zeit",
+      "player": "Spieler",
+      "moves": "Bewegungen",
+      "game over": "Spiel vorbei",
+      "start game": "Spiel Beginnen",
+      "play again": "Nochmal abspielen",
+      "congratulations! you found all pairs before the time ran out": "Erstaunlich! Du hast alle Paare gefunden, bevor die Zeit abgelaufen ist",
+      "time's up! you didn't find all pairs": "Die Zeit ist um! Du hast nicht alle Paare gefunden",
+      "tie breaker": "Ziehungsbrecher",
 
 
     }
@@ -181,6 +206,19 @@ const resources = {
       "wins": "Victorias",
       "losses": "Pérdidas",
       "games played": "Juegos jugados",
+      "current player": "Jugador actual",
+      "points": "puntos",
+      "you have": "tienes",
+      "seconds to find all pairs. are you ready": "segundos para encontrar todos los pares. Estás listo",
+      "time remaining": "Tiempo restante",
+      "player": "Jugador",
+      "moves": "Se mueve",
+      "game over": "Juego Terminado",
+      "start game": "Empezar Juego",
+      "play again": "Juega de nuevo",
+      "congratulations! you found all pairs before the time ran out": "¡Felicidades! Encontraste todos los pares antes de que se acabara el tiempo.",
+      "time's up! you didn't find all pairs": "¡Se acabó el tiempo! No encontraste todos los pares",
+      "tie breaker": "Desempate",
 
 
     }
@@ -242,6 +280,19 @@ const resources = {
       "wins": "Asebori",
       "losses": "Adanu",
       "games played": "awọn ere dun",
+      "current player": "Olumulo lọwọlọwọ",
+      "points": "ojuami",
+      "you have": "o ni",
+      "seconds to find all pairs. are you ready": "iṣẹju-aaya lati wa gbogbo awọn orisii. Ṣe o ṣetan",
+      "time remaining": "Akoko ti o ku",
+      "player": "Elere",
+      "moves": "Awọn gbigbe",
+      "game over": "Ere Pari",
+      "start game": "Bẹrẹ Ere",
+      "play again": "Tun Bẹrẹ",
+      "congratulations! you found all pairs before the time ran out": "Oriire! O rii gbogbo awọn orisii ṣaaju ki akoko to pari",
+      "time's up! you didn't find all pairs": "Akoko ti pari! O ko ri gbogbo orisii won yi",
+      "tie breaker": "Yiya Fifọ",
 
 
     }

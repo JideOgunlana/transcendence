@@ -30,7 +30,7 @@ const TournamentAlias = ({ show, handleModalClose, handleAliasSubmit, selectedPl
                     <div className="modal-header justify-content-around">
                         <h5 className="modal-title">{ t('enter an alias for your user') }</h5>
                         <div type="button" className="close" onClick={handleModalClose} aria-label="Close">
-                            <span aria-hidden="true" ><img src={closeIcon} width={20} /></span>
+                            <span className="btn btn-danger" aria-hidden="true" ><img src={closeIcon} width={20} /></span>
                         </div>
                     </div>
                     <div className="modal-body">

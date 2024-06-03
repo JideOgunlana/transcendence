@@ -7,7 +7,7 @@ const defaults = {
     ALIAS_MIN_LENGTH: 2,
     ALIAS_MAX_LENGTH: 15,
     AI_USERNAME: 'AI',
-    MEMORY_SINGLE_TIME: 120,
+    MEMORY_SINGLE_TIME: 12,
 }
 
 export default defaults;

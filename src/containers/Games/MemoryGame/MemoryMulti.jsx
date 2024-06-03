@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { generateTiles } from '../../../utils/memoryHelper';
 import { closeIcon } from '../../../assets/';
@@ -7,6 +8,7 @@ import { closeIcon } from '../../../assets/';
 
 const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
 
+    const { t } = useTranslation();
     const navigate = useNavigate()
     const [tiles, setTiles] = useState([]);
     const [flippedTiles, setFlippedTiles] = useState([]);
@@ -168,14 +170,14 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
             </div>
 
             <div className='current-player'>
-                Current Player: {getCurrentPlayerName()}
+                { t('current player') }: {getCurrentPlayerName()}
             </div>
             <div className='points'>
                 {selectedPlayers.map((player, index) => (
                     <div key={index} className='player-points'>
                         {
                             <div>
-                                {player.username} : {points[index]} points
+                                {player.username} : {points[index]} { t('points') }
                             </div>
                         }
                     </div>
@@ -192,7 +194,7 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
                                         { winner === 'tie' ? "Tie Breaker" : "Game Over" }
                                     </h5>
                                     <div type="button" className="close" onClick={() => setShowModal(false)}>
-                                        <span aria-hidden="true" ><img src={closeIcon} alt='close' width={20} /></span>
+                                        <span className='btn btn-danger' aria-hidden="true" ><img src={closeIcon} alt='close' width={20} /></span>
                                     </div>
                                 </div>
                                 <div className="modal-body">

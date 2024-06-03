@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { generateTiles } from '../../../utils/memoryHelper';
 import defaults from '../../../utils/defaults';
 import axios from 'axios';
@@ -7,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
 
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [tiles, setTiles] = useState([]);
     const [flippedTiles, setFlippedTiles] = useState([]);
@@ -57,7 +59,7 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     loss: prevResult.memory_single_player.loss + 1,
                 },
             }));
-            setModalMessage(`Time's up! You didn't find all pairs.`);
+            setModalMessage(`time's up! you didn't find all pairs`);
             setShowModal(true);
         }
     }, [countdown]);
@@ -73,7 +75,7 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     win: prevResult.memory_single_player.win + 1,
                 },
             }));
-            setModalMessage(`Congratulations! You found all pairs with ${totalMoves} moves before time ran out.`);
+            setModalMessage(`congratulations! you found all pairs before the time ran out`);
             setShowModal(true);
         }
     }, [matchedTiles, tiles.length]);
@@ -146,14 +148,14 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     </div>
                 ))}
             </div>
-            <div className='timer'>Time Remaining: {countdown}s</div>
+            <div className='timer'>{ t('time remaining') }: {countdown}s</div>
             <div className='moves'>
                 {selectedPlayers.map((player, index) => (
                     <div key={index} className='player-moves'>
                         <div>
-                            Player: {player.username}
+                            { t('player') }: {player.username}
                             <br />
-                            Moves: {totalMoves}
+                            { t('moves') }: {totalMoves}
                         </div>
                     </div>
                 ))}
@@ -165,16 +167,16 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header justify-content-between">
-                                <h5 className="modal-title">Start Game</h5>
+                                <h5 className="modal-title">{ t('start game') }</h5>
                                 <div type="button" className="close" onClick={() => setShowStartModal(false)}>
-                                    <span aria-hidden="true" ><img src={ closeIcon } width={20} /></span>
+                                    <span className="btn btn-danger" aria-hidden="true" ><img src={ closeIcon } width={20} /></span>
                                 </div>
                             </div>
                             <div className="modal-body">
-                                <p className='text-center mb-0'>You have {defaults.MEMORY_SINGLE_TIME} seconds to find all pairs. Are you ready?</p>
+                                <p className='text-center mb-0'>{ t('you have') } <em><b>{defaults.MEMORY_SINGLE_TIME}</b></em> { t('seconds to find all pairs. are you ready') } ?</p>
                             </div>
                             <div className="modal-footer justify-content-center">
-                                <button type="button" className="game-btn-enabled" onClick={startGame}>Start Game</button>
+                                <button type="button" className="game-btn-enabled" onClick={startGame}>{ t('start game') }</button>
                             </div>
                         </div>
                     </div>
@@ -187,16 +189,16 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header justify-content-between">
-                                <h5 className="modal-title">Game Over</h5>
+                                <h5 className="modal-title">{ t('game over') }</h5>
                                 <div type="button" className="close" onClick={() => setShowModal(false)}>
-                                    <span aria-hidden="true" ><img src={ closeIcon } width={20} /></span>
+                                    <span className='btn btn-danger' aria-hidden="true" ><img src={ closeIcon } width={20} /></span>
                                 </div>
                             </div>
                             <div className="modal-body">
-                                <p className='text-center mb-0'>{ modalMessage }</p>
+                                <p className='text-center mb-0'>{ t(modalMessage) }</p>
                             </div>
                             <div className="modal-footer justify-content-center">
-                                <button type="button" className="game-btn-enabled" onClick={() => navigate('/dashboard') }>Play Again</button>
+                                <button type="button" className="game-btn-enabled" onClick={() => navigate('/dashboard') }>{ t('play again') }</button>
                             </div>
                         </div>
                     </div>
