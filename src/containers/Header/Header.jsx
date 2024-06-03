@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { transcendLogo, settingsIcon, navBarToggle } from '../../assets';
 import './header.css';
@@ -17,6 +17,29 @@ const Header = ({ handleSignup, handleLogoClick, resetDashboardStep}) => {
             :
             setLinkActive([false, false]);
     }
+
+    useEffect(() => {
+        // Check if the component is active based on URL or navigation
+        const checkIsActive = () => {
+          const currentPath = window.location.pathname;
+
+          currentPath === '/dashboard' ?
+            setLinkActive( [true, false] )
+                :
+                currentPath === '/history' ?
+                    setLinkActive( [false, true] )
+                        :
+                        setLinkActive( [false, false] );
+        }
+
+        checkIsActive();
+        window.addEventListener('popstate', checkIsActive);
+    
+        return () => {
+          window.removeEventListener('popstate', checkIsActive);
+        }
+      }, []);
+
     const { t } = useTranslation();
     return (
         <>

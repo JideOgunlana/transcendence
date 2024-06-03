@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { HistoryUser } from '../../containers';
 import { useTranslation } from 'react-i18next';
+import { HistoryUser } from '../../containers';
 import axios from 'axios';
 import { userIcon } from '../../assets';
 import './historyAll.css';
@@ -9,12 +9,13 @@ import './historyAll.css';
 
 const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
 
+    const { t } = useTranslation();
     const handleClick = () => {
         onSelectUser(userData);
     };
 
     return (
-        <div className='flex-fill d-flex align-items-center justify-content-center historyAll--column mb-3 mt-3 p-5 gap-5' onClick={handleClick}>
+        <div className='flex-fill d-flex flex-column flex-lg-row align-items-center justify-content-center historyAll--column mb-3 mt-3 p-5 gap-5' onClick={handleClick}>
             <div>
                 <img src={userIcon} width={40} alt={userData.username} />
             </div>
@@ -22,31 +23,37 @@ const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
                 { userData.username }
             </div>
             <div className='historyWin'>
+                <span> { t('wins') } &gt; </span>
+                <span className='btn btn-success'>
                 { 
                     userCol === 'pong' ? 
                         userData.pong.singlePlayer['win'] + userData.pong.multiPlayer['win'] 
                         : 
                         userData.memory.singlePlayer['win'] +  userData.memory.multiPlayer['win'] 
-                } 
-                <span> wins </span> 
+                }
+                </span>
             </div>
             <div className='historyLoss'>
+                <span> { t('losses') } &gt; </span>
+                <span className='btn btn-danger'>
                 { 
                     userCol === 'pong' ? 
                         userData.pong.singlePlayer['loss'] + userData.pong.multiPlayer['loss'] 
                         : 
                         userData.memory.singlePlayer['loss'] +  userData.memory.multiPlayer['loss'] 
                 }
-                <span> losses </span> 
+                </span>
             </div>
             <div className='historyTotal'>
+                <span> { t('games played') } &gt; </span>
+                <span className='btn btn-secondary'>
                 { 
                     userCol === 'pong' ? 
                         userData.pong.singlePlayer['total'] + userData.pong.multiPlayer['total'] 
                         :
                         userData.memory.singlePlayer['total'] + userData.memory.multiPlayer['total'] 
-                } 
-                <span> games played     </span>
+                }
+                </span>
             </div>
         </div>
     );

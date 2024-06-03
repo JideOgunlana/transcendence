@@ -19,3 +19,6 @@ export { default as head2HeadIcon } from './svg/historyHead2Head.svg';
 export { default as  transcendLogo } from './svg/transcend.svg';
 export { default as  navBarToggle } from './svg/navBarToggle.svg';
 export { default as  backBtnIcon } from './svg/btnBack.svg';
+export { default as brainIcon } from './svg/brain.svg';
+export { default as pingPongIcon } from './svg/pingPong.svg';
+export { default as pieChartIcon } from './svg/pieChart.svg';

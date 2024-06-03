@@ -46,6 +46,20 @@ const resources = {
       "selected": "SELECTED",
       "start": "Start",
       "requirements": "Requirements",
+      "enter an alias for your user": "Enter an alias for your user",
+      "notice": "Notice",
+      "every player alias must be unique": "every player alias must be unique",
+      "alias must be between 2 to 15 characters": "alias must be between 2 to 15 characters",
+      "alias must not have trailing or leading space": "alias must not have trailing or leading space",
+      "alias should contain only letters / numbers": "alias should contain only letters / numbers",
+      "alias should start with a letter": "alias should start with a letter",
+      "oops! invalid alias used": "oops! invalid alias used",
+      "submit": "Submit",
+      "enter an alias": "Enter an Alias",
+      "wins": "Wins",
+      "losses": "Losses",
+      "games played": "Games played",
+
 
     }
   },
@@ -93,6 +107,20 @@ const resources = {
       "selected": "AUSGEWÄHLT",
       "start": "Start",
       "requirements": "Anforderungen",
+      "enter an alias for your user": "Geben Sie einen Alias ​​für Ihren Benutzer ein",
+      "notice": "Beachten",
+      "every player alias must be unique": "Jeder Spieleralias muss einzigartig sein",
+      "alias must be between 2 to 15 characters": "Der Alias ​​muss zwischen 2 und 15 Zeichen lang sein",
+      "alias must not have trailing or leading space": "Der Alias ​​darf weder am Anfang noch am Ende ein Leerzeichen haben.",
+      "alias should contain only letters / numbers": "Alias ​​darf nur Buchstaben/Zahlen enthalten",
+      "alias should start with a letter": "Alias ​​sollte mit einem Buchstaben beginnen",
+      "oops! invalid alias used": "ups! ungültiger Alias ​​verwendet",
+      "submit": "Senden",
+      "enter an alias": "Geben Sie einen Alias ​​ein",
+      "wins": "Gewinne",
+      "losses": "Verluste",
+      "games played": "Spiele gespielt",
+
 
     }
   },
@@ -140,6 +168,19 @@ const resources = {
       "selected": "SELECCIONADOS(AS)",
       "start": "Empezar",
       "requirements": "Requisitos",
+      "enter an alias for your user": "Ingrese un alias para su usuario/usuaria",
+      "notice": "Aviso",
+      "every player alias must be unique": "Cada alias de jugador debe ser único/unica",
+      "alias must be between 2 to 15 characters": "El alias debe tener entre 2 y 15 caracteres.",
+      "alias must not have trailing or leading space": "El alias no debe tener espacios al final ni al principio.",
+      "alias should contain only letters / numbers": "El alias debe contener solo letras/números.",
+      "alias should start with a letter": "El alias debe comenzar con una letra.",
+      "oops! invalid alias used": "¡ups! alias no válido utilizado",
+      "submit": "Entregar",
+      "enter an alias": "introduce un alias",
+      "wins": "Victorias",
+      "losses": "Pérdidas",
+      "games played": "Juegos jugados",
 
 
     }
@@ -188,6 +229,19 @@ const resources = {
       "selected": "TI YAN",
       "start": "Bẹrẹ",
       "requirements": "Awọn ibeere",
+      "enter an alias for your user": "Tẹ inagijẹ sii fun olumulo rẹ",
+      "notice": "Akiyesi",
+      "every player alias must be unique": "gbogbo ẹrọ orin inagijẹ gbọdọ jẹ oto",
+      "alias must be between 2 to 15 characters": "inagijẹ gbọdọ wa laarin awọn ohun kikọ 2 si 15",
+      "alias must not have trailing or leading space": "inagijẹ ko gbọdọ ni itọpa tabi aaye asiwaju",
+      "alias should contain only letters / numbers": "inagijẹ yẹ ki o ni awọn lẹta / awọn nọmba nikan",
+      "alias should start with a letter": "inagijẹ yẹ ki o bẹrẹ pẹlu kan lẹta",
+      "oops! invalid alias used": "Rara! inagijẹ aiṣedeede",
+      "submit": "Fi fọọmu ranṣẹ",
+      "enter an alias": "tẹ inagijẹ",
+      "wins": "Asebori",
+      "losses": "Adanu",
+      "games played": "awọn ere dun",
 
 
     }
