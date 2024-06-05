@@ -32,7 +32,8 @@ const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, han
     useEffect(() => {
         if (location.pathname !== '/dashboard' 
             && location.pathname !== '/dashboard/pong' 
-            && location.pathname !== '/dashboard/memory') {
+            && location.pathname !== '/dashboard/memory'
+        ) {
             setStep(initialStepState);
         }
     }, [location, setStep])

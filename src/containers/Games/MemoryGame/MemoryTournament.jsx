@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generateTiles, generatePairs } from '../../../utils/memoryHelper';
+import { generateTiles, generatePairs } from '../../../utils/gameHelper';
 import { closeIcon } from '../../../assets/';
 import { useNavigate } from 'react-router-dom';
 

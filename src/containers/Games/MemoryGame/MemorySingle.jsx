@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generateTiles } from '../../../utils/memoryHelper';
+import { generateTiles } from '../../../utils/gameHelper';
 import defaults from '../../../utils/defaults';
 import axios from 'axios';
 import { closeIcon } from '../../../assets/';

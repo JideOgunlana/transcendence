@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TournamentAlias } from '../../components';
-import { aliasNameValid } from '../../utils/helper';
+import { aliasNameValid } from '../../utils/formHelper';
 import { useNavigate } from 'react-router-dom';
 import './startGameBar.css';
 
