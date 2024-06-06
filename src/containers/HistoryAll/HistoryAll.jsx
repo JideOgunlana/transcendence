@@ -15,15 +15,16 @@ const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
     };
 
     return (
-        <div className='flex-fill d-flex flex-column flex-lg-row align-items-center justify-content-center historyAll--column mb-3 mt-3 p-5 gap-5' onClick={handleClick}>
-            <div>
+        <div 
+        className='row historyAll--column p-3 mb-3 row-gap-4' 
+        onClick={handleClick}>
+            <div className='col-12  justify-content between'>
                 <img src={userIcon} width={40} alt={userData.username} />
-            </div>
-            <div>
+                &nbsp;
                 { userData.username }
             </div>
-            <div className='historyWin'>
-                <span> { t('wins') } </span>
+            <div className='historyWin col-4 text-center'>
+                <span> { t('wins') } </span> <br />
                 <span className='btn btn-success'>
                 { 
                     userCol === 'pong' ? 
@@ -33,8 +34,8 @@ const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
                 }
                 </span>
             </div>
-            <div className='historyLoss'>
-                <span> { t('losses') } </span>
+            <div className='historyLoss col-4 text-center'>
+                <span> { t('losses') } </span> <br />
                 <span className='btn btn-danger'>
                 { 
                     userCol === 'pong' ? 
@@ -44,8 +45,8 @@ const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
                 }
                 </span>
             </div>
-            <div className='historyTotal'>
-                <span> { t('games played') } </span>
+            <div className='historyTotal col-4 text-center'>
+                <span> { t('games played') } </span> <br />
                 <span className='btn btn-secondary'>
                 { 
                     userCol === 'pong' ? 

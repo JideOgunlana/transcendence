@@ -1,6 +1,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { NextBtn, OptionBtn } from '../../components';
+import { brainIcon } from '../../assets';
 import './memoryGameMenu.css';
 
 
@@ -10,7 +11,9 @@ const MemoryGameMenu = ({handleNextBtnClick, handleMemoryOptionsChange, step}) =
 
     return (
         <div className='memoryGameMenu'>
-            <h3 className='text-center mb-5'>Memory</h3>
+            <h3 className='d-flex align-items-center justify-content-center mb-5'>
+                <img src={brainIcon} alt='Pong' />&nbsp;Memory
+            </h3>
             <h3 className='text-center mb-5'>{ t('game menu') }</h3>
             <div className='memoryGameMenu--card mx-auto justify-content-center align-items-center d-flex flex-column gap-5 p-4'>
                 <div className='gameTheme'>

@@ -22,7 +22,7 @@ const MemoryGame = ({ step }) => {
 
         <div className='memoryGame d-grid align-content-center'>
             {
-                initialSelectedPlayers.length >= 1 ? 
+                step.memory.selectedPlayers.length >= 1 ? 
                 <>
                     {
                         mode === 'singlePlayer' &&

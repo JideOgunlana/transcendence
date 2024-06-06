@@ -17,8 +17,8 @@ const PieChart = ({ userData }) => {
     const memoryPercentage = totalGames > 0 ? parseInt((totalMemoryGames / totalGames) * 100) : 60;
 
     const wantedGraphicData = [
-        { x: 'Pong', y: pongPercentage, label: `${totalPongGames}/${totalPongGames} ${ t('games played') }` },
-        { x: 'Memory', y: memoryPercentage, label: `${totalMemoryGames}/${totalMemoryGames} ${ t('games played') }` }
+        { x: 'Pong', y: pongPercentage, label: `${totalPongGames}/${totalPongGames + totalMemoryGames} ${ t('games played') }` },
+        { x: 'Memory', y: memoryPercentage, label: `${totalMemoryGames}/${totalPongGames + totalMemoryGames} ${ t('games played') }` }
     ]; // Data that we want to display
     const defaultGraphicData = [
         { x: 'Pong', y: 0 },

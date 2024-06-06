@@ -4,6 +4,7 @@ import { TournamentAlias } from '../../components';
 import { aliasNameValid } from '../../utils/formHelper';
 import { useNavigate } from 'react-router-dom';
 import './startGameBar.css';
+import { brainIcon, pingPongIcon } from '../../assets';
 
 const StartGameBar = ({ step, setStep }) => {
 
@@ -92,6 +93,7 @@ const StartGameBar = ({ step, setStep }) => {
                 <>
                     <div className='startGameBar--title'>
                         <h4 className='text-center'>
+                            <img src={pingPongIcon} />&nbsp;
                             {
                                 `Pong - 
                                 ${step.pong.mode === 'singlePlayer' ? t('single')
@@ -129,6 +131,7 @@ const StartGameBar = ({ step, setStep }) => {
                 <>
                     <div className='startGameBar--title'>
                         <h4 className='text-center'>
+                            <img src={ brainIcon } />&nbsp;
                             {
                                 `Memory - 
                                 ${step.memory.mode === 'singlePlayer' ? t('single')

@@ -2,15 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const PongGameOverModal = ({ show, winner, onRestart }) => {
+const PongGameOverModal = ({ show, winner }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   
   if (!show) {
     return null;
   }
-
-  const modalMessage = winner === 'PC' ? 'AI wins!' : `${ winner } wins!`;
 
   return (
     <div className="modal fade show d-block" tabIndex="-1" role="dialog">
@@ -21,7 +19,7 @@ const PongGameOverModal = ({ show, winner, onRestart }) => {
 
           </div>
           <div className="modal-body">
-            <p className='text-center mb-0'>{ t(modalMessage) }</p>
+            <p className='text-center mb-0'>{`${winner} ${ t('wins') }!`}</p>
           </div>
           <div className="modal-footer justify-content-center">
             <button type="button" className="game-btn-enabled" onClick={() => navigate('/dashboard') }>{ t('play again') }</button>

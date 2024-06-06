@@ -70,7 +70,7 @@ export default class Ball extends EventDispatcher {
 		if (dz < 0) {
 			// console.log('collisione')
 			const z = this.mesh.position.z
-			const message = z > 0 ? 'pc' : 'player'
+			const message = z > 0 ? 'opponent' : 'player'
 			this.dispatchEvent({ type: 'ongoal', message: message })
 
 			tPos.set(0, 0, 0)

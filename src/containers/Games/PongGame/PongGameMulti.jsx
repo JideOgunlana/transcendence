@@ -28,13 +28,11 @@ const PongGameMulti = ({ theme, selectedPlayers }) => {
   const sceneRef = useRef(null);
   const requestRef = useRef(null);
   const params = {
-    planeColor: 0xb994ff,
-    fogColor: 0xb499ff,
-    fogNear: 25,
-    fogFar: 150,
+    planeColor: 0x5A5A5A,
     paddleColor: 0xF59E0B,
-    pcPaddleColor: 0x3E3ECA,
-    ballColor: 0xce47ff,
+    nameColor: 0xFFFFFF,
+    opponentPaddleColor: 0x3E3ECA,
+    ballColor: 0xDCC0FF,
   };
 
   const [gameOver, setGameOver] = useState(false);
@@ -102,30 +100,26 @@ const handleSubmitResults = async () => {
     if (gameOver) return; // Skip effect when game is over
 
     const score = {
-      pc: 0,
       player: 0,
+      opponent: 0,
     };
 
-    let pcScoreMesh, playerScoreMesh, loadedFont, playerNameMesh, aiNameMesh;
+    let opponentScoreMesh, playerScoreMesh, loadedFont, playerNameMesh, opponentNameMesh;
 
 
     const TEXT_PARAMS = {
-      size: 3,
+      size: 2.5,
       height: 0.5,
       curveSegments: 12,
-      bevelEnabled: true,
-      bevelThickness: 0.1,
-      bevelSize: 0.05,
-      bevelOffset: 0,
-      bevelSegments: 5,
     };
+
 
     const scoreMaterial = new THREE.MeshStandardMaterial({
       color: params.ballColor,
     });
 
     const nameMaterial = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
+      color: params.nameColor,
     });
 
 
@@ -139,19 +133,16 @@ const handleSubmitResults = async () => {
 
       geometry.center();
 
-      pcScoreMesh = new THREE.Mesh(geometry, scoreMaterial);
-      playerScoreMesh = pcScoreMesh.clone();
-      pcScoreMesh.scale.setScalar(1.5);
-      pcScoreMesh.position.set(0, 2, -boundaries.y - 4);
+      opponentScoreMesh = new THREE.Mesh(geometry, scoreMaterial);
+      playerScoreMesh = opponentScoreMesh.clone();
+      opponentScoreMesh.position.set(0, 2, -boundaries.y - 4);
       playerScoreMesh.position.set(0, 2, boundaries.y + 4);
 
-      pcScoreMesh.castShadow = true;
-      playerScoreMesh.castShadow = true;
-      pcScoreMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
+      opponentScoreMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
       playerScoreMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
 
 
-      scene.add(pcScoreMesh, playerScoreMesh);
+      scene.add(opponentScoreMesh, playerScoreMesh);
 
 
 
@@ -163,24 +154,22 @@ const handleSubmitResults = async () => {
 
       playerNameGeometry.center();
       playerNameMesh = new THREE.Mesh(playerNameGeometry, nameMaterial);
-      playerNameMesh.position.set(0, 7, boundaries.y + 4);
-      playerNameMesh.castShadow = true;
+      playerNameMesh.position.set(0, 7, boundaries.y + 8);
       playerNameMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
 
       scene.add(playerNameMesh);
 
-      // AI Name Mesh
-      const aiNameGeometry = new TextGeometry(selectedPlayers[1].username, {
+      // Opponent Name Mesh
+      const opponentNameGeometry = new TextGeometry(selectedPlayers[1].username, {
         font: font,
         ...TEXT_PARAMS,
       });
 
-      aiNameGeometry.center();
-      aiNameMesh = new THREE.Mesh(aiNameGeometry, nameMaterial);
-      aiNameMesh.position.set(0, 7, -boundaries.y - 4);
-      aiNameMesh.castShadow = true;
-      aiNameMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
-      scene.add(aiNameMesh);
+      opponentNameGeometry.center();
+      opponentNameMesh = new THREE.Mesh(opponentNameGeometry, nameMaterial);
+      opponentNameMesh.position.set(0, 7, -boundaries.y - 8);
+      opponentNameMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
+      scene.add(opponentNameMesh);
     });
 
     function getScoreGeometry(score) {
@@ -195,12 +184,10 @@ const handleSubmitResults = async () => {
     }
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(params.fogColor);
-    scene.fog = new THREE.Fog(params.fogColor, params.fogNear, params.fogFar);
     scene.add(...lights);
 
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 20, 45);
+    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(40, 35, 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     const renderer = new THREE.WebGLRenderer({
@@ -210,17 +197,16 @@ const handleSubmitResults = async () => {
     sceneRef.current.appendChild(renderer.domElement);
     renderer.shadowMap.enabled = true;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
     renderer.shadowMap.type = THREE.VSMShadowMap;
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; // Optional: Enable smooth camera movement
+    const orbitControls = new OrbitControls(camera, renderer.domElement);
+    orbitControls.enableDamping = true; // Optional: Enable smooth camera movement
 
     const boundaries = new THREE.Vector2(18, 23);
     const planeGeometry = new THREE.PlaneGeometry(
-      boundaries.x * 20,
-      boundaries.y * 20,
-      boundaries.x * 20,
-      boundaries.y * 20
+      boundaries.x * 5,
+      boundaries.y * 5,
+      boundaries.x * 5,
+      boundaries.y * 5
     );
     planeGeometry.rotateX(-Math.PI * 0.5);
     const planeMaterial = new THREE.MeshStandardMaterial({
@@ -233,21 +219,19 @@ const handleSubmitResults = async () => {
     scene.add(plane);
 
     const boundGeometry = new RoundedBoxGeometry(1, 2, boundaries.y * 2, 5, 0.5);
-    const boundMaterial = new THREE.MeshStandardMaterial({ color: 0xdddddd });
-    const leftBound = new THREE.Mesh(boundGeometry, boundMaterial);
+    const leftBoundMaterial = new THREE.MeshStandardMaterial({ color: params.paddleColor });
+    const leftBound = new THREE.Mesh(boundGeometry, leftBoundMaterial);
     leftBound.position.x = -boundaries.x - 0.5;
-    const rightBound = leftBound.clone();
-    rightBound.position.x *= -1;
 
-    leftBound.castShadow = true;
-    rightBound.receiveShadow = true;
-    rightBound.castShadow = true;
+    const rightBoundMaterial = new THREE.MeshStandardMaterial({ color: params.opponentPaddleColor });
+    const rightBound = new THREE.Mesh(boundGeometry, rightBoundMaterial);
+    rightBound.position.x = boundaries.x + 0.5;
 
     scene.add(leftBound, rightBound);
 
     const playerPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, 15), params.paddleColor);
-    const pcPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, -15), params.pcPaddleColor);
-    const ball = new Ball(scene, boundaries, [playerPaddle, pcPaddle]);
+    const opponentPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, -15), params.opponentPaddleColor);
+    const ball = new Ball(scene, boundaries, [playerPaddle, opponentPaddle]);
     ball.material.color.set(params.ballColor);
 
     ball.addEventListener('ongoal', (e) => {
@@ -255,14 +239,14 @@ const handleSubmitResults = async () => {
 
       const geometry = getScoreGeometry(score[e.message]);
 
-      const mesh = e.message === 'pc' ? pcScoreMesh : playerScoreMesh;
+      const mesh = e.message === 'opponent' ? opponentScoreMesh : playerScoreMesh;
 
       mesh.geometry = geometry;
 
       mesh.geometry.getAttribute('position').needsUpdate = true;
 
       if (score[e.message] >= 5) {
-        setWinner(e.message === 'pc' ? `${ selectedPlayers[1].username }` : `${ selectedPlayers[0].username }`);
+        setWinner(e.message === 'opponent' ? `${ selectedPlayers[1].username }` : `${ selectedPlayers[0].username }`);
         setGameOver(true);
       }
     });
@@ -293,12 +277,12 @@ const handleSubmitResults = async () => {
         playerPaddle.setX(playerPaddle.mesh.position.x + 1);
       }
       if (moveOpponentLeft) {
-        pcPaddle.setX(pcPaddle.mesh.position.x - 1);
+        opponentPaddle.setX(opponentPaddle.mesh.position.x - 1);
       } else if (moveOpponentRight) {
-        pcPaddle.setX(pcPaddle.mesh.position.x + 1);
+        opponentPaddle.setX(opponentPaddle.mesh.position.x + 1);
       }
 
-      controls.update();
+      // orbitControls.update();
       renderer.render(scene, camera);
       requestRef.current = requestAnimationFrame(animate);
     };
@@ -363,13 +347,9 @@ const handleSubmitResults = async () => {
     };
   }, [gameOver]);
 
-  const handleRestart = () => {
-
-  };
-
   return (
     <div ref={sceneRef}>
-      <PongGameOverModal show={gameOver} winner={winner} onRestart={handleRestart} />
+      <PongGameOverModal show={gameOver} winner={winner} />
     </div>
   );
 };

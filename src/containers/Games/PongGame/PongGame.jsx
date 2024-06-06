@@ -27,9 +27,9 @@ const PongGame = ({ step }) => {
 
 
   return (
-    <div className='pongGame'>
+    <div className='pongGame d-grid'>
       {
-        initialSelectedPlayers.length >= 1 ?
+        step.pong.selectedPlayers.length >= 1 ?
           <>
             {
               mode === 'singlePlayer' &&
@@ -60,9 +60,9 @@ const PongGame = ({ step }) => {
             }
           </>
           :
-          <>
+          <div className='align-self-center'>
             <Unauthorized />
-          </>
+          </div>
       }
     </div>
   );

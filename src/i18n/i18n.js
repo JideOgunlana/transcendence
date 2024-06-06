@@ -72,7 +72,10 @@ const resources = {
       "congratulations! you found all pairs before the time ran out": "Congratulations! You found all pairs before the time ran out",
       "time's up! you didn't find all pairs": "Time's up! You didn't find all pairs",
       "tie breaker": "Tie Breaker",
-
+      "round": "Round",
+      "winner": "Winner",
+      "starting round": "Starting round",
+      "starting final round": "Starting final round",
     }
   },
   de: {
@@ -145,7 +148,10 @@ const resources = {
       "congratulations! you found all pairs before the time ran out": "Erstaunlich! Du hast alle Paare gefunden, bevor die Zeit abgelaufen ist",
       "time's up! you didn't find all pairs": "Die Zeit ist um! Du hast nicht alle Paare gefunden",
       "tie breaker": "Ziehungsbrecher",
-
+      "round": "Runde",
+      "winner": "Gewinner(in)",
+      "starting round": "Ab Runde",
+      "starting final round": "Start Endrunde",
 
     }
   },
@@ -219,7 +225,10 @@ const resources = {
       "congratulations! you found all pairs before the time ran out": "¡Felicidades! Encontraste todos los pares antes de que se acabara el tiempo.",
       "time's up! you didn't find all pairs": "¡Se acabó el tiempo! No encontraste todos los pares",
       "tie breaker": "Desempate",
-
+      "round": "La Ronda",
+      "winner": "Gandor(a)",
+      "starting round": "Comenzando la ronda",
+      "starting final round": "Comenzando la ronda final",
 
     }
   },
@@ -293,7 +302,10 @@ const resources = {
       "congratulations! you found all pairs before the time ran out": "Oriire! O rii gbogbo awọn orisii ṣaaju ki akoko to pari",
       "time's up! you didn't find all pairs": "Akoko ti pari! O ko ri gbogbo orisii won yi",
       "tie breaker": "Yiya Fifọ",
-
+      "round": "Iyika",
+      "winner": "Olubori",
+      "starting round": "Bẹrẹ yika",
+      "starting final round": "Bẹrẹ yika ikehin",
 
     }
   }

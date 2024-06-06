@@ -1,6 +1,8 @@
 
 import { useTranslation } from 'react-i18next'; 
 import { NextBtn, OptionBtn } from '../../components';
+import { pingPongIcon } from '../../assets';
+
 import './pongGameMenu.css';
 
 
@@ -10,7 +12,9 @@ const PongGameMenu = ({handleNextBtnClick, handlePongOptionsChange, step}) => {
 
     return (
         <div className='pongGameMenu'>
-            <h3 className='text-center mb-5'>Pong</h3>
+            <h3 className='d-flex align-items-center justify-content-center mb-5    '>
+                <img src={pingPongIcon} alt='Pong' />&nbsp; Pong
+            </h3>
             <h3 className='text-center mb-5'>{ t('game menu') }</h3>
             <div className='pongGameMenu--card mx-auto justify-content-center align-items-center d-flex flex-column gap-5 p-4'>
                 <div className='gameTheme'>
