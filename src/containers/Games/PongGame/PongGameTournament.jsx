@@ -10,21 +10,14 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import PongGameOverModal from './PongGameOverModal';
+import { generatePairs } from '../../../utils/gameHelper';
+import { useTranslation } from 'react-i18next';
+
+
 
 const PongGameTournament = ({ theme, selectedPlayers }) => {
 
-  const [multiPlayerResults, setMultiPlayerResults] = useState(
-    selectedPlayers.map(player => ({
-        username: player.username,
-        email: player.email,
-        pong_single_player: player.pong.singlePlayer,
-        pong_multi_player: player.pong.multiPlayer,
-        memory_single_player: player.memory.singlePlayer,
-        memory_multi_player: player.memory.multiPlayer,
-    }))
-);
-  const [resultUpdated, setResultUpdated] = useState(false);
-
+  const { t } = useTranslation();
   const sceneRef = useRef(null);
   const requestRef = useRef(null);
   const params = {
@@ -36,70 +29,59 @@ const PongGameTournament = ({ theme, selectedPlayers }) => {
     pcPaddleColor: 0x3E3ECA,
     ballColor: 0xce47ff,
   };
-
   const [gameOver, setGameOver] = useState(false);
   const [winner, setWinner] = useState('');
+  const [gameRound, setGameRound] = useState(1);
+  const [semiOneWinner, setSemiOneWinner] = useState(null);
+  const [pairs, setPairs] = useState([]);
+
 
   useEffect(() => {
-    if (winner != '') {
-        setMultiPlayerResults(prevResults =>
-            prevResults.map(result => {
-                if (result.username === winner) {
-                    return {
-                        ...result,
-                        pong_multi_player: {
-                            ...result.pong_multi_player,
-                            total: result.pong_multi_player.total + 1,
-                            win: result.pong_multi_player.win + 1,
-                        },
-                    };
-                } else {
-                    return {
-                        ...result,
-                        pong_multi_player: {
-                            ...result.pong_multi_player,
-                            total: result.pong_multi_player.total + 1,
-                            loss: result.pong_multi_player.loss + 1,
-                        },
-                    };
-                }
-            })
-        );
-        setResultUpdated(true);
-    }
-  }, [winner]);
+    setPairs(generatePairs(selectedPlayers));
+}, [selectedPlayers]);
 
-const handleSubmitResults = async () => {
-    try {
-        const response = await Promise.all(multiPlayerResults.map(result =>
-            axios.put(
-                `http://localhost:8000/pong/users/${selectedPlayers.find(player => player.username === result.username).id}/`,
-                result,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                }
-            )
-        ));
-        console.log('Response: ', response);
+useEffect(() => {
+  if (winner != '') {
+      if (gameRound === 1) {
+          handleSemifinalOneEnd();
+      } else if (gameRound === 2) {
+          handleSemifinalTwoEnd();
+      } else if (gameRound === 3) {
+          determineWinner();
+      }
+  }
+}, [winner]);
 
-    } catch (error) {
-        console.error('Error:', error);
-        if (error.response) {
-            console.error('Response data:', error.response.data);
-        }
-    }
-};
+function findObjectByAlias(arr, alias) {
+  return arr.find(obj => obj.alias === alias);
+}
 
-  useEffect(() => {
-    if (gameOver && resultUpdated) {
-      handleSubmitResults();
-    }
-  }, [gameOver, resultUpdated]);
+  const handleSemifinalOneEnd = () => {
+      setSemiOneWinner(findObjectByAlias(pairs[0], winner));
+      setGameRound(2);
+      setPairs([ pairs[1] ]);
+      setGameOver(false);
+  }
+
+  const handleSemifinalTwoEnd = () => {
+    setPairs([[semiOneWinner, findObjectByAlias(pairs[0], winner)]]);
+    setGameRound(3);
+    setGameOver(false)
+  }
+
 
   useEffect(() => {
     if (gameOver) return; // Skip effect when game is over
+    if (pairs.length === 0) return ;
+    if (gameRound === 1) {
+      alert("Round 1");
+    }
+    else if (gameRound === 2) {
+      alert("Round 2")
+    }
+    else if (gameRound === 3) {
+      alert("Finals")
+    }
 
     const score = {
       pc: 0,
@@ -156,7 +138,8 @@ const handleSubmitResults = async () => {
 
 
       // Player Name Mesh
-      const playerNameGeometry = new TextGeometry(selectedPlayers[0].alias, {
+      console.log(pairs);
+      const playerNameGeometry = new TextGeometry(pairs[0][0].alias, {
         font: font,
         ...TEXT_PARAMS,
       });
@@ -170,7 +153,7 @@ const handleSubmitResults = async () => {
       scene.add(playerNameMesh);
 
       // AI Name Mesh
-      const aiNameGeometry = new TextGeometry(selectedPlayers[1].alias, {
+      const aiNameGeometry = new TextGeometry(pairs[0][1].alias, {
         font: font,
         ...TEXT_PARAMS,
       });
@@ -262,8 +245,11 @@ const handleSubmitResults = async () => {
       mesh.geometry.getAttribute('position').needsUpdate = true;
 
       if (score[e.message] >= 5) {
-        setWinner(e.message === 'pc' ? `${ selectedPlayers[1].username }` : `${ selectedPlayers[0].username }`);
+        setWinner(e.message === 'pc' ? `${ pairs[0][1].alias }` : `${ pairs[0][0].alias }`);
         setGameOver(true);
+        if (gameRound != 3) {
+          score['pc'] = 0;
+        }
       }
     });
 
@@ -361,15 +347,15 @@ const handleSubmitResults = async () => {
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);
     };
-  }, [gameOver]);
+  }, [gameOver, pairs]);
 
-  const handleRestart = () => {
-
-  };
 
   return (
     <div ref={sceneRef}>
-      <PongGameOverModal show={gameOver} winner={winner} onRestart={handleRestart} />
+      {
+        gameRound === 3 &&
+        <PongGameOverModal show={gameOver} winner={winner} />
+      }
     </div>
   );
 };
