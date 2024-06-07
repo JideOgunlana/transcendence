@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HistoryUser } from '../../containers';
 import axios from 'axios';
-import { userIcon } from '../../assets';
+import { userIcon, pingPongIcon, brainIcon } from '../../assets';
 import './historyAll.css';
 
 // import { getFakeUserData } from '../../__tests__/api';
@@ -99,7 +99,9 @@ const HistoryAll = () => {
                         <h3 className='text-center'> { t('all user game history') } </h3>
                     </div>
                     <div className='historyAll-pong mt-5 col-12 col-md-8 col-lg-6'>
-                        <h3 className='text-center mb-5'>Pong</h3>
+                        <h3 className='text-center mb-5'>
+                            <img src={pingPongIcon} alt='Pong' /> &nbsp;Pong
+                        </h3>
                         {
                             error ? (
                                 <div className='text-center'>
@@ -123,7 +125,9 @@ const HistoryAll = () => {
                         }
                     </div>
                     <div className='historyAll-memory mt-5 col-12 col-md-8 col-lg-6'>
-                        <h3 className='text-center mb-5'>Memory</h3>
+                        <h3 className='text-center mb-5'>
+                            <img src={brainIcon} alt='Memory' />&nbsp;Memory
+                        </h3>
                         {
                             error ? (
                                 <div className='text-center'>

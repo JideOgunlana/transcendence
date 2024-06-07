@@ -11,6 +11,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import PongGameOverModal from './PongGameOverModal';
+import defaults from '../../../utils/defaults';
 
 const PongGameSingle = ({ theme, selectedPlayers }) => {
 
@@ -26,16 +27,9 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
   const sceneRef = useRef(null);
   const requestRef = useRef(null);
-  const params = {
-    planeColor: 0x5A5A5A,
-    paddleColor: 0xF59E0B,
-    nameColor: 0xFFFFFF,
-    opponentPaddleColor: 0x3E3ECA,
-    ballColor: 0xDCC0FF,
-  };
-
   const [gameOver, setGameOver] = useState(false);
   const [winner, setWinner] = useState('');
+  const [gameToStart, setGameToStart] = useState(false);
 
   useEffect(() => {
     if (winner != '') {
@@ -104,15 +98,8 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
     let pcScoreMesh, playerScoreMesh, loadedFont, playerNameMesh, aiNameMesh;
 
-
-    const TEXT_PARAMS = {
-      size: 2.5,
-      height: 0.5,
-      curveSegments: 12,
-    };
-
     const scoreMaterial = new THREE.MeshStandardMaterial({
-      color: params.ballColor,
+      color: defaults.PARAMS.ballColor,
     });
 
     const nameMaterial = new THREE.MeshStandardMaterial({
@@ -125,7 +112,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       loadedFont = font;
       const geometry = new TextGeometry('0', {
         font: font,
-        ...TEXT_PARAMS,
+        ...defaults.TEXT_PARAMS,
       });
 
       geometry.center();
@@ -135,20 +122,16 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       pcScoreMesh.scale.setScalar(1.5);
       pcScoreMesh.position.set(0, 2, -boundaries.y - 4);
       playerScoreMesh.position.set(0, 2, boundaries.y + 4);
-
-
       pcScoreMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
       playerScoreMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
 
-
       scene.add(pcScoreMesh, playerScoreMesh);
-
 
 
       // Player Name Mesh
       const playerNameGeometry = new TextGeometry(selectedPlayers[0].username, {
         font: font,
-        ...TEXT_PARAMS,
+        ...defaults.TEXT_PARAMS,
       });
 
       playerNameGeometry.center();
@@ -161,7 +144,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       // AI Name Mesh
       const aiNameGeometry = new TextGeometry('AI', {
         font: font,
-        ...TEXT_PARAMS,
+        ...defaults.TEXT_PARAMS,
       });
 
       aiNameGeometry.center();
@@ -174,7 +157,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     function getScoreGeometry(score) {
       const geometry = new TextGeometry(`${score}`, {
         font: loadedFont,
-        ...TEXT_PARAMS,
+        ...defaults.TEXT_PARAMS,
       });
 
       geometry.center();
@@ -207,7 +190,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     );
     planeGeometry.rotateX(-Math.PI * 0.5);
     const planeMaterial = new THREE.MeshStandardMaterial({
-      color: params.planeColor,
+      color: defaults.PARAMS.planeColor,
     });
 
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -216,20 +199,20 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     scene.add(plane);
 
     const boundGeometry = new RoundedBoxGeometry(1, 2, boundaries.y * 2, 5, 0.5);
-    const leftBoundMaterial = new THREE.MeshStandardMaterial({ color: params.paddleColor });
+    const leftBoundMaterial = new THREE.MeshStandardMaterial({ color: defaults.PARAMS.paddleColor });
     const leftBound = new THREE.Mesh(boundGeometry, leftBoundMaterial);
     leftBound.position.x = -boundaries.x - 0.5;
 
-    const rightBoundMaterial = new THREE.MeshStandardMaterial({ color: params.opponentPaddleColor });
+    const rightBoundMaterial = new THREE.MeshStandardMaterial({ color: defaults.PARAMS.opponentPaddleColor });
     const rightBound = new THREE.Mesh(boundGeometry, rightBoundMaterial);
     rightBound.position.x = boundaries.x + 0.5;
 
     scene.add(leftBound, rightBound);
 
-    const playerPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, 20), params.paddleColor);
-    const pcPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, -20), params.opponentPaddleColor);
+    const playerPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, 20), defaults.PARAMS.paddleColor);
+    const pcPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, -20), defaults.PARAMS.opponentPaddleColor);
     const ball = new Ball(scene, boundaries, [playerPaddle, pcPaddle]);
-    ball.material.color.set(params.ballColor);
+    ball.material.color.set(defaults.PARAMS.ballColor);
 
     ball.addEventListener('ongoal', (e) => {
       console.log(e.message)
@@ -243,7 +226,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
       mesh.geometry.getAttribute('position').needsUpdate = true;
 
-      if (score[e.message] >= 5) {
+      if (score[e.message] >= defaults.PONG_WIN_POINT) {
         setWinner(e.message === 'opponent' ? 'AI' : `${ selectedPlayers[0].username }`);
         setGameOver(true);
       }
@@ -264,9 +247,11 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
       const dt = deltaTime / 10;
 
-      for (let i = 0; i < 15; i++) {
-        ball.update(dt);
-        controller.update(dt);
+      if (gameToStart) {
+        for (let i = 0; i < 15; i++) {
+          ball.update(dt);
+          controller.update(dt);
+        }
       }
 
       if (moveLeft) {
@@ -286,6 +271,11 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
         moveLeft = true;
       } else if (e.key === 's' || e.key === 'S') {
         moveRight = true;
+      }
+      if (!gameToStart) {
+        if (e.key === 'Enter') {
+          setGameToStart(true)
+        }
       }
     }
 
@@ -322,8 +312,9 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       }
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);
+      ball.removeEventListener('ongoal');
     };
-  }, [gameOver]);
+  }, [gameOver, gameToStart]);
 
   const handleRestart = () => {
 

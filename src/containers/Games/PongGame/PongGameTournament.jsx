@@ -12,6 +12,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import PongGameOverModal from './PongGameOverModal';
 import { generatePairs } from '../../../utils/gameHelper';
 import { useTranslation } from 'react-i18next';
+import defaults from '../../../utils/defaults';
 
 
 
@@ -20,18 +21,12 @@ const PongGameTournament = ({ theme, selectedPlayers }) => {
   const { t } = useTranslation();
   const sceneRef = useRef(null);
   const requestRef = useRef(null);
-  const params = {
-    planeColor: 0x5A5A5A,
-    paddleColor: 0xF59E0B,
-    nameColor: 0xFFFFFF,
-    opponentPaddleColor: 0x3E3ECA,
-    ballColor: 0xDCC0FF,
-  };
   const [gameOver, setGameOver] = useState(false);
   const [winner, setWinner] = useState('');
   const [gameRound, setGameRound] = useState(1);
   const [semiOneWinner, setSemiOneWinner] = useState(null);
   const [pairs, setPairs] = useState([]);
+  const [gameToStart, setGameToStart] = useState(false);
 
 
   useEffect(() => {
@@ -57,14 +52,16 @@ function findObjectByAlias(arr, alias) {
       setGameRound(2);
       setPairs([ pairs[1] ]);
       setGameOver(false);
+      setGameToStart(false);
       alert(`${ t('round') } 1 ${ t('winner') } ${ winner }`);
 
   }
 
   const handleSemifinalTwoEnd = () => {
     setPairs([[semiOneWinner, findObjectByAlias(pairs[0], winner)]]);
-    setGameRound(3);  
-    setGameOver(false)
+    setGameRound(3);
+    setGameOver(false);
+    setGameToStart(false);
     alert(`${ t('round') } 2 ${ t('winner') } ${ winner }`);
   }
 
@@ -72,13 +69,13 @@ function findObjectByAlias(arr, alias) {
   useEffect(() => {
     if (gameOver) return; // Skip effect when game is over
     if (pairs.length === 0) return ;
-    if (gameRound === 1) {
+    if (gameRound === 1 && !gameToStart) {
       alert(`${ t('starting round') } 1\n${ pairs[0][0].alias } vs ${ pairs[0][1].alias }`);
     }
-    else if (gameRound === 2) {
+    else if (gameRound === 2 && !gameToStart) {
       alert(`${ t('starting round') } 2\n${ pairs[0][0].alias } vs ${ pairs[0][1].alias }`);
     }
-    else if (gameRound === 3) {
+    else if (gameRound === 3 && !gameToStart) {
       alert(`${ t('starting final round') }\n${ pairs[0][0].alias } vs ${ pairs[0][1].alias }`)
     }
 
@@ -89,20 +86,12 @@ function findObjectByAlias(arr, alias) {
 
     let opponentScoreMesh, playerScoreMesh, loadedFont, playerNameMesh, opponentNameMesh;
 
-
-    const TEXT_PARAMS = {
-      size: 2.5,
-      height: 0.5,
-      curveSegments: 12,
-    };
-
-
     const scoreMaterial = new THREE.MeshStandardMaterial({
-      color: params.ballColor,
+      color: defaults.PARAMS.ballColor,
     });
 
     const nameMaterial = new THREE.MeshStandardMaterial({
-      color: params.nameColor,
+      color: defaults.PARAMS.nameColor,
     });
 
 
@@ -111,7 +100,7 @@ function findObjectByAlias(arr, alias) {
       loadedFont = font;
       const geometry = new TextGeometry('0', {
         font: font,
-        ...TEXT_PARAMS,
+        ...defaults.TEXT_PARAMS,
       });
 
       geometry.center();
@@ -120,10 +109,8 @@ function findObjectByAlias(arr, alias) {
       playerScoreMesh = opponentScoreMesh.clone();
       opponentScoreMesh.position.set(0, 2, -boundaries.y - 4);
       playerScoreMesh.position.set(0, 2, boundaries.y + 4);
-
       opponentScoreMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
       playerScoreMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
-
 
       scene.add(opponentScoreMesh, playerScoreMesh);
 
@@ -133,7 +120,7 @@ function findObjectByAlias(arr, alias) {
       console.log(pairs);
       const playerNameGeometry = new TextGeometry(pairs[0][0].alias, {
         font: font,
-        ...TEXT_PARAMS,
+        ...defaults.TEXT_PARAMS,
       });
 
       playerNameGeometry.center();
@@ -146,7 +133,7 @@ function findObjectByAlias(arr, alias) {
       // Opponent Name Mesh
       const opponentNameGeometry = new TextGeometry(pairs[0][1].alias, {
         font: font,
-        ...TEXT_PARAMS,
+        ...defaults.TEXT_PARAMS,
       });
 
       opponentNameGeometry.center();
@@ -159,7 +146,7 @@ function findObjectByAlias(arr, alias) {
     function getScoreGeometry(score) {
       const geometry = new TextGeometry(`${score}`, {
         font: loadedFont,
-        ...TEXT_PARAMS,
+        ...defaults.TEXT_PARAMS,
       });
 
       geometry.center();
@@ -174,9 +161,7 @@ function findObjectByAlias(arr, alias) {
     camera.position.set(40, 35, 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: window.devicePixelRatio < 2,
-    });
+    const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     sceneRef.current.appendChild(renderer.domElement);
     renderer.shadowMap.enabled = true;
@@ -195,7 +180,7 @@ function findObjectByAlias(arr, alias) {
     );
     planeGeometry.rotateX(-Math.PI * 0.5);
     const planeMaterial = new THREE.MeshStandardMaterial({
-      color: params.planeColor,
+      color: defaults.PARAMS.planeColor,
     });
 
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -203,21 +188,21 @@ function findObjectByAlias(arr, alias) {
     scene.add(plane);
 
     const boundGeometry = new RoundedBoxGeometry(1, 2, boundaries.y * 2, 5, 0.5);
-    const leftBoundMaterial = new THREE.MeshStandardMaterial({ color: params.paddleColor });
+    const leftBoundMaterial = new THREE.MeshStandardMaterial({ color: defaults.PARAMS.paddleColor });
     const leftBound = new THREE.Mesh(boundGeometry, leftBoundMaterial);
     leftBound.position.x = -boundaries.x - 0.5;
 
-    const rightBoundMaterial = new THREE.MeshStandardMaterial({ color: params.opponentPaddleColor });
+    const rightBoundMaterial = new THREE.MeshStandardMaterial({ color: defaults.PARAMS.opponentPaddleColor });
     const rightBound = new THREE.Mesh(boundGeometry, rightBoundMaterial);
     rightBound.position.x = boundaries.x + 0.5;
 
 
     scene.add(leftBound, rightBound);
 
-    const playerPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, 15), params.paddleColor);
-    const opponentPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, -15), params.opponentPaddleColor);
+    const playerPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, 15), defaults.PARAMS.paddleColor);
+    const opponentPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, -15), defaults.PARAMS.opponentPaddleColor);
     const ball = new Ball(scene, boundaries, [playerPaddle, opponentPaddle]);
-    ball.material.color.set(params.ballColor);
+    ball.material.color.set(defaults.PARAMS.ballColor);
 
     ball.addEventListener('ongoal', (e) => {
       score[e.message] += 1;
@@ -230,7 +215,7 @@ function findObjectByAlias(arr, alias) {
 
       mesh.geometry.getAttribute('position').needsUpdate = true;
 
-      if (score[e.message] >= 5) {
+      if (score[e.message] >= defaults.PONG_WIN_POINT) {
         setWinner(e.message === 'opponent' ? `${ pairs[0][1].alias }` : `${ pairs[0][0].alias }`);
         setGameOver(true);
         if (gameRound != 3) {
@@ -255,8 +240,10 @@ function findObjectByAlias(arr, alias) {
 
       const dt = deltaTime / 10;
 
-      for (let i = 0; i < 15; i++) {
-        ball.update(dt);
+      if (gameToStart) {
+        for (let i = 0; i < 15; i++) {
+          ball.update(dt);
+        }
       }
 
       if (moveLeft) {
@@ -288,6 +275,12 @@ function findObjectByAlias(arr, alias) {
         moveOpponentLeft = true;
       } else if (e.key === 'ArrowDown') {
         moveOpponentRight = true;
+      }
+
+      if (!gameToStart) {
+        if (e.key === 'Enter') {
+          setGameToStart(true)
+        }
       }
     }
 
@@ -332,8 +325,10 @@ function findObjectByAlias(arr, alias) {
       }
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);
+      ball.removeEventListener('ongoal');
+
     };
-  }, [gameOver, pairs]);
+  }, [gameOver, pairs, gameToStart]);
 
 
   return (

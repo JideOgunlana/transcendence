@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+    import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generateTiles } from '../../../utils/gameHelper';
 import defaults from '../../../utils/defaults';
@@ -148,7 +148,9 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     </div>
                 ))}
             </div>
-            <div className='timer'>{ t('time remaining') }: {countdown}s</div>
+            <div className='timer'>{ t('time remaining') }: 
+                <span className={ `btn ${countdown >= 40 ? 'btn-secondary': 'btn-danger'}` }>{countdown}s</span>
+            </div>
             <div className='moves'>
                 {selectedPlayers.map((player, index) => (
                     <div key={index} className='player-moves'>
