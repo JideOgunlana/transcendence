@@ -66,17 +66,65 @@ function findObjectByAlias(arr, alias) {
   }
 
 
+  const announceRound = () => {
+    if (!gameToStart) {
+      const rootElem = document.getElementById('root');
+      const custModalElem = document.createElement('div');
+      const custModalDialogElem = document.createElement('div');
+      const custModalContent = document.createElement('div');
+      const custModalBody = document.createElement('div');
+      const custModalHeader = document.createElement('div');
+      const custModalTitle = document.createElement('h5');
+      const btn = document.createElement('button');
+      const p = document.createElement('p');
+
+      custModalTitle.innerText = `${gameRound === 3 ?
+        "starting final round"
+        : t("starting round") + " " + gameRound}: ${pairs[0][0].alias} x ${pairs[0][1].alias}`;
+      p.innerText = t("press the enter key to start the game");
+      btn.innerText = "x";
+
+      custModalElem.className = 'customModal modal fade show d-block';
+      custModalDialogElem.className = 'modal-dialog', 'modal-dialog-centered';
+      custModalContent.className = 'modal-content';
+      custModalBody.className = 'modal-body';
+      custModalHeader.className = 'modal-header justify-content-between'
+      custModalTitle.className = 'modal-title'
+      btn.className = 'btn btn-danger';
+      btn.addEventListener('click', function (e) {
+        custModalElem.remove();
+      });
+
+      rootElem.appendChild(custModalElem);
+      custModalElem.appendChild(custModalDialogElem);
+      custModalDialogElem.appendChild(custModalContent);
+      custModalContent.appendChild(custModalHeader);
+      custModalContent.appendChild(custModalBody);
+
+      custModalHeader.appendChild(custModalTitle);
+      custModalHeader.appendChild(btn);
+      custModalBody.appendChild(p);
+
+    }
+    else {
+      const custModalElem = document.querySelector('.customModal');
+      if (custModalElem) {
+        custModalElem.remove();
+      }
+    }
+  }
+
   useEffect(() => {
     if (gameOver) return; // Skip effect when game is over
     if (pairs.length === 0) return ;
-    if (gameRound === 1 && !gameToStart) {
-      alert(`${ t('starting round') } 1\n${ pairs[0][0].alias } vs ${ pairs[0][1].alias }`);
+    if (gameRound === 1) {
+      announceRound()
     }
-    else if (gameRound === 2 && !gameToStart) {
-      alert(`${ t('starting round') } 2\n${ pairs[0][0].alias } vs ${ pairs[0][1].alias }`);
+    else if (gameRound === 2) {
+      announceRound();
     }
-    else if (gameRound === 3 && !gameToStart) {
-      alert(`${ t('starting final round') }\n${ pairs[0][0].alias } vs ${ pairs[0][1].alias }`)
+    else if (gameRound === 3) {
+      announceRound();
     }
 
     const score = {

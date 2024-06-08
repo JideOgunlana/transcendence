@@ -22,14 +22,14 @@ const PongGameMenu = ({handleNextBtnClick, handlePongOptionsChange, step}) => {
                         <h4 className=''>{ t('select theme') }</h4>
                     </div>
                     <div className='gameTheme-options d-flex justify-content-around'>
-                        <OptionBtn 
+                        {/* <OptionBtn 
                             btnClass='optionBtnMedium' 
                             handlePongOptionsChange={handlePongOptionsChange} 
                             step={step} 
                             option={'2D'} 
-                            val={'2D'}/>
+                            val={'2D'}/> */}
                         <OptionBtn 
-                            btnClass='optionBtnMedium' 
+                            btnClass='optionBtnLarge' 
                             handlePongOptionsChange={handlePongOptionsChange} 
                             step={step} 
                             option={'3D'} 

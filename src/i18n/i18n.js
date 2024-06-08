@@ -76,6 +76,7 @@ const resources = {
       "winner": "Winner",
       "starting round": "Starting round",
       "starting final round": "Starting final round",
+      "press the enter key to start the game": "Press the Enter Key to start the game",
     }
   },
   de: {
@@ -152,6 +153,7 @@ const resources = {
       "winner": "Gewinner(in)",
       "starting round": "Ab Runde",
       "starting final round": "Start Endrunde",
+      "press the enter key to start the game": "Drücken Sie die Eingabetaste, um das Spiel zu starten",
 
     }
   },
@@ -229,6 +231,7 @@ const resources = {
       "winner": "Gandor(a)",
       "starting round": "Comenzando la ronda",
       "starting final round": "Comenzando la ronda final",
+      "press the enter key to start the game": "Presiona la tecla Enter para iniciar el juego.",
 
     }
   },
@@ -306,6 +309,7 @@ const resources = {
       "winner": "Olubori",
       "starting round": "Bẹrẹ yika",
       "starting final round": "Bẹrẹ yika ikehin",
+      "press the enter key to start the game": "Tẹ Enter Tẹ lati bẹrẹ ere naa",
 
     }
   }
