@@ -13,8 +13,25 @@ const PongGame = ({ step }) => {
 
   const mode = step.pong.mode;
   const theme = step.pong.theme;
-
-  console.log(initialSelectedPlayers)
+  
+  if (mode === 'tournament') {
+    if (step.aliases.length === 0) {
+      return (
+        <div className='pongGame d-grid align-content-center'>
+          <Unauthorized />
+        </div>
+      )
+    }
+  }
+  if (mode === 'multiPlayer') {
+    if (step.pong.selectedPlayers.length < 2) {
+      return (
+        <div className='pongGame d-grid align-content-center'>
+          <Unauthorized />
+        </div>
+      )
+    }
+  }
 
   useEffect(() => {
     // Add / Remove 'no-scroll' class to body when component mounts / unmounts

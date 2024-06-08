@@ -36,6 +36,19 @@ const Main = ({ showSignup, userSignedUp, showDashboard, handleUserSignedUp, han
         ) {
             setStep(initialStepState);
         }
+        if (location.pathname === '/dashboard') {
+            if (step.aliases.length > 0) {
+                setStep({ ...step, aliases: [] });
+                setStep(prevStep => ({
+                    ...prevStep,
+                    [prevStep.pong.selected ? 'pong' : 'memory']: {
+                        ...prevStep[prevStep.pong.selected ? 'pong' : 'memory'],
+                        selectedPlayers: []
+                    }
+                }));
+            }
+
+        }
     }, [location, setStep])
 
 

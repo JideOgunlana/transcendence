@@ -13,16 +13,12 @@ const StartGameBar = ({ step, setStep }) => {
     const [showAliasModal, setShowAliasModal] = useState(false);
     const [aliases, setAliases] = useState([]);
     const [showError, setShowError] = useState(false);
-    const navigate = useNavigate(); // Use useNavigate for programmatic navigation
+    const navigate = useNavigate();
 
     const handleStartClick = () => {
         if ((step.pong.selected && step.pong.mode === 'tournament') ||
             (step.memory.selected && step.memory.mode === 'tournament')) {
-            if (aliases.length < 4) {
                 setShowAliasModal(true);
-            } else {
-                console.log('Start button Clicked - Starting game with parameters:', step, 'Aliases:', aliases);
-            }
         } else {
             // Navigate to the appropriate game route
             setAliases([]);
@@ -43,7 +39,7 @@ const StartGameBar = ({ step, setStep }) => {
             setShowAliasModal(false);
             setStep({ ...step, aliases: aliases });
             // Proceed with starting the game after aliases are set
-            console.log('Aliases are valid - Starting game with parameters:', step, 'Aliases:', step.aliases);
+            // console.log('Aliases are valid - Starting game with parameters:', step, 'Aliases:', step.aliases);
             // Navigate to the appropriate game route if aliases are valid
             if (step.pong.selected) {
                 navigate('pong');

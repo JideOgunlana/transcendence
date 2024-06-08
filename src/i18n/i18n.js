@@ -77,6 +77,7 @@ const resources = {
       "starting round": "Starting round",
       "starting final round": "Starting final round",
       "press the enter key to start the game": "Press the Enter Key to start the game",
+      "match is a tie, start tie breaker": "Match is a tie, start tie breaker",
     }
   },
   de: {
@@ -154,7 +155,7 @@ const resources = {
       "starting round": "Ab Runde",
       "starting final round": "Start Endrunde",
       "press the enter key to start the game": "Drücken Sie die Eingabetaste, um das Spiel zu starten",
-
+      "match is a tie, start tie breaker": "Spiel ist unentschieden, Ziehungsbrecher starten",
     }
   },
   es: {
@@ -232,7 +233,7 @@ const resources = {
       "starting round": "Comenzando la ronda",
       "starting final round": "Comenzando la ronda final",
       "press the enter key to start the game": "Presiona la tecla Enter para iniciar el juego.",
-
+      "match is a tie, start tie breaker": "El partido es un empate, comienza el desempate",
     }
   },
   ng: {
@@ -254,7 +255,7 @@ const resources = {
       "username should contain only letters / numbers" : "Orukọ olumulo yẹ ki o ni awọn lẹta / awọn nọmba nikan",
       "username should start with a letter": "orukọ olumulo yẹ ki o bẹrẹ pẹlu lẹta kan",
       "username": "Orukọ olumulo",
-      "email": "Emaimeeliil",
+      "email": "Emaili",
       "email is not valid": "Imeeli ko wulo",
       "already have a user": "Ṣe o ti ni olumulo tẹlẹ",
       "go to Dashboard": "Lọ si Dasibodu",
@@ -310,7 +311,7 @@ const resources = {
       "starting round": "Bẹrẹ yika",
       "starting final round": "Bẹrẹ yika ikehin",
       "press the enter key to start the game": "Tẹ Enter Tẹ lati bẹrẹ ere naa",
-
+      "match is a tie, start tie breaker": "Baramu jẹ iyaworan, bẹrẹ fifọ iyaworan",
     }
   }
 };

@@ -21,6 +21,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
     const [winner, setWinner] = useState(null);
     const [semiOneWinner, setSemiOneWinner] = useState(null);
     const [modalMessage, setModalMessage] = useState('');
+    const [announceRound, setAnnounceRound] = useState(true);
 
     useEffect(() => {
         const initialTiles = generateTiles(theme, gridSize);
@@ -94,7 +95,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
         const winner1 = player1Points > player2Points ? player1 : player2;
         if (player1Points === player2Points && player1Points !== 0) {
             setWinner('tie');
-            setModalMessage("Match is a Tie, game will restart");
+            setModalMessage("match is a tie, start tie breaker");
             setShowModal(true);
             setGameRound(1);
             replayGame();
@@ -103,6 +104,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
         }
         setSemiOneWinner(winner1);
         setModalMessage(`Round 1 winner: ${winner1.alias}`);
+        setAnnounceRound(true);
         setShowModal(true);
         setPairs([pairs[1]]);
         setGameRound(2);
@@ -116,7 +118,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
         const winner2 = player3Points > player4Points ? player3 : player4;
         if (player3Points === player4Points && player3Points !== 0) {
             setWinner('tie');
-            setModalMessage("Match is a Tie, game will restart");
+            setModalMessage("match is a tie, start tie breaker");
             setShowModal(true);
             setGameRound(2);
             replayGame();
@@ -124,6 +126,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
             return;
         }
         setModalMessage(`Round 2 winner: ${winner2.alias}`);
+        setAnnounceRound(true);
         setShowModal(true);
         setPairs([[semiOneWinner, winner2]]);
         setGameRound(3);
@@ -151,7 +154,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
         const finalWinner = player1Points > player2Points ? player1.alias : player2.alias;
         if (player1Points === player2Points && player1Points !== 0) {
             setWinner('tie');
-            setModalMessage("Match is a Tie, game will restart");
+            setModalMessage("match is a tie, start tie breaker");
             setShowModal(true);
             setGameRound(3);
             resetGame();
@@ -182,16 +185,42 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
             </div>
             {pairs.length > 0 && (
                 <>
-                    <div className='current-player'>{ t('current player') }: {getCurrentPlayerName()}</div>
-                    <div className='points'>
+                    <div className='current-player'>{t('current player')}: {getCurrentPlayerName()}</div>
+                    <div className='points row'>
                         {pairs[0].map((player, index) => (
-                            <div key={index} className='player-points'>
-                                {player.alias}: {gameRound === 1 ? s1Points[index] : gameRound === 2 ? s2Points[index] : finalsPoints[index]}
+                            <div key={index}
+                                className={`col-12 text-center p-2 rounded ${index % 2 === 0 ? `${getCurrentPlayerName() === player.alias ? 'current-player-left' : ''}` : `${getCurrentPlayerName() === player.alias ? 'current-player-right' : ''}`}`}>
+                                <div>
+                                    {player.alias}: {gameRound === 1 ? s1Points[index] : gameRound === 2 ? s2Points[index] : finalsPoints[index]}
+                                </div>
                             </div>
                         ))}
                     </div>
                 </>
             )}
+            {
+                announceRound && pairs.length > 0 && (
+                    <div className="modal fade show d-block" tabIndex="-1" role="dialog">
+                        <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header justify-content-between">
+                                    <h5 className="modal-title">
+                                        {gameRound !== 3 ? `${t('starting round')} ${gameRound}` : `${t('starting final round')}`}
+                                    </h5>
+                                    <div type="button" className="close" onClick={() => setAnnounceRound(false)}>
+                                        <span className='btn btn-danger' aria-hidden="true"><img src={closeIcon} alt='close' width={20} /></span>
+                                    </div>
+                                </div>
+                                <div className="modal-body">
+                                    <p className='text-center mb-0'>
+                                        {pairs[0][0].alias} x {pairs[0][1].alias}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
             {
                 showModal && (
                     <div className="modal fade show d-block" tabIndex="-1" role="dialog">
@@ -199,20 +228,25 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
                             <div className="modal-content">
                                 <div className="modal-header justify-content-between">
                                     <h5 className="modal-title">
-                                        { winner === 'tie' ? `${ ('tie breaker') }` : gameRound === 3 ? `${ t('game over') }` : `${t('round over') }` }
+                                        {winner === 'tie' ? `${t('tie breaker')}` : gameRound === 3 ? `${t('game over')}` : `${t('round over')}`}
                                     </h5>
                                     <div type="button" className="close" onClick={() => setShowModal(false)}>
-                                        <span aria-hidden="true"><img src={ closeIcon } alt='close' width={20} /></span>
+                                        <span className='btn btn-danger' aria-hidden="true"><img src={closeIcon} alt='close' width={20} /></span>
                                     </div>
                                 </div>
                                 <div className="modal-body">
-                                    <p className='text-center mb-0'>{ modalMessage }</p>
+                                    <p className='text-center mb-0'>{t(modalMessage)}</p>
                                 </div>
                                 {
                                     gameRound === 3 && winner !== 'tie' && (
-                                    <div className="modal-footer justify-content-center">
-                                        <button type="button" className="game-btn-enabled" onClick={() => navigate('/dashboard') }>Play Again</button>
-                                    </div>
+                                        <div className="modal-footer justify-content-center">
+                                            <button
+                                                type="button"
+                                                className="game-btn-enabled"
+                                                onClick={() => navigate('/dashboard')}>
+                                                {t('play again')}
+                                            </button>
+                                        </div>
                                     )
                                 }
                             </div>

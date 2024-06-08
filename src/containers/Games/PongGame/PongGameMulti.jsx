@@ -383,6 +383,12 @@ const handleSubmitResults = async () => {
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);
       ball.removeEventListener('ongoal');
+
+      const custModalElem = document.querySelector('.customModal');
+      if (custModalElem) {
+        custModalElem.remove();
+      }
+
     };
   }, [gameOver, gameToStart]);
 

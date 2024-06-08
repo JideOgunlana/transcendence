@@ -67,3 +67,10 @@
   margin-top: 20px;
   font-size: 1.5rem;
 }
+
+.current-player-left {
+  background-color: var(--custom-player-left);
+}
+.current-player-right {
+  background-color: var(--custom-player-right);
+}

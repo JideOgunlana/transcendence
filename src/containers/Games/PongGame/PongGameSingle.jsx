@@ -359,6 +359,12 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);
       ball.removeEventListener('ongoal');
+
+      const custModalElem = document.querySelector('.customModal');
+      if (custModalElem) {
+        custModalElem.remove();
+      }
+
     };
   }, [gameOver, gameToStart]);
 

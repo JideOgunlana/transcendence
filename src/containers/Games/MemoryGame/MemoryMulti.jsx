@@ -174,10 +174,10 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
             </div>
             <div className='points'>
                 {selectedPlayers.map((player, index) => (
-                    <div key={index} className='player-points'>
+                    <div key={index} className={`col-12 text-center p-2 rounded ${index % 2 === 0 ? `${getCurrentPlayerName() === player.username ? 'current-player-left' : ''}` : `${getCurrentPlayerName() === player.username ? 'current-player-right' : ''}`}`}>
                         {
                             <div>
-                                {player.username} : {points[index]} { t('points') }
+                                {player.username} : {points[index]} {t('points')}
                             </div>
                         }
                     </div>
@@ -191,7 +191,7 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
                             <div className="modal-content">
                                 <div className="modal-header justify-content-between">
                                     <h5 className="modal-title">
-                                        { winner === 'tie' ? "Tie Breaker" : "Game Over" }
+                                        { winner === 'tie' ? t('tie breaker') : t('game over') }
                                     </h5>
                                     <div type="button" className="close" onClick={() => setShowModal(false)}>
                                         <span className='btn btn-danger' aria-hidden="true" ><img src={closeIcon} alt='close' width={20} /></span>
@@ -199,13 +199,18 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
                                 </div>
                                 <div className="modal-body">
                                     <p className='text-center mb-0'>
-                                        {winner === 'tie' ? "Match is a Tie, game will restart" : `Congratulations ${winner}!`}
+                                        {winner === 'tie' ? t('match is a tie, start tie breaker') : `${ t('winner') } ${ winner }!`}
                                     </p>
                                 </div>
                                 {
                                     winner !== 'tie' && (
                                         <div className="modal-footer justify-content-center">
-                                            <button type="button" className="game-btn-enabled" onClick={() => navigate('/dashboard') }>Play Again</button>
+                                            <button
+                                                type="button"
+                                                className="game-btn-enabled"
+                                                onClick={() => navigate('/dashboard') }>
+                                                    { t('play again') }
+                                            </button>
                                         </div>
                                     )
                                 }

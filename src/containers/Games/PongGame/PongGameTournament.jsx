@@ -375,6 +375,11 @@ function findObjectByAlias(arr, alias) {
       document.removeEventListener('keyup', keyUpHandler);
       ball.removeEventListener('ongoal');
 
+      const custModalElem = document.querySelector('.customModal');
+      if (custModalElem) {
+        custModalElem.remove();
+      }
+
     };
   }, [gameOver, pairs, gameToStart]);
 

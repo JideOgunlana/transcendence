@@ -18,6 +18,25 @@ const MemoryGame = ({ step }) => {
     const theme = step.memory.theme;
     const gridSize = step.memory.gridSize;
 
+    if (mode === 'tournament') {
+        if (step.aliases.length === 0) {
+            return (
+                <div className='memoryGame d-grid align-content-center'>
+                    <Unauthorized />
+                </div>
+            )
+        }
+    }
+    if (mode === 'multiPlayer') {
+        if (step.memory.selectedPlayers.length < 2) {
+            return (
+                <div className='pongGame d-grid align-content-center'>
+                    <Unauthorized />
+                </div>
+            )
+        }
+    }
+
     return (
 
         <div className='memoryGame d-grid align-content-center'>
