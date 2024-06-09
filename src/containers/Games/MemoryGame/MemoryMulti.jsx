@@ -39,7 +39,7 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
             setFlippedTiles(prev => [...prev, index]);
         }
         setTotalFlips(totalFlips + 1);
-        console.log("FlippedTiles count: " + totalFlips);
+        // console.log("FlippedTiles count: " + totalFlips);
     };
 
     useEffect(() => {
@@ -67,7 +67,7 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
     };
 
     useEffect(() => {
-        console.log(flippedTiles.length);
+        // console.log(flippedTiles.length);
         if (matchedTiles.length === tiles.length && tiles.length > 0) {
             determineWinner();
         }
@@ -169,12 +169,16 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
                 ))}
             </div>
 
-            <div className='current-player'>
-                { t('current player') }: {getCurrentPlayerName()}
+            <div className='current-player p-3 mt-3'>
+                { t('current player') }: 
+                <span className={`px-2 rounded ${ currentPlayer === 0 ? 'player-left': 'player-right'}`}>
+                    {getCurrentPlayerName()}
+                </span>
             </div>
-            <div className='points'>
+            <div className='points row'>
                 {selectedPlayers.map((player, index) => (
-                    <div key={index} className={`col-12 text-center p-2 rounded ${index % 2 === 0 ? `${getCurrentPlayerName() === player.username ? 'current-player-left' : ''}` : `${getCurrentPlayerName() === player.username ? 'current-player-right' : ''}`}`}>
+                    <div key={index}
+                        className={`col-12 text-center p-2 rounded ${currentPlayer === 0 ? `${getCurrentPlayerName() === player.username ? 'player-left' : ''}` : `${getCurrentPlayerName() === player.username ? 'player-right' : ''}`}`}>
                         {
                             <div>
                                 {player.username} : {points[index]} {t('points')}

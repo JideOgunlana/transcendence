@@ -163,9 +163,8 @@ function findObjectByAlias(arr, alias) {
       scene.add(opponentScoreMesh, playerScoreMesh);
 
 
-
       // Player Name Mesh
-      console.log(pairs);
+      // console.log(pairs);
       const playerNameGeometry = new TextGeometry(pairs[0][0].alias, {
         font: font,
         ...defaults.TEXT_PARAMS,

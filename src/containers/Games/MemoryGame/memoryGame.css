@@ -64,13 +64,27 @@
 
 .timer,
 .current-player {
-  margin-top: 20px;
   font-size: 1.5rem;
 }
 
-.current-player-left {
-  background-color: var(--custom-player-left);
+.points {
+  .player-left {
+    background-color: var(--custom-player-left);
+  }
+  .player-right {
+    background-color: var(--custom-player-right);
+  }
 }
-.current-player-right {
-  background-color: var(--custom-player-right);
+
+.player-left,
+.player-right {
+  border: 1px solid;
+}
+
+.player-left {
+  border-color: var(--custom-player-left);
+}
+
+.player-right {
+  border-color: var(--custom-player-right);
 }

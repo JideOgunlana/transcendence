@@ -73,7 +73,7 @@ const HistoryAll = () => {
                 // const data =  await getFakeUserData();
                 const response = await axios.get('http://127.0.0.1:8000/pong/users/');
                 setUserData(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             } catch (err) {
                 setError('Failed to fetch user data');
                 console.error(err);

@@ -168,6 +168,9 @@ const HistoryUser = ({ userData, onBack }) => {
                             userImg={userIcon}
                             username={username}
                         />
+                        <div className='mt-3'>
+                            Email: {userData.email}
+                        </div>
                     </div>
                     <div className='historyUser--stats-grid row gap-4 col-12 col-md-8 justify-content-center'>
                         <PongWinLoss

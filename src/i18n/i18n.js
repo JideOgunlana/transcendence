@@ -78,6 +78,8 @@ const resources = {
       "starting final round": "Starting final round",
       "press the enter key to start the game": "Press the Enter Key to start the game",
       "match is a tie, start tie breaker": "Match is a tie, start tie breaker",
+      "you are not authorized to view this page": "You are not authorized to view this page",
+
     }
   },
   de: {
@@ -156,6 +158,8 @@ const resources = {
       "starting final round": "Start Endrunde",
       "press the enter key to start the game": "Drücken Sie die Eingabetaste, um das Spiel zu starten",
       "match is a tie, start tie breaker": "Spiel ist unentschieden, Ziehungsbrecher starten",
+      "you are not authorized to view this page": "Sie sind nicht berechtigt, diese Seite anzuzeigen",
+
     }
   },
   es: {
@@ -234,6 +238,8 @@ const resources = {
       "starting final round": "Comenzando la ronda final",
       "press the enter key to start the game": "Presiona la tecla Enter para iniciar el juego.",
       "match is a tie, start tie breaker": "El partido es un empate, comienza el desempate",
+      "you are not authorized to view this page": "no estás autorizado a ver esta página",
+
     }
   },
   ng: {
@@ -310,8 +316,9 @@ const resources = {
       "winner": "Olubori",
       "starting round": "Bẹrẹ yika",
       "starting final round": "Bẹrẹ yika ikehin",
-      "press the enter key to start the game": "Tẹ Enter Tẹ lati bẹrẹ ere naa",
+      "press the enter key to start the game": "Tẹ Enter lati bẹrẹ ere naa",
       "match is a tie, start tie breaker": "Baramu jẹ iyaworan, bẹrẹ fifọ iyaworan",
+      "you are not authorized to view this page": "o ni aṣẹ lati wo oju-iwe yii",
     }
   }
 };

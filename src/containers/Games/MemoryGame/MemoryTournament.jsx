@@ -185,13 +185,18 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
             </div>
             {pairs.length > 0 && (
                 <>
-                    <div className='current-player'>{t('current player')}: {getCurrentPlayerName()}</div>
+                    <div className='current-player p-3 mt-3'>
+                        {t('current player')}: 
+                        <span className={`px-2 rounded ${ currentPlayer === 0 ? 'player-left': 'player-right'}`}>
+                            {getCurrentPlayerName()}
+                        </span>
+                    </div>
                     <div className='points row'>
                         {pairs[0].map((player, index) => (
                             <div key={index}
-                                className={`col-12 text-center p-2 rounded ${index % 2 === 0 ? `${getCurrentPlayerName() === player.alias ? 'current-player-left' : ''}` : `${getCurrentPlayerName() === player.alias ? 'current-player-right' : ''}`}`}>
+                                className={`col-12 text-center p-2 rounded ${currentPlayer === 0 ? `${getCurrentPlayerName() === player.alias ? 'player-left' : ''}` : `${getCurrentPlayerName() === player.alias ? 'player-right' : ''}`}`}>
                                 <div>
-                                    {player.alias}: {gameRound === 1 ? s1Points[index] : gameRound === 2 ? s2Points[index] : finalsPoints[index]}
+                                    {player.alias}: {gameRound === 1 ? s1Points[index] : gameRound === 2 ? s2Points[index] : finalsPoints[index]} {t('points')}
                                 </div>
                             </div>
                         ))}
@@ -228,7 +233,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
                             <div className="modal-content">
                                 <div className="modal-header justify-content-between">
                                     <h5 className="modal-title">
-                                        {winner === 'tie' ? `${t('tie breaker')}` : gameRound === 3 ? `${t('game over')}` : `${t('round over')}`}
+                                        {winner === 'tie' ? '' : gameRound === 3 ? `${t('game over')}` : `${t('round over')}`}
                                     </h5>
                                     <div type="button" className="close" onClick={() => setShowModal(false)}>
                                         <span className='btn btn-danger' aria-hidden="true"><img src={closeIcon} alt='close' width={20} /></span>

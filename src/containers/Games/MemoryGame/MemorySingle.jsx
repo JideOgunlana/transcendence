@@ -148,12 +148,12 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     </div>
                 ))}
             </div>
-            <div className='timer'>{ t('time remaining') }: 
+            <div className='timer p-3 mt-3'>{ t('time remaining') }: 
                 <span className={ `btn ${countdown >= 40 ? 'btn-secondary': 'btn-danger'}` }>{countdown}s</span>
             </div>
-            <div className='moves'>
+            <div className='moves row'>
                 {selectedPlayers.map((player, index) => (
-                    <div key={index} className='player-moves'>
+                    <div key={index} className='player-moves col-12'>
                         <div>
                             { t('player') }: {player.username}
                             <br />
