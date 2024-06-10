@@ -27,6 +27,7 @@ export default class Ball extends EventDispatcher {
         this.paddleLeft = paddleLeft;
         this.paddleRight = paddleRight;
         this.hitMask = 0b00;
+        this.pos = pos
         /* this.handleReset = this.handleReset.bind(this)
         window.addEventListener("reset", this.handleReset, false) */
         this.initBall(pos)
@@ -122,16 +123,20 @@ export default class Ball extends EventDispatcher {
             this.hitMask |= 2
             this.ToggleHitMask(2)
         }
-        else if (this.CollisionXLeft()) {
+        else if (this.CollisionXLeft() || this.CollisionXRight()) {
             //dispatchEvent(Events["hitLeftWall"])
-            this.dispatchEvent({ type: 'ongoal', message: "opponent" })
+            if (this.mesh.position.x > 0)
+                this.dispatchEvent({ type: 'ongoal', message: "opponent" })
+            else
+                this.dispatchEvent({ type: 'ongoal', message: "player" })
+            this.mesh.position.set(this.pos.x, this.pos.y, this.pos.z);
             this.direction.x *= -1;
         }
-        else if (this.CollisionXRight()) {
+        /* else if (this.CollisionXRight()) {
             //dispatchEvent(Events["hitRightWall"])
             this.dispatchEvent({ type: 'ongoal', message: "player" })
             this.direction.x *= -1;
-        }
+        } */
         else if (this.CollisionZ())
             this.direction.z *= -1;
     }

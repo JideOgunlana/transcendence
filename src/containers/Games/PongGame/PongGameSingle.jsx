@@ -3,9 +3,7 @@ import axios from 'axios';
 import * as THREE from 'three';
 import Paddle from './Paddle';
 import Ball from './Ball';
-import lights from './lights';
 import AIPlayer from './AIPlayer';
-import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry';
 import srcFont from 'three/examples/fonts/helvetiker_bold.typeface.json?url';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
@@ -159,6 +157,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       pcScoreMesh = new THREE.Mesh(geometry, scoreMaterial);
       playerScoreMesh = pcScoreMesh.clone();
       pcScoreMesh.scale.setScalar(1.5);
+      playerScoreMesh.scale.setScalar(1.5);
       pcScoreMesh.position.set(-gameField.x - 4, -1, 3);
       playerScoreMesh.position.set(gameField.x + 4, -1, 3);
       pcScoreMesh.rotation.set(0, Math.PI, 0); // Rotate by 90 degrees anti-clockwise
@@ -224,7 +223,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
 
 
-    const clock = new THREE.Clock();
+    //const clock = new THREE.Clock();
 
     const ai = new AIPlayer(pcPaddle, ball, gameField);
     let moveUp = false;
@@ -233,18 +232,10 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     const animate = () => {
       if (gameOver) return; // Stop the game loop if game is over
 
-      const deltaTime = clock.getDelta();
-
-      const dt = deltaTime / 10;
-
       if (gameToStart) {
         ball.update();
         ai.HandleMovement()
-        pcPaddle.update()
-        /* for (let i = 0; i < 15; i++) {
-          ball.update(); //(dt)
-          //ai.update(dt);
-        } */
+        pcPaddle.updateAI()
       }
 
       if (moveUp) {
@@ -262,6 +253,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     };
     requestRef.current = requestAnimationFrame(animate);
 
+    
     //handling key up and down press
     function keyDownHandler(e) {
       if (e.key === 'w' || e.key === 'W') {
@@ -283,9 +275,14 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
         moveDown = false;
       }
     }
-  
+    
+    function predictionHandler(e) {
+      console.log("handling ai prediction")
+      pcPaddle.SetPredictionPoint(e.detail.point)
+    }
     document.addEventListener('keydown', keyDownHandler, false);
     document.addEventListener('keyup', keyUpHandler, false);
+    window.addEventListener("AIPrediction", predictionHandler, false);
 
     return () => {
       cancelAnimationFrame(requestRef.current);
@@ -296,20 +293,28 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
         if (object.material.isMaterial) {
           cleanMaterial(object.material);
         } else {
-          for (const material of object.material) cleanMaterial(material);
+          console.log("material is an iterable, PLEASE CHECK IT DAMN YOU")
+          /*for (const material of object.material) {
+            cleanMaterial(material);
+          } */
         }
       });
       function cleanMaterial(material) {
         material.dispose();
-        for (const key in material) {
+        //for (const key of material) console.log("of key: ", key);
+        /* for (const key in material) {
           if (material[key] && typeof material[key].dispose === 'function') {
+            console.log(" its a function")
             material[key].dispose();
+          } else if (material[key] && typeof material[key].dispose !== 'function') {
+            console.log(" its not a function")
           }
-        }
+        } */
       }
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);
       ball.removeEventListener('ongoal');
+      window.removeEventListener("AIPrediction", predictionHandler);
 
       const custModalElem = document.querySelector('.customModal');
       if (custModalElem) {
