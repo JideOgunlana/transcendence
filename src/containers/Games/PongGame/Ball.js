@@ -37,7 +37,6 @@ export default class Ball extends EventDispatcher {
         this.mesh.position.set(pos.x, pos.y, pos.z); //x=-2, y=5, z=0
         this.mesh.castShadow = true;
         this.scene.add(this.mesh);
-        //this.world.addBody(this.physicBody);
     }
     /* handleReset() {
         this.SetDirection(Constants.ballStartDir);
@@ -126,9 +125,9 @@ export default class Ball extends EventDispatcher {
         else if (this.CollisionXLeft() || this.CollisionXRight()) {
             //dispatchEvent(Events["hitLeftWall"])
             if (this.mesh.position.x > 0)
-                this.dispatchEvent({ type: 'ongoal', message: "opponent" })
+                this.dispatchEvent({ type: 'onscore', message: "opponent" })
             else
-                this.dispatchEvent({ type: 'ongoal', message: "player" })
+                this.dispatchEvent({ type: 'onscore', message: "player" })
             this.mesh.position.set(this.pos.x, this.pos.y, this.pos.z);
             this.direction.x *= -1;
         }

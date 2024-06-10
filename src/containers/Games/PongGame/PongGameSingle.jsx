@@ -94,11 +94,54 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
   useEffect(() => {
     if (gameOver) return; // Skip effect when game is over
 
-    const score = {
+    const scores = {
       opponent: 0,
       player: 0,
     };
 
+    if (!gameToStart) {
+      const rootElem = document.getElementById('root');
+      const custModalElem = document.createElement('div');
+      const custModalDialogElem = document.createElement('div');
+      const custModalContent = document.createElement('div');
+      const custModalBody = document.createElement('div');
+      const custModalHeader = document.createElement('div');
+      const custModalTitle = document.createElement('h5');
+      const btn = document.createElement('button');
+      const p = document.createElement('p');
+
+      custModalTitle.innerText = `${ selectedPlayers[0].username } x AI`;
+      p.innerText = t("press the enter key to start the game");
+      btn.innerText = "x";
+
+      custModalElem.className = 'customModal modal fade show d-block';
+      custModalDialogElem.className = 'modal-dialog', 'modal-dialog-centered';
+      custModalContent.className = 'modal-content';
+      custModalBody.className = 'modal-body';
+      custModalHeader.className = 'modal-header justify-content-between'
+      custModalTitle.className = 'modal-title'
+      btn.className = 'btn btn-danger';
+      btn.addEventListener('click', function (e) {
+        custModalElem.remove();
+      });
+      
+      rootElem.appendChild(custModalElem);
+      custModalElem.appendChild(custModalDialogElem);
+      custModalDialogElem.appendChild(custModalContent);
+      custModalContent.appendChild(custModalHeader);
+      custModalContent.appendChild(custModalBody);
+
+      custModalHeader.appendChild(custModalTitle);
+      custModalHeader.appendChild(btn);
+      custModalBody.appendChild(p);
+
+    }
+    else {
+      const custModalElem = document.querySelector('.customModal');
+      if (custModalElem) {
+        custModalElem.remove();
+      }
+    }
     
 
     const scene = new THREE.Scene();
@@ -109,7 +152,6 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 20, -20);
-    //camera.position.set(40, 35, 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     const renderer = new THREE.WebGLRenderer();
@@ -117,7 +159,6 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     sceneRef.current.appendChild(renderer.domElement);
     renderer.shadowMap.enabled = true;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    //renderer.shadowMap.type = THREE.VSMShadowMap;
     new Ground(scene, 0xf1ebff, gameField);
    
 
@@ -133,10 +174,10 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     new Wall(scene, 0, 0.5, -10.5, 22, 1, 1, 0x8674aa)
 
 
-    let pcScoreMesh, playerScoreMesh, loadedFont, playerNameMesh, aiNameMesh;
+    let aiScoreMesh, playerScoreMesh, loadedFont, playerNameMesh, aiNameMesh;
 
     const scoreMaterial = new THREE.MeshStandardMaterial({
-      color: defaults.PARAMS.ballColor,
+      color: 0x8674aa,
     });
 
     const nameMaterial = new THREE.MeshStandardMaterial({
@@ -147,26 +188,26 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     const fontLoader = new FontLoader();
     fontLoader.load(srcFont, function (font) {
       loadedFont = font;
-      const geometry = new TextGeometry('0', {
+
+      const scoreGeometry = new TextGeometry('0', {
         font: font,
         ...defaults.TEXT_PARAMS,
       });
 
-      geometry.center();
+      scoreGeometry.center();
 
-      pcScoreMesh = new THREE.Mesh(geometry, scoreMaterial);
-      playerScoreMesh = pcScoreMesh.clone();
-      pcScoreMesh.scale.setScalar(1.5);
-      playerScoreMesh.scale.setScalar(1.5);
-      pcScoreMesh.position.set(-gameField.x - 4, -1, 3);
+      aiScoreMesh = new THREE.Mesh(scoreGeometry, scoreMaterial);
+      aiScoreMesh.scale.setScalar(1.5);
+      aiScoreMesh.position.set(-gameField.x - 4, -1, 3);
+      aiScoreMesh.rotation.set(0, Math.PI, 0);
+      
+      playerScoreMesh = aiScoreMesh.clone();
       playerScoreMesh.position.set(gameField.x + 4, -1, 3);
-      pcScoreMesh.rotation.set(0, Math.PI, 0); // Rotate by 90 degrees anti-clockwise
-      playerScoreMesh.rotation.set(0, Math.PI, 0); // Rotate by 90 degrees anti-clockwise
+      playerScoreMesh.rotation.set(0, Math.PI, 0);
+      playerScoreMesh.scale.setScalar(1.5);
 
-      scene.add(pcScoreMesh, playerScoreMesh);
+      scene.add(aiScoreMesh, playerScoreMesh);
 
-
-      // Player Name Mesh
       const playerNameGeometry = new TextGeometry(selectedPlayers[0].username, {
         font: font,
         ...defaults.TEXT_PARAMS,
@@ -175,7 +216,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       playerNameGeometry.center();
       playerNameMesh = new THREE.Mesh(playerNameGeometry, nameMaterial);
       playerNameMesh.position.set(gameField.x + 4, 5, 3);
-      playerNameMesh.rotation.set(0, Math.PI, 0); // Rotate by 90 degrees anti-clockwise
+      playerNameMesh.rotation.set(0, Math.PI, 0);
 
       scene.add(playerNameMesh);
 
@@ -188,7 +229,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       aiNameGeometry.center();
       aiNameMesh = new THREE.Mesh(aiNameGeometry, nameMaterial);
       aiNameMesh.position.set(-gameField.x - 4, 5, 3);
-      aiNameMesh.rotation.set(0, Math.PI, 0); // Rotate by 90 degrees anti-clockwise
+      aiNameMesh.rotation.set(0, Math.PI, 0);
       scene.add(aiNameMesh);
     });
 
@@ -203,19 +244,18 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       return geometry;
     }
 
-    ball.addEventListener('ongoal', (e) => {
-      console.log(e.message)
-      score[e.message] += 1;
+    ball.addEventListener('onscore', (e) => {
+      scores[e.message] += 1;
 
-      const geometry = getScoreGeometry(score[e.message]);
+      const geometry = getScoreGeometry(scores[e.message]);
 
-      const mesh = e.message === 'opponent' ? pcScoreMesh : playerScoreMesh;
+      const mesh = e.message === 'opponent' ? aiScoreMesh : playerScoreMesh;
 
       mesh.geometry = geometry;
 
-      mesh.geometry.getAttribute('position').needsUpdate = true;
+      //mesh.geometry.getAttribute('position').needsUpdate = true;
 
-      if (score[e.message] >= defaults.PONG_WIN_POINT) {
+      if (scores[e.message] >= defaults.PONG_WIN_POINT) {
         setWinner(e.message === 'opponent' ? 'AI' : `${ selectedPlayers[0].username }`);
         setGameOver(true);
       }
@@ -230,7 +270,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     let moveDown = false;
 
     const animate = () => {
-      if (gameOver) return; // Stop the game loop if game is over
+      if (gameOver) return;
 
       if (gameToStart) {
         ball.update();
@@ -241,11 +281,9 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       if (moveUp) {
         playerPaddle.moveUp()
         playerPaddle.update()
-        //playerPaddle.setX(playerPaddle.mesh.position.x - 1);
       } else if (moveDown) {
         playerPaddle.moveDown()
         playerPaddle.update()
-        //playerPaddle.setX(playerPaddle.mesh.position.x + 1);
       }
 
       renderer.render(scene, camera);
@@ -277,7 +315,6 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     }
     
     function predictionHandler(e) {
-      console.log("handling ai prediction")
       pcPaddle.SetPredictionPoint(e.detail.point)
     }
     document.addEventListener('keydown', keyDownHandler, false);
@@ -313,7 +350,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       }
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);
-      ball.removeEventListener('ongoal');
+      ball.removeEventListener('onscore');
       window.removeEventListener("AIPrediction", predictionHandler);
 
       const custModalElem = document.querySelector('.customModal');
@@ -324,13 +361,9 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     };
   }, [gameOver, gameToStart]);
 
-  const handleRestart = () => {
-
-  };
-
   return (
     <div ref={sceneRef}>
-      <PongGameOverModal show={gameOver} winner={winner} onRestart={handleRestart} />
+      <PongGameOverModal show={gameOver} winner={winner} />
     </div>
   );
 };
