@@ -113,7 +113,7 @@ const handleSubmitResults = async () => {
       const btn = document.createElement('button');
       const p = document.createElement('p');
 
-      custModalTitle.innerText = `${ selectedPlayers[0].username } x ${ selectedPlayers[0].username }`;
+      custModalTitle.innerText = `${ selectedPlayers[0].username } x ${ selectedPlayers[1].username }`;
       p.innerText = t("press the enter key to start the game");
       btn.innerText = "x";
 
@@ -224,7 +224,7 @@ const handleSubmitResults = async () => {
       scene.add(playerNameMesh);
 
       // Opponent Name Mesh
-      const opponentNameGeometry = new TextGeometry(selectedPlayers[0].username, {
+      const opponentNameGeometry = new TextGeometry(selectedPlayers[1].username, {
         font: font,
         ...defaults.TEXT_PARAMS,
       });
