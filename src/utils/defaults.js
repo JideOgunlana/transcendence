@@ -8,7 +8,7 @@ const defaults = {
     ALIAS_MAX_LENGTH: 15,
     AI_USERNAME: 'AI',
     MEMORY_SINGLE_TIME: 120,
-    PONG_WIN_POINT: 2,
+    PONG_WIN_POINT: 12,
     /* PARAMS: {
         planeColor: 0x5A5A5A,
         paddleColor: 0xF59E0B,
