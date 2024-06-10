@@ -9,11 +9,13 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 import srcFont from 'three/examples/fonts/helvetiker_bold.typeface.json?url';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import PongGameOverModal from './PongGameOverModal';
 import defaults from '../../../utils/defaults';
 import { useTranslation } from 'react-i18next';
-
+import Wall from './Wall';
+import Light from './Light';
+import { LightTypes } from './Enums';
+import Ground from './Ground';
 
 const PongGameSingle = ({ theme, selectedPlayers }) => {
 
@@ -99,6 +101,40 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       player: 0,
     };
 
+    
+
+    const scene = new THREE.Scene();
+    const gameField = new THREE.Vector3(20, 0, 20)
+    new Light(scene, LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(10, 20, 0), 1, 1)
+    new Light(scene, LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(-10, 20, 0), 1, 1)
+    new Light(scene, LightTypes.Directional, 10, 0xffffff, true,new THREE.Vector3(0, 20, -10), 1, 1)
+
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 20, -20);
+    //camera.position.set(40, 35, 0);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    sceneRef.current.appendChild(renderer.domElement);
+    renderer.shadowMap.enabled = true;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    //renderer.shadowMap.type = THREE.VSMShadowMap;
+    new Ground(scene, 0xf1ebff, gameField);
+   
+
+    
+    const playerPaddle = new Paddle(scene, 9.5, 0.5, 0, 1, 1, 4, 0xe4d6ff, "left", false);
+    const pcPaddle = new Paddle(scene, -9.5, 0.5, 0, 1, 1, 4, 0xe4d6ff, "right", true);
+    const ball = new Ball(scene, 0.2, 50, 50, 0xffffff, new THREE.Vector3(0, 0.2, 0), 0.1, new THREE.Vector3(1, 0, 2).normalize(), playerPaddle, pcPaddle, gameField);
+
+  
+    new Wall(scene, 10.5, 0.5, 0, 1, 1, 20, 0x8674aa)
+    new Wall(scene, 0, 0.5, 10.5, 22, 1, 1, 0x8674aa)
+    new Wall(scene, -10.5, 0.5, 0, 1, 1, 20, 0x8674aa)
+    new Wall(scene, 0, 0.5, -10.5, 22, 1, 1, 0x8674aa)
+
+
     let pcScoreMesh, playerScoreMesh, loadedFont, playerNameMesh, aiNameMesh;
 
     const scoreMaterial = new THREE.MeshStandardMaterial({
@@ -123,10 +159,10 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       pcScoreMesh = new THREE.Mesh(geometry, scoreMaterial);
       playerScoreMesh = pcScoreMesh.clone();
       pcScoreMesh.scale.setScalar(1.5);
-      pcScoreMesh.position.set(0, 2, -boundaries.y - 4);
-      playerScoreMesh.position.set(0, 2, boundaries.y + 4);
-      pcScoreMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
-      playerScoreMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
+      pcScoreMesh.position.set(-gameField.x - 4, -1, 3);
+      playerScoreMesh.position.set(gameField.x + 4, -1, 3);
+      pcScoreMesh.rotation.set(0, Math.PI, 0); // Rotate by 90 degrees anti-clockwise
+      playerScoreMesh.rotation.set(0, Math.PI, 0); // Rotate by 90 degrees anti-clockwise
 
       scene.add(pcScoreMesh, playerScoreMesh);
 
@@ -139,8 +175,8 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
       playerNameGeometry.center();
       playerNameMesh = new THREE.Mesh(playerNameGeometry, nameMaterial);
-      playerNameMesh.position.set(0, 7, boundaries.y + 4);
-      playerNameMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
+      playerNameMesh.position.set(gameField.x + 4, 5, 3);
+      playerNameMesh.rotation.set(0, Math.PI, 0); // Rotate by 90 degrees anti-clockwise
 
       scene.add(playerNameMesh);
 
@@ -152,8 +188,8 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
       aiNameGeometry.center();
       aiNameMesh = new THREE.Mesh(aiNameGeometry, nameMaterial);
-      aiNameMesh.position.set(0, 7, -boundaries.y - 4);
-      aiNameMesh.rotation.set(0, Math.PI / 2, 0); // Rotate by 90 degrees anti-clockwise
+      aiNameMesh.position.set(-gameField.x - 4, 5, 3);
+      aiNameMesh.rotation.set(0, Math.PI, 0); // Rotate by 90 degrees anti-clockwise
       scene.add(aiNameMesh);
     });
 
@@ -167,55 +203,6 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
       return geometry;
     }
-
-    const scene = new THREE.Scene();
-    scene.add(...lights);
-
-    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(40, 35, 0);
-    camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    sceneRef.current.appendChild(renderer.domElement);
-    renderer.shadowMap.enabled = true;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.shadowMap.type = THREE.VSMShadowMap;
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; // Optional: Enable smooth camera movement
-
-    const boundaries = new THREE.Vector2(20, 25);
-    const planeGeometry = new THREE.PlaneGeometry(
-      boundaries.x * 5,
-      boundaries.y * 5,
-      boundaries.x * 5,
-      boundaries.y * 5
-    );
-    planeGeometry.rotateX(-Math.PI * 0.5);
-    const planeMaterial = new THREE.MeshStandardMaterial({
-      color: defaults.PARAMS.planeColor,
-    });
-
-    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.position.y = -1.5;
-    plane.receiveShadow = true;
-    scene.add(plane);
-
-    const boundGeometry = new RoundedBoxGeometry(1, 2, boundaries.y * 2, 5, 0.5);
-    const leftBoundMaterial = new THREE.MeshStandardMaterial({ color: defaults.PARAMS.paddleColor });
-    const leftBound = new THREE.Mesh(boundGeometry, leftBoundMaterial);
-    leftBound.position.x = -boundaries.x - 0.5;
-
-    const rightBoundMaterial = new THREE.MeshStandardMaterial({ color: defaults.PARAMS.opponentPaddleColor });
-    const rightBound = new THREE.Mesh(boundGeometry, rightBoundMaterial);
-    rightBound.position.x = boundaries.x + 0.5;
-
-    scene.add(leftBound, rightBound);
-
-    const playerPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, 20), defaults.PARAMS.paddleColor);
-    const pcPaddle = new Paddle(scene, boundaries, new THREE.Vector3(0, 0, -20), defaults.PARAMS.opponentPaddleColor);
-    const ball = new Ball(scene, boundaries, [playerPaddle, pcPaddle]);
-    ball.material.color.set(defaults.PARAMS.ballColor);
 
     ball.addEventListener('ongoal', (e) => {
       console.log(e.message)
@@ -235,56 +222,13 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       }
     });
 
-    if (!gameToStart) {
-      const rootElem = document.getElementById('root');
-      const custModalElem = document.createElement('div');
-      const custModalDialogElem = document.createElement('div');
-      const custModalContent = document.createElement('div');
-      const custModalBody = document.createElement('div');
-      const custModalHeader = document.createElement('div');
-      const custModalTitle = document.createElement('h5');
-      const btn = document.createElement('button');
-      const p = document.createElement('p');
-
-      custModalTitle.innerText = `${ selectedPlayers[0].username } x AI`;
-      p.innerText = t("press the enter key to start the game");
-      btn.innerText = "x";
-
-      custModalElem.className = 'customModal modal fade show d-block';
-      custModalDialogElem.className = 'modal-dialog', 'modal-dialog-centered';
-      custModalContent.className = 'modal-content';
-      custModalBody.className = 'modal-body';
-      custModalHeader.className = 'modal-header justify-content-between'
-      custModalTitle.className = 'modal-title'
-      btn.className = 'btn btn-danger';
-      btn.addEventListener('click', function (e) {
-        custModalElem.remove();
-      });
-      
-      rootElem.appendChild(custModalElem);
-      custModalElem.appendChild(custModalDialogElem);
-      custModalDialogElem.appendChild(custModalContent);
-      custModalContent.appendChild(custModalHeader);
-      custModalContent.appendChild(custModalBody);
-
-      custModalHeader.appendChild(custModalTitle);
-      custModalHeader.appendChild(btn);
-      custModalBody.appendChild(p);
-
-    }
-    else {
-      const custModalElem = document.querySelector('.customModal');
-      if (custModalElem) {
-        custModalElem.remove();
-      }
-    }
 
 
     const clock = new THREE.Clock();
 
-    const controller = new AIPlayer(pcPaddle, ball);
-    let moveLeft = false;
-    let moveRight = false;
+    const ai = new AIPlayer(pcPaddle, ball, gameField);
+    let moveUp = false;
+    let moveDown = false;
 
     const animate = () => {
       if (gameOver) return; // Stop the game loop if game is over
@@ -294,29 +238,36 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
       const dt = deltaTime / 10;
 
       if (gameToStart) {
-        for (let i = 0; i < 15; i++) {
-          ball.update(dt);
-          controller.update(dt);
-        }
+        ball.update();
+        ai.HandleMovement()
+        pcPaddle.update()
+        /* for (let i = 0; i < 15; i++) {
+          ball.update(); //(dt)
+          //ai.update(dt);
+        } */
       }
 
-      if (moveLeft) {
-        playerPaddle.setX(playerPaddle.mesh.position.x - 1);
-      } else if (moveRight) {
-        playerPaddle.setX(playerPaddle.mesh.position.x + 1);
+      if (moveUp) {
+        playerPaddle.moveUp()
+        playerPaddle.update()
+        //playerPaddle.setX(playerPaddle.mesh.position.x - 1);
+      } else if (moveDown) {
+        playerPaddle.moveDown()
+        playerPaddle.update()
+        //playerPaddle.setX(playerPaddle.mesh.position.x + 1);
       }
 
-      // controls.update();
       renderer.render(scene, camera);
       requestRef.current = requestAnimationFrame(animate);
     };
     requestRef.current = requestAnimationFrame(animate);
 
+    //handling key up and down press
     function keyDownHandler(e) {
       if (e.key === 'w' || e.key === 'W') {
-        moveLeft = true;
+        moveUp = true;
       } else if (e.key === 's' || e.key === 'S') {
-        moveRight = true;
+        moveDown = true;
       }
       if (!gameToStart) {
         if (e.key === 'Enter') {
@@ -324,15 +275,15 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
         }
       }
     }
-
+  
     function keyUpHandler(e) {
       if (e.key === 'w' || e.key === 'W') {
-        moveLeft = false;
+        moveUp = false;
       } else if (e.key === 's' || e.key === 'S') {
-        moveRight = false;
+        moveDown = false;
       }
     }
-
+  
     document.addEventListener('keydown', keyDownHandler, false);
     document.addEventListener('keyup', keyUpHandler, false);
 
