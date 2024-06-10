@@ -53,7 +53,6 @@ export default class AIPlayer {
 				}
 				dispatchEvent(e)
 			}
-			console.log("prediction: ", this.predictionPoint)
         }, 1000);
     }
 	AdjustAccuracy(scoreDiff)
@@ -68,13 +67,11 @@ export default class AIPlayer {
 
 			this.accuracy = val
 		}
-		console.log("accuracy = " + this.accuracy)
 	}
 
 	GenerateRandom() {
 		let range = 10 - 10 * this.accuracy
 		let toggle = Math.floor(Math.random() * 2)
-		console.log(toggle)
 		return toggle > 0 ? range : -range
 		// return Math.random() * range - range
 	}
@@ -85,7 +82,6 @@ export default class AIPlayer {
             let r = (- 9 - this.ball.X()) / this.ball.direction.x;
             let zValue  = this.ball.Z() + r * this.ball.direction.z
 			let randValue = this.GenerateRandom()
-			console.log("random: ", randValue)
             let sz = new THREE.Vector3(10, 0, zValue + randValue)
             if (sz.z <= this.gameField.z / 2 && sz.z >= -this.gameField.z / 2) {
                 return sz
