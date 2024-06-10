@@ -1,7 +1,6 @@
 
 import { useEffect } from 'react';
-//import { PongGameMulti, PongGameSingle, PongGameTournament } from './'
-import { PongGameSingle } from './'
+import { PongGameSingle, PongGameMulti, PongGameTournament } from './'
 import { Unauthorized } from '../../../containers'
 import './pongGame.css'
 
@@ -58,7 +57,7 @@ const PongGame = ({ step }) => {
                 />
               </div>
             }
-            {/* {
+            {
               mode === 'multiPlayer' &&
               <div>
                 <PongGameMulti
@@ -75,7 +74,7 @@ const PongGame = ({ step }) => {
                   selectedPlayers={initialSelectedPlayers}
                 />
               </div>
-            } */}
+            }
           </>
           :
           <div className='align-self-center'>

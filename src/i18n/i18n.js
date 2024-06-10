@@ -122,7 +122,7 @@ const resources = {
       "icons": "Symbole",
       "user list": "Benutzerliste",
       "click on a user to select or unselect": "Klicken Sie auf einen Benutzer, um ihn auszuwählen oder die Auswahl aufzuheben.",
-      "there are no users, signup to create a user": "There are no users, signup to create a user",
+      "there are no users, signup to create a user": "Es sind keine Benutzer vorhanden. Melden Sie sich an, um einen Benutzer zu erstellen.",
       "selected": "AUSGEWÄHLT",
       "start": "Start",
       "requirements": "Anforderungen",
