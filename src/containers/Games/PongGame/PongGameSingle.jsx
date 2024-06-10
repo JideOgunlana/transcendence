@@ -266,30 +266,36 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     //const clock = new THREE.Clock();
 
     const ai = new AIPlayer(pcPaddle, ball, gameField);
+	if (gameToStart) {
+		ai.HandleMovement()
+	}
     let moveUp = false;
     let moveDown = false;
 
+	
     const animate = () => {
       if (gameOver) return;
 
       if (gameToStart) {
-        ball.update();
-        ai.HandleMovement()
-        pcPaddle.updateAI()
+		  ball.update();
+		  // ai.HandleMovement()
+		  ai.AdjustAccuracy(scores["player"] - scores["opponent"])
+		  pcPaddle.updateAI()
+		  if (moveUp) {
+			playerPaddle.moveUp()
+			playerPaddle.update()
+		  } else if (moveDown) {
+			playerPaddle.moveDown()
+			playerPaddle.update()
+		  }
       }
 
-      if (moveUp) {
-        playerPaddle.moveUp()
-        playerPaddle.update()
-      } else if (moveDown) {
-        playerPaddle.moveDown()
-        playerPaddle.update()
-      }
 
       renderer.render(scene, camera);
       requestRef.current = requestAnimationFrame(animate);
     };
-    requestRef.current = requestAnimationFrame(animate);
+	animate()
+    //requestRef.current = requestAnimationFrame(animate);
 
     
     //handling key up and down press
@@ -315,7 +321,8 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
     }
     
     function predictionHandler(e) {
-      pcPaddle.SetPredictionPoint(e.detail.point)
+		console.log("receive ai prediction event")
+    	pcPaddle.SetPredictionPoint(e.detail.point)
     }
     document.addEventListener('keydown', keyDownHandler, false);
     document.addEventListener('keyup', keyUpHandler, false);
@@ -323,6 +330,7 @@ const PongGameSingle = ({ theme, selectedPlayers }) => {
 
     return () => {
       cancelAnimationFrame(requestRef.current);
+	  ai.ClearInterval()
       renderer.dispose();
       scene.traverse((object) => {
         if (!object.isMesh) return;
