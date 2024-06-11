@@ -1,0 +1,9 @@
+
+.playerList {
+    width: 70%;
+
+   .playerList--players {
+        gap: 20px 40px;
+        user-select: none;
+   }
+}

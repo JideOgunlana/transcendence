@@ -1,0 +1,17 @@
+.dashboard {
+    min-height: 65vh;
+    width: 80%;
+    margin: 100px auto;
+
+    .dashboard--mainPage--selectGame {
+        div button{
+            margin: 60px auto 0;
+        }
+    }
+
+    .dashboard--gameMenu {
+        .game-btn-enabled {
+            width: 288px;
+        }
+    }
+}

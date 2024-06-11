@@ -1,0 +1,90 @@
+.memoryGame {
+  height: 100%;
+
+}
+
+.memoryGame--single,
+.memoryGame--multi,
+.memoryGame--tournament {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.memory-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.memory-grid.fourByFour {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.memory-grid.sixBySix {
+  grid-template-columns: repeat(6, 1fr);
+
+}
+
+.memory-grid.twoByThree {
+  grid-template-columns: repeat(3, 1fr);
+
+}
+
+.memory-grid.fourByFour,
+.memory-grid.sixBySix,
+.memory-grid.twoByThree {
+  padding: 70px;
+  background-color: var(--custom-darkGrey-card);
+  border-radius: 10px;
+  user-select: none;
+}
+
+.memory-tile {
+  width: 111px;
+  height: 111px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--custom-grey);
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 40px;
+  color: var(--custom-grey)
+}
+
+.memory-tile.flipped,
+.memory-tile.matched {
+  background-color: var(--custom-white);
+}
+
+.memory-tile.matched {
+  background-color: var(--custom-green-win);
+}
+
+.timer,
+.current-player {
+  font-size: 1.5rem;
+}
+
+.points {
+  .player-left {
+    background-color: var(--custom-player-left);
+  }
+  .player-right {
+    background-color: var(--custom-player-right);
+  }
+}
+
+.player-left,
+.player-right {
+  border: 1px solid;
+}
+
+.player-left {
+  border-color: var(--custom-player-left);
+}
+
+.player-right {
+  border-color: var(--custom-player-right);
+}

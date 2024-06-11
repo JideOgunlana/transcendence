@@ -1,0 +1,32 @@
+main {
+    padding: 20px;
+    min-height: 80vh;
+    .tabActive {
+        border-bottom: 1px solid var(--custom-light-purple);
+        color: var(--custom-light-purple);
+    }
+
+    .tabInactive {
+        border-bottom: 1px solid var(--custom-grey-border);
+    }
+
+    .userHistory,
+    .fullHistory {
+        /* display: flex; */
+        /* justify-content: center; */
+    }
+      
+}
+
+.main-container-transition {
+    opacity: 0;
+    animation: main-container-transition 1s ease forwards;  
+}
+@keyframes main-container-transition {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

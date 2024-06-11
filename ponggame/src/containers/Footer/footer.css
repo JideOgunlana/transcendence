@@ -1,0 +1,14 @@
+footer {
+
+    .team-profile a {
+        color: var(--custom-white);
+    }
+    .team-profile a:hover {
+        color: var(--custom-light-purple);
+    }
+
+    .logoTranscendence {
+        transform: translateX(15px)
+    }
+}
+

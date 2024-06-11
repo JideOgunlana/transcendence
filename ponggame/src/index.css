@@ -1,0 +1,102 @@
+
+/* @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap'); */
+
+
+:root {
+  --custom-black: #070708;
+  --custom-logo-link-white: #F4F4F5;
+  --custom-white: #FFFFFF;
+  --custom-light-purple: #715DF2;
+  --custom-grey-purple: #7B759D;
+  --custom-player-left: #F59E0B;
+  --custom-player-right: #3E3ECA;
+  --custom-grey-border: #5A5A5A;
+  --custom-darkGrey-card: #171717;
+  --custom-grey: #242424;
+  --custom-red-error: #F22C3D;
+  --custom-greyGreen: #7191A5;
+  --custom-green-win: #0BB32A;
+}
+
+
+
+body,
+body * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Plus Jakarta Sans", monospace;
+  /* word-spacing: 8px; */
+  background-color: var(--custom-black);
+  color: var(--custom-white);
+  height: 100%;
+}
+
+
+
+.cust-text-13 {
+  font-size: 13px;
+}
+
+
+.app-container {
+  display: grid;
+  grid-template-columns: 100%;
+  /* grid-auto-rows: 53px 1fr; */ /* causes some height problem with the footer */
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.game-btn-enabled, 
+.game-btn-disabled {
+  color: var(--custom-white);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  height: 36px;
+  width: 204px;
+}
+
+.game-btn-enabled {
+  background-color: var(--custom-light-purple);
+  cursor: pointer;
+}
+
+.game-btn-disabled {
+  background-color: var(--custom-grey-purple);
+  cursor: not-allowed;
+}
+
+.customLink {
+  color: var(--custom-light-purple);
+}
+
+a {
+  text-decoration: none;
+}
+
+
+.backBtn button {
+  background-color: var(--custom-grey);
+  border: none;
+}
+
+.modal-content {
+  background-color: var(--custom-grey);
+  border: 1px solid var(--custom-white)
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--custom-grey-border);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--custom-grey-border);
+}

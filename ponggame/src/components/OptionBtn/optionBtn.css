@@ -1,0 +1,33 @@
+
+.optionBtn-active {
+    background-color: var(--custom-greyGreen);
+} 
+.optionBtn-inactive {
+    background-color: var(--custom-grey);
+    color: var(--custom-greyGreen)
+}
+
+.optionBtnSmall, .optionBtnMedium, .optionBtnLarge {
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    height: 40px;
+    user-select: none;
+}
+
+
+.optionBtnSmall {
+    width: 56px;
+}
+
+.optionBtnMedium {
+    width: 128px;
+}
+
+.optionBtnLarge {
+    width: 288px;
+    
+}
+
