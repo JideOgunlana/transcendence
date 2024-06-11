@@ -1,6 +1,7 @@
 //import Player from './Player';
 import * as THREE from 'three';
 import Events from './Events';
+import defaults from '../../../utils/defaults';
 
 
 
@@ -57,20 +58,22 @@ export default class AIPlayer {
     }
 	AdjustAccuracy(scoreDiff)
 	{
-		if (scoreDiff < -10)
+        let maxScoreDiff = defaults.PONG_WIN_POINT - 1
+		if (scoreDiff <= -maxScoreDiff)
 			this.accuracy = 0.01
-		else if (scoreDiff > 10) {
+		else if (scoreDiff >= maxScoreDiff) {
 			this.accuracy = 0.99
 		} else {
-			let r = (0.9 - 0.1) / 20
-			let val = (scoreDiff + 10) * r + 0.1
-
+			let r = (0.9 - 0.1) / (maxScoreDiff * 2)
+			let val = (scoreDiff + maxScoreDiff) * r + 0.1
 			this.accuracy = val
+            console.log("r: ", r, " val: ", val, " maxScoreDiff: ", maxScoreDiff)
 		}
+        console.log("acc: ", this.accuracy)
 	}
 
 	GenerateRandom() {
-		let range = 10 - 10 * this.accuracy
+		let range = 5 - 5 * this.accuracy
 		let toggle = Math.floor(Math.random() * 2)
 		return toggle > 0 ? range : -range
 		// return Math.random() * range - range
@@ -82,6 +85,7 @@ export default class AIPlayer {
             let r = (- 9 - this.ball.X()) / this.ball.direction.x;
             let zValue  = this.ball.Z() + r * this.ball.direction.z
 			let randValue = this.GenerateRandom()
+            console.log("real value: ", zValue, " prediction: ", zValue + randValue)
             let sz = new THREE.Vector3(10, 0, zValue + randValue)
             if (sz.z <= this.gameField.z / 2 && sz.z >= -this.gameField.z / 2) {
                 return sz

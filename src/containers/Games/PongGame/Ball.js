@@ -137,18 +137,19 @@ export default class Ball extends EventDispatcher {
     {
         //!(this.hitMask & 2) && 
         if (!(this.hitMask & 2) && this.mesh.position.x - this.radius <= this.paddleRight.X() + this.paddleRight.width / 2) {
-			let startValX = this.paddleLeft.X() - this.paddleLeft.width / 2 + 0.15
-			let endValX = this.paddleLeft.X() + this.paddleLeft.width / 2
-			let ballValX = this.mesh.position.x + this.radius
+			let startValX = this.paddleRight.X() - this.paddleRight.width / 2
+			let endValX = this.paddleRight.X() + this.paddleRight.width / 2 - 0.15
+			let ballValX = this.mesh.position.x - this.radius
 
-			let startValZ1 = this.paddleLeft.Z() - this.paddleLeft.depth / 2
-			let endValZ1 = this.paddleLeft.Z() - this.paddleLeft.depth / 2 + 0.3
+			let startValZ1 = this.paddleRight.Z() - this.paddleRight.depth / 2
+			let endValZ1 = this.paddleRight.Z() - this.paddleRight.depth / 2 + 0.3
 
-			let startValZ2 = this.paddleLeft.Z() + this.paddleLeft.depth / 2 - 0.3
-			let endValZ2 = this.paddleLeft.Z() + this.paddleLeft.depth / 2
+			let startValZ2 = this.paddleRight.Z() + this.paddleRight.depth / 2 - 0.3
+			let endValZ2 = this.paddleRight.Z() + this.paddleRight.depth / 2
 
             if (this.direction.z > 0) {
 				let ballVal = this.mesh.position.z + this.radius
+                console.log("positive direction: ",  startValZ1, endValZ1, ballVal)
 
 				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal)){// || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
 					console.log("falls in first or second range, direction is positiv")
@@ -163,7 +164,7 @@ export default class Ball extends EventDispatcher {
 			}
             if (this.direction.z < 0) {
 				let ballVal = this.mesh.position.z - this.radius
-
+                console.log("negative direction: ",  startValZ2, endValZ2, ballVal)
 				if (this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
 					console.log("falls in first or second range, direction is negativ")
 					console.log(startValX, endValX, ballValX)
