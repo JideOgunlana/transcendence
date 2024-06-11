@@ -27,6 +27,7 @@ const PongGameTournament = ({ theme, selectedPlayers }) => {
   const [semiOneWinner, setSemiOneWinner] = useState(null);
   const [pairs, setPairs] = useState([]);
   const [gameToStart, setGameToStart] = useState(false);
+  const [announceGameOrder, setAnnounceGameOrder] = useState(true);
 
 
   useEffect(() => {
@@ -85,7 +86,7 @@ function findObjectByAlias(arr, alias) {
       btn.innerText = "x";
 
       custModalElem.className = 'customModal modal fade show d-block';
-      custModalDialogElem.className = 'modal-dialog', 'modal-dialog-centered';
+      custModalDialogElem.className = 'modal-dialog modal-dialog-centered';
       custModalContent.className = 'modal-content';
       custModalBody.className = 'modal-body';
       custModalHeader.className = 'modal-header justify-content-between'
@@ -114,6 +115,58 @@ function findObjectByAlias(arr, alias) {
     }
   }
 
+  const announceGameTournyOrder = () => {
+    if (!gameToStart && announceGameOrder) {
+      const rootElem = document.getElementById('root');
+      const custModalElem = document.createElement('div');
+      const custModalDialogElem = document.createElement('div');
+      const custModalContent = document.createElement('div');
+      const custModalBody = document.createElement('div');
+      const custModalHeader = document.createElement('div');
+      const custModalTitle = document.createElement('h5');
+      const btn = document.createElement('button');
+      const round1 = document.createElement('p');
+      const round2 = document.createElement('p');
+      const finals = document.createElement('p');
+
+      custModalTitle.innerText = `${t("tournament order")}`;
+      round1.innerText = `${t("round")} 1: \n${pairs[0][0].alias} x ${pairs[0][1].alias}`;
+      round2.innerText = `${t("round")} 2: \n${pairs[1][0].alias} x ${pairs[1][1].alias}\n\n`;
+      finals.innerText = `${t("finals")}: winner Round 1 x winner Round 2`;
+      btn.innerText = "x";
+
+      round1.style.textAlign = "center"
+      round2.style.borderBottom = "1px solid #5A5A5A";
+      round2.style.textAlign = "center"
+      finals.style.textAlign = "center"
+
+      custModalElem.className = 'customModal modal fade show d-block';
+      custModalDialogElem.className = 'modal-dialog modal-dialog-centered';
+      custModalContent.className = 'modal-content';
+      custModalBody.className = 'modal-body';
+      custModalHeader.className = 'modal-header justify-content-between'
+      custModalTitle.className = 'modal-title'
+      btn.className = 'btn btn-danger';
+      btn.addEventListener('click', function (e) {
+        custModalElem.remove();
+        setAnnounceGameOrder(false);
+      });
+
+      rootElem.appendChild(custModalElem);
+      custModalElem.appendChild(custModalDialogElem);
+      custModalDialogElem.appendChild(custModalContent);
+      custModalContent.appendChild(custModalHeader);
+      custModalContent.appendChild(custModalBody);
+
+      custModalHeader.appendChild(custModalTitle);
+      custModalHeader.appendChild(btn);
+      custModalBody.appendChild(round1);
+      custModalBody.appendChild(round2);
+      custModalBody.appendChild(finals);
+
+    }
+  }
+
   useEffect(() => {
     if (gameOver) return; // Skip effect when game is over
     if (pairs.length === 0) return ;
@@ -124,7 +177,11 @@ function findObjectByAlias(arr, alias) {
     };
 
     if (gameRound === 1) {
-      announceRound()
+      if (announceGameOrder) {
+        announceGameTournyOrder();
+      }
+      else
+        announceRound()
     }
     else if (gameRound === 2) {
       announceRound();
@@ -304,7 +361,7 @@ function findObjectByAlias(arr, alias) {
       } else if (e.key === 'ArrowDown') {
         moveOpponentDown = true;
       }
-      if (!gameToStart) {
+      if (!gameToStart && !announceGameOrder) {
         if (e.key === 'Enter') {
           setGameToStart(true)
         }
@@ -366,7 +423,7 @@ function findObjectByAlias(arr, alias) {
       }
 
     };
-  }, [gameOver, pairs, gameToStart]);
+  }, [gameOver, pairs, gameToStart, announceGameOrder]);
 
 
   return (

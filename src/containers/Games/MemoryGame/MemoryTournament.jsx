@@ -22,6 +22,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
     const [semiOneWinner, setSemiOneWinner] = useState(null);
     const [modalMessage, setModalMessage] = useState('');
     const [announceRound, setAnnounceRound] = useState(true);
+    const [announceGameOrder, setAnnounceGameOrder] = useState(true);
 
     useEffect(() => {
         const initialTiles = generateTiles(theme, gridSize);
@@ -204,7 +205,40 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
                 </>
             )}
             {
-                announceRound && pairs.length > 0 && (
+                announceGameOrder && pairs.length > 0 && (
+                    <div className="modal fade show d-block" tabIndex="-1" role="dialog">
+                        <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header justify-content-between">
+                                    <h5 className="modal-title">
+                                        {gameRound === 1 ? `${t('tournament order')}` : ''}
+                                    </h5>
+                                    <div type="button" className="close" onClick={() => setAnnounceGameOrder(false)}>
+                                        <span className='btn btn-danger' aria-hidden="true"><img src={closeIcon} alt='close' width={20} /></span>
+                                    </div>
+                                </div>
+                                <div className="modal-body">
+                                    <p className='text-center mb-0'>
+                                        {t('round')} 1: <br />{pairs[0][0].alias} &nbsp; x &nbsp; {pairs[0][1].alias}
+                                    </p>
+                                    <br />
+                                    <p className='text-center mb-0'>
+                                        {t('round')} 2: <br />{pairs[1][0].alias} &nbsp; x &nbsp; {pairs[1][1].alias}
+                                    </p>
+                                    <br />
+                                    <div className='modal-footer justify-content-center'>
+                                        <p className='text-center mb-0'>
+                                            {t('finals')} : winner Round 1 &nbsp; x &nbsp; winner Round 2
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+            {
+                !announceGameOrder && announceRound && pairs.length > 0 && (
                     <div className="modal fade show d-block" tabIndex="-1" role="dialog">
                         <div className="modal-dialog modal-dialog-centered" role="document">
                             <div className="modal-content">

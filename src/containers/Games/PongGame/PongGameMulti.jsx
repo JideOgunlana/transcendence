@@ -118,7 +118,7 @@ const handleSubmitResults = async () => {
       btn.innerText = "x";
 
       custModalElem.className = 'customModal modal fade show d-block';
-      custModalDialogElem.className = 'modal-dialog', 'modal-dialog-centered';
+      custModalDialogElem.className = 'modal-dialog modal-dialog-centered';
       custModalContent.className = 'modal-content';
       custModalBody.className = 'modal-body';
       custModalHeader.className = 'modal-header justify-content-between'
