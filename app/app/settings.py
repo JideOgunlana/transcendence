@@ -18,16 +18,34 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 ALLOWED_HOSTS = ['*']
 
-# CORS_ALLOWED_ORIGINS = [
-# 	'http://localhost:3000',
-# 	'http://127.0.0.1:3000',
-#     'http://localhost:5173',
-#     'http://127.0.0.1:5173'
-# ]
-ORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+	'http://localhost:3000',
+	'https://localhost:3000',
+	'http://127.0.0.1:3000',
+	'https://127.0.0.1:3000',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173'
+]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALOWED_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+ORS_ALLOW_HEADERS = [
+    "accept",
+    "authorization",
+    "content-type",
+    "origin",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 INTERNAL_IPS = [
     '127.0.0.1',

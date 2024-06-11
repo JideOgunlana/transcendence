@@ -1,11 +1,8 @@
-// import { getUsers } from "../__tests__/api";
-import  defaults  from './defaults'
-import axios from 'axios'
+import defaults from './defaults';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 
 export const signupFormValid = (username) => {
-
     const trimmedUsername = username.trim();
 
     if (trimmedUsername.length < defaults.USERNAME_MIN_LENGTH || trimmedUsername.length > defaults.USERNAME_MAX_LENGTH) {
@@ -24,9 +21,18 @@ export const signupFormValid = (username) => {
 
 export const checkNameExists = async (username) => {
     try {
-        // const users = await getUsers(); // stubbed line for testing without Django backend
-        const response = await axios.get('http://localhost:8000/pong/users/');
-        const users = response.data;  // Get the data property from the response
+        const response = await fetch('http://localhost:8000/pong/users/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const users = await response.json();  // Get the data property from the response
 
         const normalizedUsername = username.toUpperCase();
         return users.some(user => user.username.toUpperCase() === normalizedUsername || normalizedUsername === defaults.AI_USERNAME);
@@ -36,7 +42,6 @@ export const checkNameExists = async (username) => {
     }
 }
 
-    
 export const emailValid = (email) => {
     // Regular expression for basic email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
