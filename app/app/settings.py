@@ -15,7 +15,7 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = bool(os.environ.get("DEBUG", default=0))
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
@@ -61,14 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'core',
-    'users',
-    'fitness',
-    'pong',
-    'snake',
-    'finance',
-    'todo',
-    'flights',
+    'pong'
 ]
 
 MIDDLEWARE = [
