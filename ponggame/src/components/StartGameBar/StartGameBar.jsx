@@ -39,7 +39,6 @@ const StartGameBar = ({ step, setStep }) => {
             setShowAliasModal(false);
             setStep({ ...step, aliases: aliases });
             // Proceed with starting the game after aliases are set
-            // console.log('Aliases are valid - Starting game with parameters:', step, 'Aliases:', step.aliases);
             // Navigate to the appropriate game route if aliases are valid
             if (step.pong.selected) {
                 navigate('pong');
@@ -50,7 +49,6 @@ const StartGameBar = ({ step, setStep }) => {
             // Display an error message or handle invalid aliases
             setShowAliasModal(true);
             setShowError(true);
-            console.log('Invalid aliases. Please ensure each alias meets the criteria.');
         }
     };
 

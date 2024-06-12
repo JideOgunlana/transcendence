@@ -25,7 +25,6 @@ export default class Ground {
         const gridHelper = new THREE.GridHelper(30);
         this.mesh.rotation.x = -0.5 * Math.PI;
         this.mesh.receiveShadow = true;
-
         this.physicBody.quaternion.setFromEuler(-0.5 * Math.PI, 0, 0);
         this.scene.add(this.mesh);
     }

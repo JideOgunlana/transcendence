@@ -121,9 +121,6 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                     }
                 }
             );
-
-            console.log('Response: ', response);
-
         } catch (error) {
             console.error('Error:', error);
             if (error.response) {

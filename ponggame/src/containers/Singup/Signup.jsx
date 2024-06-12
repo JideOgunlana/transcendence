@@ -83,9 +83,6 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
                     }
                 }
             );
-
-            console.log('Response:', response);
-
             handleUserSignedUp();
             navigate('/userprofile', { state: { userData: signUpFormData } }); // Navigate to user profile with signup data
             // handleGoToUserProfile();

@@ -4,7 +4,6 @@ import { HistoryUser } from '../../containers';
 import axios from 'axios';
 import { userIcon, pingPongIcon, brainIcon } from '../../assets';
 import './historyAll.css';
-// import { getFakeUserData } from '../../__tests__/api';
 
 
 const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
@@ -78,7 +77,6 @@ const HistoryAll = () => {
                     }
                 });
                 setUserData(response.data);
-                // console.log(response.data);
             } catch (err) {
                 setError('Failed to fetch user data');
                 console.error(err);

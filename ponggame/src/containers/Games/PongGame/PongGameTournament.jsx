@@ -394,24 +394,10 @@ function findObjectByAlias(arr, alias) {
         object.geometry.dispose();
         if (object.material.isMaterial) {
           cleanMaterial(object.material);
-        } else {
-          console.log("material is an iterable, PLEASE CHECK IT DAMN YOU")
-          /*for (const material of object.material) {
-            cleanMaterial(material);
-          } */
         }
       });
       function cleanMaterial(material) {
         material.dispose();
-        //for (const key of material) console.log("of key: ", key);
-        /* for (const key in material) {
-          if (material[key] && typeof material[key].dispose === 'function') {
-            console.log(" its a function")
-            material[key].dispose();
-          } else if (material[key] && typeof material[key].dispose !== 'function') {
-            console.log(" its not a function")
-          }
-        } */
       }
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);

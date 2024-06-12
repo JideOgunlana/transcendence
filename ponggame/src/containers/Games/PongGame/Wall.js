@@ -22,9 +22,6 @@ export default class Wall {
         this.mesh.receiveShadow = true;
         this.mesh.castShadow = true; 
         this.mesh.position.set(x, y, z);
-        /* this.paddle.rotation.y = -0.5 * Math.PI;
-        this.paddle.rotation.z = -0.5 * Math.PI; */
-
         this.scene.add(this.mesh);
     }
 

@@ -54,21 +54,6 @@ const PlayerList = ({ step, setStep }) => {
     };
 
 
-    // Stubbed line via __tests__ api
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const fetchedUsers = await getUsers();
-    //             setUsers(fetchedUsers);
-    //         } catch (error) {
-    //             console.error('Error fetching users:', error);
-    //         }
-    //     };
-    //     fetchData();
-    // }, []);
-
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -80,7 +65,6 @@ const PlayerList = ({ step, setStep }) => {
                 });
                 const fetchedUsers = response.data;
                 setUsers(fetchedUsers);
-                // console.log(fetchedUsers);
             } catch (error) {
                 console.error('Error fetching users:', error);
                 return;

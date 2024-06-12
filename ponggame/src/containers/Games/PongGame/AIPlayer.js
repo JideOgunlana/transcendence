@@ -54,7 +54,7 @@ export default class AIPlayer {
 			let val = (scoreDiff + maxScoreDiff) * r + 0.1
 			this.accuracy = val
 		}
-        console.log("acc: ", this.accuracy)
+        // console.log("acc: ", this.accuracy)
 	}
 
 	GenerateRandom() {

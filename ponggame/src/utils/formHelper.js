@@ -5,7 +5,6 @@ export const signupFormValid = (username) => {
     const trimmedUsername = username.trim();
 
     if (trimmedUsername.length < defaults.USERNAME_MIN_LENGTH || trimmedUsername.length > defaults.USERNAME_MAX_LENGTH) {
-        console.error("Username must be between 2 and 20");
         return false;
     }
     if (!/^[a-zA-Z0-9]+$/.test(trimmedUsername)) {

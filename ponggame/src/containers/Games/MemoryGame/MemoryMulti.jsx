@@ -39,7 +39,6 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
             setFlippedTiles(prev => [...prev, index]);
         }
         setTotalFlips(totalFlips + 1);
-        // console.log("FlippedTiles count: " + totalFlips);
     };
 
     useEffect(() => {
@@ -67,7 +66,6 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
     };
 
     useEffect(() => {
-        // console.log(flippedTiles.length);
         if (matchedTiles.length === tiles.length && tiles.length > 0) {
             determineWinner();
         }
@@ -76,13 +74,11 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
     const determineWinner = () => {
         const maxPoints = Math.max(...points);
         const winners = selectedPlayers.filter((_, index) => points[index] === maxPoints);
-        console.log('Here -in determine winner-', winners)
         if (winners.length === 1) {
             setWinner(winners[0].username);
             updateMultiPlayerResults(winners[0].username);
             setShowModal(true);
         } else {
-            // alert('tie Breaker')
             setWinner('tie');
             setShowModal(true);
             replayGame();
@@ -146,8 +142,6 @@ const MemoryMulti = ({ gridSize, theme, selectedPlayers }) => {
                     }
                 )
             ));
-            console.log('Response: ', response);
-
         } catch (error) {
             console.error('Error:', error);
             if (error.response) {
