@@ -17,6 +17,7 @@ export default class AIPlayer {
 		this.accuracy = 1
 		this.intervalId = undefined
 
+		this.endGame = false;
 		this.predictionPoint = null
     }
 
@@ -62,18 +63,19 @@ export default class AIPlayer {
 		if (scoreDiff <= -maxScoreDiff)
 			this.accuracy = 0.01
 		else if (scoreDiff >= maxScoreDiff) {
+			this.endGame = true;
 			this.accuracy = 0.99
 		} else {
 			let r = (0.9 - 0.1) / (maxScoreDiff * 2)
 			let val = (scoreDiff + maxScoreDiff) * r + 0.1
 			this.accuracy = val
-            console.log("r: ", r, " val: ", val, " maxScoreDiff: ", maxScoreDiff)
+            // console.log("r: ", r, " val: ", val, " maxScoreDiff: ", maxScoreDiff)
 		}
         console.log("acc: ", this.accuracy)
 	}
 
 	GenerateRandom() {
-		let range = 5 - 5 * this.accuracy
+		let range = 8 - 8 * this.accuracy
 		let toggle = Math.floor(Math.random() * 2)
 		return toggle > 0 ? range : -range
 		// return Math.random() * range - range
@@ -81,15 +83,40 @@ export default class AIPlayer {
 
     Predict()
     {
+		let paddleConstX = -9;
         if (this.ball.direction.x < 0) {
-            let r = (- 9 - this.ball.X()) / this.ball.direction.x;
+            let r = (paddleConstX - this.ball.X()) / this.ball.direction.x;
             let zValue  = this.ball.Z() + r * this.ball.direction.z
-			let randValue = this.GenerateRandom()
-            console.log("real value: ", zValue, " prediction: ", zValue + randValue)
+			let randValue = 0//this.GenerateRandom()
+            // console.log("real value: ", zValue, " prediction: ", zValue + randValue)
             let sz = new THREE.Vector3(10, 0, zValue + randValue)
             if (sz.z <= this.gameField.z / 2 && sz.z >= -this.gameField.z / 2) {
+				sz.z += this.GenerateRandom();
+				console.log("no further prediction, real value: ", zValue, " prediction: ", sz.z)
                 return sz
-            }
+            } 
+			else {
+				let zConstAxisValue = undefined
+				if (this.ball.IsMovingUp()) {
+					zConstAxisValue = 10
+					r = ( zConstAxisValue - this.ball.Z()) / this.ball.direction.z
+				} else {
+					zConstAxisValue = -10
+					r = ( zConstAxisValue - this.ball.Z()) / this.ball.direction.z
+				}
+				let xValue = this.ball.X() + r * this.ball.direction.x;
+				let sx = new THREE.Vector3(xValue, 0, zConstAxisValue)
+				
+				r = ( paddleConstX - sx.x) / this.ball.direction.x
+				zValue = sx.z + r * this.ball.direction.z * -1
+				sz.z = zValue + this.GenerateRandom()
+				console.log("real value: ", zValue, " prediction: ", sz.z)
+				if (sz.z < this.gameField.z / 2 && sz.z > -this.gameField.z / 2)
+					return sz
+			}
+
+			// if (this.endGame) {
+			// }
 			return zValue > this.gameField.z / 2 ? new THREE.Vector3(10, 0, this.gameField.z / 2) : new THREE.Vector3(10, 0, -this.gameField.z / 2)
             // return zValue > this.gameField.z / 2 ? new THREE.Vector3(10, 0, 8 + Math.random() * 4 - 2) : new THREE.Vector3(10, 0, -8 + Math.random() * 4 - 2)
         

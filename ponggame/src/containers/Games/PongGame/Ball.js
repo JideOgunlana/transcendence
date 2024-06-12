@@ -13,8 +13,8 @@ export default class Ball extends EventDispatcher {
         this.widthSeg = widthSeg;
         this.heightSeg = heightSeg;
         this.color = color;
-        this.speed = speed;
-        this.direction = new THREE.Vector3(direction.x * speed, direction.y * speed, direction.z * speed);//Constants.ballStartDirection.multiplyScalar(speed);
+        this.speed = 0.15;
+        this.direction = new THREE.Vector3(direction.x * this.speed, direction.y * this.speed, direction.z * this.speed);//Constants.ballStartDirection.multiplyScalar(speed);
         this.material = new THREE.MeshStandardMaterial({color: this.color, wireframe: false, metalness: 1, roughness: 0, envMapIntensity: 1 }); //color 0xffffff
         this.physicMaterial = new CANNON.Material();
         this.geometry = new THREE.SphereGeometry(this.radius, this.widthSeg, this.heightSeg);
@@ -151,7 +151,7 @@ export default class Ball extends EventDispatcher {
 				let ballVal = this.mesh.position.z + this.radius
                 console.log("positive direction: ",  startValZ1, endValZ1, ballVal)
 
-				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal)){// || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
+				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal)|| this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)){// || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
 					console.log("falls in first or second range, direction is positiv")
 					console.log(startValX, endValX, ballValX)
 					console.log(startValZ1, endValZ1, ballVal)
@@ -165,7 +165,7 @@ export default class Ball extends EventDispatcher {
             if (this.direction.z < 0) {
 				let ballVal = this.mesh.position.z - this.radius
                 console.log("negative direction: ",  startValZ2, endValZ2, ballVal)
-				if (this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
+				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal) || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
 					console.log("falls in first or second range, direction is negativ")
 					console.log(startValX, endValX, ballValX)
 					console.log(startValZ2, endValZ2, ballVal)

@@ -17,7 +17,7 @@ export default class Paddle {
         this.material = new THREE.MeshStandardMaterial({color: this.color, metalness: 1, roughness: 0.5});
         this.geometry = new THREE.BoxGeometry(this.width, this.height,this.depth);
         this.mesh = new THREE.Mesh(this.geometry, this.material);
-        this.speed = 0.15;
+        this.speed = 0.13;
         this.AIPredictionPoint = undefined
         this.direction = new THREE.Vector3(0,0,0)
         this.scene = scene
