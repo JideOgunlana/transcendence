@@ -81,6 +81,9 @@ const resources = {
       "you are not authorized to view this page": "You are not authorized to view this page",
       "tournament order": "Tournament Order",
       "finals": "Finals",
+      "no pong game history": "No pong game history",
+      "no memory game history": "No memory game history",
+
 
     }
   },
@@ -90,7 +93,7 @@ const resources = {
       "Language": "Sprache",
       "ON": "Ein",
       "OFF": "Aus",
-      "dashboard": "Armaturenbrett",
+      "dashboard": "Dashboard",
       "history": "Spielverlauf",
       "signup": "Anmelden",
       "experience the fun of gaming": "Erleben Sie den Spaß",
@@ -163,6 +166,9 @@ const resources = {
       "you are not authorized to view this page": "Sie sind nicht berechtigt, diese Seite anzuzeigen",
       "tournament order": "Turnierreihenfolge",
       "finals": "Finale",
+      "no pong game history": "Kein Pong-Spielverlauf",
+      "no memory game history": "Kein Memory-Spielverlauf",
+
 
     }
   },
@@ -245,6 +251,9 @@ const resources = {
       "you are not authorized to view this page": "no estás autorizado a ver esta página",
       "tournament order": "Orden del torneo",
       "finals": "Finales",
+      "no pong game history": "Sin historial de juegos de pong",
+      "no memory game history": "Sin historial de juegos de memoria",
+
 
     }
   },
@@ -327,6 +336,8 @@ const resources = {
       "you are not authorized to view this page": "o ni aṣẹ lati wo oju-iwe yii",
       "tournament order": "BibẹrẹFigagbaga",
       "finals": "Ere Ipari",
+      "no pong game history": "Ko si itan-akọọlẹ ere pong",
+      "no memory game history": "Ko si itan ere iranti",
 
     }
   }

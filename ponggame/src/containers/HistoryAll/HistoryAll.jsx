@@ -4,8 +4,8 @@ import { HistoryUser } from '../../containers';
 import axios from 'axios';
 import { userIcon, pingPongIcon, brainIcon } from '../../assets';
 import './historyAll.css';
-
 // import { getFakeUserData } from '../../__tests__/api';
+
 
 const HistoryColumn = ({ userCol, userData, onSelectUser }) => {
 
@@ -124,7 +124,7 @@ const HistoryAll = () => {
                                         onSelectUser={handleSelectUser} />
                                 )) : 
                                 <div className='text-center'>
-                                    -- i18n No Pong game History --
+                                    -- {t('no pong game history')} --
                                 </div>
                             )
                         }
@@ -149,7 +149,7 @@ const HistoryAll = () => {
                                         onSelectUser={handleSelectUser} />
                                 )) : 
                                 <div className='text-center'>
-                                    -- No Memory game History --
+                                    -- {t('no memory game history')} --
                                 </div>
                             )
                         }
