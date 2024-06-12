@@ -58,7 +58,11 @@ export default class AIPlayer {
 	}
 
 	GenerateRandom() {
-		let range = 8 - 8 * this.accuracy
+		let val_off = 6;
+		// if (this.endGame) {
+		// 	val_off = 3;
+		// }
+		let range = val_off - val_off * this.accuracy
 		let toggle = Math.floor(Math.random() * 2)
 		return toggle > 0 ? range : -range
 		// return Math.random() * range - range
