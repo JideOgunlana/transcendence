@@ -14,7 +14,7 @@ export default class Ball extends EventDispatcher {
         this.heightSeg = heightSeg;
         this.color = color;
         this.speed = 0.15;
-        this.direction = new THREE.Vector3(direction.x * this.speed, direction.y * this.speed, direction.z * this.speed);//Constants.ballStartDirection.multiplyScalar(speed);
+        this.direction = new THREE.Vector3(direction.x * this.speed, direction.y * this.speed, direction.z * this.speed);
         this.material = new THREE.MeshStandardMaterial({color: this.color, wireframe: false, metalness: 1, roughness: 0, envMapIntensity: 1 }); //color 0xffffff
         this.physicMaterial = new CANNON.Material();
         this.geometry = new THREE.SphereGeometry(this.radius, this.widthSeg, this.heightSeg);
@@ -29,8 +29,6 @@ export default class Ball extends EventDispatcher {
         this.paddleRight = paddleRight;
         this.hitMask = 0b00;
         this.pos = pos
-        /* this.handleReset = this.handleReset.bind(this)
-        window.addEventListener("reset", this.handleReset, false) */
         this.initBall(pos)
     }
 
@@ -39,10 +37,6 @@ export default class Ball extends EventDispatcher {
         this.mesh.castShadow = true;
         this.scene.add(this.mesh);
     }
-    /* handleReset() {
-        this.SetDirection(Constants.ballStartDir);
-        this.SetPosition(Constants.ballStartPosition);
-    } */
     SetPosition(pos)
     {
         this.mesh.position.set(pos.x, pos.y, pos.z);
@@ -67,12 +61,6 @@ export default class Ball extends EventDispatcher {
         return false
     }
 
-    /* CollisionX()
-    {
-        if (this.mesh.position.x + this.radius >= this.gameField.x / 2 || this.mesh.position.x - this.radius <= -this.gameField.x / 2)
-            return true
-    } */
-
     CollisionZ()
     {
         if (this.mesh.position.z + this.radius >= this.gameField.z / 2 || this.mesh.position.z - this.radius <= -this.gameField.z / 2) {
@@ -87,7 +75,6 @@ export default class Ball extends EventDispatcher {
 
     CollisionPaddleLeft()
     {
-		//!(this.hitMask & 1) && 
         if (!(this.hitMask & 1) && this.mesh.position.x + this.radius >= this.paddleLeft.X() - this.paddleLeft.width / 2) {
 			let startValX = this.paddleLeft.X() - this.paddleLeft.width / 2 + 0.15
 			let endValX = this.paddleLeft.X() + this.paddleLeft.width / 2
@@ -102,10 +89,7 @@ export default class Ball extends EventDispatcher {
 			if (this.direction.z > 0) {
 				let ballVal = this.mesh.position.z + this.radius
 
-				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal)){// || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
-					console.log("falls in first or second range, direction is positiv")
-					console.log(startValX, endValX, ballValX)
-					console.log(startValZ1, endValZ1, ballVal)
+				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal) || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)){
 					if (this.FallsWithinEdgeRange(startValX, endValX, ballValX)) {
 						return ReturnStates.NONE
 					}
@@ -117,10 +101,7 @@ export default class Ball extends EventDispatcher {
 			if (this.direction.z < 0) {
 				let ballVal = this.mesh.position.z - this.radius
 
-				if (this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
-					console.log("falls in first or second range, direction is negativ")
-					console.log(startValX, endValX, ballValX)
-					console.log(startValZ2, endValZ2, ballVal)
+				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal) || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
 					if (this.FallsWithinEdgeRange(startValX, endValX, ballValX)) {
 						return ReturnStates.NONE
 					}
@@ -135,7 +116,6 @@ export default class Ball extends EventDispatcher {
 
     CollisionPaddleRight()
     {
-        //!(this.hitMask & 2) && 
         if (!(this.hitMask & 2) && this.mesh.position.x - this.radius <= this.paddleRight.X() + this.paddleRight.width / 2) {
 			let startValX = this.paddleRight.X() - this.paddleRight.width / 2
 			let endValX = this.paddleRight.X() + this.paddleRight.width / 2 - 0.15
@@ -149,12 +129,7 @@ export default class Ball extends EventDispatcher {
 
             if (this.direction.z > 0) {
 				let ballVal = this.mesh.position.z + this.radius
-                console.log("positive direction: ",  startValZ1, endValZ1, ballVal)
-
-				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal)|| this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)){// || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
-					console.log("falls in first or second range, direction is positiv")
-					console.log(startValX, endValX, ballValX)
-					console.log(startValZ1, endValZ1, ballVal)
+				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal) || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)){
 					if (this.FallsWithinEdgeRange(startValX, endValX, ballValX)) {
 						return ReturnStates.NONE
 					}
@@ -164,11 +139,7 @@ export default class Ball extends EventDispatcher {
 			}
             if (this.direction.z < 0) {
 				let ballVal = this.mesh.position.z - this.radius
-                console.log("negative direction: ",  startValZ2, endValZ2, ballVal)
 				if (this.FallsWithinEdgeRange(startValZ1, endValZ1, ballVal) || this.FallsWithinEdgeRange(startValZ2, endValZ2, ballVal)) {
-					console.log("falls in first or second range, direction is negativ")
-					console.log(startValX, endValX, ballValX)
-					console.log(startValZ2, endValZ2, ballVal)
 					if (this.FallsWithinEdgeRange(startValX, endValX, ballValX)) {
 						return ReturnStates.NONE
 					}
@@ -208,7 +179,6 @@ export default class Ball extends EventDispatcher {
             this.ToggleHitMask(2)
 		}
         if (this.CollisionXLeft() || this.CollisionXRight()) {
-            //dispatchEvent(Events["hitLeftWall"])
             if (this.mesh.position.x > 0)
                 this.dispatchEvent({ type: 'onscore', message: "opponent" })
             else
@@ -216,11 +186,6 @@ export default class Ball extends EventDispatcher {
             this.mesh.position.set(this.pos.x, this.pos.y, this.pos.z);
             this.direction.x *= -1;
         }
-        /* else if (this.CollisionXRight()) {
-            //dispatchEvent(Events["hitRightWall"])
-            this.dispatchEvent({ type: 'ongoal', message: "player" })
-            this.direction.x *= -1;
-        } */
         else if (this.CollisionZ())
             this.direction.z *= -1;
     }
