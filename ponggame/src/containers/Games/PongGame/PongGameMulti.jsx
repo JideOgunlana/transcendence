@@ -74,6 +74,7 @@ const handleSubmitResults = async () => {
                 {
                     headers: {
                         'Content-Type': 'application/json',
+                        'X-MY-CUSTOM-HEADER': 'frontend_secret_token'  // Add the custom header
                     }
                 }
             )

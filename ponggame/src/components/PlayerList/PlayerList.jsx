@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Player } from '../../components';
-import { getUsers } from '../../__tests__/api';
 import axios from 'axios';
 import { userIcon } from '../../assets/';
 import './playerList.css';
+// import { getUsers } from '../../__tests__/api';
 
 
 const PlayerList = ({ step, setStep }) => {
@@ -72,7 +72,12 @@ const PlayerList = ({ step, setStep }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/pong/users/');
+                const response = await axios.get('http://localhost:8000/pong/users/', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-MY-CUSTOM-HEADER': 'frontend_secret_token'  // Add the custom header
+                    }
+                });
                 const fetchedUsers = response.data;
                 setUsers(fetchedUsers);
                 // console.log(fetchedUsers);

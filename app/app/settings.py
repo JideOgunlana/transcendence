@@ -38,13 +38,14 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
-ORS_ALLOW_HEADERS = [
+CORS_ALLOW_HEADERS = [
     "accept",
     "authorization",
     "content-type",
     "origin",
     "x-csrftoken",
     "x-requested-with",
+    'X-MY-CUSTOM-HEADER',
 ]
 
 INTERNAL_IPS = [

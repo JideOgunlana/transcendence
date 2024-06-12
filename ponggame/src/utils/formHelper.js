@@ -1,6 +1,5 @@
 import defaults from './defaults';
-import { useLocation } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import axios from 'axios';
 
 export const signupFormValid = (username) => {
     const trimmedUsername = username.trim();
@@ -21,18 +20,14 @@ export const signupFormValid = (username) => {
 
 export const checkNameExists = async (username) => {
     try {
-        const response = await fetch('http://localhost:8000/pong/users/', {
-            method: 'GET',
+        const response = await axios.get('http://localhost:8000/pong/users/', {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-MY-CUSTOM-HEADER': 'frontend_secret_token'  // Add the custom header
             }
         });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const users = await response.json();  // Get the data property from the response
+        const users = response.data;  // Get the data property from the response
 
         const normalizedUsername = username.toUpperCase();
         return users.some(user => user.username.toUpperCase() === normalizedUsername || normalizedUsername === defaults.AI_USERNAME);

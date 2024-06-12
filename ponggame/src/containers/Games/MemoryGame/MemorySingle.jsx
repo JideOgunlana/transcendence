@@ -116,7 +116,8 @@ const MemorySingle = ({ gridSize, theme, selectedPlayers }) => {
                 singlePlayerResult,
                 {
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'X-MY-CUSTOM-HEADER': 'frontend_secret_token'  // Add the custom header
                     }
                 }
             );

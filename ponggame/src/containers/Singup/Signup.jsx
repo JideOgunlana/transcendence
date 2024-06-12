@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import { signupFormValid, checkNameExists, emailValid } from '../../utils/formHelper';
 import defaults from '../../utils/defaults';
 
@@ -71,28 +72,28 @@ const Signup = ({ handleUserSignedUp, handleGoToDashboard }) => {
             setUsernameInputState({ value: true, isDuplicate: false });
             setEmailInputState(true);
 
-            const response = await fetch('http://localhost:8000/pong/users/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(signUpFormData)
-            });
+            const response = await axios.post(
+                'http://localhost:8000/pong/users/',
+                signUpFormData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-MY-CUSTOM-HEADER': 'frontend_secret_token'  // Add the custom header
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('Response data:', errorData);
-                throw new Error('Network response was not ok');
-            }
+                    }
+                }
+            );
 
-            const responseData = await response.json();
-            console.log('Response:', responseData);
+            console.log('Response:', response);
 
             handleUserSignedUp();
             navigate('/userprofile', { state: { userData: signUpFormData } }); // Navigate to user profile with signup data
             // handleGoToUserProfile();
         } catch (error) {
             console.error('Error:', error);
+            if (error.response) {
+                console.error('Response data:', error.response.data);
+            }
         }
     };
 
