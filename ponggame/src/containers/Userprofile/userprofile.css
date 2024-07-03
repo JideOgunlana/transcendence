@@ -1,0 +1,17 @@
+.userProfileSection {
+    height: 80vh;
+
+    .userProfileSection--card {
+        background-color: var(--custom-grey);
+        width: 300px;
+        height: 300px;
+        border-radius: 32px;
+
+        .userProfileSection--card--img {
+            height: 80px;
+        }
+        div img {
+            height: 100%;
+        }
+    }
+}

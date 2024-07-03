@@ -1,0 +1,37 @@
+.historyUser {
+
+    width: 80%;
+    min-height: 80vh;
+    
+    .statsCard {
+        max-width: 500px;
+        height: 360px;
+        border-radius: 10px;
+        background-color: var(--custom-darkGrey-card);
+        padding: 20px;
+    }
+
+    .memoryKeyCell,
+    .pongKeyCell {
+        width: 10px;
+        height: 10px;
+    }
+
+    .keyCell {
+        width: 20%;
+    }
+
+    .memoryKeyCell {
+        background-color: #badfe7;
+
+    }
+
+    .pongKeyCell {
+        /* background-color: #6fb3b8; */
+        background-color: #388087;
+    }
+
+    .historySections {
+        width: 50%;
+    }
+}

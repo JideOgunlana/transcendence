@@ -1,0 +1,21 @@
+nav {
+    min-height: 53px;
+    border-bottom: 1px solid var(--custom-grey-border);
+
+    .right-nav-bar--signup-btn {
+        height: 32px;
+        width: 114px;
+    }
+
+    .customNavLink {
+        a {
+          color: var(--custom-white);
+        }
+      }
+      
+      .customNavLink.active{
+        a {
+          color: var(--custom-light-purple);
+        }
+      }
+}
