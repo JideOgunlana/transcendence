@@ -20,6 +20,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
     const [showModal, setShowModal] = useState(false);
     const [winner, setWinner] = useState(null);
     const [semiOneWinner, setSemiOneWinner] = useState(null);
+    const [semiTwoWinner, setSemiTwoWinner] = useState(null);
     const [modalMessage, setModalMessage] = useState('');
     const [announceRound, setAnnounceRound] = useState(true);
     const [announceGameOrder, setAnnounceGameOrder] = useState(true);
@@ -107,9 +108,6 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
         setModalMessage(`Round 1 winner: ${winner1.alias}`);
         setAnnounceRound(true);
         setShowModal(true);
-        setPairs([pairs[1]]);
-        setGameRound(2);
-        resetGame();
     };
 
     const handleSemifinalTwoEnd = () => {
@@ -126,13 +124,27 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
             setS2Points([0, 0]);
             return;
         }
+        setSemiTwoWinner(winner2);
         setModalMessage(`Round 2 winner: ${winner2.alias}`);
         setAnnounceRound(true);
         setShowModal(true);
-        setPairs([[semiOneWinner, winner2]]);
-        setGameRound(3);
-        resetGame();
     };
+
+    const toNextRound = () => {
+        setShowModal(false);
+
+
+        if (gameRound === 1 && !semiOneWinner) return;
+        if (gameRound === 2 && !semiTwoWinner) return;
+        if (gameRound === 3) return;
+
+        gameRound === 1 ?
+            setPairs([pairs[1]])
+                :
+                setPairs([[semiOneWinner, semiTwoWinner]]);
+        setGameRound(gameRound + 1);
+        resetGame();
+    }
 
     const resetGame = () => {
         setTiles(generateTiles(theme, gridSize));
@@ -269,7 +281,7 @@ const MemoryTournament = ({ gridSize, theme, selectedPlayers }) => {
                                     <h5 className="modal-title">
                                         {winner === 'tie' ? '' : gameRound === 3 ? `${t('game over')}` : `${t('round over')}`}
                                     </h5>
-                                    <div type="button" className="close" onClick={() => setShowModal(false)}>
+                                    <div type="button" className="close" onClick={() => toNextRound()}>
                                         <span className='btn btn-danger' aria-hidden="true"><img src={closeIcon} alt='close' width={20} /></span>
                                     </div>
                                 </div>
