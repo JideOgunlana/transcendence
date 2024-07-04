@@ -26,3 +26,10 @@ git clone https://github.com/JideOgunlana/transcendence.git
 ## Screenshots
 ![pong.png](./images/pong.png)
 ![memory.png](./images/memory.png)
+
+
+## Authors
+
+<p>
+Transcendence was created by <a href="https://github.com/TaleaX">TaleaX</a>, <a href="https://github.com/JideOgunlana">jide_O</a>, <a href="https://github.com/dantonik">dantonik</a>, and <a href="https://github.com/Sergi0Garcia">Sergi0Garcia</a>
+</p>
