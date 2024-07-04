@@ -9,7 +9,11 @@ Transcendence is a team project from the school 42. It requires building a web a
 
 - 🛸 AI Opponent: Challenge an AI in the game.
 - 🗿 Advanced 3D Techniques: Enhanced visual experience.
-- 🎮 Additional Game: Includes a Memory game with user history and matchmaking features.
+- 🕹 Game Modes:
+  - Single Player
+  - 1v1 Multiplayer
+  - Tournament Mode
+- 🎮 Additional Game: Includes a Memory game.
 - 🌟 Browser Compatibility: Optimized for various browsers.
 - 🌍 Multilingual Support: Available in multiple languages.
 - 📊 User and Game Stats: Dashboards for detailed statistics.

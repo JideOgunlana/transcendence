@@ -31,7 +31,7 @@ const Footer = () => {
                         <img src={transcendLogo} className='logoTranscendence' />
                     </div>
                     <div className='cust-text-13 d-flex align-items-center'>
-                        <div><a href='#'> <img src={githubIcon} /> </a></div>
+                        <div><a href='https://github.com/JideOgunlana/transcendence' target="_blank" rel="noopener noreferrer"> <img src={githubIcon} /> </a></div>
                         <span className='ms-4'>
                             😎 {t('team')} T*B*D*S
                         </span>
@@ -40,10 +40,10 @@ const Footer = () => {
                         {
                             showProfile &&
                             <div className='team-profile row cust-text-13'>
-                                <a href="#" className='col-12 col-md-3 text-center p-2'>@Tdehne</a>
-                                <a href="#" className='col-12 col-md-3 text-center p-2'>@Bogunlan</a>
-                                <a href="#" className='col-12 col-md-3 text-center p-2'>@Dantonik</a>
-                                <a href="#" className='col-12 col-md-3 text-center p-2'>@Segarcia</a>
+                                <a href="https://github.com/TaleaX" target="_blank" rel="noopener noreferrer" className='col-12 col-md-3 text-center p-2'>@Tdehne</a>
+                                <a href="https://github.com/JideOgunlana" target="_blank" rel="noopener noreferrer" className='col-12 col-md-3 text-center p-2'>@Bogunlan</a>
+                                <a href="https://github.com/dantonik" target="_blank" rel="noopener noreferrer" className='col-12 col-md-3 text-center p-2'>@Dantonik</a>
+                                <a href="https://github.com/Sergi0Garcia" target="_blank" rel="noopener noreferrer" className='col-12 col-md-3 text-center p-2'>@Segarcia</a>
                             </div>
                         }
                     </>
